@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   
-  # map.denied :controller => 'team_sessions', :action => 'denied'
+   map.denied '/denied', :controller => 'team_sessions', :action => 'denied'
   
   map.resources :teams
   

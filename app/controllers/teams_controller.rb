@@ -14,6 +14,10 @@ class TeamsController < ApplicationController
       format.xml  { render :xml => @teams }
     end
   end
+  
+  def new
+    @team = Team.new
+  end
 
   # GET /teams/1
   # GET /teams/1.xml
@@ -50,6 +54,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
+        current_team = @team
         flash[:notice] = 'Team was successfully created.'
         format.html { redirect_to(@team) }
         format.xml  { render :xml => @team, :status => :created, :location => @team }
@@ -113,6 +118,7 @@ class TeamsController < ApplicationController
   
   def ensure_owner
     if(@team.nil? || current_team.nil? || (current_team.id != @team.id && !current_team.admin))
+      flash[:error] = "#{@team} #{current_team}"
       redirect_to(denied_path)
     end
   end

@@ -1,6 +1,11 @@
 class TeamSessionsController < ApplicationController
+  
   def new
-   @team_session = TeamSession.new
+#    return render(:controller => 'teams', :action => 'show', :id => current_team.id) if current_team
+    @team_session = TeamSession.new
+  end
+  
+  def denied
   end
   
   def create

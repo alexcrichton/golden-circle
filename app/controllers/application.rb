@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def current_team #untested, cargo cult
     return @current_team if defined?(@current_team)
-    @current_team = current_team_session && current_team_session.user
+    @current_team = current_team_session && current_team_session.team
   end
   
 end
