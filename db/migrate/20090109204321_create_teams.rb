@@ -4,7 +4,7 @@ class CreateTeams < ActiveRecord::Migration
       t.string  :school_name
       t.boolean :admin, :default => false
       t.string  :contact_name
-      t.string  :contact_email
+      t.string  :email
       t.string  :contact_phone
       t.integer :enrollment
       

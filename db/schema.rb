@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20090109204437) do
     t.string   "school_name"
     t.boolean  "admin",             :default => false
     t.string   "contact_name"
-    t.string   "contact_email"
+    t.string   "email"
     t.string   "contact_phone"
     t.integer  "enrollment"
     t.string   "crypted_password"
