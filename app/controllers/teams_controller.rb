@@ -1,6 +1,8 @@
 class TeamsController < ApplicationController
   
-  before_filter :insure_viewer, :only => [:show]
+  before_filter :load_team
+  before_filter :ensure_owner, :except => [:create]
+  before_filter :ensure_admin, :only => [:index]
   
   # GET /teams
   # GET /teams.xml
@@ -16,12 +18,13 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.xml
   def show
-    @team = Team.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @team }
-    end
+    render :action => 'edit'
+#    @team = Team.find(params[:id])
+#
+#    respond_to do |format|
+#      format.html # show.html.erb
+#      format.xml  { render :xml => @team }
+#    end
   end
 
   # GET /teams/new
@@ -60,8 +63,7 @@ class TeamsController < ApplicationController
   # PUT /teams/1
   # PUT /teams/1.xml
   def update
-    @team = Team.find(params[:id])
-
+    
     respond_to do |format|
       if @team.update_attributes(params[:team])
         flash[:notice] = 'Team was successfully updated.'
@@ -77,12 +79,28 @@ class TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.xml
   def destroy
-    @team = Team.find(params[:id])
     @team.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to(teams_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  protected
+  def load_team
+    @team = Team.find(params[:id]) if params[:id]
+  end
+  
+  def ensure_owner
+    if(@team.nil? || current_team.nil? || (current_team.id != @team.id && !current_team.admin))
+      redirect_to(denied_path)
+    end
+  end
+  
+  def ensure_owner
+    if(current_team.nil? || !current_team.admin)
+      redirect_to(denied_path)
     end
   end
 end
