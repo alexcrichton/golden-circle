@@ -1,0 +1,2 @@
+class TeamSessionsController < ApplicationController
+end
