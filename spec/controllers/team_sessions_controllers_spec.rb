@@ -52,6 +52,12 @@ describe TeamSessionsController do
         response.should redirect_to(root_url)
       end
       
+      it "should display a flash message" do
+        TeamSession.stub!(:new).and_return(mock_team_session)
+        post :create, :team_session => {}
+        response.flash[:notice].should_not be_nil
+      end
+      
     end
     
     describe "with failed save" do
@@ -74,8 +80,8 @@ describe TeamSessionsController do
         response.should render_template('new')
       end
       
-    end
-    
+      end
+      
   end
   
   describe "responding to DELETE /team_sessions" do
@@ -94,7 +100,13 @@ describe TeamSessionsController do
     it "should redirect to the new session url" do
       @controller.stub!(:current_team_session).and_return(mock_team_session)
       delete :destroy
-      response.should redirect_to(new_team_session_url)
+      response.should redirect_to(root_url)
+    end
+    
+    it "should display a flash message" do
+      @controller.stub!(:current_team_session).and_return(mock_team_session)
+      delete :destroy
+      response.flash[:notice].should_not be_nil
     end
     
   end

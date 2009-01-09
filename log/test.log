@@ -1,0 +1,2997 @@
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:45:34) [GET]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:46:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 4ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:46:10) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:46:45) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 5ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:46:45) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:46:54) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 4ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:46:54) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:46:54) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:47:19) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 5ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:47:19) [GET]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:47:19) [GET]
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:47:42) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 6ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:47:42) [GET]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:47:42) [GET]
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:48:29) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 4ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:48:29) [GET]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:48:29) [GET]
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (3.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (4.3ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateTeams (20090109204321)
+  [4;36;1mSQL (3.4ms)[0m   [0;1mCREATE TABLE "teams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "school_name" varchar(255), "admin" boolean DEFAULT 'f', "contact_name" varchar(255), "contact_email" varchar(255), "contact_phone" varchar(255), "enrollment" integer, "crypted_password" varchar(255), "password_salt" varchar(255), "persistence_token" varchar(255), "login_count" integer, "last_request" datetime, "last_login_at" datetime, "current_login_at" datetime, "current_login" datetime, "last_login_ip" varchar(255), "current_login_ip" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (2.7ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090109204321')[0m
+Migrating to CreateStudents (20090109204359)
+  [4;36;1mSQL (3.4ms)[0m   [0;1mCREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "last_name" varchar(255), "first_name" varchar(255), "team_id" integer, "level" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (2.8ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090109204359')[0m
+Migrating to CreateProctors (20090109204437)
+  [4;36;1mSQL (2.9ms)[0m   [0;1mCREATE TABLE "proctors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "team_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (2.7ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090109204437')[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("proctors")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("students")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("teams")[0m
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:52:22) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:52:22) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:52:22) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 5ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:32) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 5ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:32) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:32) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:52) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 12ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:52) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:53:52) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 6ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:56:49) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:56:49) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:56:49) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:57:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 15:58:05) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 15:58:49) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:49) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:49) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:49) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:58:49) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 68ms (View: 68, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 15:59:39) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:39) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:39) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:39) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:39) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 70ms (View: 69, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 15:59:44) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:44) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:45) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:45) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 15:59:45) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 72ms (View: 72, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:00:04) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:04) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:05) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:00:08) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:00:19) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:00:19) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:19) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:19) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:19) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 68ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:19) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:00:46) [POST]
+  Parameters: {"team_session"=>{}}
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:00:46) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:46) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:46) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:46) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:00:46) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:01:03) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:01:03) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:01:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:01:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:01:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:01:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:02:09) [POST]
+  Parameters: {"team_session"=>{}}
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:02:09) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:02:21) [POST]
+  Parameters: {"team_session"=>{}}
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:02:21) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:02:34) [POST]
+  Parameters: {"team_session"=>{}}
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:02:34) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:34) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:34) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:34) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:02:34) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:03:40) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:03:40) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:40) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:40) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:40) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:03:44) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:03:44) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:44) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:44) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:44) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:03:44) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:04:01) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:04:01) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:04:01) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 67ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:04:47) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:04:47) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:04:47) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:04:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:05:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:05:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:05:12) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:05:16) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:05:16) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:05:16) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:05:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:10) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:10) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:10) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:10) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:11) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:11) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:11) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:11) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:38) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 3ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:38) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:38) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:38) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:41) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:41) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:41) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:07:41) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:07:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:10) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:10) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:10) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:10) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:10) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:10) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:10) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:10) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:10) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:53) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:53) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:53) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:53) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:53) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 69ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:53) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:53) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:53) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:53) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:56) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:56) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:56) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:56) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 6ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:08:56) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 76ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:56) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:56) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:56) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:08:56) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:03) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:03) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:03) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:03) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:03) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:03) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:03) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:17) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:17) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:17) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/create
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:18) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:18) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:18) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:18) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:18) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:18) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:18) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:18) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:37) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:37) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:37) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:37) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:38) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:38) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:38) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:38) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:41) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:41) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:41) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:41) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:41) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:41) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:09:41) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:09:41) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:10:14) [DELETE]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:14) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:14) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 68ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:14) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:14) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:14) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:14) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:14) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:14) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:14) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:14) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:14) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:10:47) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:47) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:47) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:47) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:47) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:47) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:47) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:47) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:47) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:10:50) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:50) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:50) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:50) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:50) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:50) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:50) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:10:50) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:10:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:11:21) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:21) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:21) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:21) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 68ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:21) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:21) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:21) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:21) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:21) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:11:57) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:11:57) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:57) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 67ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:57) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:57) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:11:57) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:11:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:12:09) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:12:09) [DELETE]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:09) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 69ms (View: 68, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:09) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:09) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:09) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:09) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:09) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:09) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:09) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:12:57) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:12:57) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:57) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:57) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:57) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:12:57) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:12:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:01) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:01) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:01) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:01) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:01) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:01) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:01) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:01) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:01) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:01) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:05) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:05) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:05) [DELETE]
+Rendering template within layouts/application
+Rendering team_sessions/destroy
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:06) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:06) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:06) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:06) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:06) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:06) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:06) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:06) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:06) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:06) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:06) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:57) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:57) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:13:57) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:57) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:57) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:57) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:57) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:13:57) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:13:57) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:12) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:12) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:12) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:12) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:12) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:12) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:12) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:16) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:16) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:16) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:16) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:16) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:16) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:16) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:16) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:16) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:16) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:16) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:49) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:49) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:49) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:14:49) [DELETE]
+Redirected to http://test.host/
+Completed in 72ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:50) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:50) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:50) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:50) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:50) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:50) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:14:50) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:14:50) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:08) [DELETE]
+Redirected to http://test.host/
+Completed in 3ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:08) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:08) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:08) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:08) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:08) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:08) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:08) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:08) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:08) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:08) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:08) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:12) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:12) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:12) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:15:12) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:12) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:12) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:12) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:12) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:15:12) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:15:12) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:16:51) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:16:51) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:16:51) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:16:51) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:16:51) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:16:51) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:16:51) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:16:51) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:16:51) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:16:51) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:16:51) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:16:51) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:16:51) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:16:51) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:16:51) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session/new]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:21) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:21) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:21) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:21) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:21) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:21) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:21) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:21) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:21) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:22) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:22) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:22) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/login]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:22) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/login]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:22) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/login]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:22) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/login]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:42) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:42) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:42) [DELETE]
+Redirected to http://test.host/
+Completed in 2ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#destroy (for 0.0.0.0 at 2009-01-09 16:18:42) [DELETE]
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/logout]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:42) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:42) [POST]
+  Parameters: {"team_session"=>{}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:42) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:42) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:42) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:42) [POST]
+  Parameters: {"team_session"=>{}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?]
+
+
+Processing TeamSessionsController#create (for 0.0.0.0 at 2009-01-09 16:18:42) [POST]
+  Parameters: {"team_session"=>{"these"=>"params"}}
+Redirected to http://test.host/
+Completed in 1ms (DB: 0) | 302 Found [http://test.host/team_session?team_session%5Bthese%5D=params]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:42) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/login]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:42) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 1, DB: 0) | 200 OK [http://test.host/login]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:42) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://test.host/login]
+
+
+Processing TeamSessionsController#new (for 0.0.0.0 at 2009-01-09 16:18:42) [GET]
+Rendering template within layouts/application
+Rendering team_sessions/new
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/login]

@@ -1,4 +1,5 @@
 class Team < ActiveRecord::Base
+  acts_as_authentic
   
   validates_presence_of     :contact_email
   validates_uniqueness_of   :contact_email

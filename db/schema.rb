@@ -29,11 +29,21 @@ ActiveRecord::Schema.define(:version => 20090109204437) do
 
   create_table "teams", :force => true do |t|
     t.string   "school_name"
-    t.boolean  "admin",         :default => false
+    t.boolean  "admin",             :default => false
     t.string   "contact_name"
     t.string   "contact_email"
     t.string   "contact_phone"
     t.integer  "enrollment"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.integer  "login_count"
+    t.datetime "last_request"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.datetime "current_login"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
