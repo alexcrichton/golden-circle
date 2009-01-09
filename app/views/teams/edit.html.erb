@@ -1,36 +1,76 @@
-<h1>Editing team</h1>
-
 <% form_for(@team) do |f| %>
   <%= f.error_messages %>
-
+  
+  <div>
+    <div>
+      <h3>Contact info</h3>
+      <p>
+        <%= f.label :contact_name %><br />
+        <%= f.text_field :contact_name %>
+      </p>
+      <p>
+        <%= f.label :contact_email %><br />
+        <%= f.text_field :contact_email %>
+      </p>
+      <p>
+        <%= f.label :contact_phone %><br />
+        <%= f.text_field :contact_phone %>
+      </p>
+    </div>
+    <div>
+      <h3>School info</h3>
+      <p>
+        <%= f.label :school_name %><br />
+        <%= f.text_field :school_name %>
+      </p>
+      <p>
+        <%= f.label :enrollment %><br />
+        <%= f.text_field :enrollment %>
+      </p>
+    </div>
+  </div>
+  
+  <hr/>
+  
+  <h3>Coaches who can also be proctors</h3>
+  <%= f.label "Also list contact's name if possible" %>
+  <% [1..5].each do |num| %>
+    <%= num %>. 
+    <% proctor = num < team.proctors.size ? team.proctors[num] : nil %>
+    <% if proctor %>
+      <%= text_field "proctor_names", proctor.id, proctor.name %>
+    <% else %>
+      <%= text_field "proctor_names", 0 %>
+    <% end %>
+  <% end %>
+  
+  <hr/>
+  
+  <div>
+    <div>
+      <h3>Apprentices</h3>
+      <%= f.label "First, then last name" %>
+      <% [1..15].each do |num| %>
+        <%= num %>.
+        <%= f.text_field "app_#{num}_first_name" %>
+        <%= f.text_field "app_#{num}_last_name" %>
+      <% end %>
+    </div>
+    <div>
+      <h3>Wizards</h3>
+      <%= f.label "First, then last name" %>
+      <% [1..15].each do |num| %>
+        <%= num %>.
+        <%= f.text_field "wiz_#{num}_first_name" %>
+        <%= f.text_field "wiz_#{num}_last_name" %>
+      <% end %>
+    </div>
+  </div>
+  
   <p>
-    <%= f.label :school_name %><br />
-    <%= f.text_field :school_name %>
-  </p>
-  <p>
-    <%= f.label :admin %><br />
-    <%= f.check_box :admin %>
-  </p>
-  <p>
-    <%= f.label :contact_name %><br />
-    <%= f.text_field :contact_name %>
-  </p>
-  <p>
-    <%= f.label :contact_email %><br />
-    <%= f.text_field :contact_email %>
-  </p>
-  <p>
-    <%= f.label :contact_phone %><br />
-    <%= f.text_field :contact_phone %>
-  </p>
-  <p>
-    <%= f.label :enrollment %><br />
-    <%= f.text_field :enrollment %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
+    <%= f.submit "Update Information" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @team %> |
-<%= link_to 'Back', teams_path %>
+The amount due for this team is <%= 4 * @team.users.size %> dollars.
+Please bring the check payable to GT Education to the registration table March 3rd. 

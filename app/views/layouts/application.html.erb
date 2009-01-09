@@ -12,8 +12,12 @@
   <body>
      <div class="container">
       <div class="column span-4" style="width:140px; margin-right:20px;">
-        <ul id="leftnav">
-        </ul>
+        The Golden Circle 9th Grade Math Championships will be held Tuesday, March 3, 2009 at Central Campus. 
+        Bus parking is one block west of 1920 Grand Ave. Car parking is in the lot at the corner of 19th and 
+        Grand (directly north of the school). To register a team, create the team on this website to the 
+        right and then edit the required information. <br/>
+        <h3>Deadline to register a team</h3>
+        Tuesday, January 27
       </div>
       <div class="span-20 last" id="page">
         <div class="span-14 column main" style="">
@@ -22,6 +26,14 @@
           <%= yield %>
         </div>
         <div class="column span-6 last">
+          <% if @team %>
+            <h3>Roster Changes:</h3>
+            If you have roster changes on or before Tuesday, January 27 simply edit the page above. <br/>
+            After January 27, please bring the changes to the registration table the night of the event. <br/>
+            Please do not contact us about changes after January 27.
+          <% end %>
+          <br/>
+          <h3><%= link_to 'Detailed Information', '/information.doc' %></h3>
           <%= yield :rightbar %>
         </div>
       </div>

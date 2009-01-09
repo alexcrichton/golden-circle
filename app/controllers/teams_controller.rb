@@ -63,6 +63,21 @@ class TeamsController < ApplicationController
   # PUT /teams/1
   # PUT /teams/1.xml
   def update
+    params[:proctor_names].each_pair do |id, name|
+      if id == '0'
+        team.proctors << Proctor.new(:name => name)
+      else
+        p = Proctor.find(id)
+        p.name = name
+        p.destroy if name.blank?
+      end
+    end
+    
+    params[:students].each_pair do |id, hash|
+      
+    end
+    arr = params[:team].keys
+    arr.select{ |key| key.match(/arr_\d+_first_name/)}
     
     respond_to do |format|
       if @team.update_attributes(params[:team])
