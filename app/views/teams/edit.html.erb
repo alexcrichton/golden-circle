@@ -36,7 +36,7 @@
   <%= f.label "Also list contact's name if possible" %>
   <% [1..5].each do |num| %>
     <%= num %>. 
-    <% proctor = num < team.proctors.size ? team.proctors[num] : nil %>
+    <% proctor = num < @team.proctors.size ? @team.proctors[num] : nil %>
     <% if proctor %>
       <%= text_field "proctors[#{proctor.id}]", 'name', proctor.name %>
     <% else %>
@@ -52,7 +52,7 @@
       <%= f.label "First, then last name" %>
       <% [1..15].each do |num| %>
         <%= num %>.
-        <% app = num < team.apprentices.size ? team.apprentices[num] : nil %>
+        <% app = num < @team.apprentices.size ? @team.apprentices[num] : nil %>
         <% id = app ? app.id : 0%>
         <%= text_field "students[#{id}]", :first_name, app ? app.first_name : "" %>
         <%= text_field "students[#{id}]", :last_name, app ? app.last_name : "" %>
@@ -78,5 +78,5 @@
   </p>
 <% end %>
 
-The amount due for this team is <%= 4 * @team.users.size %> dollars.
+The amount due for this team is <%= 4 * @team.students.size %> dollars.
 Please bring the check payable to GT Education to the registration table March 3rd. 

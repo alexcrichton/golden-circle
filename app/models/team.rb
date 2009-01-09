@@ -1,9 +1,10 @@
 class Team < ActiveRecord::Base
+  
   acts_as_authentic
   
-  validates_presence_of     :contact_email
-  validates_uniqueness_of   :contact_email
-  validates_length_of       :contact_email,    :within => 6..100 #r@a.wk
+  validates_presence_of     :email
+  validates_uniqueness_of   :email
+  validates_length_of       :email,    :within => 6..100 #r@a.wk
   
   attr_protected :admin
   
