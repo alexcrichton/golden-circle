@@ -1,10 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   
-  #map.resources :proctors
+  map.denied :controller => 'team_sessions', :action => 'denied'
   
-  #map.resources :students
+  map.resources :teams
   
-  #map.resources :teams
-  
-  map.root :controller => 'sessions', :action => 'new'
+  map.root :controller => 'team_sessions', :action => 'new'
 end
