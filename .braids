@@ -6,3 +6,10 @@ vendor/plugins/rspec-rails:
   revision: e2df5398346e3babc4b41a9004117e5ddf061482
   branch: master
   remote: braid/vendor/plugins/rspec-rails
+vendor/plugins/rspec: 
+  squashed: true
+  url: git://github.com/dchelimsky/rspec.git
+  type: git
+  revision: 91444510df439fc7acd5a308eca574d256a4baef
+  branch: master
+  remote: braid/vendor/plugins/rspec
