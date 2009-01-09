@@ -1,0 +1,22 @@
+<h1>Listing proctors</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Team</th>
+  </tr>
+
+<% for proctor in @proctors %>
+  <tr>
+    <td><%=h proctor.name %></td>
+    <td><%=h proctor.team_id %></td>
+    <td><%= link_to 'Show', proctor %></td>
+    <td><%= link_to 'Edit', edit_proctor_path(proctor) %></td>
+    <td><%= link_to 'Destroy', proctor, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New proctor', new_proctor_path %>

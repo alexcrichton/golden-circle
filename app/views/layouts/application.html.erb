@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>AcademyCommunity.com</title>
+    <%= stylesheet_link_tag "blueprint/screen.css", :media => "screen, projection" %>
+    <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
+    <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
+    <%= stylesheet_link_tag "style.css", :media =>"screen" %>
+  </head>
+  <body>
+     <div class="container">
+      <div class="column span-4" style="width:140px; margin-right:20px;">
+        <ul id="leftnav">
+        </ul>
+      </div>
+      <div class="span-20 last" id="page">
+        <div class="span-14 column main" style="">
+          <% if flash[:notice] %><div class="notice"><%= flash[:notice] %></div><% end %>
+          <% if flash[:error] %><div class="error"><%= flash[:error] %></div><% end %>          
+          <%= yield %>
+        </div>
+        <div class="column span-6 last">
+          <%= yield :rightbar %>
+        </div>
+      </div>
+      <div class="span-24" id="footer">
+        <p>&reg; 2008, Golden Circle</p>
+      </div>
+    </div>
+  </body>
+</html>

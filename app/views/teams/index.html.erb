@@ -1,0 +1,30 @@
+<h1>Listing teams</h1>
+
+<table>
+  <tr>
+    <th>School name</th>
+    <th>Admin</th>
+    <th>Contact name</th>
+    <th>Contact email</th>
+    <th>Contact phone</th>
+    <th>Enrollment</th>
+  </tr>
+
+<% for team in @teams %>
+  <tr>
+    <td><%=h team.school_name %></td>
+    <td><%=h team.admin %></td>
+    <td><%=h team.contact_name %></td>
+    <td><%=h team.contact_email %></td>
+    <td><%=h team.contact_phone %></td>
+    <td><%=h team.enrollment %></td>
+    <td><%= link_to 'Show', team %></td>
+    <td><%= link_to 'Edit', edit_team_path(team) %></td>
+    <td><%= link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New team', new_team_path %>

@@ -1,0 +1,36 @@
+<h1>Editing team</h1>
+
+<% form_for(@team) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :school_name %><br />
+    <%= f.text_field :school_name %>
+  </p>
+  <p>
+    <%= f.label :admin %><br />
+    <%= f.check_box :admin %>
+  </p>
+  <p>
+    <%= f.label :contact_name %><br />
+    <%= f.text_field :contact_name %>
+  </p>
+  <p>
+    <%= f.label :contact_email %><br />
+    <%= f.text_field :contact_email %>
+  </p>
+  <p>
+    <%= f.label :contact_phone %><br />
+    <%= f.text_field :contact_phone %>
+  </p>
+  <p>
+    <%= f.label :enrollment %><br />
+    <%= f.text_field :enrollment %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @team %> |
+<%= link_to 'Back', teams_path %>

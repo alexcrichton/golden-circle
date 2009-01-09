@@ -55,8 +55,8 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_golden_circle_session',
-    :secret      => '1911e3f3d37b8fb576f089d3c6204af7b5f7bc3b14e25ee234ff1d27d1f81019e236794e6dae4c791c5668f8d4024c495e81c91377272c951c0f28891b51f791'
+    :session_key => '_gcircle_session',
+    :secret      => '844cfdbf5d9236bfba3f100431cbb8b9aab13e3292756d248045215f5a30c40e2603a9e94f43a99d20d2a17c97f1ce2116d641ea340f03a28c5bcc170b817b30'
   }
 
   # Use the database for sessions instead of the cookie-based default,

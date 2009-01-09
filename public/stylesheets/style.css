@@ -1,0 +1,449 @@
+/*TODO: Fix duplication, especially on lists*/
+body {
+  margin: 0;
+  padding: 0;
+  background: #f1f1f1;
+}
+
+.header {
+  height: 60px;
+  border-bottom: solid #505050 4px;
+  width: auto;
+  background: #fff;
+  position: relative;
+  padding: 0 10px;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+img#logo {
+  position: absolute;
+  top: 11px;
+  left: 10px;
+}
+
+.container {
+  border-right: solid #d1d1d1 1px;
+  background: white;
+  margin: 0;
+  background: #fff url(/images/column.gif) repeat-y top left;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+div#footer {
+  background: #e5e5e5;
+  margin: 0 -10px;
+  padding: 10px;
+  border: solid #d1d1d1 4px;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  color: #555;
+}
+
+div#footer p {
+  margin: 0;
+}
+
+#topnav {
+  list-style: none;
+  margin: 0px;
+  padding: 0;
+  /*Push-10*/
+  margin-left: 400px;
+  font-size: 1.25em;
+  width: 550px;
+}
+
+ul#topnav li {
+  text-align: left;
+  float: left;
+  height: 25px;
+  margin: 0;
+  margin-top: 35px;
+  padding: 0;
+  border-left: solid #505050 1px;
+}
+
+ul#topnav li a {
+  display: block;
+  width: 63px;
+  margin: 0 10px 0 7px;
+  vertical-align: super;
+  text-decoration: none;
+  color: inherit;
+}
+
+ul#topnav li a.contact_us {
+  width: 150px;
+}
+
+ul#topnav li:hover {
+  text-decoration: underline;
+}
+
+.showgrid { /*Grid offset for margins*/
+  background: url(/images/grid.png) repeat 10px 0;
+}
+
+/*  .column div { margin:10px; }*/
+#login_links {
+  position: absolute;
+  right: 10px;
+  text-align: right;
+  background: white;
+}
+
+ul.rightnav {
+  list-style: none;
+  margin: 0;
+  /*TODO: Really hackish, don't know why margin-bottom doesn't work*/
+  padding-bottom: 10px;
+}
+
+ul.rightnav li {
+  margin-bottom: 5px;
+  padding: 2px;
+  padding-left: 5px;
+  border-bottom: solid #ccc 1px;
+}
+
+ul.rightnav li a {
+  color: black;
+  text-decoration: none;
+}
+
+ul.rightnav li a:hover {
+  text-decoration: underline;
+}
+
+ul.rightnav li:hover {
+  background: #eee;
+}
+
+#sidebarimage {
+  margin-bottom: 5px;
+}
+
+ul#leftnav {
+  list-style: none;
+  margin: 0;
+  margin: 10px -10px;
+  border-bottom: solid #bbb 1px;
+}
+
+ul#leftnav li {
+  background: #ddd;
+  border-top: solid #bbb 1px;
+  padding-left: 10px;
+  padding: 10px;
+  font-size: 125%;
+}
+
+ul#leftnav li:hover {
+  background: #ccc;
+}
+
+ul#leftnav li a {
+  color: black;
+  text-decoration: none;
+}
+
+ul#leftnav li a:hover {
+  text-decoration: underline;
+}
+
+ul#leftnav li ul {
+  margin: 0 0;
+  list-style: none;
+  font-size: 75%;
+  margin: -10px;
+}
+
+ul#leftnav li.left_sub_nav {
+  border-top: none;
+}
+
+ul#leftnav li ul li {
+  background: #eee;
+  padding: 5px 10px;
+  font-size: 100%;
+}
+
+ul#leftnav li ul li:hover {
+  background: #e5e5e5;
+}
+
+ul#leftnav .selected {
+  background: #ddd url(/images/selected_menu_item.gif) no-repeat right;
+}
+
+ul#leftnav .selected:hover {
+  background: #ccc url(/images/selected_menu_item.gif) no-repeat right;
+}
+
+#leftsearch {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  width: 116px;
+  height: 20px;
+  float: left;
+}
+
+#searchglass {
+  float: left;
+  width: 20px;
+  height: 20px;
+  background: #fff url(/images/searchglass.gif) no-repeat 0% 0%;
+  border: solid #aaa 1px;
+  border-left: none;
+}
+
+#info {
+  font-size: 100%;
+}
+
+#info dd {
+  float: left;
+  margin-left: 0;
+  /*Span-10*/
+  width: 390px;
+  margin-bottom: 5px;
+  padding: 3px 0;
+}
+
+#info dt {
+  float: left;
+  margin-right: 10px;
+  /*span-4*/
+  width: 150px;
+  padding: 3px 0;
+}
+
+.newsblock {
+  margin-bottom: 10px;
+}
+
+.newsblock h3 {
+  margin: 0;
+}
+
+.newsblock cite {
+  color: #555;
+  font-size: 90%;
+}
+
+.newsblock p {
+  margin-left: 10px;
+  margin-bottom: 0;
+  margin-top: 5px;
+  border-left: solid #ccc 1px;
+  padding-left: 10px;
+}
+
+.wikispace {
+  border-left: solid #eee 2px;
+  border-right: solid #eee 2px;
+  background: #f9f9f9;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.wikispace a.newwikipage {
+  color: #CC1800;
+}
+
+div.blocktitle {
+  border-bottom: solid #eee 1px;
+  margin-bottom: 50px;
+  margin-top: 10px;
+}
+
+div.blocktitle h4 {
+  margin: 0;
+}
+
+.controls {
+  float: right;
+  margin-left: 3px;
+  margin-right: 3px;
+  /*Comment for admin*/ /*	display:none;*/
+}
+
+div.blocktitle {
+  margin-bottom: 5px;
+}
+
+/* Normal Bubble */
+div.bubble {
+  width: auto;
+  font-size: 0.75em;
+  margin-bottom: 24px;
+}
+
+div.bubble blockquote {
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #c9c2c1;
+  background-color: #fff;
+}
+
+div.bubble blockquote p {
+  margin: 10px;
+  padding: 0px;
+  color: black;
+}
+
+div.bubble cite {
+  position: relative;
+  margin: 0px;
+  padding: 7px 0px 0px 15px;
+  top: 5px;
+  background: transparent url(/images/tip.gif) no-repeat 20px 0;
+  font-style: normal;
+  color: #555;
+}
+
+div.photobox {
+  
+}
+
+div.photobox ul {
+  list-style: none;
+  margin: 0;
+}
+
+div.photobox ul li {
+  float: left;
+  padding: 4px;
+}
+
+div.photobox ul li img {
+  border: solid #ccc 1px;
+}
+
+div.photobox ul li img:hover {
+  border: solid #999 1px;
+}
+
+.bottomlink {
+  float: right;
+  font-size: 90%;
+}
+
+ul.discussion_list {
+  list-style: none;
+  margin: 0;
+}
+
+ul.discussion_list h4 {
+  margin-bottom: 0;
+}
+
+ul.discussion_list li {
+  margin-bottom: 10px;
+}
+
+div#footer {
+  
+}
+
+ul.officers_list {
+  list-style: none;
+  margin: 0;
+}
+
+ul.officers_list li {
+  margin-bottom: 5px;
+}
+
+ul.officers_list h4 {
+  margin: 0;
+}
+
+ul.officers_list .superlative {
+  font-style: italic;
+}
+
+div.events_list ul {
+  list-style: none;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+div.events_list ul li {
+  margin-bottom: 5px;
+}
+
+div.events_list ul h4 {
+  margin: 0;
+}
+
+div.events_list ul .date {
+  font-style: italic;
+}
+
+div.events_list .bottomlink { /*TODO: Stupid positioning hack fix*/
+  margin-top: -15px;
+}
+
+div.pledges_list ol {
+  list-style-position: inside;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+div.pledges_list ol li {
+  margin-bottom: 5px;
+}
+
+div.pledges_list ol h4 {
+  margin: 0;
+}
+
+div.pledges_list ol .pledge_description {
+  font-style: italic;
+  /*TODO: Actually align with number instead of faking it*/
+  margin-left: 12px;
+}
+
+div.pledges_list .bottomlink { /*TODO: Stupid positioning hack fix*/
+  margin-top: -15px;
+}

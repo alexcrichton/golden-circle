@@ -1,0 +1,33 @@
+<p>
+  <b>School name:</b>
+  <%=h @team.school_name %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%=h @team.admin %>
+</p>
+
+<p>
+  <b>Contact name:</b>
+  <%=h @team.contact_name %>
+</p>
+
+<p>
+  <b>Contact email:</b>
+  <%=h @team.contact_email %>
+</p>
+
+<p>
+  <b>Contact phone:</b>
+  <%=h @team.contact_phone %>
+</p>
+
+<p>
+  <b>Enrollment:</b>
+  <%=h @team.enrollment %>
+</p>
+
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

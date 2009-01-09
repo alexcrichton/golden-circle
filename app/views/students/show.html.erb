@@ -1,0 +1,23 @@
+<p>
+  <b>Last name:</b>
+  <%=h @student.last_name %>
+</p>
+
+<p>
+  <b>First name:</b>
+  <%=h @student.first_name %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%=h @student.team_id %>
+</p>
+
+<p>
+  <b>Level:</b>
+  <%=h @student.level %>
+</p>
+
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
