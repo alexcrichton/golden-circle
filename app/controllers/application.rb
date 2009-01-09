@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  
   include ApplicationHelper
   
   helper :all # include all helpers, all the time
@@ -14,15 +15,5 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
-  
-  def current_team_session #untested, cargo cult
-    return @current_team_session if defined?(@current_team_session)
-    @current_team_session = TeamSession.find
-  end
-
-  def current_team #untested, cargo cult
-    return @current_team if defined?(@current_team)
-    @current_team = current_team_session && current_team_session.team
-  end
   
 end

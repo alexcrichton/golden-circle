@@ -1,11 +1,8 @@
 class TeamSessionsController < ApplicationController
   
   def new
-#    return render(:controller => 'teams', :action => 'show', :id => current_team.id) if current_team
+    return redirect_to(current_team) if current_team
     @team_session = TeamSession.new
-  end
-  
-  def denied
   end
   
   def create
@@ -23,7 +20,7 @@ class TeamSessionsController < ApplicationController
   end
   
   def destroy
-    current_team_session.destroy
+      current_team_session.destroy
     
     respond_to do |format|
       flash[:notice] = "Logout successful!"
