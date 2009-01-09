@@ -7,7 +7,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.xml
   def index
-    @teams = Team.find(:all)
+    @teams = Team.find(:all, :order => 'enrollment DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -63,21 +63,25 @@ class TeamsController < ApplicationController
   # PUT /teams/1
   # PUT /teams/1.xml
   def update
-    params[:proctor_names].each_pair do |id, name|
+    params[:proctors].each_pair do |id, hash|
       if id == '0'
-        team.proctors << Proctor.new(:name => name)
+        team.proctors << Proctor.new(hash)
       else
         p = Proctor.find(id)
-        p.name = name
-        p.destroy if name.blank?
+        p.update_attributes(hash)
+        p.destroy if hash[:name].blank?
       end
     end
     
     params[:students].each_pair do |id, hash|
-      
+      if id == '0'
+        team.students << Student.new(hash)
+      else
+        s = Student.find(id)
+        s.update_attributes(hash)
+        s.destroy if hash[:first_name].blank?
+      end
     end
-    arr = params[:team].keys
-    arr.select{ |key| key.match(/arr_\d+_first_name/)}
     
     respond_to do |format|
       if @team.update_attributes(params[:team])

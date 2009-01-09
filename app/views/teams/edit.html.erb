@@ -9,8 +9,8 @@
         <%= f.text_field :contact_name %>
       </p>
       <p>
-        <%= f.label :contact_email %><br />
-        <%= f.text_field :contact_email %>
+        <%= f.label :email %><br />
+        <%= f.text_field :email %>
       </p>
       <p>
         <%= f.label :contact_phone %><br />
@@ -38,9 +38,9 @@
     <%= num %>. 
     <% proctor = num < team.proctors.size ? team.proctors[num] : nil %>
     <% if proctor %>
-      <%= text_field "proctor_names", proctor.id, proctor.name %>
+      <%= text_field "proctors[#{proctor.id}]", 'name', proctor.name %>
     <% else %>
-      <%= text_field "proctor_names", 0 %>
+      <%= text_field "proctors[0]", 'name' %>
     <% end %>
   <% end %>
   
@@ -52,8 +52,11 @@
       <%= f.label "First, then last name" %>
       <% [1..15].each do |num| %>
         <%= num %>.
-        <%= f.text_field "app_#{num}_first_name" %>
-        <%= f.text_field "app_#{num}_last_name" %>
+        <% app = num < team.apprentices.size ? team.apprentices[num] : nil %>
+        <% id = app ? app.id : 0%>
+        <%= text_field "students[#{id}]", :first_name, app ? app.first_name : "" %>
+        <%= text_field "students[#{id}]", :last_name, app ? app.last_name : "" %>
+        <%= hidden_field "students[#{id}]", :level, :value => Student::APPRENTICE %>
       <% end %>
     </div>
     <div>
@@ -61,8 +64,11 @@
       <%= f.label "First, then last name" %>
       <% [1..15].each do |num| %>
         <%= num %>.
-        <%= f.text_field "wiz_#{num}_first_name" %>
-        <%= f.text_field "wiz_#{num}_last_name" %>
+        <% wiz = num < team.wizards.size ? team.wizards[num] : nil %>
+        <% id = wiz ? wiz.id : 0%>
+        <%= text_field "students[#{id}]", :first_name, wiz ? wiz.first_name : "" %>
+        <%= text_field "students[#{id}]", :last_name, wiz ? wiz.last_name : "" %>
+        <%= hidden_field "students[#{id}]", :level, :value => Student::WIZARD %>
       <% end %>
     </div>
   </div>
