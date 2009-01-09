@@ -1,30 +1,37 @@
-<h1>Listing teams</h1>
+<h1>Listing all teams</h1>
+
+<div>
+  <h3>Statistics</h3>
+  <p>
+    Team count: <%= Team.count %>
+  </p>
+  <p>
+    Wizard count: <%= Student.wizards.size %>
+  </p>
+  <p>
+    Apprentice count: <%= Student.apprentices.size %>
+  </p>
+  <p>
+    Student count: <%= Student.count %>
+  </p>
+</div>
 
 <table>
   <tr>
     <th>School name</th>
-    <th>Admin</th>
-    <th>Contact name</th>
-    <th>Contact email</th>
-    <th>Contact phone</th>
     <th>Enrollment</th>
+    <th>Wizard Count</th>
+    <th>Apprentice Count</th>
   </tr>
-
+  
 <% for team in @teams %>
   <tr>
-    <td><%=h team.school_name %></td>
-    <td><%=h team.admin %></td>
-    <td><%=h team.contact_name %></td>
-    <td><%=h team.contact_email %></td>
-    <td><%=h team.contact_phone %></td>
+    <td><%= link_to(h(team.school_name), team)%></td>
     <td><%=h team.enrollment %></td>
-    <td><%= link_to 'Show', team %></td>
-    <td><%= link_to 'Edit', edit_team_path(team) %></td>
+    <td><%= team.wizards.size %></td>
+    <td><%= team.apprentices.size %></td>
     <td><%= link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New team', new_team_path %>

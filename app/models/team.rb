@@ -9,5 +9,7 @@ class Team < ActiveRecord::Base
   
   has_many :students
   has_many :proctors
+  has_many :apprentices, :class_name => 'Student', :conditions => ['level = ?', Student::APPRENTICE]
+  has_many :wizards,     :class_name => 'Student', :conditions => ['level = ?', Student::WIZARD]
   
 end
