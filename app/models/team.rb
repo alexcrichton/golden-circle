@@ -14,10 +14,4 @@ class Team < ActiveRecord::Base
   has_many :students
   has_many :proctors
   
-  def self.authenticate(email, school_name, password)
-    return nil if email.nil? || password.nil?
-    t = find_by_email(email) # need to get the salt
-    t && t.authenticated?(password) ? t : nil
-  end
-  
 end

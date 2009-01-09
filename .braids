@@ -13,3 +13,10 @@ vendor/plugins/rspec:
   revision: 91444510df439fc7acd5a308eca574d256a4baef
   branch: master
   remote: braid/vendor/plugins/rspec
+vendor/plugins/authlogic: 
+  squashed: true
+  url: git://github.com/binarylogic/authlogic.git
+  type: git
+  revision: f45f1faf2db0fde4daeb880f63f00e5b61d3399b
+  branch: master
+  remote: braid/vendor/plugins/authlogic
