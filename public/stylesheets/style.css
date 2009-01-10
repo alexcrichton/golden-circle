@@ -60,7 +60,7 @@ img#logo {
   border-right: solid #d1d1d1 1px;
   background: white;
   margin: 0;
-  background: #fff url(/images/column.gif) repeat-y top left;
+  background: solid #fff 1px;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;

@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   
   before_filter :load_team
-  before_filter :ensure_owner, :except => [:create]
+  before_filter :ensure_owner, :except => [:create, :new]
   before_filter :ensure_admin, :only => [:index]
   
   # GET /teams
@@ -22,9 +22,9 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.xml
   def show
-    render :action => 'edit'
+#    render :action => 'edit'
 #    @team = Team.find(params[:id])
-#
+
 #    respond_to do |format|
 #      format.html # show.html.erb
 #      format.xml  { render :xml => @team }
@@ -70,7 +70,7 @@ class TeamsController < ApplicationController
   def update
     params[:proctors].each_pair do |id, hash|
       if id == '0'
-        team.proctors << Proctor.new(hash)
+        @team.proctors << Proctor.new(hash)
       else
         p = Proctor.find(id)
         p.update_attributes(hash)
@@ -80,7 +80,7 @@ class TeamsController < ApplicationController
     
     params[:students].each_pair do |id, hash|
       if id == '0'
-        team.students << Student.new(hash)
+        @team.students << Student.new(hash)
       else
         s = Student.find(id)
         s.update_attributes(hash)

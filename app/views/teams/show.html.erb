@@ -1,8 +1,8 @@
 <% form_for(@team) do |f| %>
   <%= f.error_messages %>
   
-  <div>
-    <div>
+  <div style="margin:20px 0" class="clearfix">
+    <div class="span-8 colborder">
       <h3>Contact info</h3>
       <p>
         <%= f.label :contact_name %><br />
@@ -17,7 +17,7 @@
         <%= f.text_field :contact_phone %>
       </p>
     </div>
-    <div>
+    <div class="span-8 last">
       <h3>School info</h3>
       <p>
         <%= f.label :school_name %><br />
