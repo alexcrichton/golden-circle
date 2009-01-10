@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   
   before_filter :load_team
-  before_filter :ensure_owner, :except => [:create, :new]
+  before_filter :ensure_owner, :except => [:create, :new, :index]
   before_filter :ensure_admin, :only => [:index]
   
   # GET /teams

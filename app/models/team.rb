@@ -4,12 +4,8 @@ class Team < ActiveRecord::Base
   
   validate :submitted_before_deadline?
   
-#  validates_presence_of :school_name
-#  validates_presence_of :contact_name
-#  validates_presence_of :contact_phone
-#  validates_presence_of :enrollment
-  
-#  validates_numericality_of :enrollment
+  validates_presence_of :school_name
+  validates_uniqueness_of :school_name
   
   attr_protected :admin
   
@@ -25,6 +21,9 @@ class Team < ActiveRecord::Base
                          :attributes => true, 
                          :discard_if => :blank?, 
                          :dependent => :destroy
+  
+  validates_size_of :wizards, :maximum => 15, :message => "have a maximum of 15 allowed"
+  validates_size_of :apprentices, :maximum => 15, :message => "have a maximum of 15 allowed"
   
   private
   def submitted_before_deadline?

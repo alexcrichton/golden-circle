@@ -16,7 +16,7 @@
         
         <div id="login_links">
           <% if current_team %>
-            Logged in as: <%= current_team.email %> |
+            Logged in as: <%= link_to current_team.school_name, current_team %> |
             <%= link_to 'Log out', logout_path %>
           <% else %>
             <%= link_to 'Log in', login_path %> |

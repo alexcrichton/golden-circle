@@ -1,24 +1,19 @@
 <h1>Listing all teams</h1>
 
 <div>
-  <h3>Statistics</h3>
-  <p>
-    Team count: <%= Team.count %>
-  </p>
-  <p>
-    Wizard count: <%= Student.wizards.size %>
-  </p>
-  <p>
-    Apprentice count: <%= Student.apprentices.size %>
-  </p>
-  <p>
-    Student count: <%= Student.count %>
-  </p>
+  <h4>Statistics</h4>
+  <dl id="info">
+    <dt>Team count:</dt><dd><%= Team.count %></dd>
+    <dt>Wizard count:</dt><dd><%= Student.wizards.size %></dd>
+    <dt>Apprentice count:</dt><dd><%= Student.apprentices.size %></dd>
+    <dt>Student count:</dt><dd><%= Student.count %></dd>
+  </dl>
 </div>
 
 <table>
   <tr>
     <th>School name</th>
+    <th>Contact email</th>
     <th>Enrollment</th>
     <th>Wizard Count</th>
     <th>Apprentice Count</th>
@@ -26,7 +21,8 @@
   
 <% for team in @teams %>
   <tr>
-    <td><%= link_to(h(team.school_name), team)%></td>
+    <td><%= link_to(h(team.school_name), team) %></td>
+    <td><%= mail_to(team.email) %></td>
     <td><%=h team.enrollment %></td>
     <td><%= team.wizards.size %></td>
     <td><%= team.apprentices.size %></td>

@@ -1,3 +1,7 @@
+<% if current_team && current_team.admin %>
+  <%= link_to 'All Teams', teams_path %>
+<% end %>
+
 <% form_for(@team) do |f| %>
   <%= f.error_messages %>
   
@@ -35,23 +39,29 @@
     <h3>Coaches who can also be proctors</h3>
     <%= f.label "Also list contact's name if possible" %><br/>
     <%= f.render_associated_form(@team.proctors, :new => 1) %>
-    <%= f.add_associated_link('add', @team.proctors.build) %>
   </div>
+  <%= f.add_associated_link('add', @team.proctors.build) %>
   <hr/>
   
-  <div id="apprentices">
-    <h3>Apprentices</h3>
-    <%= f.label "First, then last name" %><br/>
-    <%= f.render_associated_form(@team.apprentices, :new => 1, :locals => {:level => Student::APPRENTICE}) %>
-  </div>
+  <div style="margin:20px 0" class="clearfix">
+    <div class="span-8 colborder">
+      <div id="apprentices">
+        <h3>Apprentices (<%= @team.apprentices.size %>/15)</h3>
+        <label>First, then last name</label>
+        <%= f.render_associated_form(@team.apprentices, :new => 1, :locals => {:level => Student::APPRENTICE}) %>
+      </div>
       <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
-  <div id="wizards">
-    <h3>Wizards</h3>
-    <%= f.label "First, then last name" %><br/>
-    <%= f.render_associated_form(@team.wizards, :new => 1, :locals => {:level => Student::WIZARD}) %>
-    <%= f.add_associated_link('add', @team.wizards.build, :locals => {:level => Student::WIZARD}, :container => 'wizards') %>
+    </div>
+    <div class="span-8 last">
+      <div id="wizards">
+        <h3>Wizards (<%= @team.wizards.size %>/15)</h3>
+        <label>First, then last name</label>
+        <%= f.render_associated_form(@team.wizards, :new => 1, :locals => {:level => Student::WIZARD}) %>
+      </div>
+      <%= f.add_associated_link('add', @team.wizards.build, :locals => {:level => Student::WIZARD}, :container => 'wizards') %>
+    </div>
   </div>
-  
+  <br/>
   <p>
     <%= f.submit "Update Information" %>
   </p>

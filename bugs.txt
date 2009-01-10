@@ -1,0 +1,4 @@
+limiting to 15 people -
+	you can add 16 or more to a team, and it saves correctly once, 
+	subsequent times, however, you cannot save
+	REASON: attribute_fu adds the student after the update i'm guessing
