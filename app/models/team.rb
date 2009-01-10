@@ -2,6 +2,8 @@ class Team < ActiveRecord::Base
   
   acts_as_authentic
   
+  validate :submitted_before_deadline?
+  
 #  validates_presence_of :school_name
 #  validates_presence_of :contact_name
 #  validates_presence_of :contact_phone
@@ -23,5 +25,13 @@ class Team < ActiveRecord::Base
                          :attributes => true, 
                          :discard_if => :blank?, 
                          :dependent => :destroy
+  
+  private
+  def submitted_before_deadline?
+    # Needs to be before midnight on Tuesday, January 27, 2009
+    if Time.zone.now > Time.zone.local(2009, 1, 27, 24, 0, 0)
+      errors.add_to_base("The registration deadline has passed. Please bring your changes to the registration table the night of the event.")
+    end
+  end
   
 end
