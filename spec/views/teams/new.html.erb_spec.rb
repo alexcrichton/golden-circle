@@ -21,4 +21,8 @@ describe "/teams/new.html.erb" do
     response.should have_tag("input[type=password][name='team[password_confirmation]']")
   end
   
+  it "should have a submit button" do
+    response.should have_tag("input[type=submit][name='commit']")
+  end
+  
 end
