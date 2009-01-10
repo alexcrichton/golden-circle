@@ -7,6 +7,8 @@ class Team < ActiveRecord::Base
   validates_presence_of :school_name
   validates_uniqueness_of :school_name
   
+  composed_of :phone, :mapping => %w(contact_phone phone_number), :allow_nil => true
+  
   attr_protected :admin
   
   has_many :students, :attributes => true, :discard_if => :blank?, :dependent => :destroy
