@@ -7,4 +7,5 @@ class Proctor < ActiveRecord::Base
   def blank?
     name.blank?
   end
+  
 end

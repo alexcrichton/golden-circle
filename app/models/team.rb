@@ -7,11 +7,10 @@ class Team < ActiveRecord::Base
   validates_presence_of :school_name
   validates_uniqueness_of :school_name
   
-  composed_of :phone, 
-              :mapping => %w(contact_phone phone_number), 
-              :allow_nil => true, 
+  composed_of :phone,
+              :mapping => %w(contact_phone phone_number),
+              :allow_nil => true,
               :converter => Proc.new { |hash| Phone.new(hash[:area_code], hash[:prefix], hash[:suffix]) }
-
   validates_associated :phone
   
   attr_protected :admin
