@@ -31,11 +31,11 @@ class TeamsController < ApplicationController
 
   # POST /teams
   def create
+    current_team_session.destroy if current_team_session
+    
     @team = Team.new(params[:team])
-
     respond_to do |format|
       if @team.save
-        current_team = @team
         flash[:notice] = 'Team was successfully created.'
         format.html { redirect_to(@team) }
       else
