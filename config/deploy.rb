@@ -32,8 +32,8 @@ namespace :db do
     base: &base
       adapter: mysql
       socket: /tmp/mysql.sock
-      username: academy
-      password: xxx~K)Xnlc
+      username: golden
+      password: N)+;3^Df
 
     development:
       database: gc_development
