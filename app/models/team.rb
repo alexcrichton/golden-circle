@@ -10,11 +10,8 @@ class Team < ActiveRecord::Base
   composed_of :phone, 
               :mapping => %w(contact_phone phone_number), 
               :allow_nil => true,
-              :constructor => Proc.new { |phone_number|
-                                match = phone_number.match(Phone::REGEX)
-                                match.nil? ? nil : Phone.new(match[1], match[2], match[3])
-                              },
-              :converter => Proc.new { |hash| Phone.new(hash[:area_code], hash[:prefix], hash[:suffix]) }
+              :constructor => Phone.constructor,
+              :converter => Phone.converter
   validates_associated :phone
   
   attr_protected :admin
