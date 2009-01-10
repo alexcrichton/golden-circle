@@ -1,10 +1,12 @@
-class Team < ActiveRecord::Base
-  
+class Team < ActiveRecord::Base  
   acts_as_authentic
   
-  validates_presence_of     :email
-  validates_uniqueness_of   :email
-  validates_length_of       :email,    :within => 6..100 #r@a.wk
+  validates_presence_of :school_name
+  validates_presence_of :contact_name
+  validates_presence_of :contact_phone
+  validates_presence_of :enrollment
+  
+  validates_numericality_of :enrollment
   
   attr_protected :admin
   

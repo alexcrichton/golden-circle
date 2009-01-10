@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   
-  before_filter :ensure_owner, :except => [:create]
-  before_filter :ensure_admin, :only => [:index]
+  # before_filter :ensure_owner, :except => [:create]
+  # before_filter :ensure_admin, :only => [:index]
   
   # GET /teams
   def index
