@@ -8,6 +8,7 @@ class Team < ActiveRecord::Base
   validates_uniqueness_of :school_name
   
   composed_of :phone, :mapping => %w(contact_phone phone_number), :allow_nil => true
+#  validates_associated :phone
   
   attr_protected :admin
   
