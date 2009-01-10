@@ -23,4 +23,8 @@ class Phone
     @phone_number[6,4]
   end
   
+  def valid?
+    return !@phone_number.nil? && @phone_number.match(/\d{10}/)
+  end
+  
 end
