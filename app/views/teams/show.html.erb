@@ -43,8 +43,8 @@
     <h3>Apprentices</h3>
     <%= f.label "First, then last name" %><br/>
     <%= f.render_associated_form(@team.apprentices, :new => 1, :locals => {:level => Student::APPRENTICE}) %>
-    <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
   </div>
+      <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
   <div id="wizards">
     <h3>Wizards</h3>
     <%= f.label "First, then last name" %><br/>
