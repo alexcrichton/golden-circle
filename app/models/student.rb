@@ -14,4 +14,8 @@ class Student < ActiveRecord::Base
     find(:all, :conditions => ['level = ?', WIZARD])
   end
   
+  def blank?
+    first_name.blank? || last_name.blank?
+  end
+  
 end
