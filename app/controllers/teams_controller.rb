@@ -12,6 +12,10 @@ class TeamsController < ApplicationController
       format.xml  { render :xml => @teams }
     end
   end
+  
+  def new
+    @team = Team.new
+  end
 
   # GET /teams/1
   def show
@@ -37,6 +41,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
+        current_team = @team
         flash[:notice] = 'Team was successfully created.'
         format.html { redirect_to(@team) }
       else
@@ -80,13 +85,15 @@ class TeamsController < ApplicationController
   protected
   def ensure_owner
     if(@team.nil? || current_team.nil? || (current_team.id != @team.id && !current_team.admin))
-      # redirect_to(denied_path)
+      flash[:error] = 'Access Denied'
+      redirect_to root_path
     end
   end
   
-  def ensure_owner
+  def ensure_admin
     if(current_team.nil? || !current_team.admin)
-      # redirect_to(denied_path)
+      flash[:error] = 'Access Denied'
+      redirect_to root_path
     end
   end
   

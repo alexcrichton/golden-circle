@@ -1,24 +1,10 @@
-<% form_for @team do |f| %>
-  <%= f.label :email %><br />
-  <%= f.text_field :email %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %><br />
-  <br />
-  <%= f.label :school_name %><br />
-  <%= f.text_field :school_name %><br />
-  <br />
-  <%= f.label :contact_name %><br />
-  <%= f.text_field :contact_name %><br />
-  <br />
-  <%= f.label :contact_phone %><br />
-  <%= f.text_field :contact_phone %><br />
-  <br />
-  <%= f.label :enrollment %><br />
-  <%= f.text_field :enrollment %><br />
-  <br />
-  <%= f.submit "Login" %>
+<h2>Create a team</h2>
+<% form_for @team, :url => teams_path, :html => {:method => :post} do |f| %>
+  
+  <%= render :partial => 'teams/form', :locals => {:f => f} %>
+  
+  <%= f.submit "Register Team" %>
+  
 <% end %>
+
+<%= link_to '[Back]', root_path %>

@@ -33,8 +33,8 @@
   <hr/>
   
   <h3>Coaches who can also be proctors</h3>
-  <%= f.label "Also list contact's name if possible" %>
-  <% [1..5].each do |num| %>
+  <%= f.label "Also list contact's name if possible" %><br/>
+  <% (1..5).each do |num| %>
     <%= num %>. 
     <% proctor = num < @team.proctors.size ? @team.proctors[num] : nil %>
     <% if proctor %>
@@ -42,6 +42,7 @@
     <% else %>
       <%= text_field "proctors[0]", 'name' %>
     <% end %>
+    <br/>
   <% end %>
   
   <hr/>
@@ -49,26 +50,28 @@
   <div>
     <div>
       <h3>Apprentices</h3>
-      <%= f.label "First, then last name" %>
-      <% [1..15].each do |num| %>
+      <%= f.label "First, then last name" %><br/>
+      <% (1..15).each do |num| %>
         <%= num %>.
         <% app = num < @team.apprentices.size ? @team.apprentices[num] : nil %>
-        <% id = app ? app.id : 0%>
-        <%= text_field "students[#{id}]", :first_name, app ? app.first_name : "" %>
-        <%= text_field "students[#{id}]", :last_name, app ? app.last_name : "" %>
-        <%= hidden_field "students[#{id}]", :level, :value => Student::APPRENTICE %>
+        <% id = app ? app.id : 0 %>
+        <%= text_field "students[#{id}]", 'first_name', :value => (app ? app.first_name : "") %>
+        <%= text_field "students[#{id}]", 'last_name', :value => (app ? app.last_name : "") %>
+        <%= hidden_field "students[#{id}]", 'level', :value => Student::APPRENTICE %>
+        <br/>
       <% end %>
     </div>
     <div>
       <h3>Wizards</h3>
-      <%= f.label "First, then last name" %>
-      <% [1..15].each do |num| %>
+      <%= f.label "First, then last name" %><br/>
+      <% (1..15).each do |num| %>
         <%= num %>.
-        <% wiz = num < team.wizards.size ? team.wizards[num] : nil %>
+        <% wiz = num < @team.wizards.size ? @team.wizards[num] : nil %>
         <% id = wiz ? wiz.id : 0%>
-        <%= text_field "students[#{id}]", :first_name, wiz ? wiz.first_name : "" %>
-        <%= text_field "students[#{id}]", :last_name, wiz ? wiz.last_name : "" %>
-        <%= hidden_field "students[#{id}]", :level, :value => Student::WIZARD %>
+        <%= text_field "students[#{id}]", 'first_name', :value => (wiz ? wiz.first_name : "") %>
+        <%= text_field "students[#{id}]", 'last_name', :value => (wiz ? wiz.last_name : "") %>
+        <%= hidden_field "students[#{id}]", 'level', :value => Student::WIZARD %>
+        <br/>
       <% end %>
     </div>
   </div>
