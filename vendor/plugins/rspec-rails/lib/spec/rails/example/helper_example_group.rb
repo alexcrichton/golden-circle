@@ -26,6 +26,8 @@ module Spec
       #     end
       #   end
       class HelperExampleGroup < FunctionalExampleGroup
+        attr_accessor :output_buffer
+        
         class HelperObject < ActionView::Base
           def protect_against_forgery?
             false
@@ -117,7 +119,9 @@ module Spec
 
           @flash = ActionController::Flash::FlashHash.new
           session['flash'] = @flash
-
+          
+          @output_buffer = ""
+          @template = helper
           ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
           
           helper.session = session

@@ -2,28 +2,28 @@
 vendor/plugins/rspec-rails: 
   squashed: true
   url: git://github.com/dchelimsky/rspec-rails.git
-  type: git
-  revision: e2df5398346e3babc4b41a9004117e5ddf061482
   branch: master
+  type: git
+  revision: 1a09ad4b31e1997157c01bf0c8ed56073a18431d
   remote: braid/vendor/plugins/rspec-rails
-vendor/plugins/attribute_fu: 
-  squashed: true
-  url: git://github.com/giraffesoft/attribute_fu.git
-  type: git
-  revision: 2184928876b6a99cf2aeab6f1f20caafef7975da
-  branch: master
-  remote: braid/vendor/plugins/attribute-fu
 vendor/plugins/rspec: 
   squashed: true
+  branch: master
   url: git://github.com/dchelimsky/rspec.git
   type: git
   revision: 91444510df439fc7acd5a308eca574d256a4baef
-  branch: master
   remote: braid/vendor/plugins/rspec
 vendor/plugins/authlogic: 
   squashed: true
+  branch: master
   url: git://github.com/binarylogic/authlogic.git
   type: git
   revision: f45f1faf2db0fde4daeb880f63f00e5b61d3399b
-  branch: master
   remote: braid/vendor/plugins/authlogic
+vendor/plugins/attribute_fu: 
+  squashed: true
+  branch: master
+  url: git://github.com/giraffesoft/attribute_fu.git
+  type: git
+  revision: 2184928876b6a99cf2aeab6f1f20caafef7975da
+  remote: braid/vendor/plugins/attribute-fu
