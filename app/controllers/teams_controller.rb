@@ -46,32 +46,13 @@ class TeamsController < ApplicationController
   
   # PUT /teams/1
   def update
-    params[:proctors].each_pair do |id, hash|
-      if id == '0'
-        @team.proctors << Proctor.new(hash)
-      else
-        p = Proctor.find(id)
-        p.update_attributes(hash)
-        p.destroy if hash[:name].blank?
-      end
-    end
-    
-    params[:students].each_pair do |id, hash|
-      if id == '0'
-        @team.students << Student.new(hash)
-      else
-        s = Student.find(id)
-        s.update_attributes(hash)
-        s.destroy if hash[:first_name].blank?
-      end
-    end
     
     respond_to do |format|
       if @team.update_attributes(params[:team])
         flash[:notice] = 'Team was successfully updated.'
         format.html { redirect_to(@team) }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "show" }
       end
     end
   end

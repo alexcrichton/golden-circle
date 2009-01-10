@@ -31,49 +31,25 @@
   </div>
   
   <hr/>
-  
-  <h3>Coaches who can also be proctors</h3>
-  <%= f.label "Also list contact's name if possible" %><br/>
-  <% (1..5).each do |num| %>
-    <%= num %>. 
-    <% proctor = num < @team.proctors.size ? @team.proctors[num] : nil %>
-    <% if proctor %>
-      <%= text_field "proctors[#{proctor.id}]", 'name', proctor.name %>
-    <% else %>
-      <%= text_field "proctors[0]", 'name' %>
-    <% end %>
-    <br/>
-  <% end %>
-  
+  <div id="proctors">
+    <h3>Coaches who can also be proctors</h3>
+    <%= f.label "Also list contact's name if possible" %><br/>
+    <%= f.render_associated_form(@team.proctors, :new => 1) %>
+    <%= f.add_associated_link('add', @team.proctors.build) %>
+  </div>
   <hr/>
   
-  <div>
-    <div>
-      <h3>Apprentices</h3>
-      <%= f.label "First, then last name" %><br/>
-      <% (1..15).each do |num| %>
-        <%= num %>.
-        <% app = num < @team.apprentices.size ? @team.apprentices[num] : nil %>
-        <% id = app ? app.id : 0 %>
-        <%= text_field "students[#{id}]", 'first_name', :value => (app ? app.first_name : "") %>
-        <%= text_field "students[#{id}]", 'last_name', :value => (app ? app.last_name : "") %>
-        <%= hidden_field "students[#{id}]", 'level', :value => Student::APPRENTICE %>
-        <br/>
-      <% end %>
-    </div>
-    <div>
-      <h3>Wizards</h3>
-      <%= f.label "First, then last name" %><br/>
-      <% (1..15).each do |num| %>
-        <%= num %>.
-        <% wiz = num < @team.wizards.size ? @team.wizards[num] : nil %>
-        <% id = wiz ? wiz.id : 0%>
-        <%= text_field "students[#{id}]", 'first_name', :value => (wiz ? wiz.first_name : "") %>
-        <%= text_field "students[#{id}]", 'last_name', :value => (wiz ? wiz.last_name : "") %>
-        <%= hidden_field "students[#{id}]", 'level', :value => Student::WIZARD %>
-        <br/>
-      <% end %>
-    </div>
+  <div id="apprentices">
+    <h3>Apprentices</h3>
+    <%= f.label "First, then last name" %><br/>
+    <%= f.render_associated_form(@team.apprentices, :new => 1, :locals => {:level => Student::APPRENTICE}) %>
+    <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
+  </div>
+  <div id="wizards">
+    <h3>Wizards</h3>
+    <%= f.label "First, then last name" %><br/>
+    <%= f.render_associated_form(@team.wizards, :new => 1, :locals => {:level => Student::WIZARD}) %>
+    <%= f.add_associated_link('add', @team.wizards.build, :locals => {:level => Student::WIZARD}, :container => 'wizards') %>
   </div>
   
   <p>
