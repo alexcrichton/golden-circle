@@ -1,29 +1,19 @@
 class Phone
   
-  attr_accessor :phone_number
+  REGEX=/^(\d{3}) (\d{3}) (\d{4})$/
+  
+  attr_accessor :area_code, :prefix, :suffix
    
-  def initialize(phone_number, prefix = nil, suffix = nil)
-    if !phone_number.nil? && !prefix.nil? && !suffix.nil?
-      @phone_number = phone_number + prefix + suffix
-    else
-      @phone_number = phone_number || ''
-    end
+  def initialize(area_code, prefix, suffix)
+    @area_code, @prefix, @suffix = area_code, prefix, suffix
   end
   
-  def area_code
-    @phone_number[0,3]
-  end
-  
-  def prefix
-    @phone_number[3,3]
-  end
-  
-  def suffix
-    @phone_number[6,4]
+  def phone_number
+    [@area_code, @prefix, @suffix].join(' ')
   end
   
   def valid?
-    return !@phone_number.nil? && (@phone_number.match(/\d{10}/) || @phone_number.blank?)
+    return phone_number.match(REGEX) || phone_number.blank?
   end
   
 end

@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   
   # GET /teams
   def index
-    @teams = Team.find(:all, :order => 'school_name DESC')
+    @teams = Team.find(:all, :order => 'school_name ASC')
     
     respond_to do |format|
       format.html # index.html.erb
@@ -67,7 +67,6 @@ class TeamsController < ApplicationController
   end
   
   protected
-  
   def load_team
     @team = Team.find(params[:id]) if params[:id]
   end

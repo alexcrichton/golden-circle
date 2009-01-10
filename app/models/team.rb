@@ -7,9 +7,13 @@ class Team < ActiveRecord::Base
   validates_presence_of :school_name
   validates_uniqueness_of :school_name
   
-  composed_of :phone,
-              :mapping => %w(contact_phone phone_number),
+  composed_of :phone, 
+              :mapping => %w(contact_phone phone_number), 
               :allow_nil => true,
+              :constructor => Proc.new { |phone_number|
+                                match = phone_number.match(Phone::REGEX)
+                                match.nil? ? nil : Phone.new(match[1], match[2], match[3])
+                              },
               :converter => Proc.new { |hash| Phone.new(hash[:area_code], hash[:prefix], hash[:suffix]) }
   validates_associated :phone
   
