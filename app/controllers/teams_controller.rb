@@ -5,50 +5,31 @@ class TeamsController < ApplicationController
   before_filter :ensure_admin, :only => [:index]
   
   # GET /teams
-  # GET /teams.xml
   def index
     @teams = Team.find(:all, :order => 'enrollment DESC')
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @teams }
     end
   end
   
+  # GET /teams/1
+  def show
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  # GET /teams/new
   def new
     @team = Team.new
+    respond_to do |format|
+      format.html
+    end
   end
-
-  # GET /teams/1
-  # GET /teams/1.xml
-  def show
-#    render :action => 'edit'
-#    @team = Team.find(params[:id])
-
-#    respond_to do |format|
-#      format.html # show.html.erb
-#      format.xml  { render :xml => @team }
-#    end
-  end
-
-  # GET /teams/new
-  # GET /teams/new.xml
- def new
-   @team = Team.new
- 
-   respond_to do |format|
-     format.html # new.html.erb
-     format.xml  { render :xml => @team }
-   end
- end
-
-  # GET /teams/1/edit
-#  def edit
-#    @team = Team.find(params[:id])
-#  end
 
   # POST /teams
-  # POST /teams.xml
   def create
     @team = Team.new(params[:team])
 
@@ -57,16 +38,13 @@ class TeamsController < ApplicationController
         current_team = @team
         flash[:notice] = 'Team was successfully created.'
         format.html { redirect_to(@team) }
-        format.xml  { render :xml => @team, :status => :created, :location => @team }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @team.errors, :status => :unprocessable_entity }
       end
     end
   end
-
+  
   # PUT /teams/1
-  # PUT /teams/1.xml
   def update
     params[:proctors].each_pair do |id, hash|
       if id == '0'
@@ -92,26 +70,23 @@ class TeamsController < ApplicationController
       if @team.update_attributes(params[:team])
         flash[:notice] = 'Team was successfully updated.'
         format.html { redirect_to(@team) }
-        format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @team.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   # DELETE /teams/1
-  # DELETE /teams/1.xml
   def destroy
     @team.destroy
     
     respond_to do |format|
       format.html { redirect_to(teams_url) }
-      format.xml  { head :ok }
     end
   end
   
   protected
+  
   def load_team
     @team = Team.find(params[:id]) if params[:id]
   end
@@ -129,4 +104,5 @@ class TeamsController < ApplicationController
       redirect_to root_path
     end
   end
+  
 end
