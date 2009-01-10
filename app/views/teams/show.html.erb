@@ -18,9 +18,11 @@
       </p>
       <p>
         <%= f.label :contact_phone %><br />
-        <input type="text" name="team[phone(1s)]" value="<%= @team.phone ? @team.phone.area_code : '' %>" size="3" />
-        <input type="text" name="team[phone(2s)]" value="<%= @team.phone ? @team.phone.prefix : '' %>" size="3" />
-        <input type="text" name="team[phone(3s)]" value="<%= @team.phone ? @team.phone.suffix : '' %>" size="4" />
+        <% f.fields_for :phone, @team.phone do |pf| %>
+          <%= pf.text_field :area_code, :size => 3 %>
+          <%= pf.text_field :prefix, :size => 3 %>
+          <%= pf.text_field :suffix, :size => 4 %>
+        <% end %>
       </p>
     </div>
     <div class="span-8 last">

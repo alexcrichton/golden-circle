@@ -3,8 +3,7 @@ class Phone
   attr_accessor :phone_number
    
   def initialize(phone_number, prefix = nil, suffix = nil)
-    puts "#{phone_number} #{prefix} #{suffix}"
-   if !phone_number.nil? && !prefix.nil? && !suffix.nil?
+    if !phone_number.nil? && !prefix.nil? && !suffix.nil?
       @phone_number = phone_number + prefix + suffix
     else
       @phone_number = phone_number || ''
@@ -24,7 +23,7 @@ class Phone
   end
   
   def valid?
-    return !@phone_number.nil? && @phone_number.match(/\d{10}/)
+    return !@phone_number.nil? && (@phone_number.match(/\d{10}/) || @phone_number.blank?)
   end
   
 end
