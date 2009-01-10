@@ -47,21 +47,35 @@
   
   <div style="margin:20px 0" class="clearfix">
     <div class="span-8 colborder">
-      <div id="apprentices">
-        <h3>Apprentices (<%= @team.apprentices.size %>/15)</h3>
-        <label>First, then last name</label>
+      
+      <table id="apprentices">
+        <caption>Apprentices (<%= @team.apprentices.size %>/15)</caption>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th></th>
+        </tr>
         <%= f.render_associated_form(@team.apprentices, :new => 1, :locals => {:level => Student::APPRENTICE}) %>
-      </div>
+      </table>
       <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
+      
     </div>
+    
     <div class="span-8 last">
-      <div id="wizards">
-        <h3>Wizards (<%= @team.wizards.size %>/15)</h3>
-        <label>First, then last name</label>
+      
+      <table id="wizards">
+        <caption>Wizards (<%= @team.wizards.size %>/15)</caption>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th></th>
+        </tr>
         <%= f.render_associated_form(@team.wizards, :new => 1, :locals => {:level => Student::WIZARD}) %>
-      </div>
+      </table>
       <%= f.add_associated_link('add', @team.wizards.build, :locals => {:level => Student::WIZARD}, :container => 'wizards') %>
+      
     </div>
+    
   </div>
   <br/>
   <p>
