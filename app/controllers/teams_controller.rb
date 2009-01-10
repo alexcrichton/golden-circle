@@ -29,14 +29,14 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   # GET /teams/new.xml
- # def new
- #   @team = Team.new
- # 
- #   respond_to do |format|
- #     format.html # new.html.erb
- #     format.xml  { render :xml => @team }
- #   end
- # end
+ def new
+   @team = Team.new
+ 
+   respond_to do |format|
+     format.html # new.html.erb
+     format.xml  { render :xml => @team }
+   end
+ end
 
   # GET /teams/1/edit
 #  def edit
