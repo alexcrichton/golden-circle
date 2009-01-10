@@ -1,25 +1,11 @@
 class Phone
   
-  attr_accessor :phone_number
+  attr_reader :phone_number
+  attr_accessor :area_code, :prefix, :suffix
    
-  def initialize(phone_number, prefix = nil, suffix = nil)
-    if !phone_number.nil? && !prefix.nil? && !suffix.nil?
-      @phone_number = phone_number + prefix + suffix
-    else
-      @phone_number = phone_number || ''
-    end
-  end
-  
-  def area_code
-    @phone_number[0,3]
-  end
-  
-  def prefix
-    @phone_number[3,3]
-  end
-  
-  def suffix
-    @phone_number[6,4]
+  def initialize(area_code, prefix, suffix)
+    @area_code, @prefix, @suffix = area_code, prefix, suffix
+    @phone_number = [@area_code, @prefix, @suffix].join(' ')
   end
   
   def valid?

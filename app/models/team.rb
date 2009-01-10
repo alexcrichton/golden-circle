@@ -9,7 +9,8 @@ class Team < ActiveRecord::Base
   
   composed_of :phone, 
               :mapping => %w(contact_phone phone_number), 
-              :allow_nil => true, 
+              :allow_nil => true,
+              :constructor => Proc.new { |phone_number| Phone.new(phone_number.split(' ')[0]||"", phone_number.split(' ')[1]||"", phone_number.split(' ')[2]||"") },
               :converter => Proc.new { |hash| Phone.new(hash[:area_code], hash[:prefix], hash[:suffix]) }
 
   validates_associated :phone
