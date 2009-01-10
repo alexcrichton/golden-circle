@@ -6,6 +6,13 @@ vendor/plugins/rspec-rails:
   revision: e2df5398346e3babc4b41a9004117e5ddf061482
   branch: master
   remote: braid/vendor/plugins/rspec-rails
+vendor/plugins/attribute_fu: 
+  squashed: true
+  url: git://github.com/giraffesoft/attribute_fu.git
+  type: git
+  revision: 2184928876b6a99cf2aeab6f1f20caafef7975da
+  branch: master
+  remote: braid/vendor/plugins/attribute-fu
 vendor/plugins/rspec: 
   squashed: true
   url: git://github.com/dchelimsky/rspec.git
