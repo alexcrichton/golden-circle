@@ -1,6 +1,8 @@
-<div class="student">
-  <%= f.text_field :first_name, :size => 10 %>
-  <%= f.text_field :last_name, :size => 10 %>
-  <%= f.hidden_field :level, :value => level %>
-  <%= f.remove_link 'remove' %>
-</div>
+<tr class="student">
+  <td><%= f.text_field :first_name, :size => 12 %></td>
+  <td><%= f.text_field :last_name, :size => 12 %></td>
+  <td>
+    <%= f.hidden_field :level, :value => level %>
+    <%= f.remove_link 'remove' %>
+  </td>
+</tr>
