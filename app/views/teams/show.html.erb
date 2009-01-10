@@ -18,7 +18,9 @@
       </p>
       <p>
         <%= f.label :contact_phone %><br />
-        <%= f.text_field :contact_phone %>
+        <%= f.text_field 'phone(1s)', :value => @team.phone.area_code, :size => 3, :limit => 3 %> &ndash;
+        <%= f.text_field 'phone(2s)', :value => @team.phone.prefix, :size => 3 %> &ndash;
+        <%= f.text_field 'phone(3s)', :value => @team.phone.suffix, :size => 4 %>
       </p>
     </div>
     <div class="span-8 last">
@@ -29,7 +31,7 @@
       </p>
       <p>
         <%= f.label :enrollment %><br />
-        <%= f.text_field :enrollment %>
+        <%= f.text_field :enrollment, :size => 4 %>
       </p>
     </div>
   </div>

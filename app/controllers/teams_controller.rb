@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
   
   # GET /teams
   def index
-    @teams = Team.find(:all, :order => 'enrollment DESC')
+    @teams = Team.find(:all, :order => 'school_name DESC')
     
     respond_to do |format|
       format.html # index.html.erb
