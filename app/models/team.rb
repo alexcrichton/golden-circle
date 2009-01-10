@@ -11,9 +11,17 @@ class Team < ActiveRecord::Base
   
   attr_protected :admin
   
-  has_many :students, :attributes => true, :discard_if => proc { |student| student.first_name.blank? || student.last_name.blank?}
-  has_many :proctors, :attributes => true, :discard_if => proc { |proctor| proctor.name.blank? }
-  has_many :apprentices, :class_name => 'Student', :conditions => ['level = ?', Student::APPRENTICE], :attributes => true, :discard_if => :blank?
-  has_many :wizards,     :class_name => 'Student', :conditions => ['level = ?', Student::WIZARD], :attributes => true, :discard_if => :blank?
+  has_many :students, :attributes => true, :discard_if => :blank?, :dependent => :destroy
+  has_many :proctors, :attributes => true, :discard_if => :blank?, :dependent => :destroy
+  has_many :apprentices, :class_name => 'Student', 
+                         :conditions => ['level = ?', Student::APPRENTICE], 
+                         :attributes => true, 
+                         :discard_if => :blank?, 
+                         :dependent => :destroy
+  has_many :wizards,     :class_name => 'Student', 
+                         :conditions => ['level = ?', Student::WIZARD], 
+                         :attributes => true, 
+                         :discard_if => :blank?, 
+                         :dependent => :destroy
   
 end
