@@ -18,9 +18,9 @@
       </p>
       <p>
         <%= f.label :contact_phone %><br />
-        <%= f.text_field 'phone(1s)', :value => @team.phone ? @team.phone.area_code : '', :size => 3, :limit => 3 %> &ndash;
-        <%= f.text_field 'phone(2s)', :value => @team.phone ? @team.phone.prefix : '', :size => 3 %> &ndash;
-        <%= f.text_field 'phone(3s)', :value => @team.phone ? @team.phone.suffix: '', :size => 4 %>
+        (<%= f.text_field 'phone(1s)', :value => @team.phone ? @team.phone.area_code : '', :size => 3, :maxlength => 3 %>)  &ndash;
+        <%= f.text_field 'phone(2s)', :value => @team.phone ? @team.phone.prefix : '', :size => 3, :maxlength => 3 %> &ndash;
+        <%= f.text_field 'phone(3s)', :value => @team.phone ? @team.phone.suffix: '', :size => 4, :maxlength => 4 %>
       </p>
     </div>
     <div class="span-8 last">
