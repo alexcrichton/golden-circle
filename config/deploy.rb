@@ -2,7 +2,7 @@ require 'erb'
 # http://github.com/jnewland/san_juan/tree/master For god integration
 require 'san_juan'
 
-set :application, "gcircle.ac.com"
+set :application, "goldencircle.academycommunity.com"
 
 set :scm, :git
 set :repository,  "git@academycommunity.com:golden_circle.git"
@@ -69,11 +69,13 @@ desc "install required gems"
   end
 end
 
-role :app, application
-role :web, application
-role :db,  application, :primary => true
+set :web_server, "academycommunity.com"
 
-thin_app = "thin-gcircle.ac.com"
+role :app, web_server
+role :web, web_server
+role :db,  web_server, :primary => true
+
+thin_app = "thin-goldencircle.academycommunity.com"
 
 san_juan.role :app, [thin_app]
 san_juan.role :web, %w(nginx)
