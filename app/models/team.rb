@@ -8,7 +8,7 @@ class Team < ActiveRecord::Base
   validates_size_of :students, :maximum => 15, :message => "have a maximum of 15 allowed"
   
   def blank?
-#    students.size == 0 && name.blank?
+    students.size == 0 && name.blank?
   end
   
 end

@@ -9,23 +9,23 @@
     <div class="span-8 colborder">
       <fieldset>
         <legend>Contact info</legend>
-      <p>
-        <%= f.label :contact_name %><br />
-        <%= f.text_field :contact_name %>
-      </p>
-      <p>
-        <%= f.label :email %><br />
-        <%= f.text_field :email %>
-      </p>
-      <p>
-        <%= f.label :contact_phone %><br />
-        <% f.fields_for :phone, @school.phone do |pf| %>
-          <%= pf.text_field :area_code, :size => 3 %> &ndash;
-          <%= pf.text_field :prefix, :size => 3 %> &ndash;
-          <%= pf.text_field :suffix, :size => 4 %>
-        <% end %><br/>
-        <small><i>xxx - xxx - xxxx</i></small>
-      </p>
+        <p>
+          <%= f.label :contact_name %><br />
+          <%= f.text_field :contact_name %>
+        </p>
+        <p>
+          <%= f.label :email %><br />
+          <%= f.text_field :email %>
+        </p>
+        <p>
+          <%= f.label :contact_phone %><br />
+          <% f.fields_for :phone, @school.phone do |pf| %>
+            <%= pf.text_field :area_code, :size => 3 %> &ndash;
+            <%= pf.text_field :prefix, :size => 3 %> &ndash;
+            <%= pf.text_field :suffix, :size => 4 %>
+          <% end %><br/>
+          <small><i>xxx - xxx - xxxx</i></small>
+        </p>
       </fieldset>
     </div>
     <div class="span-8 last">
@@ -54,10 +54,11 @@
   
   <h3 style="font-weight:bold"><center>Student Roster</center></h3>
   
-  <div id="RANDOMTHING teams team">
+  <div id="teams">
     <%= f.render_associated_form(@school.teams, :new => 1) %>
-    <%= f.add_associated_link('Add a Team', @school.teams.build, :container => 'RANDOMTHING') %>
+    <%= f.add_associated_link('Add a Team', @school.teams.build) %>
   </div>
+  <%= f.add_associated_link('Add a Team', @school.teams.build) %>
   
   <br/>
   <hr/>
@@ -66,5 +67,5 @@
   </p>
 <% end %>
 
-The amount due for this team is <%#= 4 * @school.students.size %> dollars.
+The amount due for this team is <%= 4 * @school.students.size %> dollars.
 Please bring the check payable to GT Education to the registration table March 3rd. 
