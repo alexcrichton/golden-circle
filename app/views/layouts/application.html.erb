@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>AcademyCommunity.com</title>
@@ -8,69 +9,40 @@
     <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
     <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
     <%= stylesheet_link_tag "style.css", :media =>"screen" %>
+    
     <%= javascript_include_tag 'jquery', 'application', 'jquery.template' %>
   </head>
+  
   <body>
+    
     <div class="header">
-        <a href="/"><%= image_tag "logo.png", :id=>"logo",:alt=>"Golden Circle" %></a>
-        
-        <div id="login_links">
-          <% if current_school %>
-            Logged in as: <%= link_to current_school.name, current_school %> |
-            <%= link_to 'Log out', logout_path %>
-          <% else %>
-            <%= link_to 'Log in', login_path %> |
-            <%= link_to 'Register', new_school_path %>
-          <% end %>
-        </div>
-        
-        <ul id="topnav">
-          <li>
-            <%= link_to 'Home', root_path %>
-          </li>
-          <li>
-            <%= link_to 'Register', new_school_path %>
-          </li>
-        </ul>
-      </div>
-     <div class="container">
-      <div class="span-24 last" id="page">
-        <div class="span-17 main" style="border-right:solid #ddd 1px">
-          <% if flash[:notice] %><div class="notice"><%= flash[:notice] %></div><% end %>
-          <% if flash[:error] %><div class="error"><%= flash[:error] %></div><% end %>
-          <%= yield %>
-        </div>
-        <div class="span-6 last">
-          <p>
-            <h5>Information</h5>
-            The Golden Circle 9th Grade Math Championships will be held Tuesday, March 3, 2009 at Central Campus. 
-            Bus parking is one block west of 1920 Grand Ave. Car parking is in the lot at the corner of 19th and 
-            Grand (directly north of the school). To register a team, create the team on this website and then edit
-            the required information.<br/>
-            <%= link_to 'More information...', '/golden_circle_information.pdf' %> [pdf]
-          </p>
-          <br/>
-          <br/>
-          <hr/>
-          <p>
-            <h5>Registration Deadline</h5>
-            Tuesday, January 27
-          </p>
-          <br/>
-          <br/>
-          <hr/>
-          <% if @team %>
-            <h5>Roster Changes:</h5>
-            If you have roster changes on or before Tuesday, January 27 simply edit your team page.
-            After January 27, please bring the changes to the registration table the night of the event.
-            Please do not contact us about changes after January 27.
-          <% end %>
-          <br/>
-        </div>
-      </div>
-      <div class="span-24" id="footer">
-        <p>&reg; 2009, Golden Circle</p>
-      </div>
+      <a href="/"><%= image_tag "logo.png", :id=>"logo",:alt=>"Golden Circle" %></a>
+      <%= render :partial => 'layouts/login_links' %>
+      <%= render :partial => 'layouts/topnav' %>
     </div>
+    
+    <div class="container">
+      
+      <div class="span-24 last" id="page">
+        <div class="span-17 main" style="border-right:solid #ddd 1px; padding-right:15px;">
+          
+          <%= render :partial => 'layouts/flash_messages' %>
+          
+          <%= yield %>
+          
+        </div>
+        
+        <div class="span-6 last" style="padding-left:5px">
+          <%= render :partial => 'layouts/sidebar' %>
+        </div>
+        
+      </div>
+      
+      <div class="span-24" id="footer">
+        <p>® 2009, Golden Circle</p>
+      </div>
+      
+    </div>
+    
   </body>
 </html>

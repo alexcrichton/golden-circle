@@ -25,6 +25,10 @@ class School < ActiveRecord::Base
   
   before_save :strip_name
   
+  def cost
+    4 * students.size
+  end
+  
   private
   def submitted_before_deadline?
     # Needs to be before midnight on Tuesday, January 27, 2009

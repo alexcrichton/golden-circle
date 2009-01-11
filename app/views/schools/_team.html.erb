@@ -1,5 +1,6 @@
 <div class="team">
-  <div class="colborder span-8" style="margin-right:10px">
+  <fieldset>
+    <%= f.remove_link 'Remove Team' %>
     <p>
       <label>Division</label><br/>
       <%= f.select :level, [Student::APPRENTICE, Student::WIZARD] %>
@@ -9,9 +10,7 @@
       <%= f.text_field :name %><br/>
       <small><i>i.e. Wizards A, Wizards B, Central Academy Wizards, etc.</i></small>
     </p>
-    <%= f.remove_link 'Remove Team' %>
-  </div>
-  <div class="last span-8">
+
     <%= small_errors(team.students) %>
     <table id="students">
       <caption>
@@ -23,8 +22,7 @@
         <th></th>
       </tr>
       <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
-      <%#= f.add_associated_link('add', team.students.build) %>
     </table>
-  </div>
-  <hr/>
+    <%= f.add_associated_link('add', team.students.build) %>
+    </fieldset>
 </div>

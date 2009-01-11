@@ -1,4 +1,5 @@
 <div class="proctor">
-  <%= f.text_field :name, :size => 20 %>
-  <%= f.remove_link 'remove' %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.remove_link 'remove', :class => "remove_link" %>
 </div>
