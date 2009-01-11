@@ -1,11 +1,13 @@
 class Team < ActiveRecord::Base
   
-  validates_presence_of :level, :name
-  validates_uniqueness_of :name, :scope => :school_id
   has_many :students, :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
   belongs_to :school
+  
+  validates_presence_of :level, :name
+  validates_uniqueness_of :name, :scope => :school_id
   validates_associated :students, :message => 'are invalid'
   validates_size_of :students, :maximum => 15, :message => "have a maximum of 15 allowed"
+  
   before_save :strip_name
   
   def blank?
@@ -13,7 +15,8 @@ class Team < ActiveRecord::Base
   end
   
   def strip_name
-    name = name.strip if name
+    # need selfs here to work for some reason
+    self.name = self.name.strip if self.name
   end
   
 end
