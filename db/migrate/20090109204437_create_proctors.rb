@@ -2,7 +2,7 @@ class CreateProctors < ActiveRecord::Migration
   def self.up
     create_table :proctors do |t|
       t.string  :name
-      t.integer :team_id
+      t.integer :school_id
 
       t.timestamps
     end

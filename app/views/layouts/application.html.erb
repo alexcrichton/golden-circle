@@ -15,12 +15,12 @@
         <a href="/"><%= image_tag "logo.png", :id=>"logo",:alt=>"Golden Circle" %></a>
         
         <div id="login_links">
-          <% if current_team %>
-            Logged in as: <%= link_to current_team.school_name, current_team %> |
+          <% if current_school %>
+            Logged in as: <%= link_to current_school.name, current_school %> |
             <%= link_to 'Log out', logout_path %>
           <% else %>
             <%= link_to 'Log in', login_path %> |
-            <%= link_to 'Register', new_team_path %>
+            <%= link_to 'Register', new_school_path %>
           <% end %>
         </div>
         
@@ -29,7 +29,7 @@
             <%= link_to 'Home', root_path %>
           </li>
           <li>
-            <%= link_to 'Register', new_team_path %>
+            <%= link_to 'Register', new_school_path %>
           </li>
         </ul>
       </div>

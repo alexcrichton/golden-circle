@@ -1,23 +1,25 @@
-<h2>Login team</h2>
-<% form_for @team_session, :url => team_session_path do |f| %>
-  <%= f.error_messages %> <%# Not tested %>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-  
-  <%= f.submit "Login" %>
-<% end %>
-<br/>
-<hr/>
-<h2>Create a team</h2>
-<% form_for :team, :url => teams_path, :html => {:method => :post} do |f| %>
-  
-  <%= render :partial => 'teams/form', :locals => {:f => f} %>
-  
-  <%= f.submit "Register Team" %>
-<% end %>
+<div class="colborder span-8">
+  <h2>Login School</h2>
+  <% form_for @school_session, :url => school_session_path do |f| %>
+    <%= f.error_messages %> <%# Not tested %>
+    <p>
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label :password %><br />
+      <%= f.password_field :password %>
+    </p>
+    
+    <%= f.submit "Login" %>
+  <% end %>
+</div>
+<div class="last span-7">
+  <h2>Register a School</h2>
+  <% form_for :school, :url => schools_path, :html => {:method => :post} do |f| %>
+    
+    <%= render :partial => 'schools/form', :locals => {:f => f} %>
+    
+    <%= f.submit "Register School" %>
+  <% end %>
+</div>

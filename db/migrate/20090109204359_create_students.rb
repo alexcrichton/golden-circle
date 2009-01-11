@@ -4,8 +4,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string  :last_name
       t.string  :first_name
       t.integer :team_id
-      t.string  :level
-
+      
       t.timestamps
     end
   end

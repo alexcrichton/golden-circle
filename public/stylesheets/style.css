@@ -41,6 +41,7 @@ body {
 
 #errorExplanation p {
   color: #333;
+  margin-top: 10px;
   margin-bottom: 0;
   padding: 5px;
 }

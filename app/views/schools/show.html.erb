@@ -5,7 +5,7 @@
 <% form_for(@team) do |f| %>
   <%= f.error_messages %>
   
-  <div style="margin:20px 0" class="clearfix">
+  <div class="clearfix">
     <div class="span-8 colborder">
       <h3>Contact info</h3>
       <p>
@@ -19,10 +19,11 @@
       <p>
         <%= f.label :contact_phone %><br />
         <% f.fields_for :phone, @team.phone do |pf| %>
-          <%= pf.text_field :area_code, :size => 3 %>
-          <%= pf.text_field :prefix, :size => 3 %>
+          <%= pf.text_field :area_code, :size => 3 %> &ndash;
+          <%= pf.text_field :prefix, :size => 3 %> &ndash;
           <%= pf.text_field :suffix, :size => 4 %>
-        <% end %>
+        <% end %><br/>
+        <small><i>xxx - xxx - xxxx</i></small>
       </p>
     </div>
     <div class="span-8 last">
@@ -47,39 +48,40 @@
   <%= f.add_associated_link('add', @team.proctors.build) %>
   <hr/>
   
-  <div style="margin:20px 0" class="clearfix">
-    <div class="span-8 colborder" style="margin-right:7px">
-      
-      <table id="apprentices">
-        <caption>Apprentices (<%= @team.apprentices.size %>/15)</caption>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th></th>
-        </tr>
-        <%= f.render_associated_form(@team.apprentices, :new => 1, :locals => {:level => Student::APPRENTICE}) %>
-      </table>
-      <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
-      
-    </div>
+  <h3 style="font-weight:bold"><center>Student Roster</center></h3>
+  
+  <div class="span-8 colborder" style="margin-right:7px">
     
-    <div class="span-8 last">
-      
-      <table id="wizards">
-        <caption>Wizards (<%= @team.wizards.size %>/15)</caption>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th></th>
-        </tr>
-        <%= f.render_associated_form(@team.wizards, :new => 1, :locals => {:level => Student::WIZARD}) %>
-      </table>
-      <%= f.add_associated_link('add', @team.wizards.build, :locals => {:level => Student::WIZARD}, :container => 'wizards') %>
-      
-    </div>
+    <table id="apprentices">
+      <caption>Apprentices (<%= @team.apprentices.size %>/15)</caption>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th></th>
+      </tr>
+      <%= f.render_associated_form(@team.apprentices, :new => (@team.apprentices.size >= 15 ? 0 : 1), :locals => {:level => Student::APPRENTICE}) %>
+    </table>
+    <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
     
   </div>
+  
+  <div class="span-8 last">
+    
+    <table id="wizards">
+      <caption>Wizards (<%= @team.wizards.size %>/15)</caption>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th></th>
+      </tr>
+      <%= f.render_associated_form(@team.wizards, :new => (@team.wizards.size >= 15 ? 0 : 1), :locals => {:level => Student::WIZARD}) %>
+    </table>
+    <%= f.add_associated_link('add', @team.wizards.build, :locals => {:level => Student::WIZARD}, :container => 'wizards') %>
+    
+  </div>
+  
   <br/>
+  <hr/>
   <p>
     <%= f.submit "Update Information" %>
   </p>

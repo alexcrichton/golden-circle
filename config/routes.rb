@@ -1,11 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :teams
+  map.resources :schools
   
-  map.logout '/logout', :controller => "team_sessions", :action => "destroy"
-  map.login '/login', :controller => "team_sessions", :action => "new"
-  map.resource :team_session, :only => [:new, :create, :destroy]
+  map.logout '/logout', :controller => "school_sessions", :action => "destroy"
+  map.login '/login', :controller => "school_sessions", :action => "new"
+  map.resource :school_session, :only => [:new, :create, :destroy]
   
-  map.root :controller => "team_sessions", :action => "new"
+  map.root :controller => "school_sessions", :action => "new"
   
 end
