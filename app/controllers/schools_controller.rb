@@ -58,6 +58,14 @@ class SchoolsController < ApplicationController
   # PUT /schools/1
   # PUT /schools/1.xml
   def update
+    # if the forms were all cleared, we have to make sure that attribute_fu knows this and the
+    # attributes= methods are called with blank hashes so all items are deleted. If this is not
+    # here, when all forms are deleted, no hash is passed here, and nothing is deleted.
+    params[:school][:proctor_attributes] ||= {}
+    params[:school][:team_attributes] ||= {}
+    params[:school][:team_attributes].each_key do |key|
+      params[:school][:team_attributes][key][:student_attributes] ||= {} if key.to_s.match(/^\d+$/)
+    end
     
     respond_to do |format|
       if @school.update_attributes(params[:school])

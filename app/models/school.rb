@@ -7,10 +7,13 @@ class School < ActiveRecord::Base
   
   validate :submitted_before_deadline?
   
-  has_many :teams, :attributes => true, :discard_if => :blank?, :dependent => :destroy
+  has_many :teams,    :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
   has_many :students, :through => :teams
-  has_many :proctors, :attributes => true, :discard_if => :blank?, :dependent => :destroy
-
+  has_many :proctors, :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
+  
+  validates_associated :teams, :message => 'are invalid'
+  validates_associated :proctors, :message => 'are invalid'
+  
   composed_of :phone, 
               :mapping => %w(contact_phone phone_number), 
               :allow_nil => true,

@@ -27,8 +27,6 @@
           <small><i>xxx - xxx - xxxx</i></small>
         </p>
       </fieldset>
-    </div>
-    <div class="span-8 last">
       <fieldset>
         <legend>School info</legend>
         <p>
@@ -41,22 +39,27 @@
         </p>
       </fieldset>
     </div>
+    
+    <div class="span-8 last">
+      <%= small_errors(@school.proctors) %>
+      <fieldset id="proctors">
+        <legend>Coaches who can also be proctors</legend>
+        <i>Also list contact's name if possible</i>
+        <%= f.render_associated_form(@school.proctors, :new => 1) %>
+      </fieldset>
+      <%= f.add_associated_link('Add a Proctor', @school.proctors.build) %>
+    </div>
   </div>
   
   <hr/>
-  <div id="proctors">
-    <h3>Coaches who can also be proctors</h3>
-    <%= f.label "Also list contact's name if possible" %><br/>
-    <%= f.render_associated_form(@school.proctors, :new => 1) %>
-  </div>
-  <%= f.add_associated_link('Add a Proctor', @school.proctors.build) %>
+ 
   <hr/>
   
   <h3 style="font-weight:bold"><center>Student Roster</center></h3>
   
   <div id="teams">
-    <%= f.render_associated_form(@school.teams, :new => 1) %>
-    <%= f.add_associated_link('Add a Team', @school.teams.build) %>
+    <%= small_errors(@school.teams) %>
+    <%= f.render_associated_form(@school.teams) %>
   </div>
   <%= f.add_associated_link('Add a Team', @school.teams.build) %>
   
