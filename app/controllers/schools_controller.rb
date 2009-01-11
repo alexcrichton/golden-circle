@@ -39,7 +39,7 @@ class SchoolsController < ApplicationController
   # POST /schools
   # POST /schools.xml
   def create
-    current_school_session.destroy
+    current_school_session.destroy unless current_school_session.nil?
     @school = School.new(params[:school])
     
     respond_to do |format|
