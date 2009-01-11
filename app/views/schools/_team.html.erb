@@ -17,7 +17,7 @@
       <th></th>
     </tr>
     <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
-<!--        <%= f.add_associated_link('add', team.students.build) %>-->
+    <%= f.add_associated_link('add', team.students.build) %>
   </table>
   <%= f.remove_link 'Remove Team' %>
 </div>
