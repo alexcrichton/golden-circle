@@ -1,9 +1,9 @@
-<h2>Create a team</h2>
-<% form_for @team, :url => teams_path, :html => {:method => :post} do |f| %>
+<h2>Create a school</h2>
+<% form_for @school, :url => schools_path, :html => {:method => :post} do |f| %>
   
-  <%= render :partial => 'teams/form', :locals => {:f => f} %>
+  <%= render :partial => 'schools/form', :locals => {:f => f} %>
   
-  <%= f.submit "Register Team" %>
+  <%= f.submit "Register School" %>
   
 <% end %>
 <br/>

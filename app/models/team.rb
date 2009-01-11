@@ -1,16 +1,14 @@
 class Team < ActiveRecord::Base
   
+  validates_presence_of :level, :name
+  
   has_many :students, :attributes => true, :discard_if => :blank?, :dependent => :destroy
-  has_many :apprentices, :class_name => 'Student', 
-                         :conditions => ['level = ?', Student::APPRENTICE], 
-                         :dependent => :destroy
-  has_many :wizards,     :class_name => 'Student', 
-                         :conditions => ['level = ?', Student::WIZARD], 
-                         :dependent => :destroy
+  belongs_to :school
   
-  validates_size_of :wizards, :maximum => 15, :message => "have a maximum of 15 allowed"
-  validates_size_of :apprentices, :maximum => 15, :message => "have a maximum of 15 allowed"
+  validates_size_of :students, :maximum => 15, :message => "have a maximum of 15 allowed"
   
-
+  def blank?
+#    students.size == 0 && name.blank?
+  end
   
 end

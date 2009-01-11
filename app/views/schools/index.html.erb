@@ -1,11 +1,9 @@
-<h1>Listing all teams</h1>
+<h1>Listing all Schools</h1>
 
 <div>
   <h4>Statistics</h4>
   <dl id="info">
-    <dt>Team count:</dt><dd><%= Team.count %></dd>
-    <dt>Wizard count:</dt><dd><%= Student.wizards.size %></dd>
-    <dt>Apprentice count:</dt><dd><%= Student.apprentices.size %></dd>
+    <dt>School count:</dt><dd><%= School.count %></dd>
     <dt>Student count:</dt><dd><%= Student.count %></dd>
   </dl>
 </div>
@@ -15,18 +13,16 @@
     <th>School name</th>
     <th>Contact email</th>
     <th>Enrollment</th>
-    <th>Wizard Count</th>
-    <th>Apprentice Count</th>
+    <th>Team Count</th>
   </tr>
   
-<% for team in @teams %>
+<% for school in @schools %>
   <tr>
-    <td><%= link_to(h(team.school_name), team) %></td>
-    <td><%= mail_to(team.email) %></td>
-    <td><%=h team.enrollment %></td>
-    <td><%= team.wizards.size %></td>
-    <td><%= team.apprentices.size %></td>
-    <td><%= link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to(h(school.name), school) %></td>
+    <td><%= mail_to(school.email) %></td>
+    <td><%=h school.enrollment %></td>
+    <td><%= school.teams.size %></td>
+    <td><%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

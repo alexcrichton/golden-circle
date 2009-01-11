@@ -1,8 +1,8 @@
-<% if current_team && current_team.admin %>
-  <%= link_to 'All Teams', teams_path %>
+<% if current_school && current_school.admin %>
+  <%= link_to 'All Teams', schools_path %>
 <% end %>
 
-<% form_for(@team) do |f| %>
+<% form_for(@school) do |f| %>
   <%= f.error_messages %>
   
   <div class="clearfix">
@@ -19,7 +19,7 @@
       </p>
       <p>
         <%= f.label :contact_phone %><br />
-        <% f.fields_for :phone, @team.phone do |pf| %>
+        <% f.fields_for :phone, @school.phone do |pf| %>
           <%= pf.text_field :area_code, :size => 3 %> &ndash;
           <%= pf.text_field :prefix, :size => 3 %> &ndash;
           <%= pf.text_field :suffix, :size => 4 %>
@@ -33,7 +33,7 @@
         <legend>School info</legend>
         <p>
           <%= f.label :school_name %><br />
-          <%= f.text_field :school_name %>
+          <%= f.text_field :name %>
         </p>
         <p>
           <label>9th grade class size</label><br />
@@ -47,41 +47,16 @@
   <div id="proctors">
     <h3>Coaches who can also be proctors</h3>
     <%= f.label "Also list contact's name if possible" %><br/>
-    <%= f.render_associated_form(@team.proctors, :new => 1) %>
+    <%= f.render_associated_form(@school.proctors, :new => 1) %>
   </div>
-  <%= f.add_associated_link('add', @team.proctors.build) %>
+  <%= f.add_associated_link('Add a Proctor', @school.proctors.build) %>
   <hr/>
   
   <h3 style="font-weight:bold"><center>Student Roster</center></h3>
   
-  <div class="span-8 colborder" style="margin-right:7px">
-    
-    <table id="apprentices">
-      <caption>Apprentices (<%= @team.apprentices.size %>/15)</caption>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th></th>
-      </tr>
-      <%= f.render_associated_form(@team.apprentices, :new => (@team.apprentices.size >= 15 ? 0 : 1), :locals => {:level => Student::APPRENTICE}) %>
-    </table>
-    <%= f.add_associated_link('add', @team.apprentices.build, :locals => {:level => Student::APPRENTICE}, :container => 'apprentices') %>
-    
-  </div>
-  
-  <div class="span-8 last">
-    
-    <table id="wizards">
-      <caption>Wizards (<%= @team.wizards.size %>/15)</caption>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th></th>
-      </tr>
-      <%= f.render_associated_form(@team.wizards, :new => (@team.wizards.size >= 15 ? 0 : 1), :locals => {:level => Student::WIZARD}) %>
-    </table>
-    <%= f.add_associated_link('add', @team.wizards.build, :locals => {:level => Student::WIZARD}, :container => 'wizards') %>
-    
+  <div id="RANDOMTHING teams team">
+    <%= f.render_associated_form(@school.teams, :new => 1) %>
+    <%= f.add_associated_link('Add a Team', @school.teams.build, :container => 'RANDOMTHING') %>
   </div>
   
   <br/>
@@ -91,5 +66,5 @@
   </p>
 <% end %>
 
-The amount due for this team is <%= 4 * @team.students.size %> dollars.
+The amount due for this team is <%#= 4 * @school.students.size %> dollars.
 Please bring the check payable to GT Education to the registration table March 3rd. 
