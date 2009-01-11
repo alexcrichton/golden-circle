@@ -11,5 +11,6 @@ class Team < ActiveRecord::Base
   validates_size_of :wizards, :maximum => 15, :message => "have a maximum of 15 allowed"
   validates_size_of :apprentices, :maximum => 15, :message => "have a maximum of 15 allowed"
   
+
   
 end

@@ -7,7 +7,8 @@
   
   <div class="clearfix">
     <div class="span-8 colborder">
-      <h3>Contact info</h3>
+      <fieldset>
+        <legend>Contact info</legend>
       <p>
         <%= f.label :contact_name %><br />
         <%= f.text_field :contact_name %>
@@ -25,17 +26,20 @@
         <% end %><br/>
         <small><i>xxx - xxx - xxxx</i></small>
       </p>
+      </fieldset>
     </div>
     <div class="span-8 last">
-      <h3>School info</h3>
-      <p>
-        <%= f.label :school_name %><br />
-        <%= f.text_field :school_name %>
-      </p>
-      <p>
-        <label>9th grade class size</label><br />
-        <%= f.text_field :enrollment, :size => 4 %>
-      </p>
+      <fieldset>
+        <legend>School info</legend>
+        <p>
+          <%= f.label :school_name %><br />
+          <%= f.text_field :school_name %>
+        </p>
+        <p>
+          <label>9th grade class size</label><br />
+          <%= f.text_field :enrollment, :size => 4 %>
+        </p>
+      </fieldset>
     </div>
   </div>
   
