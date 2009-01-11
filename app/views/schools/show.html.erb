@@ -51,13 +51,13 @@
   </div>
   
   <fieldset>
-  <legend>Teams <%= f.add_associated_link('[add]', @school.teams.build) %></legend>
-  
-  <div id="teams">
-    <%= small_errors(@school.teams) %>
-    <%= f.render_associated_form(@school.teams) %>
-  </div>
-  
+    <legend>Teams <%= f.add_associated_link('[add]', @school.teams.build) %></legend>
+    
+    <div id="teams">
+      <%= small_errors(@school.teams) %>
+      <%= f.render_associated_form(@school.teams, :new => 1) %>
+    </div>
+    
   </fieldset>
   
   <hr/>

@@ -13,7 +13,7 @@ class SchoolSessionsController < ApplicationController
     respond_to do |format|
       if @school_session.save
         flash[:notice] = 'Login successful!'
-        format.html { redirect_to account_url }
+        format.html { redirect_to current_school }
       else
         format.html { render :action => :new }
        end
