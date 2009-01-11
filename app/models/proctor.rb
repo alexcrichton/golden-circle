@@ -11,7 +11,7 @@ class Proctor < ActiveRecord::Base
   
   protected
   def strip_name
-    name = name.strip if name
+    self.name = self.name.strip if self.name
   end
   
 end

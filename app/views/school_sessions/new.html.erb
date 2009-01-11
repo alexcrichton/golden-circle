@@ -1,7 +1,7 @@
 <div class="colborder span-8">
   <h2>Login School</h2>
   <% form_for @school_session, :url => school_session_path do |f| %>
-    <%= f.error_messages %> <%# Not tested %>
+    <%= f.error_messages %>
     <p>
       <%= f.label :email %><br />
       <%= f.text_field :email %>
