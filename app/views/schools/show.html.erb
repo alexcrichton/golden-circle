@@ -30,12 +30,12 @@
           <%= f.text_field :email %>
         </p>
           <fieldset id="school_phone">
-          <legend>Phone</legend>
-          <% f.fields_for :phone, @school.phone do |pf| %>
-            <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
-            <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
-            <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
-          <% end %>
+            <legend>Phone</legend>
+            <% f.fields_for :phone, @school.phone do |pf| %>
+              <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
+              <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
+              <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
+            <% end %>
           </fieldset>
       </fieldset>
     </div>
@@ -43,21 +43,19 @@
     <div class="span-8 last">
       <%= small_errors(@school.proctors) %>
       <fieldset id="proctors">
-        <legend>Proctors <%= f.add_associated_link('[add]', @school.proctors.build) %></legend>
         <p>We need proctors. Let us know if you can proctor.</p>
         <%= f.render_associated_form(@school.proctors, :new => 1) %>
+        <legend>Proctors <%= f.add_associated_link('[add]', @school.proctors.build) %></legend>
       </fieldset>
     </div>
   </div>
   
   <fieldset>
-    <legend>Teams <%= f.add_associated_link('[add]', @school.teams.build) %></legend>
-    
     <div id="teams">
       <%= small_errors(@school.teams) %>
-      <%= f.render_associated_form(@school.teams, :new => 1) %>
+      <%= f.render_associated_form(@school.teams) %>
     </div>
-    
+    <legend>Teams <%= f.add_associated_link('[add]', @school.teams.build) %></legend>
   </fieldset>
   
   <hr/>
