@@ -43,20 +43,23 @@
     <div class="span-8 last">
       <%= small_errors(@school.proctors) %>
       <fieldset id="proctors">
+        <legend>Proctors <%= f.add_associated_link('[add]', @school.proctors.build) %></legend>
         <p>We need proctors. Let us know if you can proctor.</p>
         <%= f.render_associated_form(@school.proctors, :new => 1) %>
-        <legend>Proctors <%= f.add_associated_link('[add]', @school.proctors.build) %></legend>
       </fieldset>
     </div>
   </div>
   
-  <fieldset>
-    <div id="teams">
-      <%= small_errors(@school.teams) %>
-      <%= f.render_associated_form(@school.teams) %>
+  <div>
+    <h3 style="font-weight:bold;text-align:center">Teams</h3>
+    <%= small_errors(@school.teams) %>
+    <div class="span-8 colborder team">
+      <%= f.render_associated_form(@school.teams[0]) %>
     </div>
-    <legend>Teams <%= f.add_associated_link('[add]', @school.teams.build) %></legend>
-  </fieldset>
+    <div class="span-8 last team">
+      <%= f.render_associated_form(@school.teams[1]) %>
+    </div>
+  </div>
   
   <hr/>
   

@@ -10,6 +10,7 @@ class SchoolSessionsController < ApplicationController
   
   def create
     @school_session = SchoolSession.new(params[:school_session])
+    
     respond_to do |format|
       if @school_session.save
         flash[:notice] = 'Login successful!'

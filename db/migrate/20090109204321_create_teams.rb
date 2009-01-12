@@ -3,7 +3,6 @@ class CreateTeams < ActiveRecord::Migration
     create_table :teams do |t|
       t.integer  :school_id
       t.string   :level
-      t.string   :name
       
       t.timestamps
     end

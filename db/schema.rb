@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20090109204437) do
   create_table "teams", :force => true do |t|
     t.integer  "school_id"
     t.string   "level"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

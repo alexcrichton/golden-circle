@@ -62,7 +62,14 @@ class SchoolsController < ApplicationController
     # attributes= methods are called with blank hashes so all items are deleted. If this is not
     # here, when all forms are deleted, no hash is passed here, and nothing is deleted.
     params[:school][:proctor_attributes] ||= {}
+    
     params[:school][:team_attributes] ||= {}
+#    [:wizard_team_attributes, :apprentice_team_attributes].each do |team|
+#      params[:school][team] ||= {}
+#      params[:school][team].each_key do |key|
+#        params[:school][team][key][:student_attributes] ||= {} if key.to_s.match(/^\d+$/)
+#      end
+#    end
     params[:school][:team_attributes].each_key do |key|
       params[:school][:team_attributes][key][:student_attributes] ||= {} if key.to_s.match(/^\d+$/)
     end

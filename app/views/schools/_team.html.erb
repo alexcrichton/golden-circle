@@ -1,24 +1,18 @@
-<fieldset class="team">
-  <%= f.remove_link 'Remove Team', :class => 'controls' %>
-  <p>
-    <label>Team name</label>
-    <%= f.text_field :name %><br/>
-    <small><i>i.e. Wizards A, Wizards B, Central Academy Wizards, etc.</i></small><br/>
-    <label>Division</label><br/>
-    <%= f.select :level, [Student::APPRENTICE, Student::WIZARD] %>
-  </p>
-  <%= small_errors(team.students) %>
-  <table id="students">
-    <caption>
-      Students (<%= team.students.size %>/15)
-    </caption>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th></th>
-    </tr>
-    <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
-  </table>
-  <%# f.add_associated_link('add', team.students.build) %>
-  <hr/>
-</fieldset>
+<div class="team"><p>
+  <label>Team level:</label> <%= team.level %>
+</p>
+<%= f.hidden_field :level %>
+<%= small_errors(team.students) %>
+<table id="<%= team.level.downcase.pluralize %>">
+  <caption>
+    Students (<%= team.students.size %>/15)
+  </caption>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th></th>
+  </tr>
+  <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
+</table>
+<%= f.add_associated_link('add', team.students.build, :container => "##{team.level.downcase.pluralize}") %>
+</div>
