@@ -15,7 +15,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 body {line-height:1.5;}
 table {border-collapse:separate;border-spacing:0;}
 caption, th, td {text-align:left;font-weight:normal;}
-table, td, th {vertical-align:middle;}
+table, td, th {vertical-align:middle}
 blockquote:before, blockquote:after, q:before, q:after {content:"";}
 blockquote, q {quotes:"" "";}
 a img {border:none;}

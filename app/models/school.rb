@@ -34,11 +34,15 @@ class School < ActiveRecord::Base
   end
   
   def self.large_schools
-    find :all, :conditions => ['enrollment >= ?', CUTOFF]
+    find :all, :conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'
   end
   
   def self.small_schools
-    find :all, :conditions => ['enrollment < ?', CUTOFF]
+    find :all, :conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'
+  end
+  
+  def self.unknown
+    find :all, :conditions => ['enrollment IS ?', nil], :order => 'name ASC'
   end
   
   private

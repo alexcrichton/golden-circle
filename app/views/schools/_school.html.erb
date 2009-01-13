@@ -1,0 +1,9 @@
+<tr class="<%= school_counter % 2 == 0 ? 'even' : 'odd' %>">
+  <td><%= link_to(h(school.name), school) %></td>
+  <td><%= mail_to(school.email) %></td>
+  <td><%=h school.enrollment %></td>
+  <td><%= student_count(school, Student::APPRENTICE) %></td>
+  <td><%= student_count(school, Student::WIZARD) %></td>
+  <td><%= student_count(school, :all) %></td>
+  <td><%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>

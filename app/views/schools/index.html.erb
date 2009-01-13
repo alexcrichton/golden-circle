@@ -1,29 +1,54 @@
 <h1>Listing all Schools</h1>
 
-<div>
-  <h4>Statistics</h4>
-  <dl id="info">
-    <dt>School count:</dt><dd><%= School.count %></dd>
-    <dt>Student count:</dt><dd><%= Student.count %></dd>
-  </dl>
-</div>
-
 <table>
+  <caption>Statistics</caption>
+  <tr>
+    <th></th>
+    <th>Large Schools</th>
+    <th>Small Schools</th>
+    <th>Total</th>
+  </tr>
+  <tr>
+    <td>School Count:</td>
+    <td><%= School.large_schools.size %></td>
+    <td><%= School.small_schools.size %></td>
+    <td><%= School.count %></td>
+  </tr>
+  <tr>
+    <td>Apprentice Count:</td>
+    <td><%= student_count(School.large_schools, Student::APPRENTICE) %></td>
+    <td><%= student_count(School.small_schools, Student::APPRENTICE) %></td>
+    <td><%= student_count(School.find(:all), Student::APPRENTICE) %></td>
+  </tr>
+  <tr>
+    <td>Wizard Count:</td>
+    <td><%= student_count(School.large_schools, Student::WIZARD) %></td>
+    <td><%= student_count(School.small_schools, Student::WIZARD) %></td>
+    <td><%= student_count(School.find(:all), Student::WIZARD) %></td>
+  </tr>
+  <tr>
+    <td>Student Count:</td>
+    <td><%= student_count(School.large_schools, :all) %></td>
+    <td><%= student_count(School.small_schools, :all) %></td>
+    <td><%= student_count(School.find(:all), :all) %></td>
+  </tr>
+</table>
+
+<table border="1px">
   <tr>
     <th>School name</th>
     <th>Contact email</th>
     <th>Enrollment</th>
-    <th>Team Count</th>
+    <th>Apprentice Count</th>
+    <th>Wizard Count</th>
+    <th>Student Count</th>
+    <th></th>
   </tr>
-  
-<% for school in @schools %>
-  <tr>
-    <td><%= link_to(h(school.name), school) %></td>
-    <td><%= mail_to(school.email) %></td>
-    <td><%=h school.enrollment %></td>
-    <td><%= school.teams.size %></td>
-    <td><%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <tr><td class="separator" colspan="7">Large Schools</td></tr>
+  <%= render :partial => 'school', :collection => School.large_schools %>
+  <tr><td class="separator" colspan="7">Small Schools</td></tr>
+  <%= render :partial => 'school', :collection => School.small_schools %>
+  <tr><td class="separator" colspan="7">Unlisted Enrollments</td></tr>
+  <%= render :partial => 'school', :collection => School.unknown %>
 </table>
 

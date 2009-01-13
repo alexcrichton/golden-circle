@@ -487,3 +487,10 @@ div.pledges_list ol .pledge_description {
 div.pledges_list .bottomlink { /*TODO: Stupid positioning hack fix*/
   margin-top: -15px;
 }
+
+td.separator {
+  background: #ccc;
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+}
