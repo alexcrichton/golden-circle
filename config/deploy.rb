@@ -87,7 +87,7 @@ namespace :deploy do
     task :restart do
       god.all.reload #ensures any changes to the god config are applied at deploy
       god.app.send(thin_app).restart
-      god.web.nginx.restart
+      god.web.nginx.reload
     end
 
     desc "Use god to start the app" 
