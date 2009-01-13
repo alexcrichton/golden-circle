@@ -2,7 +2,7 @@ class SchoolsController < ApplicationController
   
   before_filter :load_school
   before_filter :is_owner?, :only => [:update, :show, :destroy]
-  before_filter :is_admin?, :only => [:index]
+  before_filter :is_admin?, :only => [:index, :print]
   
   # GET /schools
   # GET /schools.xml
@@ -12,6 +12,12 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @schools }
+    end
+  end
+  
+  def print
+    respond_to do |format|
+      format.html
     end
   end
 

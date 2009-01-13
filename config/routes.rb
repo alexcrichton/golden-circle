@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :schools
   
+  map.print_view 'schools/:id/print', :controller => 'schools', :action => 'print'
   map.logout '/logout', :controller => "school_sessions", :action => "destroy"
   map.login '/login', :controller => "school_sessions", :action => "new"
   map.resource :school_session, :only => [:new, :create, :destroy]

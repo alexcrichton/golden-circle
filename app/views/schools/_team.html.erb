@@ -1,5 +1,5 @@
 <div class="team"><p>
-  <label>Team level:</label> <%= team.level %>
+  <%= f.label :level, 'Team level:' %> <%= team.level %>
 </p>
 <%= f.hidden_field :level %>
 <%= small_errors(team.students) %>

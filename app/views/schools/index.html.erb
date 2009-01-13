@@ -14,27 +14,17 @@
     <td><%= School.small_schools.size %></td>
     <td><%= School.count %></td>
   </tr>
-  <tr>
-    <td>Apprentice Count:</td>
-    <td><%= student_count(School.large_schools, Student::APPRENTICE) %></td>
-    <td><%= student_count(School.small_schools, Student::APPRENTICE) %></td>
-    <td><%= student_count(School.find(:all), Student::APPRENTICE) %></td>
-  </tr>
-  <tr>
-    <td>Wizard Count:</td>
-    <td><%= student_count(School.large_schools, Student::WIZARD) %></td>
-    <td><%= student_count(School.small_schools, Student::WIZARD) %></td>
-    <td><%= student_count(School.find(:all), Student::WIZARD) %></td>
-  </tr>
-  <tr>
-    <td>Student Count:</td>
-    <td><%= student_count(School.large_schools, :all) %></td>
-    <td><%= student_count(School.small_schools, :all) %></td>
-    <td><%= student_count(School.find(:all), :all) %></td>
-  </tr>
+  <% [Student::APPRENTICE, Student::WIZARD, :all].each do |level| %>
+    <tr>
+      <td><%= level.to_s.classify %> Count:</td>
+      <td><%= student_count(School.large_schools, level) %></td>
+      <td><%= student_count(School.small_schools, level) %></td>
+      <td><%= student_count(School.find(:all), level) %></td>
+    </tr>
+  <% end %>
 </table>
 
-<table border="1px">
+<table>
   <tr>
     <th>School name</th>
     <th>Contact email</th>

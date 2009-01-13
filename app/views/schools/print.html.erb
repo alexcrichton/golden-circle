@@ -1,0 +1,24 @@
+<h1><%= @school.name %></h1>
+<dl id="info" class="clearfix">
+  <dt>Contact name:</dt>     <dd><%=h @school.contact_name.blank? ? 'No Contact' : @school.contact_name %></dd>
+  <dt>Contact email:</dt>    <dd><%= mail_to @school.email %></dd>
+  <dt>Contact phone:</dt>    <dd><%=h @school.contact_phone.blank? ? 'No Phone' : @school.contact_phone %></dd>
+  <dt>Apprentice Count:</dt> <dd><%= student_count(@school, Student::APPRENTICE) %></dd>
+  <dt>Wizard Count:</dt>     <dd><%= student_count(@school, Student::WIZARD) %></dd>
+</dl>
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th></th>
+  </tr>
+  <% for team in @school.teams %>
+    <tr><td colspan="3" class="separator"><%= team.level.classify.pluralize %></td></tr>
+    <% for i in 0...team.students.length %>
+      <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+        <td><%= team.students[i].first_name %></td>
+        <td><%= team.students[i].last_name %></td>
+        <td></td>
+    <% end %>
+  <% end %>
+</table>

@@ -1,6 +1,10 @@
 class Team < ActiveRecord::Base
   
-  has_many :students, :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
+  has_many :students, :attributes => true,
+                      :discard_if => :blank?,
+                      :dependent => :destroy,
+                      :validate => false,
+                      :order => ['last_name ASC, first_name ASC']
   belongs_to :school
   
   validates_presence_of :level

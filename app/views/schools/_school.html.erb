@@ -5,5 +5,8 @@
   <td><%= student_count(school, Student::APPRENTICE) %></td>
   <td><%= student_count(school, Student::WIZARD) %></td>
   <td><%= student_count(school, :all) %></td>
-  <td><%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %></td>
+  <td>
+    <%= link_to 'Print view', print_view_path(school) %>
+    <%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %>
+  </td>
 </tr>
