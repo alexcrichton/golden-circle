@@ -9,14 +9,6 @@ class Student < ActiveRecord::Base
   
   before_save :strip_names
   
-  def self.apprentices
-    find(:all, :conditions => ['level = ?', APPRENTICE])
-  end
-  
-  def self.wizards
-    find(:all, :conditions => ['level = ?', WIZARD])
-  end
-  
   def level
     team.level
   end

@@ -11,11 +11,8 @@ class School < ActiveRecord::Base
   composed_of :phone, 
               :mapping => %w(contact_phone phone_number), 
               :allow_nil => true,
-              :constructor => Proc.new { |phone_number|
-                                match = phone_number.match(Phone::REGEX)
-                                match.nil? ? nil : Phone.new(match[1], match[2], match[3])
-                              },
-              :converter => Proc.new { |hash| Phone.new(hash[:area_code], hash[:prefix], hash[:suffix]) }
+              :constructor => Phone.constructor,
+              :converter => Phone.converter
   
   validate :submitted_before_deadline?
   validates_presence_of   :name
@@ -48,7 +45,7 @@ class School < ActiveRecord::Base
   private
   def submitted_before_deadline?
     # Needs to be before midnight on Friday, February 27, 2009
-    if Time.zone.now > Time.zone.local(2009, 2, 27, 24, 0, 0)
+    if Time.zone.now > Time.zone.local(2009, 2, 24, 24, 0, 0)
       errors.add_to_base("The registration deadline has passed. Please bring your changes to the registration table the night of the event.")
     end
   end

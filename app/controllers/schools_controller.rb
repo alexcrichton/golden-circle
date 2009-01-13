@@ -15,6 +15,7 @@ class SchoolsController < ApplicationController
     end
   end
   
+  # GET /schools/1/print
   def print
     respond_to do |format|
       format.html
