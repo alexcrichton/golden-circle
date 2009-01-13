@@ -56,7 +56,7 @@ namespace :db do
     put db_config.result, "#{shared_path}/config/database.yml" 
   end
 
-  desc "Make symlink for database yaml, attachment-fu" 
+  desc "Make symlink for database yaml" 
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
@@ -78,25 +78,27 @@ role :db,  web_server, :primary => true
 thin_app = "thin-goldencircle.academycommunity.com"
 
 san_juan.role :app, [thin_app]
-san_juan.role :web, %w(nginx)
+#san_juan.role :web, %w(nginx)
 
 set :god_config_path, "/etc/god.conf"
 
 namespace :deploy do
   desc "Use god to restart the app" 
     task :restart do
-      god.all.reload #ensures any changes to the god config are applied at deploy
+#      god.all.reload #ensures any changes to the god config are applied at deploy
       god.app.send(thin_app).restart
-      god.web.nginx.reload
+#      god.web.nginx.reload
     end
 
     desc "Use god to start the app" 
     task :start do
-      god.all.start
+#      god.all.start
+      god.app.send(thin_app).start
     end
 
     desc "Use god to stop the app" 
     task :stop do
-      god.all.terminate
+      #god.all.terminate
+      god.app.send(thin_app).stop
     end
 end
