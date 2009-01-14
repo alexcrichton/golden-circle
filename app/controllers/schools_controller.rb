@@ -8,9 +8,13 @@ class SchoolsController < ApplicationController
   # GET /schools.xml
   def index
     @schools = School.find(:all, :order => ['name ASC'])
+    @large_schools = School.large_schools
+    @small_schools = School.small_schools
+    @unknown = School.unknown
+    @proctors = @schools.collect{ |s| s.proctors }.flatten
     
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :action => 'index', :layout => 'admin' }
       format.xml  { render :xml => @schools }
     end
   end
@@ -18,14 +22,13 @@ class SchoolsController < ApplicationController
   # GET /schools/1/print
   def print
     respond_to do |format|
-      format.html
+      format.html { render :action => 'print', :layout => 'admin'}
     end
   end
 
   # GET /schools/1
   # GET /schools/1.xml
   def show
-    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @school }

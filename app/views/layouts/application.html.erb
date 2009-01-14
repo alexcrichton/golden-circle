@@ -1,48 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%= render :partial => 'layouts/header' %>
+<div class="container">
+  <div class="span-24 last" id="page">
+    <div class="span-17 main" style="border-right:solid #ddd 1px; padding-right:15px;">
+      
+      <%= render :partial => 'layouts/flash_messages' %>
+      
+      <%= yield %>
+      
+    </div>
+    
+    <div class="span-6 last" style="padding-left:5px">
+      <%= render :partial => 'layouts/sidebar' %>
+    </div>
+    
+  </div>
+</div>
 
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Golden Circle</title>
-    <%= stylesheet_link_tag "blueprint/screen.css", :media => "screen, projection" %>
-    <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
-    <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
-    <%= stylesheet_link_tag "style.css", :media =>"screen" %>
-    
-    <%= javascript_include_tag 'jquery', 'jquery.template', 'application' %>
-  </head>
-  
-  <body>
-    
-    <div class="header">
-      <a href="/"><%= image_tag "logo.png", :id=>"logo",:alt=>"Golden Circle" %></a>
-      <%= render :partial => 'layouts/login_links' %>
-      <%= render :partial => 'layouts/topnav' %>
-    </div>
-    
-    <div class="container">
-      
-      <div class="span-24 last" id="page">
-        <div class="span-17 main" style="border-right:solid #ddd 1px; padding-right:15px;">
-          
-          <%= render :partial => 'layouts/flash_messages' %>
-          
-          <%= yield %>
-          
-        </div>
-        
-        <div class="span-6 last" style="padding-left:5px">
-          <%= render :partial => 'layouts/sidebar' %>
-        </div>
-        
-      </div>
-      
-      <div class="span-24" id="footer">
-        <p>® 2009, Golden Circle</p>
-      </div>
-      
-    </div>
-    
-  </body>
-</html>
+<%= render :partial => 'layouts/footer' %>

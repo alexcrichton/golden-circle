@@ -42,6 +42,15 @@ class School < ActiveRecord::Base
     find :all, :conditions => ['enrollment IS ?', nil], :order => 'name ASC'
   end
   
+  def school_class
+    return 'unknown' if enrollment.nil?
+    if enrollment >= 200
+      'Large School'
+    else
+      'Small School'
+    end
+  end
+  
   private
   def submitted_before_deadline?
     # Needs to be before midnight on Tuesday, February 24, 2009

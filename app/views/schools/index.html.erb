@@ -1,6 +1,6 @@
 <h1>Listing all Schools</h1>
 
-<table>
+<table style="width:50%" border=1>
   <caption>Statistics</caption>
   <tr>
     <th></th>
@@ -9,22 +9,22 @@
     <th>Total</th>
   </tr>
   <tr>
-    <td>School Count:</td>
-    <td><%= School.large_schools.size %></td>
-    <td><%= School.small_schools.size %></td>
-    <td><%= School.count %></td>
+    <th>School Count:</th>
+    <td class="num"><%= @large_schools.size %></td>
+    <td class="num"><%= @small_schools.size %></td>
+    <td class="num"><b><%= @schools.size %></b></td>
   </tr>
   <% [Student::APPRENTICE, Student::WIZARD, :all].each do |level| %>
     <tr>
-      <td><%= level.to_s.classify %> Count:</td>
-      <td><%= student_count(School.large_schools, level) %></td>
-      <td><%= student_count(School.small_schools, level) %></td>
-      <td><%= student_count(School.find(:all), level) %></td>
+      <th><%= level.to_s.classify %> Count:</th>
+      <td class="num"><%= student_count(@large_schools, level) %></td>
+      <td class="num"><%= student_count(@small_schools, level) %></td>
+      <td class="num"><b><%= student_count(@schools, level) %></b></td>
     </tr>
   <% end %>
 </table>
 
-<table>
+<table border=1>
   <tr>
     <th>School name</th>
     <th>Contact email</th>
@@ -35,10 +35,23 @@
     <th></th>
   </tr>
   <tr><td class="separator" colspan="7">Large Schools</td></tr>
-  <%= render :partial => 'school', :collection => School.large_schools %>
+  <%= render :partial => 'school', :collection => @large_schools %>
   <tr><td class="separator" colspan="7">Small Schools</td></tr>
-  <%= render :partial => 'school', :collection => School.small_schools %>
+  <%= render :partial => 'school', :collection => @small_schools %>
   <tr><td class="separator" colspan="7">Unlisted Enrollments</td></tr>
-  <%= render :partial => 'school', :collection => School.unknown %>
+  <%= render :partial => 'school', :collection => @unknown %>
 </table>
 
+<table border=1 style="width:50%">
+  <caption>Available proctors</caption>
+  <tr>
+    <th>Name</th>
+    <th>School</th>
+  </tr>
+  <% for i in 0...@proctors.length %>
+    <tr class="<%= i % 2 == 0 ? 'odd' : 'even' %>">
+      <td><%= @proctors[i].name %></td>
+      <td><%= @proctors[i].school.name %></td>
+    </tr>
+  <% end %>
+</table>

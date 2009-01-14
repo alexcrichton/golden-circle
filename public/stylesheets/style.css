@@ -492,5 +492,9 @@ td.separator {
   background: #ccc;
   font-weight: bold;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
+}
+
+td.num {
+  text-align: right;
 }
