@@ -4,7 +4,7 @@ class Student < ActiveRecord::Base
   APPRENTICE = 'Apprentice'
   
   validates_presence_of :first_name, :last_name
-  validates_uniqueness_of :first_name, :scope => [:last_name, :team_id]
+  validates_uniqueness_of :first_name, :scope => [:last_name, :team_id], :case_sensitive => false
   belongs_to :team
   
   before_save :strip_names

@@ -16,7 +16,7 @@ class School < ActiveRecord::Base
   
   validate :submitted_before_deadline?
   validates_presence_of   :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid'

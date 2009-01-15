@@ -1,7 +1,7 @@
 class Proctor < ActiveRecord::Base
   
   validates_presence_of   :name
-  validates_uniqueness_of :name, :scope => :school_id
+  validates_uniqueness_of :name, :scope => :school_id, :case_sensitive => false
   belongs_to :school
   before_save :strip_name
   
