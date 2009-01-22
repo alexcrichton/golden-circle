@@ -69,4 +69,8 @@ class School < ActiveRecord::Base
     self.teams << Team.create(:level => Student::APPRENTICE)
   end
   
+  def school_score
+    teams.map { |t| t.team_score }.sum
+  end
+  
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090109204437) do
+ActiveRecord::Schema.define(:version => 20090122051811) do
 
   create_table "proctors", :force => true do |t|
     t.string   "name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20090109204437) do
     t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "test_score"
   end
 
   create_table "teams", :force => true do |t|
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20090109204437) do
     t.string   "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "test_score"
   end
 
 end
