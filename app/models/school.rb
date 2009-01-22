@@ -14,7 +14,6 @@ class School < ActiveRecord::Base
               :constructor => Phone.constructor,
               :converter => Phone.converter
   
-  validate :submitted_before_deadline?
   validates_presence_of   :name
   validates_uniqueness_of :name, :case_sensitive => false
   validates_associated :teams, :message => "are invalid"
@@ -24,6 +23,7 @@ class School < ActiveRecord::Base
   attr_protected :admin
   
   before_save :strip_name
+  before_create :submitted_before_deadline?
   after_create :add_teams
   
   def cost
@@ -44,7 +44,7 @@ class School < ActiveRecord::Base
   
   def school_class
     return 'unknown' if enrollment.nil?
-    if enrollment >= 200
+    if enrollment >= CUTOFF
       'Large School'
     else
       'Small School'
@@ -55,12 +55,12 @@ class School < ActiveRecord::Base
   def submitted_before_deadline?
     # Needs to be before midnight on Tuesday, February 24, 2009
     if Time.zone.now > Time.zone.local(2009, 2, 24, 24, 0, 0)
-      errors.add_to_base("The registration deadline has passed. Please bring your changes to the registration table the night of the event.")
+      errors.add_to_base("The registration deadline has passed.")
     end
   end
   
   def strip_name
-    # need selfs here or otherwise won't work.
+    # need selfs here or otherwise won't work. god knows why...
     self.name = self.name.strip if self.name
   end
   

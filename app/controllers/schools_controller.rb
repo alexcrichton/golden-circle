@@ -21,6 +21,7 @@ class SchoolsController < ApplicationController
   
   # GET /schools/1/print
   def print
+    @team = @school.teams.detect { |t| t.level.downcase == params[:level].downcase }
     respond_to do |format|
       format.html { render :action => 'print', :layout => 'admin'}
     end
@@ -86,7 +87,7 @@ class SchoolsController < ApplicationController
     
     respond_to do |format|
       if @school.update_attributes(params[:school])
-        flash[:notice] = 'School was successfully updated.'
+        flash[:notice] = 'School was successfully updated. Please review the form below, it is what was saved in the database.'
         format.html { redirect_to(@school) }
         format.xml  { head :ok }
       else

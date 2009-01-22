@@ -17,10 +17,11 @@ fieldset legend {
 fieldset input {
   width:auto;
 }
-fieldset fieldset label {  
-float: none;  
-width: auto;  
-margin-right: auto; 
+
+fieldset fieldset label {
+  float: none;  
+  width: auto;  
+  margin-right: auto; 
 }
 fieldset fieldset legend {  
 margin-left: 0;
@@ -150,16 +151,8 @@ ul#topnav li a {
   color: inherit;
 }
 
-ul#topnav li a.contact_us {
-  width: 150px;
-}
-
 ul#topnav li:hover {
   text-decoration: underline;
-}
-
-.showgrid { /*Grid offset for margins*/
-  background: url(/images/grid.png) repeat 10px 0;
 }
 
 /*  .column div { margin:10px; }*/
@@ -168,112 +161,6 @@ ul#topnav li:hover {
   right: 10px;
   text-align: right;
   background: white;
-}
-
-ul.rightnav {
-  list-style: none;
-  margin: 0;
-  /*TODO: Really hackish, don't know why margin-bottom doesn't work*/
-  padding-bottom: 10px;
-}
-
-ul.rightnav li {
-  margin-bottom: 5px;
-  padding: 2px;
-  padding-left: 5px;
-  border-bottom: solid #ccc 1px;
-}
-
-ul.rightnav li a {
-  color: black;
-  text-decoration: none;
-}
-
-ul.rightnav li a:hover {
-  text-decoration: underline;
-}
-
-ul.rightnav li:hover {
-  background: #eee;
-}
-
-#sidebarimage {
-  margin-bottom: 5px;
-}
-
-ul#leftnav {
-  list-style: none;
-  margin: 0;
-  margin: 10px -10px;
-  border-bottom: solid #bbb 1px;
-}
-
-ul#leftnav li {
-  background: #ddd;
-  border-top: solid #bbb 1px;
-  padding-left: 10px;
-  padding: 10px;
-  font-size: 125%;
-}
-
-ul#leftnav li:hover {
-  background: #ccc;
-}
-
-ul#leftnav li a {
-  color: black;
-  text-decoration: none;
-}
-
-ul#leftnav li a:hover {
-  text-decoration: underline;
-}
-
-ul#leftnav li ul {
-  margin: 0 0;
-  list-style: none;
-  font-size: 75%;
-  margin: -10px;
-}
-
-ul#leftnav li.left_sub_nav {
-  border-top: none;
-}
-
-ul#leftnav li ul li {
-  background: #eee;
-  padding: 5px 10px;
-  font-size: 100%;
-}
-
-ul#leftnav li ul li:hover {
-  background: #e5e5e5;
-}
-
-ul#leftnav .selected {
-  background: #ddd url(/images/selected_menu_item.gif) no-repeat right;
-}
-
-ul#leftnav .selected:hover {
-  background: #ccc url(/images/selected_menu_item.gif) no-repeat right;
-}
-
-#leftsearch {
-  margin: 0;
-  margin-bottom: 5px;
-  padding: 0;
-  width: 116px;
-  height: 20px;
-  float: left;
-}
-
-#searchglass {
-  float: left;
-  width: 20px;
-  height: 20px;
-  background: #fff url(/images/searchglass.gif) no-repeat 0% 0%;
-  border: solid #aaa 1px;
-  border-left: none;
 }
 
 #info {
@@ -297,49 +184,6 @@ ul#leftnav .selected:hover {
   padding: 3px 0;
 }
 
-.newsblock {
-  margin-bottom: 10px;
-}
-
-.newsblock h3 {
-  margin: 0;
-}
-
-.newsblock cite {
-  color: #555;
-  font-size: 90%;
-}
-
-.newsblock p {
-  margin-left: 10px;
-  margin-bottom: 0;
-  margin-top: 5px;
-  border-left: solid #ccc 1px;
-  padding-left: 10px;
-}
-
-.wikispace {
-  border-left: solid #eee 2px;
-  border-right: solid #eee 2px;
-  background: #f9f9f9;
-  padding: 10px;
-  margin: 10px 0;
-}
-
-.wikispace a.newwikipage {
-  color: #CC1800;
-}
-
-div.blocktitle {
-  border-bottom: solid #eee 1px;
-  margin-bottom: 50px;
-  margin-top: 10px;
-}
-
-div.blocktitle h4 {
-  margin: 0;
-}
-
 .controls {
   float: right;
   margin-left: 3px;
@@ -347,145 +191,9 @@ div.blocktitle h4 {
   /*Comment for admin*/ /*	display:none;*/
 }
 
-div.blocktitle {
-  margin-bottom: 5px;
-}
-
-/* Normal Bubble */
-div.bubble {
-  width: auto;
-  font-size: 0.75em;
-  margin-bottom: 24px;
-}
-
-div.bubble blockquote {
-  margin: 0px;
-  padding: 0px;
-  border: 1px solid #c9c2c1;
-  background-color: #fff;
-}
-
-div.bubble blockquote p {
-  margin: 10px;
-  padding: 0px;
-  color: black;
-}
-
-div.bubble cite {
-  position: relative;
-  margin: 0px;
-  padding: 7px 0px 0px 15px;
-  top: 5px;
-  background: transparent url(/images/tip.gif) no-repeat 20px 0;
-  font-style: normal;
-  color: #555;
-}
-
-div.photobox {
-  
-}
-
-div.photobox ul {
-  list-style: none;
-  margin: 0;
-}
-
-div.photobox ul li {
-  float: left;
-  padding: 4px;
-}
-
-div.photobox ul li img {
-  border: solid #ccc 1px;
-}
-
-div.photobox ul li img:hover {
-  border: solid #999 1px;
-}
-
 .bottomlink {
   float: right;
   font-size: 90%;
-}
-
-ul.discussion_list {
-  list-style: none;
-  margin: 0;
-}
-
-ul.discussion_list h4 {
-  margin-bottom: 0;
-}
-
-ul.discussion_list li {
-  margin-bottom: 10px;
-}
-
-div#footer {
-  
-}
-
-ul.officers_list {
-  list-style: none;
-  margin: 0;
-}
-
-ul.officers_list li {
-  margin-bottom: 5px;
-}
-
-ul.officers_list h4 {
-  margin: 0;
-}
-
-ul.officers_list .superlative {
-  font-style: italic;
-}
-
-div.events_list ul {
-  list-style: none;
-  margin: 0;
-  margin-bottom: 20px;
-}
-
-div.events_list ul li {
-  margin-bottom: 5px;
-}
-
-div.events_list ul h4 {
-  margin: 0;
-}
-
-div.events_list ul .date {
-  font-style: italic;
-}
-
-div.events_list .bottomlink { /*TODO: Stupid positioning hack fix*/
-  margin-top: -15px;
-}
-
-div.pledges_list ol {
-  list-style-position: inside;
-  margin: 0;
-  margin-bottom: 20px;
-}
-
-div.pledges_list ol li {
-  margin-bottom: 5px;
-}
-
-div.pledges_list ol h4 {
-  margin: 0;
-}
-
-div.pledges_list ol .pledge_description {
-  font-style: italic;
-  /*TODO: Actually align with number instead of faking it*/
-  margin-left: 12px;
-}
-
-div.pledges_list .bottomlink { /*TODO: Stupid positioning hack fix*/
-  margin-top: -15px;
 }
 
 td.separator {
@@ -497,4 +205,48 @@ td.separator {
 
 td.num {
   text-align: right;
+}
+
+p#strong {
+  background: #3c3;
+  text-align: center;
+  padding: 10px;
+  color: #000;
+  font-weight: bold;
+  font-size: 10pt;
+  border: 4px solid #070;
+}
+
+p#payment {
+  font-size: 15pt;
+  background: #efefef;
+  border: 2px solid #aaa;
+  text-align: center;
+}
+
+table.print td{
+  height: 40px;
+  font-size: 12pt;
+}
+
+div.total {
+  margin: 10px;
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+div.total p {
+  font-weight: bold;
+  font-size: 15pt;
+  margin: 0;
+  padding: 0;
+}
+
+div.sum {
+  background: #ccc;
+  border: 3px solid #555;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100px;
+  float: right;
 }

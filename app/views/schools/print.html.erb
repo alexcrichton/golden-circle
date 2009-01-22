@@ -1,27 +1,38 @@
 <h1><%= @school.name %></h1>
-<h2><%= @school.school_class %></h2>
+<h2><%= @school.school_class %> - <%= @team.level.classify.pluralize %></h2>
 <dl id="info" class="clearfix" style="width:60%">
   <dt>Contact name:</dt>     <dd><%=h @school.contact_name.blank? ? 'No Contact' : @school.contact_name %></dd>
   <dt>Contact email:</dt>    <dd><%= mail_to @school.email %></dd>
   <dt>Contact phone:</dt>    <dd><%=h @school.contact_phone.blank? ? 'No Phone' : @school.contact_phone %></dd>
-  <dt>Apprentice Count:</dt> <dd><%= student_count(@school, Student::APPRENTICE) %></dd>
-  <dt>Wizard Count:</dt>     <dd><%= student_count(@school, Student::WIZARD) %></dd>
+  <dt>Student Count:</dt> <dd><%= @team.students.size %></dd>
 </dl>
-<table border=1>
+<table border=1 class="print">
   <tr>
     <th></th>
     <th>First Name</th>
     <th>Last Name</th>
-    <th></th>
+    <th>Score</th>
   </tr>
-  <% for team in @school.teams %>
-    <tr><td colspan="4" class="separator"><%= team.level.classify.pluralize %></td></tr>
-    <% for i in 0...team.students.length %>
-      <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
-        <td class="num"><%= i + 1 %></td>
-        <td><%= team.students[i].first_name %></td>
-        <td><%= team.students[i].last_name %></td>
-        <td></td>
-    <% end %>
+  <% for i in 0...@team.students.length %>
+    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+      <td class="num"><%= i + 1 %></td>
+      <td><%= @team.students[i].first_name %></td>
+      <td><%= @team.students[i].last_name %></td>
+      <td></td>
+    </tr>
   <% end %>
 </table>
+<div class="span-12 colborder" style="margin:10px;">
+  <p>________ + ________ + _________ + ________ + _________ = _________</p>
+  <i>Top five individual scores and sum.</i>
+  <hr/>
+  <p>_______ x 5 = ________</p>
+  <i>Number right on team test, then times 5</i>
+</div>
+<div class="span-5 total">
+  <p>School Score:</p>
+  <i>Add sum and product</i>
+  <div class="sum">&nbsp;</div>
+</div>
+
+
