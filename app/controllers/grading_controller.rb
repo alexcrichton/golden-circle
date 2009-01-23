@@ -1,7 +1,7 @@
 class GradingController < ApplicationController
   
   before_filter :is_admin?
-  before_filter :load_teams, :except => [:statistics]
+  before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
   layout 'admin'
   
@@ -59,28 +59,21 @@ class GradingController < ApplicationController
     rank[0] = 1
     size = 0;
     for i in 1...collection.size
-      puts i
-      off = 1
       if collection[i].send(method) == collection[i - 1].send(method)
-        size += 1
-        off = 0
+        size = size + 1
+        rank[i] = rank[i - 1];
       else
-        size = 1
+        rank[i] = rank[i - 1] + size + 1
+        size = 0
       end
-      rank[i] = rank[i - 1] + off
     end
     rank
   end
   
   def load_students
     @student_hash = {}
-    @small_app = @small_app.map { |t| t.students }.flatten
-    @small_wiz = @small_wiz.map { |t| t.students }.flatten
-    @large_app = @large_app.map { |t| t.students }.flatten
-    @large_wiz = @large_wiz.map { |t| t.students }.flatten
-    @students = [@small_app, @small_wiz, @large_app, @large_wiz].flatten
+    @students = Student.find(:all, :order => 'last_name ASC, first_name ASC')
     @students.each { |s| @student_hash[s.id] = s }
-    @team_hash = nil 
   end
   
   def load_teams

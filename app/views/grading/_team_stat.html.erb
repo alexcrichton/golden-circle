@@ -1,0 +1,7 @@
+<tr class="<%= team_stat_counter % 2 == 0 ? 'even' : 'odd' %>">
+  <td class="num"><%= @teams_rank[team_stat_counter] %></td>
+  <td><%= team_stat.school.name %></td>
+  <td class="num"><%= team_stat.student_score_sum %></td>
+  <td class="num"><%= team_stat.team_test_score %></td>
+  <td class="num"><%= team_stat.team_score %></td>
+</tr>

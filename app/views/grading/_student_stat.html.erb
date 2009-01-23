@@ -1,0 +1,6 @@
+<tr class="<%= student_stat_counter % 2 == 0 ? 'even' : 'odd' %>">
+  <td class="num"><%= @students_rank[student_stat_counter] %></td>
+  <td><%= student_stat.first_name %> <%= student_stat.last_name %></td>
+  <td><%= student_stat.school.name %></td>
+  <td class="num"><%= student_stat.test_score %></td>
+</tr>
