@@ -5,7 +5,9 @@ class Student < ActiveRecord::Base
   
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :first_name, :scope => [:last_name, :team_id], :case_sensitive => false
-  validates_size_of :test_score, :within => 0..25, :if => :score_not_nil?
+  validates_numericality_of :test_score, :less_than => 26, :greater_than => -1, :if => :score_not_nil?
+  
+  attr_protected :test_score
   
   belongs_to :team
   
@@ -13,6 +15,10 @@ class Student < ActiveRecord::Base
   
   def level
     team.level
+  end
+  
+  def school
+    team.school
   end
   
   def blank?

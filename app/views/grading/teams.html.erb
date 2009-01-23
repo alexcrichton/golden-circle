@@ -1,0 +1,23 @@
+<h1>Grading Teams</h1>
+
+<% form_tag(grading_teams_path, :method => :put) do %>
+<table border=1>
+  <%= error_messages_for(:object => @teams) %>
+  <% [:small_app, :small_wiz, :large_app, :large_wiz].each do |thing| %>
+    <tr><td class="separator" colspan=2><%= thing %></td></tr>
+    <tr>
+      <th>School Name</th>
+      <th>Score</th>
+    </tr>
+    <% for team in instance_variable_get("@#{thing}") %>
+      <% fields_for("teams[#{team.id}]", team) do |tf| %>
+        <tr>
+          <td><%= tf.label :test_score, team.school.name %></td>
+          <td><%= tf.text_field :test_score %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>
+  <%= submit_tag "Submit Changes" %>
+<% end %>

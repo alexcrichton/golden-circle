@@ -42,6 +42,14 @@ class School < ActiveRecord::Base
     find :all, :conditions => ['enrollment IS ?', nil], :order => 'name ASC'
   end
   
+  def wizard_team
+    teams.find(:first, :conditions => ['level = ?', Student::WIZARD])
+  end
+  
+  def apprentice_team
+    teams.find(:first, :conditions => ['level = ?', Student::APPRENTICE])
+  end
+  
   def school_class
     return 'unknown' if enrollment.nil?
     if enrollment >= CUTOFF
@@ -49,6 +57,10 @@ class School < ActiveRecord::Base
     else
       'Small School'
     end
+  end
+  
+  def school_score
+    teams.map { |t| t.team_score }.sum
   end
   
   private
@@ -67,10 +79,6 @@ class School < ActiveRecord::Base
   def add_teams
     self.teams << Team.create(:level => Student::WIZARD)
     self.teams << Team.create(:level => Student::APPRENTICE)
-  end
-  
-  def school_score
-    teams.map { |t| t.team_score }.sum
   end
   
 end

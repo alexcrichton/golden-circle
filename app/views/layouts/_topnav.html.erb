@@ -1,4 +1,8 @@
 <ul id="topnav">
   <li><%= link_to 'Home', root_path %></li>
   <li><%= link_to 'Register', new_school_path %></li>
+  <% if current_school && current_school.admin %>
+    <li><%= link_to 'All Teams', schools_path %></li>
+    <li><%= link_to 'Scoring', statistics_path %></li>
+  <% end %>
 </ul>

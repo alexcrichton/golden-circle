@@ -1,11 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
   
-  map.resources :schools, :only => [:new, :index, :update, :show, :destroy], :member => {:print => :get}
+  map.resources :schools, :except => [:edit], :member => {:print => :get}
   
-  map.namespace :grading do |grading|
-    grading.teams '/teams', :controller => 'grading', :action => 'teams'
-    grading.students '/students', :controller => 'grading', :action => 'students'
-  end
+  map.grading_teams '/grading/teams', :controller => 'grading', :action => 'update_teams', :conditions => { :method => :put }
+  map.grading_teams '/grading/teams', :controller => 'grading', :action => 'teams'
+  map.grading_students '/grading/students', :controller => 'grading', :action => 'update_students', :conditions => {:method => :put}
+  map.grading_students '/grading/students', :controller => 'grading', :action => 'students'
   map.statistics '/stats', :controller => 'grading', :action => 'statistics'
   
   map.logout '/logout', :controller => "school_sessions", :action => "destroy"
