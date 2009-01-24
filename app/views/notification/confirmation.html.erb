@@ -1,0 +1,48 @@
+<img src="http://goldencircle.academycommunity.com/images/logo.png" alt="Golden Circle"/><br/>
+<br/>
+Thank you for signing up your school for this competition! We would like you to validate the information below
+to ensure that it is accurate. The following is what is currently saved in our database:<br/>
+<br>
+<p>
+  <b>School name:</b> <%= @school.name %>
+</p>
+<p>
+  <b>Contact name:</b> <%= @school.contact_name %>
+</p>
+<p>
+  <b>Contact phone:</b> <%= @school.contact_phone %>
+</p>
+<p>
+  <b>9th grade school enrollment:</b> <%= @school.enrollment %> (needed to classify the school as large or small)
+</p>
+<h2>Apprentice Team</h2>
+<%= @school.apprentice_team.students.size %>/15 Students Registered
+<ol>
+  <% for student in @school.apprentice_team.students %>
+    <li><%= student.first_name + " " + student.last_name %></li>
+  <% end %>
+</ol>
+<h2>Wizard Team</h2>
+<%= @school.wizard_team.students.size %>/15 Students Registered
+<ol>
+  <% for student in @school.wizard_team.students %>
+    <li><%= student.first_name + " " + student.last_name %></li>
+  <% end %>
+</ol>
+<br/>
+<br/>
+If any of the above information is inaccurate, please correct it on the <a href="http://goldencircle.academycommunity.com">registration website</a>.
+Otherwise, your registration is complete and we will see you and your students on the competition day!.
+<br/>
+<br/>
+As a reminder, the tournament is scheduled for March 3, 2009, and you will need to bring a check for 
+<font color="green"><b><%= number_to_currency @school.cost %></b></font> payable to "GT Education" 
+to the registration table on this date.<br/>
+Thank you for registering for the Golden Circle Tournament!<br/>
+<br/>
+<br/>
+- Golden Circle Administration<br/>
+<br/>
+Questions? Please contact: <%= mail_to 'golden.circle.contest@email.com' %><br/>
+
+

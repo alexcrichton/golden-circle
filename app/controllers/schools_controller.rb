@@ -2,7 +2,7 @@ class SchoolsController < ApplicationController
   
   before_filter :load_school
   before_filter :is_owner?, :only => [:update, :show, :destroy]
-  before_filter :is_admin?, :only => [:index, :print]
+  before_filter :is_admin?, :only => [:index, :print, :email]
   
   # GET /schools
   # GET /schools.xml
@@ -25,6 +25,12 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       format.html { render :action => 'print', :layout => 'admin'}
     end
+  end
+  
+  def email
+    School.find(:all).each { |school| Notification.deliver_confirmation(school) }
+    flash[:notice] = 'Emails have been sent!'
+    redirect_to schools_path
   end
 
   # GET /schools/1

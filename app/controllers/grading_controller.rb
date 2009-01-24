@@ -3,7 +3,6 @@ class GradingController < ApplicationController
   before_filter :is_admin?
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
-  layout 'admin'
   
   def teams
   end
@@ -76,14 +75,8 @@ class GradingController < ApplicationController
   end
   
   def load_teams
-    schools = School.small_schools
     @team_hash = {}
-    @small_app = schools.map { |s| s.apprentice_team }
-    @small_wiz = schools.map { |s| s.wizard_team }
-    schools = School.large_schools
-    @large_app = schools.map { |s| s.apprentice_team }
-    @large_wiz = schools.map { |s| s.wizard_team }
-    @teams = [@small_app, @small_wiz, @large_app, @large_wiz].flatten
+    @teams = Team.find(:all)
     @teams.each { |t| @team_hash[t.id] = t} 
   end
   

@@ -1,0 +1,34 @@
+<%= render :partial => 'layouts/header' %>
+<div class="container">
+  <div class="span-24 last" id="page">
+    <div class="span-17 main" style="border-right:solid #ddd 1px; padding-right:15px;">
+      
+      <%= render :partial => 'layouts/flash_messages' %>
+      
+      <%= yield %>
+      
+    </div>
+    
+    <div class="span-6 last" style="padding-left:5px">
+      <fieldset>
+        <legend>Statistics</legend>
+        <%- form_tag statistics_path do -%>
+          <%= label_tag :level, 'Division:' %>
+          <%= select_tag :level, options_for_select([Student::APPRENTICE, Student::WIZARD]), :selected => (@sort ? @sort[:level] : "" ) %><br/>
+          <%= label_tag :class, 'School Size:' %>
+          <%= select_tag :class, options_for_select(['Large', 'Small']) %>
+          <%= submit_tag "Calculate" %>
+        <%- end -%>
+      </fieldset>
+      <fieldset>
+        <legend>Grading Room</legend>
+        <ul>
+          <li><%= link_to 'Team Scores', grading_teams_path %></li>
+          <li><%= link_to 'Individual Scores', grading_students_path %></li>
+        </ul>
+      </fieldset>
+    </div>
+    
+  </div>
+</div>
+<%= render :partial => 'layouts/footer' %>

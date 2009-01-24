@@ -1,15 +1,7 @@
-<% form_tag statistics_path do -%>
-  <%= select_tag :level, options_for_select([Student::APPRENTICE, Student::WIZARD]) %>
-  <%= select_tag :class, options_for_select(['Large', 'Small']) %>
-  <%= submit_tag "Load Results" %>
-<% end -%>
 <h1><%= @sort[:class] %> Schools - <%= @sort[:level] %> Division</h1>
 
-<%= link_to 'Team Scores', grading_teams_path %>
-<%= link_to 'Student Scores', grading_students_path %>
-
 <table border=1>
-  <tr><td colspan=5 class="separator">Schools</td></tr>
+  <tr><td colspan=5 class="separator"><%= @sort[:class] %> School Sweepstakes</td></tr>
   <tr>
     <th>Rank</th>
     <th>Name</th>
@@ -18,7 +10,7 @@
     <th>Sweepstakes Score</th>
   </tr>
   <%= render :partial => 'school_stat', :collection => @schools %>
-  <tr><td colspan=5 class="separator">Teams</td></tr>
+  <tr><td colspan=5 class="separator"><%= @sort[:class] %> School <%= @sort[:level] %> Team Results</td></tr>
   <tr>
     <th>Rank</th>
     <th>School Name</th>
@@ -27,11 +19,11 @@
     <th>Total Score</th>
   </tr>
   <%= render :partial => 'team_stat', :collection => @teams %>
-  <tr><td colspan=5 class="separator">Students</td></tr>
+  <tr><td colspan=5 class="separator"><%= @sort[:class] %> School Individual <%= @sort[:level] %> Results</td></tr>
   <tr>
     <th>Rank</th>
     <th>Name</th>
-    <th>School</th>
+    <th colspan=2>School</th>
     <th>Score</th>
   </tr>
   <%= render :partial => 'student_stat', :collection => @students %>

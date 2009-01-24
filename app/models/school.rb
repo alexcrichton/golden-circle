@@ -15,7 +15,7 @@ class School < ActiveRecord::Base
               :converter => Phone.converter
   
   validates_presence_of   :name
-  validates_numericality_of :enrollment, :if => :enrollment_not_nil?
+  validates_numericality_of :enrollment, :if => :enrollment_not_nil?, :greater_than => -1
   validates_uniqueness_of :name, :case_sensitive => false
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'

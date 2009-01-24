@@ -1,8 +1,8 @@
-<h1>Grading Students</h1>
+<h1>Editing Individual Scores</h1>
 <%= javascript_include_tag 'auto' %>
 <script type="text/javascript">window.onload = function(){ init("students", "search", "tr"); };</script>
 
-Search Box:<br/>
+Find:<br/>
 <form name="test" id="test">
   <input name="search" type="text" autocomplete="off">
 </form>
@@ -20,11 +20,11 @@ Search Box:<br/>
   </tr>
   <%- for student in @students -%>
     <%- fields_for("students[#{student.id}]", student) do |sf| -%>
-      <tr filter="<%= (student.first_name + " " + student.last_name).gsub(/ /, "_") %>">
-        <td><%= sf.label :test_score, student.first_name + " " + student.last_name %></td>
+      <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>">
+        <td><%= sf.label :test_score, h(student.first_name + " " + student.last_name) %></td>
         <td><%= sf.text_field :test_score, :size => 4 %></td>
-        <td><%= student.school.name %></td>
-        <td><%= student.team.level %></td>
+        <td><%= h(student.school.name) %></td>
+        <td><%= h(student.team.level) %></td>
       </tr>
     <%- end -%>
   <%- end -%>

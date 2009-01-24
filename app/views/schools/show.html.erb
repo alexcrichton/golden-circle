@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'notifychange' %>
+<script type="text/javascript">window.onload = function(){ init(); };</script>
 <% form_for(@school) do |f| %>
   <%= f.error_messages %>
   
@@ -61,7 +63,7 @@
   
   <p id="strong">
     Press this button to save this form!<br/>
-    <%= f.submit "Save Changes" %>
+    <%= f.submit "Save Changes", :onclick => "closeOk()" %>
   </p>
   
 <% end %>

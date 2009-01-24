@@ -138,13 +138,15 @@ ul#topnav li {
   height: 25px;
   margin: 0;
   margin-top: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding: 0;
   border-left: solid #505050 1px;
 }
 
 ul#topnav li a {
   display: block;
-  width: 63px;
+ /* width: 63px;*/
   margin: 0 10px 0 7px;
   vertical-align: super;
   text-decoration: none;
@@ -201,6 +203,7 @@ td.separator {
   font-weight: bold;
   text-align: center;
   font-size: 13px;
+  /*border-top: 15px solid #fff;*/
 }
 
 td.num {

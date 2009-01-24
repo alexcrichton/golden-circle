@@ -1,31 +1,33 @@
-<h1>Grading Teams</h1>
+<h1>Editing Team Scores</h1>
 
 <%= javascript_include_tag 'auto' %>
 <script type="text/javascript">window.onload = function(){ init("teams", "search", "tr"); };</script>
 
-Filter field:<br/>
+Find:<br/>
 <input name="search" type="text" autocomplete="off">
 <hr/>
 
 
 <% form_tag(grading_teams_path, :method => :put) do %>
 <table border=1 id="teams">
+  
   <%= error_messages_for :object => @teams %>
-  <% [:small_app, :small_wiz, :large_app, :large_wiz].each do |thing| %>
-    <tr><td class="separator" colspan=2><%= thing %></td></tr>
-    <tr>
-      <th>School Name</th>
-      <th>Score</th>
-    </tr>
-    <% for team in instance_variable_get("@#{thing}") %>
-      <% fields_for("teams[#{team.id}]", team) do |tf| %>
-        <tr filter="<%= team.school.name.gsub(/ /, "_") %>">
-          <td><%= tf.label :test_score, team.school.name %></td>
-          <td><%= tf.text_field :test_score %></td>
-        </tr>
-      <% end %>
+  <tr>
+    <th>School Name</th>
+    <th>Level</th>
+    <th>Score</th>
+    <th>School Size</th>
+  </tr>
+  <%- for team in @teams -%>
+    <% fields_for("teams[#{team.id}]", team) do |tf| %>
+      <tr filter="<%= h(team.school.name + " " + team.level).gsub(/ /, "_") %>">
+        <td><%= tf.label :test_score, h(team.school.name) %></td>
+        <td><%=h team.level %></td>
+        <td><%= tf.text_field :test_score, :size => 5 %></td>
+        <td><%=h team.school.school_class %></td>
+      </tr>
     <% end %>
-  <% end %>
+  <%- end -%>
 </table>
   <%= submit_tag "Submit Changes" %>
 <% end %>

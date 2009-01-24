@@ -1,14 +1,20 @@
-<h1>Listing all Schools</h1>
-
-<table style="width:50%" border=1>
+<fieldset style="float:left;width:40%">
+  <h1>School Index</h1>
+  <hr/>
+  <% form_tag email_path, :method => :put do %>
+    The following button will send a confirmation email to all schools so they might validate the information they have submitted.
+    <%= submit_tag 'Send Email Notification', :confirm => "Are you sure?\nThis will email all schools!" %>
+  <% end %>
+</fieldset>
+<table style="width:50%;float:right;" border=1>
   <caption>Statistics</caption>
   <tr>
-    <th></th>
+    <td></td>
     <th>Large Schools</th>
     <th>Small Schools</th>
     <th>Total</th>
   </tr>
-  <tr>
+  <tr class="even">
     <th>School Count:</th>
     <td class="num"><%= @large_schools.size %></td>
     <td class="num"><%= @small_schools.size %></td>
@@ -16,7 +22,7 @@
   </tr>
   <% [Student::APPRENTICE, Student::WIZARD, :all].each do |level| %>
     <tr>
-      <th><%= level.to_s.classify %> Count:</th>
+      <th><%= level == :all ? 'Total Student' : level %> Count:</th>
       <td class="num"><%= student_count(@large_schools, level) %></td>
       <td class="num"><%= student_count(@small_schools, level) %></td>
       <td class="num"><b><%= student_count(@schools, level) %></b></td>
