@@ -1,23 +1,33 @@
 <h1>Grading Students</h1>
+<%= javascript_include_tag 'auto' %>
+<script type="text/javascript">window.onload = function(){ init("students", "search", "tr"); };</script>
 
+Search Box:<br/>
+<form name="test" id="test">
+  <input name="search" type="text" autocomplete="off">
+</form>
+<br/>
+
+<hr/>
 <% form_tag(grading_students_path, :method => :put) do %>
-<table border=1>
+  <%= error_messages_for :object => @students %>
+<table border=1 id="students">
   <tr>
     <th>Name</th>
     <th>Test Score</th>
     <th>School Name</th>
     <th>Level</th>
   </tr>
-  <% for student in @students %>
-    <% fields_for("students[#{student.id}]", student) do |sf| %>
-      <tr>
+  <%- for student in @students -%>
+    <%- fields_for("students[#{student.id}]", student) do |sf| -%>
+      <tr filter="<%= (student.first_name + " " + student.last_name).gsub(/ /, "_") %>">
         <td><%= sf.label :test_score, student.first_name + " " + student.last_name %></td>
         <td><%= sf.text_field :test_score, :size => 4 %></td>
         <td><%= student.school.name %></td>
         <td><%= student.team.level %></td>
       </tr>
-    <% end %>
-  <% end %>
+    <%- end -%>
+  <%- end -%>
 </table>
-  <%= submit_tag "Submit Changes" %>
+<%= submit_tag "Submit Changes" %>
 <% end %>

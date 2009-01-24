@@ -22,7 +22,7 @@ class SchoolSessionsController < ApplicationController
   end
   
   def destroy
-    current_school_session.destroy
+    current_school_session.destroy if current_school_session
     
     respond_to do |format|
       flash[:notice] = 'Logout successful!'

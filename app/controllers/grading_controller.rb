@@ -54,7 +54,6 @@ class GradingController < ApplicationController
   end
   
   def rank(collection, method)
-    puts collection
     rank = Array.new(collection.size)
     rank[0] = 1
     size = 0;

@@ -1,7 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>Golden Circle</title>
@@ -9,14 +8,11 @@
     <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
     <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
     <%= stylesheet_link_tag "style.css", :media =>"screen" %>
-    
     <%= javascript_include_tag 'jquery', 'jquery.template', 'application' %>
   </head>
-  
   <body>
-    
     <div class="header">
-      <a href="/"><%= image_tag "logo.png", :id=>"logo",:alt=>"Golden Circle" %></a>
+      <a href="/"><%= image_tag "logo.png", :id=>"logo", :alt=>"Golden Circle" %></a>
       <%= render :partial => 'layouts/login_links' %>
       <%= render :partial => 'layouts/topnav' %>
     </div>
