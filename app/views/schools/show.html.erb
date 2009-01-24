@@ -4,18 +4,23 @@
   <%= f.error_messages %>
   
   <div class="clearfix">
-    <fieldset>
-      <legend>School</legend>
-      <p>
-        <%= f.label :name %><br />
-        <%= f.text_field :name %>
-      </p>
-      <p>
-        <%= f.label :enrollment, '9th grade school enrollment' %><br />
-        <%= f.text_field :enrollment, :size => 4 %>
-      </p>
-    </fieldset>
-    
+    <div class="span-9">
+      <fieldset>
+        <legend>School</legend>
+        <p>
+          <%= f.label :name %><br />
+          <%= f.text_field :name %>
+        </p>
+        <p>
+          <%= f.label :enrollment, '9th grade school enrollment' %><br />
+          <%= f.text_field :enrollment, :size => 4 %>
+        </p>
+      </fieldset>
+    </div>
+    <div class="span-7 payment">
+      The amount due for this team is <font color="green"><b><%= number_to_currency @school.cost %></b></font>. Please bring the check payable to GT Education to the registration table March 3rd.
+    </div>
+    <hr/>
     <div class="span-8 colborder">
       <fieldset>
         <legend>School Contact</legend>
@@ -62,12 +67,10 @@
   <hr/>
   
   <p id="strong">
-    Press this button to save this form!<br/>
+    Press this button to save the form!<br/>
     <%= f.submit "Save Changes", :onclick => "closeOk()" %>
   </p>
   
 <% end %>
 
-<p id="payment">
-The amount due for this team is <font color="green"><b><%= number_to_currency @school.cost %></b></font>. Please bring the check payable to GT Education to the registration table March 3rd.
-</p>
+
