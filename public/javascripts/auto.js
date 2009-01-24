@@ -19,7 +19,7 @@ function matches(words, searches, index) {
 	for ( var i = 0; i < words.length; i++) {
 		if(words[i] == null)
 			continue;
-		if(words[i].indexOf(searches[index]) >= 0){
+		if(words[i].toLowerCase().indexOf(searches[index].toLowerCase()) >= 0){
 			var k = words[i];
 			words[i] = null;
 			if(matches(words, searches, index + 1))
