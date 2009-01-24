@@ -1,7 +1,7 @@
 class SchoolSessionsController < ApplicationController
   
   def new
-    return redirect_to(current_school) if current_school
+    return redirect_to(@current_school) if @current_school
     @school_session = SchoolSession.new
     respond_to do |format|
       format.html
@@ -14,7 +14,7 @@ class SchoolSessionsController < ApplicationController
     respond_to do |format|
       if @school_session.save
         flash[:notice] = 'Login successful!'
-        format.html { redirect_to current_school }
+        format.html { redirect_to root_path }
       else
         format.html { render :action => :new }
        end
@@ -22,7 +22,8 @@ class SchoolSessionsController < ApplicationController
   end
   
   def destroy
-    current_school_session.destroy if current_school_session
+    session = current_school_session
+    session.destroy if session
     
     respond_to do |format|
       flash[:notice] = 'Logout successful!'

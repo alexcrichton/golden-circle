@@ -15,12 +15,13 @@ class School < ActiveRecord::Base
               :converter => Phone.converter
   
   validates_presence_of   :name
+  validates_numericality_of :enrollment, :if => :enrollment_not_nil?
   validates_uniqueness_of :name, :case_sensitive => false
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid'
   
-  attr_protected :admin
+  attr_protected :admin, :teams
   
   before_save :strip_name
   before_create :submitted_before_deadline?
@@ -74,6 +75,10 @@ class School < ActiveRecord::Base
   def strip_name
     # need selfs here or otherwise won't work. god knows why...
     self.name = self.name.strip if self.name
+  end
+  
+  def enrollment_not_nil?
+    !enrollment.nil?
   end
   
   def add_teams

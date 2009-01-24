@@ -1,11 +1,11 @@
-module MockTeamSessionHelper
-  def mock_team_session(stubs={})
+module MockSchoolSessionHelper
+  def mock_school_session(stubs={})
     stubs = {
       :save => true,
       :destroy => true,
       :password => "password",
       :email => "email@email.com"
     }.merge(stubs)
-    @mock_team_session ||= mock_model(TeamSession, stubs)
+    @mock_school_session ||= mock_model(SchoolSession, stubs)
   end
 end

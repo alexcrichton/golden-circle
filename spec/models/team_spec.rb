@@ -4,89 +4,88 @@ describe Team do
   
   before(:each) do
     @valid_attributes = {
-      :email => "email@email.com",
-      :password => "password",
-      :password_confirmation => "password",
-      :school_name => "Central Academy",
-      :contact_name => "Thomas Edison",
-      :contact_phone => "(555)555-5555",
-      :enrollment => "500"
+      :school_id => "1",
+      :level => Student::WIZARD,
     }
     @it = Team.new
   end
   
-  it "should be invalid without an email" do
-    @it.attributes = @valid_attributes.except(:email)
-    @it.should_not be_valid
-    @it.email = @valid_attributes[:email]
-    @it.should be_valid
-  end
-  
-  it "should be invalid with an invalid email" do
+  it 'should create' do
     @it.attributes = @valid_attributes
-    @it.email = "invalid"
-    @it.should_not be_valid
-    @it.email = @valid_attributes[:email]
     @it.should be_valid
   end
   
-  it "should be invalid with an non-unique email" do
+  
+  it "should be invalid without a level" do
+    @it.attributes = @valid_attributes.except(:level)
+    @it.should_not be_valid
+    @it.level = @valid_attributes[:level]
+    @it.should be_valid
+  end
+  
+  it "should be invalid with an non-unique level" do
     Team.create!(@valid_attributes)
     @it.attributes = @valid_attributes
     @it.should_not be_valid
   end
   
-  it "should be invalid with a blank email" do
+  it "should not be invalid with an non-unique level when between schools" do
+    Team.create!(@valid_attributes.merge(:school_id => 2))
     @it.attributes = @valid_attributes
-    @it.email = ""
-    @it.should_not be_valid
-  end
-  
-  it "should be invalid when email is less than 6 characters long" do
-    @it.attributes = @valid_attributes
-    @it.password = "short"
-    @it.should_not be_valid
-  end
-  
-  it "should be invalid without a password" do
-    @it.attributes = @valid_attributes.except(:password)
-    @it.should_not be_valid
-    @it.password = @valid_attributes[:password]
     @it.should be_valid
   end
   
-  it "should be invalid when password is less than 4 characters long" do
+  it 'should allow only valid test scores' do
     @it.attributes = @valid_attributes
-    @it.password = "sho"
-    @it.should_not be_valid
+    [-2, -1, 16, 17].each { |n| @it.test_score = n; @it.should_not be_valid }
+    (0..15).each { |n| @it.test_score = n; @it.should be_valid }
   end
   
-  it "should be invalid without a school name" do
-    @it.attributes = @valid_attributes.except(:school_name)
-    @it.should_not be_valid
+  it 'should calculate the team test score correctly' do
+    @it.test_score = 1
+    @it.team_test_score.should eql(5)
+    @it.test_score = 5
+    @it.team_test_score.should eql(25)
+    @it.test_score = nil
+    @it.team_test_score.should eql(0)
   end
   
-  it "should be invalid without a contact name" do
-    @it.attributes = @valid_attributes.except(:contact_name)
-    @it.should_not be_valid
-  end
-  
-  it "should be invalid without a contact phone" do
-    @it.attributes = @valid_attributes.except(:contact_phone)
-    @it.should_not be_valid
-  end
-  
-  it "should be invalid without an enrollment" do
-    @it.attributes = @valid_attributes.except(:enrollment)
-    @it.should_not be_valid
-  end
-  
-  it "should be invalid if enrollment is not a number" do
+  it 'should calculate student sum score correctly' do
     @it.attributes = @valid_attributes
-    @it.enrollment = "string"
-    @it.should_not be_valid
+    @it.save
+    p = Proc.new do |s| 
+      k = Student.new(:first_name => s.to_s, :last_name => s.to_s, :team_id => @it.id)
+      k.test_score = s;
+      k.save!
+    end
+    p.call(1)
+    @it.student_score_sum.should eql(1)
+    p.call(2)
+    @it.student_score_sum.should eql(3)
+    p.call(3)
+    @it.student_score_sum.should eql(6)
+    p.call(4)
+    @it.student_score_sum.should eql(10)
+    p.call(5)
+    @it.student_score_sum.should eql(15)
+    p.call(6)
+    @it.student_score_sum.should eql(20)
+    p.call(0)
+    @it.student_score_sum.should eql(20)
   end
   
-  # it "should be invalid when the admin attribute is set by mass assignment"
+  it 'should calculate team score correctly' do
+    @it.attributes = @valid_attributes
+    @it.save
+    (1..5).each do |s| 
+      k = Student.new(:first_name => s.to_s, :last_name => s.to_s, :team_id => @it.id)
+      k.test_score = s;
+      k.save!
+    end
+    @it.test_score = 8
+    @it.team_score.should eql(55)
+    @it.test_score = 9
+    @it.team_score.should eql(60)
+  end
   
 end
