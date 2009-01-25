@@ -54,7 +54,7 @@ dl dt {font-weight:bold;}
 dd {margin-left:1.5em;}
 table {margin-bottom:1.4em;width:100%;border-width:0;border-bottom:1px solid #066;}
 th {font-weight:bold;background:#C3D9FF;}
-th, td {padding:4px 10px 4px 5px;border:1px solid #066}
+th, td {padding:4px 10px 4px 5px;border:1px solid #066;margin:0;}
 tr.even td {background:#E5ECF9;}
 tr.odd td {background:#ffc}
 table.noborder th, table.noborder td {border:none;border-width:0;}
