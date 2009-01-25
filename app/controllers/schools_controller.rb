@@ -116,7 +116,7 @@ class SchoolsController < ApplicationController
   end
   
   def is_owner?
-    if current_school.nil? || @school.nil? || (@school.id != current_school.id && !current_school.admin?)
+    if current_school.nil? || @school.nil? || (@school.id != current_school.id && !current_school.admin)
       flash[:error] = 'Access Denied'
       redirect_to root_path
     end

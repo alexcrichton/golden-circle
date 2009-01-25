@@ -83,6 +83,29 @@ describe SchoolsController do
   
   describe "responding to GET /schools/1" do
     
+    it 'should require a login' do
+      get :show, :id => '1'
+      response.should be_redirect
+    end
+    
+    it 'should only allow own school' do
+      s = mock_model(School, valid_attributes.merge(:name => 'random', :email => 'more@random.com'))
+      s.should_receive(:admin).and_return(false)
+      @controller.stub!(:current_school).and_return(s)
+      School.stub!(:find).and_return(mock_school)
+      get :show, :id => '1'
+      response.should be_redirect
+    end
+    
+    it 'should allow an admin school' do
+      s = mock_model(School, valid_attributes.merge(:name => 'random', :email => 'more@random.com'))
+      s.should_receive(:admin).and_return(true)
+      @controller.stub!(:current_school).and_return(s)
+      School.stub!(:find).and_return(mock_school)
+      get :show, :id => '1'
+      response.should be_success
+    end
+
     it "should succeed" do
       @controller.should_receive(:is_owner?).and_return(true)
       School.stub!(:find).and_return(mock_school)
@@ -178,7 +201,30 @@ describe SchoolsController do
     end
   
     describe "with failed update" do
-  
+      it 'should require a login' do
+        put :update, :id => '1'
+        response.should be_redirect
+      end
+      
+      it 'should only allow own school' do
+        s = mock_model(School, valid_attributes.merge(:name => 'random', :email => 'more@random.com'))
+        s.should_receive(:admin).and_return(false)
+        @controller.stub!(:current_school).and_return(s)
+        School.stub!(:find).and_return(mock_school)
+        put :update, :id => '1'
+        response.should be_redirect
+      end
+      
+      it 'should allow an admin school' do
+        s = mock_model(School, valid_attributes.merge(:name => 'random', :email => 'more@random.com'))
+        s.should_receive(:admin).and_return(true)
+        @controller.stub!(:current_school).and_return(s)
+        School.stub!(:find).and_return(mock_school)
+        mock_school.should_receive(:update_attributes).and_return(false)
+        put :update, :id => '1'
+        response.should be_success
+      end
+      
       it "should find the requested school" do
         School.should_receive(:find).with("37").and_return(mock_school(:update_attributes => false))
         put :update, :id => "37"

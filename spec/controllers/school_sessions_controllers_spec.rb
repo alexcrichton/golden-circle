@@ -18,11 +18,13 @@ describe SchoolSessionsController do
     end
     
     it "should create a new session" do
+      @controller.stub!(:current_school).and_return(nil)
       SchoolSession.should_receive(:new)
       get :new
     end
     
     it "should assign the new session for the view" do
+      @controller.stub!(:current_school).and_return(nil)
       SchoolSession.should_receive(:new).and_return(mock_school_session)
       get :new
       assigns[:school_session].should equal(mock_school_session)
