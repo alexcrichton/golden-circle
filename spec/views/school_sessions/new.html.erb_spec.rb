@@ -20,6 +20,11 @@ describe "/school_sessions/new.html.erb" do
     response.should have_tag("input[type=password][name='school_session[password]']")
   end
   
+  it "should have a remember me in the form" do
+    response.should have_tag("input[type=checkbox][name='school_session[remember_me]']")
+  end
+
+  
   it "should have a submit button" do
     response.should have_tag("input[type=submit][name='commit']")
   end

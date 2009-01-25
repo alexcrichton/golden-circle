@@ -3,6 +3,7 @@ module MockSchoolSessionHelper
     stubs = {
       :save => true,
       :destroy => true,
+      :remember_me => true,
       :password => "password",
       :email => "email@email.com"
     }.merge(stubs)

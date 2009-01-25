@@ -9,11 +9,12 @@ class SchoolSessionsController < ApplicationController
   end
   
   def create
-    @current_school = nil
-    @current_school_session = nil
     @school_session = SchoolSession.new(params[:school_session])
+    
     respond_to do |format|
       if @school_session.save
+        @current_school = nil
+        @current_school_session = @school_session
         flash[:notice] = 'Login successful!'
         format.html { redirect_to root_path }
       else

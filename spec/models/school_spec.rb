@@ -124,6 +124,7 @@ describe School do
   
   it "should be invalid if enrollment is not a number" do
     @it.attributes = @valid_attributes
+    @it.save
     @it.enrollment = "string"
     @it.should_not be_valid
   end

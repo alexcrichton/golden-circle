@@ -37,7 +37,7 @@ describe Team do
   
   it 'should allow only valid test scores' do
     @it.attributes = @valid_attributes
-    [-2, -1, 16, 17].each { |n| @it.test_score = n; @it.should_not be_valid }
+    [-2, -1, 21, 22].each { |n| @it.test_score = n; @it.should_not be_valid }
     (0..15).each { |n| @it.test_score = n; @it.should be_valid }
   end
   

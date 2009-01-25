@@ -13,7 +13,7 @@ class Phone
   end
   
   def valid?
-    return phone_number.match(REGEX) || phone_number.blank?
+    return phone_number.match(REGEX)
   end
   
   def self.converter

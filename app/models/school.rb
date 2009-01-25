@@ -14,18 +14,22 @@ class School < ActiveRecord::Base
               :constructor => Phone.constructor,
               :converter => Phone.converter
   
-  validates_presence_of   :name
-  validates_numericality_of :enrollment, :if => :enrollment_not_nil?, :greater_than => -1
+  validates_presence_of :name
+  validates_presence_of :contact_name, :enrollment, :phone, :on => :update
+  validates_numericality_of :enrollment,
+                            :greater_than_or_equal_to => 0,
+                            :only_integer => true,
+                            :on => :update
   validates_uniqueness_of :name, :case_sensitive => false
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
-  validates_associated :phone, :message => 'number is invalid'
+  validates_associated :phone, :message => 'number is invalid', :on => :update
+  validate :submitted_before_deadline?
   
   attr_protected :admin, :teams
   
-  before_save :strip_name
-  before_create :submitted_before_deadline?
   after_create :add_teams
+  before_save :strip_name
   
   def cost
     4 * students.size
@@ -45,12 +49,10 @@ class School < ActiveRecord::Base
   
   def wizard_team
     teams.detect { |t| t.level == Student::WIZARD }
-#    teams.find(:first, :conditions => ['level = ?', Student::WIZARD])
   end
   
   def apprentice_team
     teams.detect { |t| t.level == Student::APPRENTICE } 
-#    teams.find(:first, :conditions => ['level = ?', Student::APPRENTICE])
   end
   
   def school_class
@@ -69,7 +71,7 @@ class School < ActiveRecord::Base
   private
   def submitted_before_deadline?
     # Needs to be before midnight on Tuesday, February 24, 2009
-    if Time.zone.now > Time.zone.local(2009, 2, 24, 24, 0, 0)
+    if Time.zone.now > Time.zone.local(2009, 2, 24, 24, 0, 0) && new_record?
       errors.add_to_base("The registration deadline has passed.")
     end
   end
@@ -77,10 +79,6 @@ class School < ActiveRecord::Base
   def strip_name
     # need selfs here or otherwise won't work. god knows why...
     self.name = self.name.strip if self.name
-  end
-  
-  def enrollment_not_nil?
-    !enrollment.nil?
   end
   
   def add_teams
