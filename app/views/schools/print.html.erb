@@ -8,10 +8,10 @@
 </dl>
 <table border=1 class="print">
   <tr>
-    <th></th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Score</th>
+    <td class="separator"></td>
+    <td class="separator">First Name</td>
+    <td class="separator">Last Name</td>
+    <td class="separator">Score</td>
   </tr>
   <% for i in 0...@team.students.length %>
     <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
