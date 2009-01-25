@@ -5,7 +5,11 @@ class Student < ActiveRecord::Base
   
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :first_name, :scope => [:last_name, :team_id], :case_sensitive => false
-  validates_numericality_of :test_score, :less_than => 26, :greater_than => -1, :if => :score_not_nil?
+  validates_numericality_of :test_score,
+                            :only_integer => true,
+                            :less_than_or_equal_to => 25,
+                            :greater_than_or_equal_to => 0,
+                            :if => :score_not_nil?
   
   attr_protected :test_score
   

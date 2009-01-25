@@ -11,7 +11,11 @@ class Team < ActiveRecord::Base
   validates_uniqueness_of :level, :scope => :school_id, :case_sensitive => false
   validates_associated :students, :message => 'are invalid'
   validates_size_of :students, :maximum => 15, :message => "have a maximum of 15 allowed"
-  validates_numericality_of :test_score, :less_than => 16, :greater_than => -1, :if => :score_not_nil?
+  validates_numericality_of :test_score,
+                            :only_integer => true,
+                            :less_than_or_equal_to => 20,
+                            :greater_than_or_equal_to => 0,
+                            :if => :score_not_nil?
   
   attr_protected :test_score
   
