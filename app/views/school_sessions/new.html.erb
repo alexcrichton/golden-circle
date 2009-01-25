@@ -10,7 +10,9 @@
       <%= f.label :password %><br />
       <%= f.password_field :password %>
     </p>
-    
+    <p>
+      <%= f.check_box :remember_me %><%= f.label :remember_me %>
+    </p>
     <%= f.submit "Login" %>
   <% end %>
 </div>
