@@ -3,7 +3,7 @@ var rows;
 var input;
 var last_filter = null;
 
-function init(containerID, inputName, tag) {
+function filter(containerID, inputName, tag) {
 	container = document.getElementById(containerID);
 	input = document.getElementsByName(inputName)[0];
 	input.focus();

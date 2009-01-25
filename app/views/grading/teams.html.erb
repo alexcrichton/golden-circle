@@ -1,7 +1,7 @@
 <h1>Editing Team Scores</h1>
 
-<%= javascript_include_tag 'auto' %>
-<script type="text/javascript">window.onload = function(){ init("teams", "search", "tr"); };</script>
+<%= javascript_include_tag 'auto', 'notifychange' %>
+<script type="text/javascript">window.onload = function(){ watch();filter("teams", "search", "tr"); };</script>
 
 Find:<br/>
 <input name="search" type="text" autocomplete="off">
@@ -29,5 +29,5 @@ Find:<br/>
     <% end %>
   <%- end -%>
 </table>
-  <%= submit_tag "Submit Changes" %>
+  <%= submit_tag "Submit Changes", :onclick => "closeOk()" %>
 <% end %>

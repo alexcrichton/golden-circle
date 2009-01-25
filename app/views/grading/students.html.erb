@@ -1,11 +1,10 @@
 <h1>Editing Individual Scores</h1>
-<%= javascript_include_tag 'auto' %>
-<script type="text/javascript">window.onload = function(){ init("students", "search", "tr"); };</script>
+<%= javascript_include_tag 'auto', 'notifychange' %>
+<script type="text/javascript">window.onload = function(){ watch();filter("students", "search", "tr"); };</script>
+
 
 Find:<br/>
-<form name="test" id="test">
-  <input name="search" type="text" autocomplete="off">
-</form>
+<input name="search" type="text" autocomplete="off">
 <br/>
 
 <hr/>
@@ -29,5 +28,5 @@ Find:<br/>
     <%- end -%>
   <%- end -%>
 </table>
-<%= submit_tag "Submit Changes" %>
+<%= submit_tag "Submit Changes", :onclick => "closeOk()" %>
 <% end %>

@@ -2,7 +2,7 @@ var form;
 var originalSchtuff;
 var close;
 
-function init() {
+function watch() {
 	form = document.forms[0];
 	tags = form.getElementsByTagName("input");
 	originalSchtuff = new Array(tags.length);

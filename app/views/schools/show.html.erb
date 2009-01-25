@@ -1,6 +1,6 @@
 <%= javascript_include_tag 'jquery', 'jquery.template', 'application', 'notifychange' %>
+<script type="text/javascript">window.onload = function(){ watch(); };</script>
 
-<script type="text/javascript">window.onload = function(){ init(); };</script>
 <% form_for(@school) do |f| %>
   <%= f.error_messages %>
   
