@@ -1,6 +1,6 @@
 <h1><%= @sort[:class] %> Schools - <%= @sort[:level] %> Division</h1>
 
-<table border=1>
+<table>
   <tr><td colspan=5 class="separator"><%= @sort[:class] %> School Sweepstakes</td></tr>
   <tr>
     <th>Rank</th>
@@ -10,6 +10,8 @@
     <th>Sweepstakes Score</th>
   </tr>
   <%= render :partial => 'school_stat', :collection => @schools %>
+</table>
+<table>
   <tr><td colspan=5 class="separator"><%= @sort[:class] %> School <%= @sort[:level] %> Team Results</td></tr>
   <tr>
     <th>Rank</th>
@@ -19,6 +21,8 @@
     <th>Total Score</th>
   </tr>
   <%= render :partial => 'team_stat', :collection => @teams %>
+</table>
+<table>
   <tr><td colspan=5 class="separator"><%= @sort[:class] %> School Individual <%= @sort[:level] %> Results</td></tr>
   <tr>
     <th>Rank</th>

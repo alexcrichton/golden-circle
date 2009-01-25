@@ -1,3 +1,4 @@
+<table>
 <tr><td class="separator" colspan="7"><%= title %></td></tr>
 <tr>
   <th>School name</th>
@@ -6,7 +7,7 @@
   <th>Apprentice Count</th>
   <th>Wizard Count</th>
   <th>Student Count</th>
-  <th></th>
+  <th>&nbsp;</th>
 </tr>
 <%- schools.each_with_index do |school, i| -%>
 <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
@@ -23,3 +24,4 @@
   </td>
 </tr>
 <%- end -%>
+</table>

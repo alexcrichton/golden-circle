@@ -151,6 +151,7 @@ ul#topnav li a {
   vertical-align: super;
   text-decoration: none;
   color: inherit;
+  color: #444;
 }
 
 ul#topnav li:hover {

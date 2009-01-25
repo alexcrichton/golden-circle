@@ -10,7 +10,7 @@
   <tr>
     <th>First Name</th>
     <th>Last Name</th>
-    <th></th>
+    <th>&nbsp;</th>
   </tr>
   <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
 </table>

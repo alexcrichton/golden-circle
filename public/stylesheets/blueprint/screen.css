@@ -52,9 +52,10 @@ ol {list-style-type:decimal;}
 dl {margin:0 0 1.5em 0;}
 dl dt {font-weight:bold;}
 dd {margin-left:1.5em;}
-table {margin-bottom:1.4em;width:100%;border-width:0;border-bottom:1px solid #066;}
+table {margin-bottom:1.4em;width:100%;border-width:0;
+  border-bottom:1px solid #066;padding:0;border-collapse:collapse;}
 th {font-weight:bold;background:#C3D9FF;}
-th, td {padding:4px 10px 4px 5px;border:1px solid #066;margin:0;}
+th, td {padding:4px 10px 4px 5px;border:2px solid #066}
 tr.even td {background:#E5ECF9;}
 tr.odd td {background:#ffc}
 table.noborder th, table.noborder td {border:none;border-width:0;}
@@ -214,7 +215,7 @@ hr.space {background:#fff;color:#fff;}
 /* forms.css */
 label {font-weight:bold;}
 fieldset {padding:1.4em;margin:0 0 1.5em 0;border:1px solid #ccc;}
-legend {font-weight:bold;font-size:1.2em;}
+legend {font-weight:bold;font-size:1.2em;color:#111;}
 input.text, input.title, textarea, select {margin:0.5em 0;border:1px solid #bbb;}
 input.text:focus, input.title:focus, textarea:focus, select:focus {border:1px solid #666;}
 input.text, input.title {width:300px;padding:5px;}
