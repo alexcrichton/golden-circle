@@ -9,6 +9,8 @@ class SchoolSessionsController < ApplicationController
   end
   
   def create
+    @current_school = nil
+    @current_school_session = nil
     @school_session = SchoolSession.new(params[:school_session])
     respond_to do |format|
       if @school_session.save
@@ -23,6 +25,8 @@ class SchoolSessionsController < ApplicationController
   def destroy
     session = current_school_session
     session.destroy if session
+    @current_school = nil
+    @current_school_session = nil
     
     respond_to do |format|
       flash[:notice] = 'Logout successful!'

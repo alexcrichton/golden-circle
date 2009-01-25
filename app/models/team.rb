@@ -21,7 +21,7 @@ class Team < ActiveRecord::Base
   end
   
   def student_score_sum
-    students.find(:all, :select => :test_score, :order => 'test_score DESC', :limit => 5).map{ |s| s.test_score || 0 }.sum
+    students.sort_by { |s| s.test_score || 0 }.reverse[0..4].map { |s| s.test_score || 0 }.sum
   end
   
   def team_score

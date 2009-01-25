@@ -31,12 +31,12 @@ class School < ActiveRecord::Base
     4 * students.size
   end
   
-  def self.large_schools
-    find :all, :conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'
+  def self.large_schools(opts = {})
+    find :all, {:conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'}.merge(opts)
   end
   
-  def self.small_schools
-    find :all, :conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'
+  def self.small_schools(opts = {})
+    find :all, {:conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'}.merge(opts)
   end
   
   def self.unknown
@@ -44,11 +44,13 @@ class School < ActiveRecord::Base
   end
   
   def wizard_team
-    teams.find(:first, :conditions => ['level = ?', Student::WIZARD])
+    teams.detect { |t| t.level == Student::WIZARD }
+#    teams.find(:first, :conditions => ['level = ?', Student::WIZARD])
   end
   
   def apprentice_team
-    teams.find(:first, :conditions => ['level = ?', Student::APPRENTICE])
+    teams.detect { |t| t.level == Student::APPRENTICE } 
+#    teams.find(:first, :conditions => ['level = ?', Student::APPRENTICE])
   end
   
   def school_class

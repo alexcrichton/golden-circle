@@ -203,7 +203,7 @@ td.separator {
   font-weight: bold;
   text-align: center;
   font-size: 13px;
-  /*border-top: 15px solid #fff;*/
+  border-top: 15px solid #fff;
 }
 
 td.num {

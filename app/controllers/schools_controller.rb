@@ -7,10 +7,20 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.xml
   def index
-    @schools = School.find(:all, :order => ['name ASC'])
-    @large_schools = School.large_schools
-    @small_schools = School.small_schools
-    @unknown = School.unknown
+    @schools = School.find(:all, :include => [:proctors, :teams, :students])
+    @large_schools = []
+    @small_schools = []
+    @unknown = []
+    @schools.each do |s|
+      case s.school_class
+      when 'Large School'
+        @large_schools << s
+      when 'Small School'
+        @small_schools << s
+      else
+        @unknown << s
+      end
+    end
     @proctors = @schools.collect{ |s| s.proctors }.flatten
     
     respond_to do |format|
@@ -112,7 +122,7 @@ class SchoolsController < ApplicationController
   protected
   
   def load_school
-    @school = School.find(params[:id]) if params[:id]
+    @school = School.find(params[:id], :include => [:teams, :students, :proctors]) if params[:id]
   end
   
   def is_owner?
