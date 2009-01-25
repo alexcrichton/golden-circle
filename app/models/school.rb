@@ -71,7 +71,7 @@ class School < ActiveRecord::Base
   private
   def submitted_before_deadline?
     # Needs to be before midnight on Tuesday, February 24, 2009
-    if Time.zone.now > Time.zone.local(2009, 2, 24, 24, 0, 0) && new_record?
+    if new_record? && Time.zone.now > Time.zone.local(2009, 2, 24, 24, 0, 0)
       errors.add_to_base("The registration deadline has passed.")
     end
   end

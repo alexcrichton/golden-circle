@@ -57,6 +57,8 @@ th {font-weight:bold;background:#C3D9FF;}
 th, td {padding:4px 10px 4px 5px;border:1px solid #066}
 tr.even td {background:#E5ECF9;}
 tr.odd td {background:#ffc}
+table.noborder th, table.noborder td {border:none;border-width:0;}
+table.noborder {border:none;}
 tfoot {font-style:italic;}
 caption {background:#066;color:#fff;padding-left:5px;font-weight:bold;}
 .small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}
