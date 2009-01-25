@@ -52,11 +52,10 @@ describe Team do
   
   it 'should calculate student sum score correctly' do
     @it.attributes = @valid_attributes
-    @it.save
     p = Proc.new do |s| 
-      k = Student.new(:first_name => s.to_s, :last_name => s.to_s, :team_id => @it.id)
-      k.test_score = s;
-      k.save!
+      k = Student.new(:first_name => s.to_s, :last_name => s.to_s)
+      k.test_score = s
+      @it.students << k
     end
     p.call(1)
     @it.student_score_sum.should eql(1)
@@ -80,7 +79,7 @@ describe Team do
     (1..5).each do |s| 
       k = Student.new(:first_name => s.to_s, :last_name => s.to_s, :team_id => @it.id)
       k.test_score = s;
-      k.save!
+      @it.students << k
     end
     @it.test_score = 8
     @it.team_score.should eql(55)

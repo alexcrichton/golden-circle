@@ -121,7 +121,7 @@ describe SchoolsController do
     end
     
     it "should find the requested school" do
-      School.should_receive(:find).with("37").and_return(mock_school)
+      School.should_receive(:find).with("37", {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
       get :show, :id => "37"
     end
     
@@ -165,7 +165,7 @@ describe SchoolsController do
     describe "with successful update" do
       
       it "should find the requested school" do
-        School.should_receive(:find).with("37").and_return(mock_school)
+        School.should_receive(:find).with("37",{:include=>[:teams, :students, :proctors]}).and_return(mock_school)
         put :update, :id => "37"
       end
       
@@ -226,7 +226,7 @@ describe SchoolsController do
       end
       
       it "should find the requested school" do
-        School.should_receive(:find).with("37").and_return(mock_school(:update_attributes => false))
+        School.should_receive(:find).with("37",  {:include=>[:teams, :students, :proctors]}).and_return(mock_school(:update_attributes => false))
         put :update, :id => "37"
       end
       
