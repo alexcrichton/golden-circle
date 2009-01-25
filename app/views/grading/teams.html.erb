@@ -9,18 +9,18 @@ Find:<br/>
 
 
 <% form_tag(grading_teams_path, :method => :put) do %>
-<table border=1 id="teams">
-  
   <%= error_messages_for :object => @teams %>
+<table border=1 id="teams">
+  <tr><td class="separator" colspan=4">All Teams</td></tr>
   <tr>
     <th>School Name</th>
     <th>Level</th>
     <th>Score</th>
     <th>School Size</th>
   </tr>
-  <%- for team in @teams -%>
+  <%- @teams.each_with_index do |team, i| -%>
     <% fields_for("teams[#{team.id}]", team) do |tf| %>
-      <tr filter="<%= h(team.school.name + " " + team.level).gsub(/ /, "_") %>">
+      <tr filter="<%= h(team.school.name + " " + team.level).gsub(/ /, "_") %>" class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
         <td><%= tf.label :test_score, h(team.school.name) %></td>
         <td><%=h team.level %></td>
         <td><%= tf.text_field :test_score, :size => 5 %></td>

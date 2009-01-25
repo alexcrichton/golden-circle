@@ -31,6 +31,7 @@
 </table>
 
 <table border=1>
+  <tr><td class="separator" colspan="7">Large Schools</td></tr>
   <tr>
     <th>School name</th>
     <th>Contact email</th>
@@ -40,7 +41,6 @@
     <th>Student Count</th>
     <th></th>
   </tr>
-  <tr><td class="separator" colspan="7">Large Schools</td></tr>
   <%= render :partial => 'school', :collection => @large_schools %>
   <tr><td class="separator" colspan="7">Small Schools</td></tr>
   <%= render :partial => 'school', :collection => @small_schools %>

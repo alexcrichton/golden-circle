@@ -52,12 +52,13 @@ ol {list-style-type:decimal;}
 dl {margin:0 0 1.5em 0;}
 dl dt {font-weight:bold;}
 dd {margin-left:1.5em;}
-table {margin-bottom:1.4em;width:100%;}
+table {margin-bottom:1.4em;width:100%;border-width:0;border-bottom:1px solid #066;}
 th {font-weight:bold;background:#C3D9FF;}
-th, td {padding:4px 10px 4px 5px;}
+th, td {padding:4px 10px 4px 5px;border:1px solid #066}
 tr.even td {background:#E5ECF9;}
+tr.odd td {background:#ffc}
 tfoot {font-style:italic;}
-caption {background:#eee;}
+caption {background:#066;color:#fff;padding-left:5px;font-weight:bold;}
 .small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}
 .large {font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;}
 .hide {display:none;}

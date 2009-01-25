@@ -11,15 +11,16 @@ Find:<br/>
 <% form_tag(grading_students_path, :method => :put) do %>
   <%= error_messages_for :object => @students %>
 <table border=1 id="students">
+  <tr><td class="separator" colspan=4">All Students</td></tr>
   <tr>
     <th>Name</th>
     <th>Test Score</th>
     <th>School Name</th>
     <th>Level</th>
   </tr>
-  <%- for student in @students -%>
+  <%- @students.each_with_index do |student, i| -%>
     <%- fields_for("students[#{student.id}]", student) do |sf| -%>
-      <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>">
+      <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>" class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
         <td><%= sf.label :test_score, h(student.first_name + " " + student.last_name) %></td>
         <td><%= sf.text_field :test_score, :size => 4 %></td>
         <td><%= h(student.school.name) %></td>

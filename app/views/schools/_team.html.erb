@@ -3,7 +3,7 @@
 </p>
 <%= f.hidden_field :level %>
 <%= small_errors(team.students) %>
-<table id="<%= team.level.downcase.pluralize %>">
+<table id="<%= team.level.downcase.pluralize %>" border=0>
   <caption>
     Students (<%= team.students.size %>/15)
   </caption>

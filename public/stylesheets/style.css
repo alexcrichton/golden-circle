@@ -199,10 +199,12 @@ ul#topnav li:hover {
 }
 
 td.separator {
-  background: #ccc;
+  background: #066;
   font-weight: bold;
   text-align: center;
   font-size: 13px;
+  color: white;
+  border-width: 0;
   border-top: 15px solid #fff;
 }
 
