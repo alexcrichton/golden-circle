@@ -1,4 +1,15 @@
-<tr class="<%= school_counter % 2 == 0 ? 'even' : 'odd' %>">
+<tr><td class="separator" colspan="7"><%= title %></td></tr>
+<tr>
+  <th>School name</th>
+  <th>Contact email</th>
+  <th>Enrollment</th>
+  <th>Apprentice Count</th>
+  <th>Wizard Count</th>
+  <th>Student Count</th>
+  <th></th>
+</tr>
+<%- schools.each_with_index do |school, i| -%>
+<tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
   <td><%= link_to(h(school.name), school) %></td>
   <td><%= mail_to(school.email) %></td>
   <td class="num"><%=h school.enrollment %></td>
@@ -11,3 +22,4 @@
     <%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %>
   </td>
 </tr>
+<%- end -%>

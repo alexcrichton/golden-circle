@@ -14,7 +14,7 @@
     <th>Small Schools</th>
     <th>Total</th>
   </tr>
-  <tr class="even">
+  <tr class="odd">
     <th>School Count:</th>
     <td class="num"><%= @large_schools.size %></td>
     <td class="num"><%= @small_schools.size %></td>
@@ -31,21 +31,9 @@
 </table>
 
 <table border=1>
-  <tr><td class="separator" colspan="7">Large Schools</td></tr>
-  <tr>
-    <th>School name</th>
-    <th>Contact email</th>
-    <th>Enrollment</th>
-    <th>Apprentice Count</th>
-    <th>Wizard Count</th>
-    <th>Student Count</th>
-    <th></th>
-  </tr>
-  <%= render :partial => 'school', :collection => @large_schools %>
-  <tr><td class="separator" colspan="7">Small Schools</td></tr>
-  <%= render :partial => 'school', :collection => @small_schools %>
-  <tr><td class="separator" colspan="7">Unlisted Enrollments</td></tr>
-  <%= render :partial => 'school', :collection => @unknown %>
+  <%= render :partial => 'schools', :locals => {:title => 'Large Schools', :schools => @large_schools} %>
+  <%= render :partial => 'schools', :locals => {:title => 'Small Schools', :schools => @small_schools} %>
+  <%= render :partial => 'schools', :locals => {:title => 'Unlisted Enrollments', :schools => @unknown} %>
 </table>
 
 <table border=1 style="width:50%">
@@ -54,10 +42,10 @@
     <th>Name</th>
     <th>School</th>
   </tr>
-  <% for i in 0...@proctors.length %>
+  <% @proctors.each_with_index do |proctor, i| %>
     <tr class="<%= i % 2 == 0 ? 'odd' : 'even' %>">
-      <td><%= @proctors[i].name %></td>
-      <td><%= @proctors[i].school.name %></td>
+      <td><%= proctor.name %></td>
+      <td><%= proctor.school.name %></td>
     </tr>
   <% end %>
 </table>

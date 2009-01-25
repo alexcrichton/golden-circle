@@ -1,6 +1,6 @@
 <h1>Editing Team Scores</h1>
 
-<%= javascript_include_tag 'auto', 'notifychange' %>
+<%= javascript_include_tag 'filter', 'notifychange' %>
 <script type="text/javascript">window.onload = function(){ watch();filter("teams", "search", "tr"); };</script>
 
 Find:<br/>
@@ -10,8 +10,8 @@ Find:<br/>
 
 <% form_tag(grading_teams_path, :method => :put) do %>
   <%= error_messages_for :object => @teams %>
-<table border=1 id="teams">
-  <tr><td class="separator" colspan=4">All Teams</td></tr>
+<table id="teams">
+  <tr><td class="separator" colspan=4>All Teams</td></tr>
   <tr>
     <th>School Name</th>
     <th>Level</th>

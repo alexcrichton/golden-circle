@@ -8,8 +8,9 @@
     <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
     <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
     <%= stylesheet_link_tag "style.css", :media =>"screen" %>
+    <%= javascript_include_tag 'application' %>
   </head>
-  <body>
+  <body onLoad="focusFirstInput()">
     <div class="header">
       <a href="/"><%= image_tag "logo.png", :id=>"logo", :alt=>"Golden Circle" %></a>
       <%= render :partial => 'layouts/login_links' %>
