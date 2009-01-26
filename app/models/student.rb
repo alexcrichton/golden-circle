@@ -9,7 +9,7 @@ class Student < ActiveRecord::Base
                             :only_integer => true,
                             :less_than_or_equal_to => 25,
                             :greater_than_or_equal_to => 0,
-                            :if => :score_not_nil?
+                            :allow_nil => true
   
   attr_protected :test_score
   
@@ -34,10 +34,6 @@ class Student < ActiveRecord::Base
     # without self, doesn't work for some reason...
     self.first_name = self.first_name.strip if self.first_name
     self.last_name = self.last_name.strip if self.last_name
-  end
-  
-  def score_not_nil?
-    !test_score.nil?
   end
   
 end

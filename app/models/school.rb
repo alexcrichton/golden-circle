@@ -65,7 +65,7 @@ class School < ActiveRecord::Base
   end
   
   def school_score
-    teams.map { |t| t.team_score }.sum
+    teams.map(&:team_score).sum
   end
   
   private
