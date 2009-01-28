@@ -81,5 +81,5 @@ ActionMailer::Base.smtp_settings = {
    :domain => "gmail.com",
    :authentication => :login,
    :user_name => "golden.circle.contest",
-   :password => "PASSWORDHERE",
+   :password => "newtonphi",
 }

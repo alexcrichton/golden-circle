@@ -16,14 +16,14 @@ to ensure that it is accurate. The following is what is currently saved in our d
   <b>9th grade school enrollment:</b> <%= @school.enrollment %> (needed to classify the school as large or small)
 </p>
 <h2>Apprentice Team</h2>
-<%= @school.apprentice_team.students.size %>/15 Students Registered
+<%= @school.apprentice_team.students.size %> out of 15 max Students Registered
 <ol>
   <% for student in @school.apprentice_team.students %>
     <li><%= student.first_name + " " + student.last_name %></li>
   <% end %>
 </ol>
 <h2>Wizard Team</h2>
-<%= @school.wizard_team.students.size %>/15 Students Registered
+<%= @school.wizard_team.students.size %> out of 15 max Students Registered
 <ol>
   <% for student in @school.wizard_team.students %>
     <li><%= student.first_name + " " + student.last_name %></li>
