@@ -1,12 +1,12 @@
 class GradingController < ApplicationController
-  
+
   before_filter :is_admin?
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
-  
+
   def teams
   end
-  
+
   def update_teams
     params[:teams] ||= {}
     params[:teams].each_pair do |i, v|
@@ -16,10 +16,10 @@ class GradingController < ApplicationController
     end
     render :action => 'teams'
   end
-  
+
   def students
   end
-  
+
   def update_students
     params[:students] ||= {}
     params[:students].each_pair do |i, v|
@@ -29,33 +29,34 @@ class GradingController < ApplicationController
     end
     render :action => 'students'
   end
-  
+
   def statistics
     @sort = {:level => Student::WIZARD, :class => 'Large'}
     @sort[:level] = params[:level] if params[:level]
     @sort[:class] = params[:class] if params[:class]
-    
+
     @schools = School.send("#{@sort[:class].downcase}_schools", :include => [:teams, :students]).sort_by(&:school_score).reverse
     @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database when the school of the team is referenced
-    
-    @teams = @schools.map(&:teams).flatten.select{ |t| t.level == @sort[:level] }.sort_by(&:team_score).reverse 
+
+    @teams = @schools.map(&:teams).flatten.select{ |t| t.level == @sort[:level] }.sort_by(&:team_score).reverse
     @teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database when the team of the student is referenced
-    
+
     @students = @teams.map(&:students).flatten.sort_by { |s| s.test_score || 0 }.reverse
-      
+
     @teams_rank = rank(@teams, :team_score)
     @schools_rank = rank(@schools, :school_score)
     @students_rank = rank(@students, :test_score)
   end
-  
+
   protected
+
   def is_admin?
     if current_school.nil? || !current_school.admin
       flash[:error] = "Sorry, but you don't have access to here"
       redirect_to root_path
     end
   end
-  
+
   def rank(collection, method)
     rank = Array.new(collection.size)
     rank[0] = 1
@@ -71,17 +72,17 @@ class GradingController < ApplicationController
     end
     rank
   end
-  
+
   def load_students
     @student_hash = {}
     @students = Student.find(:all, :order => 'last_name ASC, first_name ASC', :include => {:team => :school})
     @students.each { |s| @student_hash[s.id] = s }
   end
-  
+
   def load_teams
     @team_hash = {}
     @teams = Team.find(:all, :include => [:school])
-    @teams.each { |t| @team_hash[t.id] = t} 
+    @teams.each { |t| @team_hash[t.id] = t}
   end
-  
+
 end
