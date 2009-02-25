@@ -12,3 +12,9 @@
     <%= javascript_include_tag 'application' %>
   </head>
   <body onLoad="focusFirstInput()">
+    <div class="header">
+      <a href="/"><%= image_tag "logo.png", :id=>"logo", :alt=>"Golden Circle" %></a>
+      <%= render :partial => 'layouts/login_links' %>
+      <%= render :partial => 'layouts/topnav' %>
+    </div>
+

@@ -31,9 +31,9 @@ class SchoolsController < ApplicationController
   
   # GET /schools/1/print
   def print
-    @team = @school.teams.detect { |t| t.level.downcase == params[:level].downcase }
+    @team = @school.send("#{params[:level].downcase}_team")
     respond_to do |format|
-      format.html { render :action => 'print', :layout => 'print'}
+      format.html { render :action => 'print', :layout => 'admin'}
     end
   end
   
