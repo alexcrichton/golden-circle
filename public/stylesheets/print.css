@@ -1,0 +1,11 @@
+body {
+  background: inherit;
+}
+
+.container {
+  border-right: 0;
+}
+
+#footer {
+  display: none;
+}

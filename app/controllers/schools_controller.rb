@@ -33,7 +33,7 @@ class SchoolsController < ApplicationController
   def print
     @team = @school.teams.detect { |t| t.level.downcase == params[:level].downcase }
     respond_to do |format|
-      format.html { render :action => 'print', :layout => 'admin'}
+      format.html { render :action => 'print', :layout => 'print'}
     end
   end
   

@@ -77,7 +77,7 @@ class School < ActiveRecord::Base
     end
   end
 
-  def strip_name
+  def strip_name    
     # need selfs here or otherwise won't work. god knows why...
     self.name = self.name.strip if self.name
   end
