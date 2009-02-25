@@ -34,11 +34,14 @@ class GradingController < ApplicationController
     params[:level] ||= Student::WIZARD
     params[:class] ||= 'Large'
 
-    @schools = School.send("#{params[:class].downcase}_schools", :include => [:teams, :students]).sort_by(&:school_score).reverse
+    @schools = School.send("#{params[:class].downcase}_schools", :include => {:teams => :students}).sort_by(&:school_score).reverse
     @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
 
-    @teams = @schools.map(&:teams).flatten.select{ |t| t.level == params[:level] }.sort_by(&:team_score).reverse
-    @teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database
+    @teams = @schools.map(&:teams).flatten.select{ |t| t.level == params[:level] && t.students_count > 0 }.sort_by(&:team_score).reverse
+    # TODO: This statement prevents extra queries, b/c the eager loading doesn't set the associations backwards
+    # problem, though, is that this screws w/ the counter cache and takes longer, so isn't as simple as the
+    # one above...
+    #@teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database
 
     @students = @teams.map(&:students).flatten.sort_by { |s| s.test_score || 0 }.reverse
 
@@ -76,7 +79,7 @@ class GradingController < ApplicationController
     @student_hash = {}
     @team = Team.find(params[:team_id], :include => [:students, :school])
     @students = @team.students
-    @students.each { |s| @student_hash[s.id] = s; s.team = @team } # second part prevents extra SQL queries
+    @students.each { |s| @student_hash[s.id] = s }
   end
 
   def load_teams

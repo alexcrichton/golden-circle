@@ -9,7 +9,15 @@
     <th>Wizard Score</th>
     <th>Sweepstakes Score</th>
   </tr>
-  <%= render :partial => 'school_stat', :collection => @schools %>
+  <%- @schools.each_with_index do |school, i| -%>
+  <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+    <td class="num"><%= @schools_rank[i] %></td>
+    <td><%= h(school.name) %></td>
+    <td class="num"><%= school.apprentice_team.team_score %></td>
+    <td class="num"><%= school.wizard_team.team_score %></td>
+    <td class="num"><%= school.school_score %></td>
+  </tr>
+  <%- end -%>
 </table>
 <table>
   <tr><td colspan=5 class="separator"><%= params[:class] %> School <%= params[:level] %> Team Results</td></tr>
@@ -20,7 +28,15 @@
     <th>Test Score</th>
     <th>Total Score</th>
   </tr>
-  <%= render :partial => 'team_stat', :collection => @teams %>
+  <%- @teams.each_with_index do |team, i| -%>
+  <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+    <td class="num"><%= @teams_rank[i] %></td>
+    <td><%= h(team.school.name) %></td>
+    <td class="num"><%= team.student_score_sum %></td>
+    <td class="num"><%= team.team_test_score %></td>
+    <td class="num"><%= team.team_score %></td>
+  </tr>
+  <%- end -%>
 </table>
 <table>
   <tr><td colspan=5 class="separator"><%= params[:class] %> School Individual <%= params[:level] %> Results</td></tr>
@@ -30,5 +46,12 @@
     <th colspan=2>School</th>
     <th>Score</th>
   </tr>
-  <%= render :partial => 'student_stat', :collection => @students %>
+  <%- @students.each_with_index do |student, i| -%>
+  <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+    <td class="num"><%= @students_rank[i] %></td>
+    <td><%= h(student.first_name + " " + student.last_name) %></td>
+    <td colspan=2><%= student.school.name %></td>
+    <td class="num"><%= student.test_score %></td>
+  </tr>
+  <%- end -%>
 </table>

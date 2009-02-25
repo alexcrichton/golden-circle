@@ -23,8 +23,8 @@ Find:<br/>
       <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>" class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
         <td><%= sf.label :test_score, h(student.first_name + " " + student.last_name) %></td>
         <td><%= sf.text_field :test_score, :size => 4 %></td>
-        <td><%=h student.school.name %></td>
-        <td><%=h student.team.level %></td>
+        <td><%=h @team.school.name %></td>
+        <td><%=h @team.level %></td>
       </tr>
     <%- end -%>
   <%- end -%>

@@ -13,7 +13,7 @@ class Team < ActiveRecord::Base
   validates_size_of :students, :maximum => 15, :message => "have a maximum of 15 allowed"
   validates_numericality_of :test_score,
                             :only_integer => true,
-                            :less_than_or_equal_to => 20,
+                            :less_than_or_equal_to => 30,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
   attr_protected :test_score
