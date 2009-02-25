@@ -74,9 +74,6 @@ class GradingController < ApplicationController
 
   def load_students
     @student_hash = {}
-    #schools = School.find(:all, :order => 'name ASC', :include => {:teams => :students})
-    #@students = Student.find(:all, :order => 'last_name ASC, first_name ASC', :include => {:team => :school})
-    #@students = schools.map { |s| s.send("#{params[:level].downcase}_team").students }.flatten
     @team = Team.find(params[:team_id], :include => [:students, :school])
     @students = @team.students
     @students.each { |s| @student_hash[s.id] = s; s.team = @team } # second part prevents extra SQL

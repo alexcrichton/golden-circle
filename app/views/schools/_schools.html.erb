@@ -7,7 +7,7 @@
   <th>Apprentice Count</th>
   <th>Wizard Count</th>
   <th>Student Count</th>
-  <th>&nbsp;</th>
+  <th>Actions</th>
 </tr>
 <%- schools.each_with_index do |school, i| -%>
 <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
@@ -18,8 +18,8 @@
   <td class="num"><%= student_count(school, Student::WIZARD) %></td>
   <td class="num"><%= student_count(school, :all) %></td>
   <td>
-    <%= link_to 'Print App', print_school_path(school, :level => Student::APPRENTICE) %> |
-    <%= link_to 'Print Wiz', print_school_path(school, :level => Student::WIZARD) %> |
+    <%= link_to 'App', print_school_path(school, :level => Student::APPRENTICE) %> |
+    <%= link_to 'Wiz', print_school_path(school, :level => Student::WIZARD) %> |
     <%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %>
   </td>
 </tr>
