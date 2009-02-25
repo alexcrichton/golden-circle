@@ -13,3 +13,13 @@ body {
 #footer {
   display: none;
 }
+
+#right {
+  display: none;
+  visibility: collapse;
+}
+
+div.main {
+  border-right: 0;
+  width: 100%;
+}

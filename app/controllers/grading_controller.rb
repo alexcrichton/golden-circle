@@ -1,6 +1,6 @@
 class GradingController < ApplicationController
 
-  before_filter :is_admin?
+  before_filter :is_admin?#, :except => [:statistics] # uncomment after tournament to let everyone see statistics
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
 
@@ -31,14 +31,13 @@ class GradingController < ApplicationController
   end
 
   def statistics
-    @sort = {:level => Student::WIZARD, :class => 'Large'}
-    @sort[:level] = params[:level] if params[:level]
-    @sort[:class] = params[:class] if params[:class]
+    params[:level] ||= Student::WIZARD
+    params[:class] ||= 'Large'
 
-    @schools = School.send("#{@sort[:class].downcase}_schools", :include => [:teams, :students]).sort_by(&:school_score).reverse
+    @schools = School.send("#{params[:class].downcase}_schools", :include => [:teams, :students]).sort_by(&:school_score).reverse
     @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database when the school of the team is referenced
 
-    @teams = @schools.map(&:teams).flatten.select{ |t| t.level == @sort[:level] }.sort_by(&:team_score).reverse
+    @teams = @schools.map(&:teams).flatten.select{ |t| t.level == params[:level] }.sort_by(&:team_score).reverse
     @teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database when the team of the student is referenced
 
     @students = @teams.map(&:students).flatten.sort_by { |s| s.test_score || 0 }.reverse

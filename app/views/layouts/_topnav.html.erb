@@ -3,6 +3,6 @@
   <li><%= link_to 'Register', new_school_path %></li>
   <% if current_school && current_school.admin %>
     <li><%= link_to 'Roster', schools_path %></li>
-    <li><%= link_to 'Scoring', statistics_path %></li>
+    <li><%= link_to 'Statistics', statistics_path %></li>
   <% end %>
 </ul>
