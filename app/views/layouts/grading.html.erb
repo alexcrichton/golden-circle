@@ -3,9 +3,9 @@
 <div class="container">
   <div class="span-24 last" id="page">
     <div class="span-17 main">
-      
+
       <%= render :partial => 'layouts/flash_messages' %>
-      
+
       <%= yield %>
 
     </div>
@@ -14,7 +14,7 @@
         <legend>Statistics</legend>
         <%- form_tag statistics_path do -%>
           <%= label_tag :level, 'Division:' %>
-          <%= select_tag :level, options_for_select([Student::APPRENTICE, Student::WIZARD]), :selected => (@sort ? @sort[:level] : "" ) %><br/>
+          <%= select_tag :level, options_for_select([Student::WIZARD, Student::APPRENTICE]) %><br/>
           <%= label_tag :class, 'School Size:' %>
           <%= select_tag :class, options_for_select(['Large', 'Small']) %>
           <%= submit_tag "Calculate" %>
