@@ -35,10 +35,10 @@ class GradingController < ApplicationController
     params[:class] ||= 'Large'
 
     @schools = School.send("#{params[:class].downcase}_schools", :include => [:teams, :students]).sort_by(&:school_score).reverse
-    @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database when the school of the team is referenced
+    @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
 
     @teams = @schools.map(&:teams).flatten.select{ |t| t.level == params[:level] }.sort_by(&:team_score).reverse
-    @teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database when the team of the student is referenced
+    @teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database
 
     @students = @teams.map(&:students).flatten.sort_by { |s| s.test_score || 0 }.reverse
 
@@ -76,12 +76,12 @@ class GradingController < ApplicationController
     @student_hash = {}
     @team = Team.find(params[:team_id], :include => [:students, :school])
     @students = @team.students
-    @students.each { |s| @student_hash[s.id] = s; s.team = @team } # second part prevents extra SQL
+    @students.each { |s| @student_hash[s.id] = s; s.team = @team } # second part prevents extra SQL queries
   end
 
   def load_teams
     @team_hash = {}
-    @teams = Team.find(:all, :include => [:school], :conditions => {:level => params[:level]})
+    @teams = Team.find(:all, :include => [:school], :conditions => ['level = ? AND students_count > ?', params[:level], 0])
     @teams.each { |t| @team_hash[t.id] = t}
   end
 

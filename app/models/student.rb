@@ -13,7 +13,7 @@ class Student < ActiveRecord::Base
 
   attr_protected :test_score
 
-  belongs_to :team
+  belongs_to :team, :counter_cache => true
 
   before_save :strip_names
 
