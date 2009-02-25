@@ -82,6 +82,7 @@ class GradingController < ApplicationController
   def load_teams
     @team_hash = {}
     @teams = Team.find(:all, :include => [:school], :conditions => ['level = ? AND students_count > ?', params[:level], 0])
+    @teams = @teams.sort_by{ |t| t.school.name }
     @teams.each { |t| @team_hash[t.id] = t}
   end
 
