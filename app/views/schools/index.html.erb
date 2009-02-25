@@ -1,8 +1,10 @@
 <fieldset style="float:left;width:40%;margin-right:20px;">
   <h1>School Index</h1>
-  <hr/>
+
+  <hr />
   <% form_tag email_path, :method => :put do %>
-    The following button will send a confirmation email to all schools so they might validate the information they have submitted.
+    The following button will send a confirmation email to all schools so they might validate the information they have
+    submitted.
     <%= submit_tag 'Send Email Notification', :confirm => "Are you sure?\nThis will email all schools!" %>
   <% end %>
 </fieldset>
@@ -25,11 +27,11 @@
       <th><%= level == :all ? 'Total Student' : level %> Count:</th>
       <td class="num"><%= student_count(@large_schools, level) %></td>
       <td class="num"><%= student_count(@small_schools, level) %></td>
-      <td class="num"><b><%= student_count(@schools, level) %></b></td>
+      <td class="num"><span style="font-weight:bold"><%= student_count(@schools, level) %></span></td>
     </tr>
   <% end %>
 </table>
-<hr/>
+<hr />
 <%= render :partial => 'schools', :locals => {:title => 'Large Schools', :schools => @large_schools} %>
 <%= render :partial => 'schools', :locals => {:title => 'Small Schools', :schools => @small_schools} %>
 <%= render :partial => 'schools', :locals => {:title => 'Unlisted Enrollments', :schools => @unknown} %>

@@ -3,7 +3,7 @@
 
 <% form_for(@school) do |f| %>
   <%= f.error_messages %>
-  
+
   <div class="clearfix">
     <div class="span-9">
       <fieldset>
@@ -12,6 +12,7 @@
           <%= f.label :name %><br />
           <%= f.text_field :name %>
         </p>
+
         <p>
           <%= f.label :enrollment, '9th grade school enrollment' %><br />
           <%= f.text_field :enrollment, :size => 4 %>
@@ -19,9 +20,11 @@
       </fieldset>
     </div>
     <div class="span-7 payment">
-      The amount due for this team is <font color="green"><b><%= number_to_currency @school.cost %></b></font>. Please bring the check payable to GT Education to the registration table March 3rd.
+      The amount due for this team is
+      <span style="color:green;font-weight:bold;"><%= number_to_currency @school.cost %></span>. Please
+      bring the check payable to GT Education to the registration table March 3rd.
     </div>
-    <hr/>
+    <hr />
     <div class="span-8 colborder">
       <fieldset>
         <legend>School Contact</legend>
@@ -29,21 +32,22 @@
           <%= f.label :contact_name, "Name" %><br />
           <%= f.text_field :contact_name %>
         </p>
+
         <p>
           <%= f.label :email %><br />
           <%= f.text_field :email %>
         </p>
-          <fieldset id="school_phone">
-            <legend>Phone</legend>
-            <% f.fields_for :phone, @school.phone do |pf| %>
-              <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
-              <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
-              <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
-            <% end %>
-          </fieldset>
+        <fieldset id="school_phone">
+          <legend>Phone</legend>
+          <% f.fields_for :phone, @school.phone do |pf| %>
+            <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
+            <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
+            <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
+          <% end %>
+        </fieldset>
       </fieldset>
     </div>
-    
+
     <div class="span-8 last">
       <%= small_errors(@school.proctors) %>
       <fieldset id="proctors">
@@ -53,7 +57,7 @@
       </fieldset>
     </div>
   </div>
-  
+
   <div>
     <h3 style="font-weight:bold;text-align:center">Teams</h3>
     <%= small_errors(@school.teams) %>
@@ -64,14 +68,14 @@
       <%= f.render_associated_form(@school.teams[1]) %>
     </div>
   </div>
-  
-  <hr/>
-  
+
+  <hr />
+
   <p id="strong">
-    Press this button to save the form!<br/>
+    Press this button to save the form!<br />
     <%= f.submit "Save Changes", :onclick => "closeOk()" %>
   </p>
-  
+
 <% end %>
 
 

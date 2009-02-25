@@ -1,10 +1,10 @@
 <h2>Create a school</h2>
 <% form_for @school, :url => schools_path, :html => {:method => :post} do |f| %>
-  
+
   <%= render :partial => 'schools/form', :locals => {:f => f} %>
-  
+
   <%= f.submit "Register School" %>
-  
+
 <% end %>
-<br/>
+<br />
 <%= link_to 'Back Home', root_path %>

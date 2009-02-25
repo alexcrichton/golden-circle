@@ -3,31 +3,33 @@
 <script type="text/javascript">window.onload = function(){ watch();filter("students", "search", "tr"); };</script>
 
 
-Find:<br/>
+Find:<br />
 <input name="search" type="text" autocomplete="off">
-<br/>
+<br />
 
-<hr/>
+<hr />
 <% form_tag(grading_students_path(:team_id => @team.id), :method => :put) do %>
   <%= error_messages_for :object => @students %>
-<table border=1 id="students">
-  <tr><td class="separator" colspan="4">All <%= @team.level %> Students of <%= @team.school.name %></td></tr>
-  <tr>
-    <th>Name</th>
-    <th>Test Score</th>
-    <th>School Name</th>
-    <th>Level</th>
-  </tr>
-  <%- @students.each_with_index do |student, i| -%>
-    <%- fields_for("students[#{student.id}]", student) do |sf| -%>
-      <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>" class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
-        <td><%= sf.label :test_score, h(student.first_name + " " + student.last_name) %></td>
-        <td><%= sf.text_field :test_score, :size => 4 %></td>
-        <td><%=h @team.school.name %></td>
-        <td><%=h @team.level %></td>
-      </tr>
+  <table border=1 id="students">
+    <tr>
+      <td class="separator" colspan="4">All <%= @team.level %> Students of <%= @team.school.name %></td>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>Test Score</th>
+      <th>School Name</th>
+      <th>Level</th>
+    </tr>
+    <%- @students.each_with_index do |student, i| -%>
+      <%- fields_for("students[#{student.id}]", student) do |sf| -%>
+        <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>" class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+          <td><%= sf.label :test_score, h(student.first_name + " " + student.last_name) %></td>
+          <td><%= sf.text_field :test_score, :size => 4 %></td>
+          <td><%= h @team.school.name %></td>
+          <td><%= h @team.level %></td>
+        </tr>
+      <%- end -%>
     <%- end -%>
-  <%- end -%>
-</table>
-<%= submit_tag "Submit Changes", :onclick => "closeOk()" %>
+  </table>
+  <%= submit_tag "Submit Changes", :onclick => "closeOk()" %>
 <% end %>

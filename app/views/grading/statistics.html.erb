@@ -1,7 +1,9 @@
 <h1><%= params[:class] %> Schools - <%= params[:level] %> Division</h1>
 
 <table>
-  <tr><td colspan=5 class="separator"><%= params[:class] %> School Sweepstakes</td></tr>
+  <tr>
+    <td colspan=5 class="separator"><%= params[:class] %> School Sweepstakes</td>
+  </tr>
   <tr>
     <th width=40>Rank</th>
     <th>Name</th>
@@ -10,17 +12,19 @@
     <th>Sweepstakes Score</th>
   </tr>
   <%- @schools.each_with_index do |school, i| -%>
-  <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
-    <td class="num"><%= @schools_rank[i] %></td>
-    <td><%= h(school.name) %></td>
-    <td class="num"><%= school.apprentice_team.team_score %></td>
-    <td class="num"><%= school.wizard_team.team_score %></td>
-    <td class="num"><%= school.school_score %></td>
-  </tr>
+    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+      <td class="num"><%= @schools_rank[i] %></td>
+      <td><%= h(school.name) %></td>
+      <td class="num"><%= school.apprentice_team.team_score %></td>
+      <td class="num"><%= school.wizard_team.team_score %></td>
+      <td class="num"><%= school.school_score %></td>
+    </tr>
   <%- end -%>
 </table>
 <table>
-  <tr><td colspan=5 class="separator"><%= params[:class] %> School <%= params[:level] %> Team Results</td></tr>
+  <tr>
+    <td colspan=5 class="separator"><%= params[:class] %> School <%= params[:level] %> Team Results</td>
+  </tr>
   <tr>
     <th width=40>Rank</th>
     <th>School Name</th>
@@ -29,17 +33,19 @@
     <th>Total Score</th>
   </tr>
   <%- @teams.each_with_index do |team, i| -%>
-  <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
-    <td class="num"><%= @teams_rank[i] %></td>
-    <td><%= h(team.school.name) %></td>
-    <td class="num"><%= team.student_score_sum %></td>
-    <td class="num"><%= team.team_test_score %></td>
-    <td class="num"><%= team.team_score %></td>
-  </tr>
+    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+      <td class="num"><%= @teams_rank[i] %></td>
+      <td><%= h(team.school.name) %></td>
+      <td class="num"><%= team.student_score_sum %></td>
+      <td class="num"><%= team.team_test_score %></td>
+      <td class="num"><%= team.team_score %></td>
+    </tr>
   <%- end -%>
 </table>
 <table>
-  <tr><td colspan=5 class="separator"><%= params[:class] %> School Individual <%= params[:level] %> Results</td></tr>
+  <tr>
+    <td colspan=5 class="separator"><%= params[:class] %> School Individual <%= params[:level] %> Results</td>
+  </tr>
   <tr>
     <th width=40>Rank</th>
     <th>Name</th>
@@ -47,11 +53,11 @@
     <th>Score</th>
   </tr>
   <%- @students.each_with_index do |student, i| -%>
-  <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
-    <td class="num"><%= @students_rank[i] %></td>
-    <td><%= h(student.first_name + " " + student.last_name) %></td>
-    <td colspan=2><%= student.school.name %></td>
-    <td class="num"><%= student.test_score %></td>
-  </tr>
+    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+      <td class="num"><%= @students_rank[i] %></td>
+      <td><%= h(student.first_name + " " + student.last_name) %></td>
+      <td colspan=2><%= student.school.name %></td>
+      <td class="num"><%= student.test_score %></td>
+    </tr>
   <%- end -%>
 </table>
