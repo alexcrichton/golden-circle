@@ -64,11 +64,11 @@ class GradingController < ApplicationController
     rank[0] = 1
     size = 0;
     for i in 1...collection.size
+      rank[i] = rank[i -1];
       if collection[i].send(method) == collection[i - 1].send(method)
-        size = size + 1
-        rank[i] = rank[i - 1];
+        size += 1
       else
-        rank[i] = rank[i - 1] + size + 1
+        rank[i] += size + 1
         size = 0
       end
     end
@@ -84,8 +84,10 @@ class GradingController < ApplicationController
 
   def load_teams
     @team_hash = {}
-    @teams = Team.find(:all, :include => [:school], :conditions => ['level = ? AND students_count > ?', params[:level], 0])
-    @teams = @teams.sort_by{ |t| t.school.name }
+    @teams = Team.find(:all,
+                       :include => [:school],
+                       :conditions => ['level = ? AND students_count > ?', params[:level], 0],
+                       :order => "schools.name ASC")
     @teams.each { |t| @team_hash[t.id] = t}
   end
 
