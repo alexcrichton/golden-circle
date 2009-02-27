@@ -112,17 +112,17 @@ describe SchoolsController do
     end
 
     it "should succeed" do
-      @controller.should_receive(:is_owner?).and_return(true)
+      @controller.should_receive(:require_owner)
       School.stub!(:find).and_return(mock_school)
       get :show, :id => "1"
       response.should be_success
     end
 
-    it "should render the 'show' template" do
-      @controller.should_receive(:is_owner?).and_return(true)
+    it "should render the 'edit' template" do
+      @controller.should_receive(:require_owner)
       School.stub!(:find).and_return(mock_school)
       get :show, :id => "1"
-      response.should render_template('show')
+      response.should render_template('edit')
     end
 
     it "should find the requested school" do
@@ -176,21 +176,21 @@ describe SchoolsController do
 
       it "should update the found school" do
         School.stub!(:find).and_return(mock_school)
-        @controller.stub!(:is_owner?).and_return(true)
+        @controller.should_receive(:require_owner)
         mock_school.should_receive(:update_attributes)
         put :update, :id => "1", :school => {'these' => 'params'}
       end
 
       it "should assign the found school to the view" do
         School.stub!(:find).and_return(mock_school)
-        @controller.stub!(:is_owner?).and_return(true)
+        @controller.should_receive(:require_owner)
         put :update, :id => "1"
         assigns(:school).should equal(mock_school)
       end
 
       it "should redirect to the school" do
         School.stub!(:find).and_return(mock_school)
-        @controller.stub!(:is_owner?).and_return(true)
+        @controller.should_receive(:require_owner)
         put :update, :id => "1"
         response.should redirect_to(school_url(mock_school))
       end
@@ -198,7 +198,7 @@ describe SchoolsController do
       it "should display a flash message" do
         School.stub!(:find).and_return(mock_school)
         mock_school.should_receive(:update_attributes).and_return(true)
-        @controller.stub!(:is_owner?).and_return(true)
+        @controller.should_receive(:require_owner)
         put :update, :id => "1"
         response.flash[:notice].should_not be_nil
       end

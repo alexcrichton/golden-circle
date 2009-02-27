@@ -34,10 +34,14 @@
         </p>
 
         <p>
-          <%= f.label :email %><br />
+          <%= f.label :email %>
+          <%- if current_school && current_school.id == @school.id -%>
+            <%= link_to '[Change Password]', current_password_resets_path %>
+          <%- end -%>
+          <br />
           <%= f.text_field :email %>
         </p>
-        <fieldset id="school_phone">
+        <fieldset>
           <legend>Phone</legend>
           <% f.fields_for :phone, @school.phone do |pf| %>
             <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;

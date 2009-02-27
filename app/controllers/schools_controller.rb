@@ -1,11 +1,10 @@
 class SchoolsController < ApplicationController
 
   before_filter :load_school
-  before_filter :is_owner?, :only => [:update, :show, :destroy]
-  before_filter :is_admin?, :only => [:index, :print, :email]
+  before_filter :require_school, :only => [:show_current]
+  before_filter :require_owner, :only => [:update, :edit, :destroy, :show]
+  before_filter :require_admin, :only => [:index, :print, :email]
 
-  # GET /schools
-  # GET /schools.xml
   def index
     @schools = School.find(:all, :include => [:proctors, :teams, :students], :order => 'name ASC')
     @large_schools = []
@@ -23,18 +22,12 @@ class SchoolsController < ApplicationController
     end
     @proctors = @schools.collect{ |s| s.proctors }.flatten
 
-    respond_to do |format|
-      format.html { render :action => 'index', :layout => 'admin' }
-      format.xml  { render :xml => @schools }
-    end
+    render :layout => 'admin'
   end
 
-  # GET /schools/1/print
   def print
     @team = @school.send("#{params[:level].downcase}_team")
-    respond_to do |format|
-      format.html { render :action => 'print', :layout => 'admin'}
-    end
+    render :layout => 'admin'
   end
 
   def email
@@ -43,46 +36,34 @@ class SchoolsController < ApplicationController
     redirect_to schools_path
   end
 
-  # GET /schools/1
-  # GET /schools/1.xml
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @school }
-    end
+    render :action => 'edit'
   end
 
-  # GET /schools/new
-  # GET /schools/new.xml
+  def show_current
+    @school = current_school
+    render :action => 'edit'
+  end
+
   def new
     @school = School.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @school }
-    end
   end
 
-  # POST /schools
-  # POST /schools.xml
   def create
     current_school_session.destroy if current_school_session
     @school = School.new(params[:school])
 
-    respond_to do |format|
-      if @school.save
-        flash[:notice] = 'School was successfully created.'
-        format.html { redirect_to(@school) }
-        format.xml  { render :xml => @school, :status => :created, :location => @school }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @school.errors, :status => :unprocessable_entity }
-      end
+    if @school.save
+      flash[:notice] = 'School was successfully created.'
+      redirect_to(@school)
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /schools/1
-  # PUT /schools/1.xml
+  def edit
+  end
+
   def update
     # if the forms were all cleared, we have to make sure that attribute_fu knows this and the
     # attributes= methods are called with blank hashes so all items are deleted. If this is not
@@ -95,27 +76,17 @@ class SchoolsController < ApplicationController
       params[:school][:team_attributes][key][:student_attributes] ||= {} if key.to_s.match(/^\d+$/)
     end
 
-    respond_to do |format|
-      if @school.update_attributes(params[:school])
-        flash[:notice] = 'School was successfully updated. Please review the form below, it is what was saved in the database.'
-        format.html { redirect_to(@school) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "show" }
-        format.xml  { render :xml => @school.errors, :status => :unprocessable_entity }
-      end
+    if @school.update_attributes(params[:school])
+      flash[:notice] = 'School was successfully updated. Please review the form below, it is what was saved in the database.'
+      redirect_to(@school)
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /schools/1
-  # DELETE /schools/1.xml
   def destroy
     @school.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(schools_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(schools_path)
   end
 
   protected
@@ -124,17 +95,13 @@ class SchoolsController < ApplicationController
     @school = School.find(params[:id], :include => [:teams, :students, :proctors]) if params[:id]
   end
 
-  def is_owner?
-    if current_school.nil? || @school.nil? || (@school.id != current_school.id && !current_school.admin)
-      flash[:error] = 'Access Denied'
-      redirect_to root_path
+  def require_owner
+    unless current_school && @school && (@school.id == current_school.id || current_school.admin)
+      store_location
+      flash[:notice] = "You must be logged in to access this page"
+      redirect_to login_path
+      return false
     end
   end
 
-  def is_admin?
-    if current_school.nil? || !current_school.admin?
-      flash[:error] = 'Access Denied'
-      redirect_to root_path
-    end
-  end
 end
