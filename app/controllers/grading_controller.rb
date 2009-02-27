@@ -1,6 +1,6 @@
 class GradingController < ApplicationController
 
-  before_filter :is_admin?#, :except => [:statistics] # uncomment after tournament to let everyone see statistics
+  before_filter :require_admin#, :except => [:statistics] # uncomment after tournament to let everyone see statistics
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
 
@@ -51,13 +51,6 @@ class GradingController < ApplicationController
   end
 
   protected
-
-  def is_admin?
-    if current_school.nil? || !current_school.admin
-      flash[:error] = "Sorry, but you don't have access to here"
-      redirect_to root_path
-    end
-  end
 
   def rank(collection, method)
     rank = Array.new(collection.size)

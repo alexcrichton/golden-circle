@@ -31,6 +31,11 @@ class School < ActiveRecord::Base
   after_create :add_teams
   before_save :strip_name
 
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    Notification.deliver_password_reset_instructions(self)
+  end
+
   def cost
     4 * students.size
   end
@@ -77,7 +82,7 @@ class School < ActiveRecord::Base
     end
   end
 
-  def strip_name    
+  def strip_name
     # need selfs here or otherwise won't work. god knows why...
     self.name = self.name.strip if self.name
   end
