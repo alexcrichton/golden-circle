@@ -36,8 +36,7 @@ class GradingController < ApplicationController
 
     @schools = School.send("#{params[:class].downcase}_schools", :include => {:teams => :students}).sort_by(&:school_score).reverse
     @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
-
-    @teams = @schools.map(&:teams).flatten.select{ |t| t.level == params[:level] && t.students_count > 0 }.sort_by(&:team_score).reverse
+    @teams = @schools.map(&"#{params[:level].downcase}_team".to_sym).select{ |t| t.students_count > 0 }.sort_by(&:team_score).reverse
     # TODO: This statement prevents extra queries, b/c the eager loading doesn't set the associations backwards
     # problem, though, is that this screws w/ the counter cache and takes longer, so isn't as simple as the
     # one above...

@@ -2,7 +2,7 @@
   <h1>School Index</h1>
 
   <hr />
-  <% form_tag email_path, :method => :put do %>
+  <% form_tag email_schools_path, :method => :put do %>
     The following button will send a confirmation email to all schools so they might validate the information they have
     submitted.
     <%= submit_tag 'Send Email Notification', :confirm => "Are you sure?\nThis will email all schools!" %>

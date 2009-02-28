@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :schools, :except => [:edit], :member => {:print => :get}, :collection => {:show_current => :get}
-  map.email '/email', :controller => 'schools', :action => 'email', :conditions => { :method => :put }
+  map.resources :schools, :member => {:print => :get}, :collection => {:show_current => :get, :email => :put}
 
   map.grading_teams '/grading/teams/:level', :controller => 'grading', :action => 'update_teams', :conditions => { :method => :put }
   map.grading_teams '/grading/teams/:level', :controller => 'grading', :action => 'teams'

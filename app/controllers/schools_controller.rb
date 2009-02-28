@@ -86,7 +86,7 @@ class SchoolsController < ApplicationController
 
   def destroy
     @school.destroy
-    redirect_to(schools_path)
+    redirect_to(login_path)
   end
 
   protected
