@@ -10,6 +10,10 @@ describe SchoolsController do
       route_for(:controller => "schools", :action => "new").should == "/schools/new"
     end
 
+    it "should map #edit" do
+      route_for(:controller => "schools", :action => "edit", :id => 1).should == "/schools/1/edit"
+    end
+
     it "should map #show" do
       route_for(:controller => "schools", :action => "show", :id => 1).should == "/schools/1"
     end
@@ -48,6 +52,10 @@ describe SchoolsController do
       params_from(:get, "/schools/1").should == {:controller => "schools", :action => "show", :id => "1"}
     end
 
+    it "should generate params for #edit" do
+      params_from(:get, "/schools/1/edit").should == {:controller => "schools", :action => "edit", :id => "1"}
+    end
+
     it "should generate params for #update" do
       params_from(:put, "/schools/1").should == {:controller => "schools", :action => "update", :id => "1"}
     end
@@ -57,7 +65,7 @@ describe SchoolsController do
     end
 
     it 'should generate params for #print' do
-      params_from(:get, "/schools/1/print").should == {:controller => 'schools', :action => 'print', :id => '1'}   
+      params_from(:get, "/schools/1/print").should == {:controller => 'schools', :action => 'print', :id => '1'}
     end
 
     it 'should generate params for #email' do

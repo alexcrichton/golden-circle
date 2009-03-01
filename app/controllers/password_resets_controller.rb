@@ -22,8 +22,7 @@ class PasswordResetsController < ApplicationController
   def current
     @school = current_school
     @school.reset_perishable_token!
-    params[:id] = @school.perishable_token
-    render :action => :edit
+    redirect_to edit_password_reset_path(:id => @school.perishable_token)
   end
 
   def edit
@@ -32,12 +31,11 @@ class PasswordResetsController < ApplicationController
   def update
     @school.password = params[:school][:password]
     @school.password_confirmation = params[:school][:password_confirmation]
-    @school.perishable_token = ""
     if @school.save
       flash[:notice] = "Password successfully updated"
       redirect_to @school
     else
-      render :action => :edit
+      render :action => 'edit'
     end
   end
 

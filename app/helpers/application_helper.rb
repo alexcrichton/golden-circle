@@ -23,7 +23,7 @@ module ApplicationHelper
     unless current_school && current_school.admin
       store_location
       flash[:notice] = "You must be an admin to view this page"
-      redirect_to root_path
+      redirect_to login_path
       return false
     end
   end

@@ -9,7 +9,7 @@ describe GradingController do
   describe "GET /stats" do
 
     before(:each) do
-      controller.should_receive(:require_admin).and_return(true)
+      controller.stub!(:require_admin)
     end
 
     it "should succeed" do
@@ -45,7 +45,7 @@ describe GradingController do
 
   describe "GET /grading/teams" do
     before(:each) do
-      controller.should_receive(:require_admin).and_return(true)
+      controller.stub!(:require_admin)
     end
 
     it "should succeed" do
@@ -72,7 +72,7 @@ describe GradingController do
 
   describe "GET /grading/students" do
     before(:each) do
-      controller.should_receive(:require_admin).and_return(true)
+      controller.stub!(:require_admin).and_return(true)
     end
 
     it "should succeed" do
@@ -102,15 +102,19 @@ describe GradingController do
     end
   end
 
-  describe "POST /grading/teams" do
+  describe "PUT /grading/teams" do
     before(:each) do
-      controller.should_receive(:require_admin).and_return(true)
-      Team.should_receive(:find).with(:all, {:include=>[:school], :conditions=>["level = ? AND students_count > ?", "wizard", 0], :order=>"schools.name ASC"}).and_return([mock_team])
+      controller.stub!(:require_admin)
     end
 
     it 'should succeed' do
       put :update_teams, :level => 'wizard'
       response.should be_success
+    end
+
+    it 'should find all teams with the correct parameters' do
+      Team.should_receive(:find).with(:all, {:include=>[:school], :conditions=>["level = ? AND students_count > ?", "wizard", 0], :order=>"schools.name ASC"}).and_return([mock_team])
+      put :update_teams, :level => 'wizard'
     end
 
     it 'should render the correct template' do
@@ -121,6 +125,7 @@ describe GradingController do
     describe 'with successful update' do
       before(:each) do
         mock_team.stub!(:id).and_return(1)
+        Team.stub!(:find).and_return([mock_team])
       end
 
       it 'should update the teams correctly and save them' do
@@ -131,25 +136,32 @@ describe GradingController do
     end
   end
 
-  describe "POST /grading/students/1" do
+  describe "PUT /grading/students/1" do
     before(:each) do
-      controller.should_receive(:require_admin).and_return(true)
-      Team.should_receive(:find).and_return(mock_team)
-      mock_team.stub!(:students).and_return([mock_student])
+      controller.stub!(:require_admin)
+      mock_team(:students => [mock_student])
     end
 
     it 'should succeed' do
+      Team.stub!(:find).and_return(mock_team)
       put :update_students, :team_id => '1'
       response.should be_success
     end
 
+    it 'should find the correct team' do
+      Team.should_receive(:find).with('1', :include=>[:students, :school]).and_return(mock_team)
+      put :update_students, :team_id => '1'
+    end
+
     it 'should render the correct template' do
+      Team.stub!(:find).and_return(mock_team)
       put :update_students, :team_id => '1'
       response.should render_template('students')
     end
 
     describe 'with successful update' do
       before(:each) do
+        Team.stub!(:find).and_return(mock_team)
         mock_student.stub!(:id).and_return(1)
       end
 

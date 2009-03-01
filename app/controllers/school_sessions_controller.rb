@@ -1,5 +1,7 @@
 class SchoolSessionsController < ApplicationController
 
+  before_filter :require_school, :only => [:destroy]
+
   def new
     @school_session = SchoolSession.new
   end
@@ -18,8 +20,7 @@ class SchoolSessionsController < ApplicationController
   end
 
   def destroy
-    session = current_school_session
-    session.destroy if session
+    current_school_session.destroy
     @current_school = nil
     @current_school_session = nil
 

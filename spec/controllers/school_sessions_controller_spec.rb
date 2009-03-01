@@ -4,6 +4,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe SchoolSessionsController do
   include MockSchoolSessionHelper
+  include MockSchoolHelper
 
   describe "responding to GET /school_sessions/new" do
 
@@ -37,7 +38,7 @@ describe SchoolSessionsController do
     describe "with successful save" do
 
       before(:each) do
-        mock_school_session.should_receive(:school).and_return(mock_model(School))
+        mock_school_session.stub!(:school).and_return(mock_school)
       end
 
       it "should create a new session" do
@@ -92,21 +93,25 @@ describe SchoolSessionsController do
 
   describe "responding to DELETE /school_sessions" do
 
+    before(:each) do
+      controller.stub!(:require_school)
+    end
+
     it "should find the current session" do
       @controller.should_receive(:current_school_session).and_return(mock_school_session)
       delete :destroy
     end
 
-    it "should call destory on the found session" do
-      @controller.should_receive(:current_school_session).and_return(mock_school_session)
+    it "should call destroy on the found session" do
+      @controller.stub!(:current_school_session).and_return(mock_school_session)
       mock_school_session.should_receive(:destroy)
       delete :destroy
     end
 
-    it "should redirect to the new session url" do
+    it "should redirect to the login url" do
       @controller.stub!(:current_school_session).and_return(mock_school_session)
       delete :destroy
-      response.should redirect_to(login_path)
+      response.should redirect_to(login_url)
     end
 
     it "should display a flash message" do
