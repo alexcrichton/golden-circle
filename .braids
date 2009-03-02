@@ -1,2 +1,8 @@
---- {}
-
+--- 
+vendor/plugins/authlogic: 
+  squashed: true
+  url: git://github.com/binarylogic/authlogic.git
+  branch: master
+  type: git
+  revision: 495e95e5a2f724e6f1e339c4871168c6c5e6a7ca
+  remote: braid/vendor/plugins/authlogic
