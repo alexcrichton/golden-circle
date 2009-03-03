@@ -1,15 +1,8 @@
 --- 
-vendor/plugins/authlogic: 
-  squashed: true
-  url: git://github.com/binarylogic/authlogic.git
-  branch: master
-  type: git
-  revision: f45f1faf2db0fde4daeb880f63f00e5b61d3399b
-  remote: braid/vendor/plugins/authlogic
 vendor/plugins/attribute_fu: 
   squashed: true
-  url: git://github.com/giraffesoft/attribute_fu.git
   branch: jquery
+  url: git://github.com/giraffesoft/attribute_fu.git
   type: git
   revision: adb3a4719c7fdf511255739adff4e3d86a53526b
   remote: braid/vendor/plugins/attribute-fu
