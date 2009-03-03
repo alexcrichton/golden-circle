@@ -1,8 +1,8 @@
---- 
-vendor/plugins/attribute_fu: 
+---
+vendor/plugins/attribute_fu:
   squashed: true
-  branch: jquery
+  branch: master
   url: git://github.com/giraffesoft/attribute_fu.git
   type: git
-  revision: adb3a4719c7fdf511255739adff4e3d86a53526b
+  revision: 2184928876b6a99cf2aeab6f1f20caafef7975da
   remote: braid/vendor/plugins/attribute-fu
