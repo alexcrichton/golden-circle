@@ -7,7 +7,7 @@ class Student < ActiveRecord::Base
   validates_uniqueness_of :first_name, :scope => [:last_name, :team_id], :case_sensitive => false
   validates_numericality_of :test_score,
                             :only_integer => true,
-                            :less_than_or_equal_to => 25,
+                            :less_than_or_equal_to => Configuration.first.max_student_score,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
 
@@ -16,14 +16,6 @@ class Student < ActiveRecord::Base
   belongs_to :team, :counter_cache => true
 
   before_save :strip_names
-
-  def level
-    team.level
-  end
-
-  def school
-    team.school
-  end
 
   def blank?
     first_name.blank? && last_name.blank?

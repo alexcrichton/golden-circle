@@ -1,8 +1,9 @@
 <ul id="topnav">
   <li><%= link_to 'Home', root_path %></li>
   <li><%= link_to 'Register', new_school_path %></li>
-  <% if current_school && current_school.admin %>
+  <%- if current_school && current_school.admin -%>
     <li><%= link_to 'Roster', schools_path %></li>
-    <li><%= link_to 'Statistics', statistics_path %></li>
-  <% end %>
+    <li><%= link_to 'Grading', grading_config_path %></li>
+  <%- end -%>
+  <li><%= link_to 'Results', statistics_path %></li>
 </ul>

@@ -1,6 +1,6 @@
 class Notification < ActionMailer::Base
 
-  default_url_options[:host] = "localhost:3000"
+  default_url_options[:host] = "goldencircle.academycommunity.com"
 
   def password_reset_instructions(school)
     subject       "Password Reset Instructions"

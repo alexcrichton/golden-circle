@@ -1,0 +1,7 @@
+<fieldset>
+  <legend>Grading Room</legend>
+  <ul>
+    <li><%= link_to 'Wizard Scores', grading_teams_path(:level => Student::WIZARD) %></li>
+    <li><%= link_to 'Apprentice Scores', grading_teams_path(:level => Student::APPRENTICE) %></li>
+  </ul>
+</fieldset>

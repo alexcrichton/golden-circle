@@ -9,7 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090226223246) do
+ActiveRecord::Schema.define(:version => 20090304142745) do
+
+  create_table "configurations", :force => true do |t|
+    t.datetime "deadline"
+    t.integer  "max_team_score"
+    t.integer  "max_student_score"
+    t.text     "right_hand_information"
+    t.text     "confirmation_email"
+    t.integer  "test_scores_to_count"
+    t.integer  "max_students_on_team"
+    t.integer  "team_test_points_per_question"
+    t.integer  "large_school_cutoff"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "proctors", :force => true do |t|
     t.string   "name"
@@ -57,7 +71,11 @@ ActiveRecord::Schema.define(:version => 20090226223246) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "test_score"
-    t.integer  "students_count", :default => 0
+    t.integer  "students_count",         :default => 0
+    t.boolean  "test_score_checked"
+    t.boolean  "team_score_checked"
+    t.boolean  "student_scores_checked"
+    t.boolean  "is_exhibition"
   end
 
 end

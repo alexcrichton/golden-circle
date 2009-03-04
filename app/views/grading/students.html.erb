@@ -1,3 +1,7 @@
+<%- content_for :sidebar do -%>
+  <%= render :partial => 'grading/sidebar' %>
+<%- end -%>
+
 <h1>Editing Individual Scores</h1>
 <%= javascript_include_tag 'filter', 'notifychange' %>
 <script type="text/javascript">window.onload = function(){ watch();filter("students", "search", "tr"); };</script>
@@ -10,6 +14,10 @@ Find:<br />
 <hr />
 <% form_tag(grading_students_path(:team_id => @team.id), :method => :put) do %>
   <%= error_messages_for :object => @students %>
+  <%- fields_for("team", @team) do |tf| -%>
+    <%= tf.check_box :student_scores_checked %>
+    <%= tf.label :student_scores_checked, 'These scores have been checked at least once and they are all correctly entered.' %>
+  <%- end -%>
   <table border=1 id="students">
     <tr>
       <td class="separator" colspan="4">All <%= @team.level %> Students of <%= @team.school.name %></td>

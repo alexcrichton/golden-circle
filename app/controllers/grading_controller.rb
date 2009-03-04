@@ -1,6 +1,6 @@
 class GradingController < ApplicationController
 
-  before_filter :require_admin#, :except => [:statistics] # uncomment after tournament to let everyone see statistics
+  before_filter :require_admin
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
 
@@ -12,6 +12,7 @@ class GradingController < ApplicationController
     params[:teams].each_pair do |i, v|
       t = @team_hash[i.to_i]
       t.test_score = v['test_score']
+      t.team_score_checked = v['team_score_checked']
       t.save
     end
     render :action => 'teams'
@@ -27,45 +28,17 @@ class GradingController < ApplicationController
       s.test_score = v['test_score']
       s.save
     end
+    @team.student_scores_checked = params[:team][:student_scores_checked]
+    @team.save
     render :action => 'students'
   end
 
-  def statistics
-    params[:level] ||= Student::WIZARD
-    params[:class] ||= 'Large'
-
-    @schools = School.send("#{params[:class].downcase}_schools", :include => {:teams => :students}).sort_by(&:school_score).reverse
-    @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
-    @teams = @schools.map(&"#{params[:level].downcase}_team".to_sym).select{ |t| t.students_count > 0 }.sort_by(&:team_score).reverse
-    # TODO: This statement prevents extra queries, b/c the eager loading doesn't set the associations backwards
-    # problem, though, is that this screws w/ the counter cache and takes longer, so isn't as simple as the
-    # one above...
-    #@teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database
-
-    @students = @teams.map(&:students).flatten.sort_by { |s| s.test_score || 0 }.reverse
-
-    @teams_rank = rank(@teams, :team_score)
-    @schools_rank = rank(@schools, :school_score)
-    @students_rank = rank(@students, :test_score)
+  def config
+    @configuration = Configuration.first
   end
+
 
   protected
-
-  def rank(collection, method)
-    rank = Array.new(collection.size)
-    rank[0] = 1
-    size = 0;
-    for i in 1...collection.size
-      rank[i] = rank[i -1];
-      if collection[i].send(method) == collection[i - 1].send(method)
-        size += 1
-      else
-        rank[i] += size + 1
-        size = 0
-      end
-    end
-    rank
-  end
 
   def load_students
     @student_hash = {}

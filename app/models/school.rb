@@ -1,7 +1,5 @@
 class School < ActiveRecord::Base
 
-  CUTOFF = 200
-
   acts_as_authentic
 
   has_many :teams,    :attributes => true, :dependent => :destroy, :validate => false
@@ -41,11 +39,11 @@ class School < ActiveRecord::Base
   end
 
   def self.large_schools(opts = {})
-    find :all, {:conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'}.merge(opts)
+    find :all, {:conditions => ['enrollment >= ?', Configuration.first.large_school_cutoff], :order => 'name ASC'}.merge(opts)
   end
 
   def self.small_schools(opts = {})
-    find :all, {:conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'}.merge(opts)
+    find :all, {:conditions => ['enrollment < ?', Configuration.first.large_school_cutoff], :order => 'name ASC'}.merge(opts)
   end
 
   def self.unknown
@@ -62,7 +60,7 @@ class School < ActiveRecord::Base
 
   def school_class
     return 'unknown' if enrollment.nil?
-    if enrollment >= CUTOFF
+    if enrollment >= Configuration.first.large_school_cutoff
       'Large School'
     else
       'Small School'
