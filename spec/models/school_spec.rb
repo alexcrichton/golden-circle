@@ -43,6 +43,12 @@ describe School do
     @it.school_class.should eql("Large School")
   end
 
+  it 'should be invalid after the deadline' do
+    @it.attributes = @valid_attributes
+    Time.zone.should_receive(:now).and_return(Time.zone.local(2019,2,25,0,0,0))
+    @it.should_not be_valid
+  end
+
   it 'should calculate the cost right' do
     @it.attributes = @valid_attributes
     @it.cost.should eql(0)

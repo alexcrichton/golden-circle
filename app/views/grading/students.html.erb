@@ -24,9 +24,9 @@ Find:<br />
       <th>School Name</th>
       <th>Level</th>
     </tr>
-    <%- @students.each_with_index do |student, i| -%>
+    <%- @students.each do |student| -%>
       <%- fields_for("students[#{student.id}]", student) do |sf| -%>
-        <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>" class="<%= rowclass(i) %>">
+        <tr filter="<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>" class="<%= cycle('even', 'odd') %>">
           <td><%= sf.label :test_score, h(student.first_name + " " + student.last_name) %></td>
           <td><%= sf.text_field :test_score, :size => 4 %></td>
           <td><%= h @team.school.name %></td>

@@ -25,8 +25,8 @@
         <th>Name</th>
         <th>Score</th>
       </tr>
-      <%- @school.teams.send(level).first.students.winners.each_with_index do |student, i| -%>
-        <tr class="<%= rowclass(i) %>">
+      <%- @school.teams.send(level).first.students.winners.each do |student| -%>
+        <tr class="<%= cycle('even', 'odd') %>">
           <td><%= h student.name %></td>
           <td><%= student.test_score %></td>
         </tr>

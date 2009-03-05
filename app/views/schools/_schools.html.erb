@@ -11,8 +11,8 @@
     <th>Students</th>
     <th>Actions</th>
   </tr>
-  <%- schools.each_with_index do |school, i| -%>
-    <tr class="<%= rowclass(i) %>">
+  <%- schools.each do |school| -%>
+    <tr class="<%= cycle('even', 'odd') %>">
       <td><%= link_to(h(school.name), school) %></td>
       <td><%= mail_to(school.email) %></td>
       <td class="num"><%= h school.enrollment %></td>

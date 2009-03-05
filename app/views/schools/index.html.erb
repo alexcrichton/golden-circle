@@ -42,8 +42,8 @@
     <th>Name</th>
     <th>School</th>
   </tr>
-  <% @proctors.each_with_index do |proctor, i| %>
-    <tr class="<%= rowclass(i) %>">
+  <% @proctors.each do |proctor| %>
+    <tr class="<%= cycle('even', 'odd') %>">
       <td><%= proctor.name %></td>
       <td><%= proctor.school.name %></td>
     </tr>

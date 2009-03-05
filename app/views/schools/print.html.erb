@@ -17,11 +17,11 @@
     <td class="separator">Last Name</td>
     <td class="separator">Score</td>
   </tr>
-  <% for i in 0...@team.students.length %>
-    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+  <% @team.students.each_with_index do |student, i| %>
+    <tr class="<%= cycle('even', 'odd') %>">
       <td class="num"><%= i + 1 %></td>
-      <td><%= @team.students[i].first_name %></td>
-      <td><%= @team.students[i].last_name %></td>
+      <td><%= student.first_name %></td>
+      <td><%= student.last_name %></td>
       <td>&nbsp;</td>
     </tr>
   <% end %>
