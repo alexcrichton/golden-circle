@@ -1,5 +1,12 @@
----
-vendor/plugins/attribute_fu:
+--- 
+vendor/plugins/rails-settings: 
+  squashed: true
+  url: git://github.com/Squeegy/rails-settings.git
+  branch: master
+  type: git
+  revision: c409585a39d89378f10c081d1b739c22384565ad
+  remote: braid/vendor/plugins/rails-settings
+vendor/plugins/attribute_fu: 
   squashed: true
   branch: master
   url: git://github.com/giraffesoft/attribute_fu.git
