@@ -30,11 +30,11 @@ class Team < ActiveRecord::Base
 
   def team_test_score
     return 0 if test_score.nil?
-    test_score * CONFIG.team_test_points_per_question
+    test_score * Settings.team_test_points_per_question
   end
 
   def team_score
-    if students.reject{ |s| s.updated_at < self.updated_at }.size > 0
+    if students.reject{ |s| s.updated_at.nil? || s.updated_at < self.updated_at }.size > 0
       recalculate_team_score
       save
     end

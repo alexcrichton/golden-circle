@@ -42,7 +42,7 @@ class School < ActiveRecord::Base
   end
 
   def cost
-    4 * students.size
+    Settings.cost_per_student * students.size
   end
 
   def school_class
@@ -55,7 +55,7 @@ class School < ActiveRecord::Base
   end
 
   def school_score
-    if teams.reject{ |t| t.updated_at < self.updated_at }.size > 0
+    if teams.reject{ |t| t.updated_at.nil? || t.updated_at < self.updated_at }.size > 0
       recalculate_school_score
       save
     end
@@ -70,7 +70,7 @@ class School < ActiveRecord::Base
 
   def submitted_before_deadline?
     # Needs to be before midnight on Tuesday, February 24, 2009
-    if new_record? && Time.zone.now > CONFIG.deadline
+    if new_record? && Time.zone.now > Settings.deadline
       errors.add_to_base("The registration deadline has passed. If you would still like to participate this year, please email golden.circle.contest@gmail.com")
     end
   end

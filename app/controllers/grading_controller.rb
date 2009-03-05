@@ -33,8 +33,7 @@ class GradingController < ApplicationController
     render :action => 'students'
   end
 
-  def config
-    @configuration = Configuration.first
+  def config  
   end
 
 

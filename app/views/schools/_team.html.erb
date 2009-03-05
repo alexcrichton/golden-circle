@@ -6,14 +6,14 @@
   <%= small_errors(team.students) %>
   <table id="<%= team.level.downcase.pluralize %>" class="noborder">
     <caption>
-      Students (<%= team.students.size %>/<%= Configuration.current.max_students_on_team %>)
+      Students (<%= team.students.size %>/<%= Settings.max_students_on_team %>)
     </caption>
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
       <th>&nbsp;</th>
     </tr>
-    <%= f.render_associated_form(team.students, :new => (team.students.size >= Configuration.current.max_students_on_team ? 0 : 1)) %>
+    <%= f.render_associated_form(team.students, :new => (team.students.size >= Settings.max_students_on_team ? 0 : 1)) %>
   </table>
   <%= f.add_associated_link('add', team.students.build, :container => "##{team.level.downcase.pluralize}") %>
 </div>
