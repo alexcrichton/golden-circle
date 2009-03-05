@@ -60,6 +60,11 @@ namespace :db do
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
+
+  desc "Rake the databases"
+  task :rake_db do
+    run "rake db:migrate RAILS_ENV=production"
+  end
 end
 
 namespace :slicehost do
