@@ -38,7 +38,6 @@ class Team < ActiveRecord::Base
     super
   end
 
-
   def student_score_sum
     students.map(&:test_score).reject(&:nil?).sort.reverse[0..4].sum
   end

@@ -36,10 +36,10 @@
           <th>School</th>
           <th>Score</th>
         </tr>
-        <%- @schools.send(klass).sort_by(&:team_score).each do |school| -%>
+        <%- @schools.send(klass).map { |s| s.teams.winners }.flatten.sort_by(&:team_score).each do |team| -%>
           <tr class="<%= cycle('even', 'odd') %>">
-            <td><%= h school.name %></td>
-            <td><%= school.teams.send(level).first.team_score %></td>
+            <td><%= h team.school.name %></td>
+            <td><%= team.team_score %></td>
           </tr>
         <%- end -%>
       </table>
