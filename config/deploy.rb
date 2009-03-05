@@ -23,7 +23,7 @@ set :deploy_to, "/srv/www/#{application}"
 # set :scm, :subversion
 
 before "deploy:setup", :db
-after "deploy:update_code", "db:symlink" 
+after "deploy:update_code", "db:symlink", "db:rake_db" 
 
 namespace :db do
   desc "Create database yaml in shared path" 
@@ -59,6 +59,11 @@ namespace :db do
   desc "Make symlink for database yaml" 
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+
+  desc "Rake the databases"
+  task :rake_db do
+    run "rake -f #{release_path}/Rakefile db:migrate RAILS_ENV=production"
   end
 end
 

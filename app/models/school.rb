@@ -27,7 +27,14 @@ class School < ActiveRecord::Base
   attr_protected :admin, :teams
 
   after_create :add_teams
-  before_save :strip_name
+  before_save :strip_name, :recalculate_school_score
+
+  named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
+  named_scope :non_exhibition, :conditions => ['name NOT LIKE ?', 'Exhibition']
+  named_scope :large, :conditions => ['enrollment >= ?', Configuration.current.large_school_cutoff], :order => 'name ASC'
+  named_scope :small, :conditions => ['enrollment < ?', Configuration.current.large_school_cutoff], :order => 'name ASC'
+  named_scope :unknown, :conditions => {:enrollment => nil}, :order => 'name ASC'
+  named_scope :winners, :order => 'school_score DESC, name ASC'
 
   def deliver_password_reset_instructions!
     reset_perishable_token!
@@ -38,29 +45,9 @@ class School < ActiveRecord::Base
     4 * students.size
   end
 
-  def self.large_schools(opts = {})
-    find :all, {:conditions => ['enrollment >= ?', Configuration.first.large_school_cutoff], :order => 'name ASC'}.merge(opts)
-  end
-
-  def self.small_schools(opts = {})
-    find :all, {:conditions => ['enrollment < ?', Configuration.first.large_school_cutoff], :order => 'name ASC'}.merge(opts)
-  end
-
-  def self.unknown
-    find :all, :conditions => ['enrollment IS ?', nil], :order => 'name ASC'
-  end
-
-  def wizard_team
-    teams.detect { |t| t.level == Student::WIZARD }
-  end
-
-  def apprentice_team
-    teams.detect { |t| t.level == Student::APPRENTICE }
-  end
-
   def school_class
     return 'unknown' if enrollment.nil?
-    if enrollment >= Configuration.first.large_school_cutoff
+    if enrollment >= Configuration.current.large_school_cutoff
       'Large School'
     else
       'Small School'
@@ -68,14 +55,22 @@ class School < ActiveRecord::Base
   end
 
   def school_score
-    teams.map(&:team_score).sum
+    if teams.reject{ |t| t.updated_at < self.updated_at }.size > 0
+      recalculate_school_score
+      save
+    end
+    super
+  end
+
+  def recalculate_school_score
+    self.school_score = teams.map(&:team_score).sum
   end
 
   private
 
   def submitted_before_deadline?
     # Needs to be before midnight on Tuesday, February 24, 2009
-    if new_record? && Time.zone.now > Time.zone.local(2009, 2, 24, 24, 0, 0)
+    if new_record? && Time.zone.now > CONFIG.deadline
       errors.add_to_base("The registration deadline has passed. If you would still like to participate this year, please email golden.circle.contest@gmail.com")
     end
   end

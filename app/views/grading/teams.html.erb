@@ -25,9 +25,9 @@ Find:<br />
       <th>School Size</th>
       <th></th>
     </tr>
-    <%- @teams.each_with_index do |team, i| -%>
+    <%- @teams.each do |team| -%>
       <% fields_for("teams[#{team.id}]", team) do |tf| %>
-        <tr filter="<%= h(team.school.name + " " + team.level).gsub(/ /, "_") %>" class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+        <tr filter="<%= h(team.school.name + " " + team.level).gsub(/ /, "_") %>" class="<%= cycle('even', 'odd') %>">
           <td><%= tf.label :test_score, h(team.school.name) %></td>
           <td><%= h team.level %></td>
           <td><%= tf.text_field :test_score, :size => 5 %> <%= tf.check_box :team_score_checked %></td>

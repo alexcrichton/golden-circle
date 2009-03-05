@@ -25,10 +25,10 @@ describe School do
     @it.attributes = @valid_attributes
     @it.save
     @it.teams.size.should eql(2)
-    @it.apprentice_team.should_not be_nil
-    @it.apprentice_team.level.should eql(Student::APPRENTICE)
-    @it.wizard_team.should_not be_nil
-    @it.wizard_team.level.should eql(Student::WIZARD)
+    @it.teams.apprentice.first.should_not be_nil
+    @it.teams.apprentice.first.level.should eql(Student::APPRENTICE)
+    @it.teams.wizard.first.should_not be_nil
+    @it.teams.wizard.first.level.should eql(Student::WIZARD)
   end
 
   it 'should classify the school correctly' do
@@ -41,6 +41,12 @@ describe School do
     @it.school_class.should eql("Large School")
     @it.enrollment = 1000
     @it.school_class.should eql("Large School")
+  end
+
+  it 'should be invalid after the deadline' do
+    @it.attributes = @valid_attributes
+    Time.zone.should_receive(:now).and_return(Time.zone.local(2019,2,25,0,0,0))
+    @it.should_not be_valid
   end
 
   it 'should calculate the cost right' do

@@ -1,6 +1,6 @@
 <h1><%= @school.name %></h1>
 <h2><%= @school.school_class %> - <%= @team.level.classify.pluralize %></h2>
-<dl id="info" class="clearfix" style="width:60%">
+<dl id="info" class="clearfix" style="width:80%">
   <dt>Contact name:</dt>
   <dd><%= h @school.contact_name.blank? ? 'No Contact' : @school.contact_name %></dd>
   <dt>Contact email:</dt>
@@ -17,22 +17,22 @@
     <td class="separator">Last Name</td>
     <td class="separator">Score</td>
   </tr>
-  <% for i in 0...@team.students.length %>
-    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+  <% @team.students.each_with_index do |student, i| %>
+    <tr class="<%= cycle('even', 'odd') %>">
       <td class="num"><%= i + 1 %></td>
-      <td><%= @team.students[i].first_name %></td>
-      <td><%= @team.students[i].last_name %></td>
+      <td><%= student.first_name %></td>
+      <td><%= student.last_name %></td>
       <td>&nbsp;</td>
     </tr>
   <% end %>
 </table>
 <div class="span-12 colborder" style="margin:10px;">
-  <p>________ + ________ + _________ + ________ + _________ = _________</p>
-  <i>Top five individual scores and sum.</i>
+  <p><%= Configuration.current.test_scores_to_count.times { "________ + "} %>= _________</p>
+  <i>Top <%= Configuration.current.test_scores_to_count %> individual scores and sum.</i>
 
   <hr />
-  <p>_______ x 5 = ________</p>
-  <i>Number right on team test, then times 5</i>
+  <p>_______ x <%= Configuration.current.team_test_points_per_question %> = ________</p>
+  <i>Number right on team test, then times <%= Configuration.current.team_test_points_per_question %></i>
 </div>
 <div class="span-5 total">
   <p>School Score:</p>

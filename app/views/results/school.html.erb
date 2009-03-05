@@ -1,0 +1,36 @@
+<%- content_for :sidebar do -%>
+  <%= render :partial => 'sidebar' %>
+<%- end -%>
+<h1><%= h @school.name %>'s Results </h1>
+<dl id="info" class="clearfix">
+  <dt>Total Score:</dt>
+  <dd><%= h @school.school_score %></dd>
+  <dt>Wizard Team Score:</dt>
+  <dd><%= @school.teams.wizard.first.team_score %></dd>
+  <dt>Wizard Team Test Score:</dt>
+  <dd><%= @school.teams.wizard.first.test_score %></dd>
+  <dt>Apprentice Team Score:</dt>
+  <dd><%= @school.teams.apprentice.first.team_score %></dd>
+  <dt>Apprentice Team Test Score:</dt>
+  <dd><%= @school.teams.apprentice.first.test_score %></dd>
+</dl>
+
+<%- ['wizard', 'apprentice'].each do |level| -%>
+  <div class="span-7 <%= level == 'wizard' ? 'colborder' : 'last' %>">
+    <table>
+      <tr>
+        <td class="separator" colspan="2"><%= level.capitalize %> Results</td>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+      <%- @school.teams.send(level).first.students.winners.each do |student| -%>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <td><%= h student.name %></td>
+          <td><%= student.test_score %></td>
+        </tr>
+      <%- end -%>
+    </table>
+  </div>
+<%- end -%>

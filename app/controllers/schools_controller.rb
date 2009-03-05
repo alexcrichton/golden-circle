@@ -6,27 +6,17 @@ class SchoolsController < ApplicationController
   before_filter :require_admin, :only => [:index, :print, :email]
 
   def index
-    @schools = School.find(:all, :include => [:proctors, :teams, :students], :order => 'name ASC')
-    @large_schools = []
-    @small_schools = []
-    @unknown = []
-    @schools.each do |s|
-      case s.school_class
-      when 'Large School'
-        @large_schools << s
-      when 'Small School'
-        @small_schools << s
-      else
-        @unknown << s
-      end
-    end
+    @schools = School.all
+    @large_schools = @schools.large
+    @small_schools = @schools.small
+    @unknown = @schools.unknown
     @proctors = @schools.collect{ |s| s.proctors }.flatten
 
     render :layout => 'admin'
   end
 
   def print
-    @team = @school.send("#{params[:level].downcase}_team")
+    @team = @school.teams.send("#{params[:level].downcase}").first
     render :layout => 'admin'
   end
 

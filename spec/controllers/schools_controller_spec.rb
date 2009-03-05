@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe SchoolsController do
   include MockSchoolHelper
   include MockTeamHelper
+  include MockScopeHelper
 
   describe "responding to GET /schools/new" do
 
@@ -92,39 +93,13 @@ describe SchoolsController do
       controller.stub!(:require_owner)
     end
 
-    #    it 'should require a login' do
-    #      School.should_receive(:find).and_return(mock_school)
-    #      get :show, :id => '1'
-    #      response.should be_redirect
-    #    end
-    #
-    #    it 'should only allow own school' do
-    #      s = mock_model(School, valid_school_attributes.merge(:name => 'random', :email => 'more@random.com'))
-    #      s.should_receive(:admin).and_return(false)
-    #      @controller.stub!(:current_school).and_return(s)
-    #      School.stub!(:find).and_return(mock_school)
-    #      get :show, :id => '1'
-    #      response.should be_redirect
-    #    end
-    #
-    #    it 'should allow an admin school' do
-    #      s = mock_model(School, valid_school_attributes.merge(:name => 'random', :email => 'more@random.com'))
-    #      s.should_receive(:admin).and_return(true)
-    #      @controller.stub!(:current_school).and_return(s)
-    #      School.stub!(:find).and_return(mock_school)
-    #      get :show, :id => '1'
-    #      response.should be_success
-    #    end
-
     it "should succeed" do
-      #      @controller.should_receive(:require_owner)
       School.stub!(:find).and_return(mock_school)
       get :show, :id => "1"
       response.should be_success
     end
 
     it "should render the 'edit' template" do
-      #      @controller.should_receive(:require_owner)
       School.stub!(:find).and_return(mock_school)
       get :show, :id => "1"
       response.should render_template('edit')
@@ -213,30 +188,6 @@ describe SchoolsController do
     end
 
     describe "with failed update" do
-#      it 'should require a login' do
-#        School.should_receive(:find).and_return(mock_school)
-#        put :update, :id => '1'
-#        response.should be_redirect
-#      end
-#
-#      it 'should only allow own school' do
-#        s = mock_model(School, valid_school_attributes.merge(:name => 'random', :email => 'more@random.com'))
-#        s.should_receive(:admin).and_return(false)
-#        @controller.stub!(:current_school).and_return(s)
-#        School.stub!(:find).and_return(mock_school)
-#        put :update, :id => '1'
-#        response.should be_redirect
-#      end
-#
-#      it 'should allow an admin school' do
-#        s = mock_model(School, valid_school_attributes.merge(:name => 'random', :email => 'more@random.com'))
-#        s.should_receive(:admin).and_return(true)
-#        @controller.stub!(:current_school).and_return(s)
-#        School.stub!(:find).and_return(mock_school)
-#        mock_school.should_receive(:update_attributes).and_return(false)
-#        put :update, :id => '1'
-#        response.should be_success
-#      end
 
       it "should update the requested school" do
         School.should_receive(:find).with("37",  {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
@@ -265,32 +216,8 @@ describe SchoolsController do
 
     before(:each) do
       controller.stub!(:require_admin)
-      mock_school(:wizard_team => true)
+      mock_school(:teams => mock_scope([], :wizard))
     end
-
-#    it 'should require a login' do
-#      controller.stub!(:load_school)
-#      get :print, :id => '1', :level => 'wizard'
-#      response.should be_redirect
-#    end
-#
-#    it 'should not allow non admin school' do
-#      s = mock_model(School, valid_school_attributes.merge(:name => 'random', :email => 'more@random.com'))
-#      s.should_receive(:admin).and_return(false)
-#      School.should_receive(:find).and_return(mock_school)
-#      @controller.stub!(:current_school).and_return(s)
-#      get :print, :id => '1', :level => 'wizard'
-#      response.should be_redirect
-#    end
-#
-#    it 'should allow an admin school' do
-#      s = mock_model(School, valid_school_attributes.merge(:name => 'random', :email => 'more@random.com'))
-#      s.should_receive(:admin).and_return(true)
-#      School.should_receive(:find).and_return(mock_school)
-#      @controller.stub!(:current_school).and_return(s)
-#      get :show, :id => '1', :level => 'wizard'
-#      response.should be_success
-#    end
 
     it "should succeed" do
       School.stub!(:find).and_return(mock_school)
@@ -317,7 +244,7 @@ describe SchoolsController do
 
     it 'should assign the correct team for the view' do
       School.should_receive(:find).and_return(mock_school)
-      mock_school.should_receive(:wizard_team).and_return(mock_team)
+      mock_school.should_receive(:teams).and_return(mock_scope([mock_team], :wizard))
       get :print, :id => '1', :level => 'wizard'
       assigns[:team].should equal(mock_team)
     end
@@ -329,23 +256,6 @@ describe SchoolsController do
     before(:each) do
       controller.stub!(:require_admin)
     end
-
-#    it 'should require a login' do
-#      put :email
-#      response.should be_redirect
-#    end
-#
-#    it 'should not allow non admin school' do
-#      @controller.stub!(:current_school).and_return(mock_school(:admin => false))
-#      put :email
-#      response.should be_redirect
-#    end
-#
-#    it 'should allow an admin school' do
-#      @controller.stub!(:current_school).and_return(mock_school(:admin => true))
-#      put :email
-#      response.should redirect_to(schools_path)
-#    end
 
     it "should redirect back to the index" do
       put :email
@@ -375,11 +285,6 @@ describe SchoolsController do
     before(:each) do
       controller.stub!(:require_school)
     end
-
-#    it 'should require a login' do
-#      get :show_current
-#      response.should be_redirect
-#    end
 
     it "should succeed" do
       get :show_current
@@ -453,15 +358,9 @@ describe SchoolsController do
       assigns[:proctors].should == [true]
     end
 
-    it "should organize the schools into categories" do
-      small = mock_school(:school_class => 'Small School', :proctors => true); @mock_school = nil
-      large = mock_school(:school_class => 'Large School', :proctors => true); @mock_school = nil
-      unknown = mock_school(:school_class => 'unknown', :proctors => true); @mock_school = nil
-      School.stub!(:find).and_return([small, large, unknown])
+    it 'should find all the schools' do
+      School.should_receive(:all).and_return(mock_scope([], :large, :small, :unknown))
       get :index
-      assigns[:large_schools].should == [large]
-      assigns[:small_schools].should == [small]
-      assigns[:unknown].should == [unknown]
     end
 
   end
