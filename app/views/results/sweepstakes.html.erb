@@ -36,7 +36,7 @@
           <th>School</th>
           <th>Score</th>
         </tr>
-        <%- @schools.send(klass).map { |s| s.teams.winners }.flatten.sort_by(&:team_score).reverse.each do |team| -%>
+        <%- @schools.send(klass).map { |s| s.teams.send(level).winners }.flatten.sort_by(&:team_score).reverse.each do |team| -%>
           <tr class="<%= cycle('even', 'odd') %>">
             <td><%= h team.school.name %></td>
             <td><%= team.team_score %></td>
