@@ -35,7 +35,7 @@ class GradingController < ApplicationController
     params[:class] ||= 'Large'
 
     @schools = School.send("#{params[:class].downcase}", :include => {:teams => :students}).sort_by(&:school_score).reverse
-    @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
+#    @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
     team_level = params[:level].downcase
     @teams = @schools.map { |s| s.teams.participating.send(team_level) }.flatten
     @teams = @teams.sort_by(&:team_score).reverse

@@ -25,10 +25,10 @@ describe School do
     @it.attributes = @valid_attributes
     @it.save
     @it.teams.size.should eql(2)
-    @it.apprentice_team.should_not be_nil
-    @it.apprentice_team.level.should eql(Student::APPRENTICE)
-    @it.wizard_team.should_not be_nil
-    @it.wizard_team.level.should eql(Student::WIZARD)
+    @it.teams.apprentice.first.should_not be_nil
+    @it.teams.apprentice.first.level.should eql(Student::APPRENTICE)
+    @it.teams.wizard.first.should_not be_nil
+    @it.teams.wizard.first.level.should eql(Student::WIZARD)
   end
 
   it 'should classify the school correctly' do

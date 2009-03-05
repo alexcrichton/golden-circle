@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe GradingController do
 
   include MockSchoolHelper
+  include MockScopeHelper
   include MockTeamHelper
   include MockStudentHelper
 
@@ -24,16 +25,15 @@ describe GradingController do
 
     it 'should find the correct class of schools and level of teams' do
       School.should_receive(:small).and_return([mock_school])
-      mock_school.should_receive(:teams)
+      mock_school.should_receive(:teams).and_return(mock_scope([mock_team(:school= => true)], :participating, :wizard))
 #      mock_school.should_receive(:wizard).and_return(mock_team)
-#      mock_team.stub!(:students).and_return([mock_student])
+      mock_team.should_receive(:students).and_return([mock_student])
       get :statistics, :level => 'Wizard', :class => 'Small'
     end
 
     it 'should assign the schools, teams, and students variables' do
-      School.stub!(:large_schools).and_return([mock_school])
-      mock_school.stub!(:teams).and_return([])
-      mock_school.should_receive(:wizard_team).and_return(mock_team)
+      School.stub!(:large).and_return([mock_school])
+      mock_school.stub!(:teams).and_return(mock_scope([mock_team(:school= => true)], :participating, :wizard))
       mock_team.stub!(:students).and_return([mock_student])
       get :statistics
       assigns[:schools].should == [mock_school]

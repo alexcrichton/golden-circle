@@ -16,7 +16,7 @@ class SchoolsController < ApplicationController
   end
 
   def print
-    @team = @school.teams.send("#{params[:level].downcase.pluralize}").first
+    @team = @school.teams.send("#{params[:level].downcase}").first
     render :layout => 'admin'
   end
 

@@ -2,6 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe SchoolsController do
   include MockSchoolHelper
+  include MockScopeHelper
 
   describe "responding to GET /schools/new" do
 
@@ -141,7 +142,7 @@ describe SchoolsController do
 
     it 'should allow an admin school' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil
-      School.stub!(:find).and_return(mock_school(:wizard_team => true))
+      School.stub!(:find).and_return(mock_school(:teams => mock_scope([], :wizard)))
       get :print, :id => 1, :level => 'wizard'
       response.should be_success
     end
@@ -234,5 +235,5 @@ describe SchoolsController do
       response.should be_success
     end
   end
-  
+
 end

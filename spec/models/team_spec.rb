@@ -82,8 +82,10 @@ describe Team do
       @it.students << k
     end
     @it.test_score = 8
+    @it.save
     @it.team_score.should eql(55)
     @it.test_score = 9
+    @it.save
     @it.team_score.should eql(60)
   end
 
