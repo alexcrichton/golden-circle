@@ -1,4 +1,8 @@
-<%= javascript_include_tag 'jquery', 'jquery.template', 'application', 'notifychange' %>
+<%- content_for :sidebar do -%>
+  <%= render :partial => 'sidebar' %>
+<%- end -%>
+
+<%= javascript_include_tag 'notifychange' %>
 <script type="text/javascript">window.onload = function(){ watch(); };</script>
 
 <% form_for(@school) do |f| %>

@@ -29,8 +29,14 @@ class School < ActiveRecord::Base
   attr_protected :admin, :teams
 
   after_create :add_teams
-  before_save :strip_name
+  before_save :strip_name, :calculate_school_score
 
+  named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
+  named_scope :non_exhibition, :conditions => ['name NOT LIKE ?', 'Exhibition']
+  named_scope :large, lambda { |opts| {:conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'}.merge(opts || {})}
+  named_scope :small, lambda { |opts| {:conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'}.merge(opts || {})}
+  named_scope :unknown, lambda { |opts| {:conditions => ['enrollment IS ?', nil], :order => 'name ASC'}.merge(opts || {}) }
+  named_scope :winners, :order => 'school_score DESC, name ASC'
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notification.deliver_password_reset_instructions(self)
@@ -38,26 +44,6 @@ class School < ActiveRecord::Base
 
   def cost
     4 * students.size
-  end
-
-  def self.large_schools(opts = {})
-    find :all, {:conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'}.merge(opts)
-  end
-
-  def self.small_schools(opts = {})
-    find :all, {:conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'}.merge(opts)
-  end
-
-  def self.unknown
-    find :all, :conditions => ['enrollment IS ?', nil], :order => 'name ASC'
-  end
-
-  def wizard_team
-    teams.detect { |t| t.level == Student::WIZARD }
-  end
-
-  def apprentice_team
-    teams.detect { |t| t.level == Student::APPRENTICE }
   end
 
   def school_class
@@ -69,8 +55,8 @@ class School < ActiveRecord::Base
     end
   end
 
-  def school_score
-    teams.map(&:team_score).sum
+  def calculate_school_score
+    self.school_score = teams.map(&:team_score).sum
   end
 
   private

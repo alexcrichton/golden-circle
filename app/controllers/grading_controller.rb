@@ -1,6 +1,6 @@
 class GradingController < ApplicationController
 
-  before_filter :require_admin#, :except => [:statistics] # uncomment after tournament to let everyone see statistics
+  before_filter :require_admin
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
 
@@ -34,9 +34,11 @@ class GradingController < ApplicationController
     params[:level] ||= Student::WIZARD
     params[:class] ||= 'Large'
 
-    @schools = School.send("#{params[:class].downcase}_schools", :include => {:teams => :students}).sort_by(&:school_score).reverse
+    @schools = School.send("#{params[:class].downcase}", :include => {:teams => :students}).sort_by(&:school_score).reverse
     @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
-    @teams = @schools.map(&"#{params[:level].downcase}_team".to_sym).select{ |t| t.students_count > 0 }.sort_by(&:team_score).reverse
+    team_level = params[:level].downcase
+    @teams = @schools.map { |s| s.teams.participating.send(team_level) }.flatten
+    @teams = @teams.sort_by(&:team_score).reverse
     # TODO: This statement prevents extra queries, b/c the eager loading doesn't set the associations backwards
     # problem, though, is that this screws w/ the counter cache and takes longer, so isn't as simple as the
     # one above...

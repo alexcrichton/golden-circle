@@ -1,6 +1,6 @@
 <h1><%= @school.name %></h1>
 <h2><%= @school.school_class %> - <%= @team.level.classify.pluralize %></h2>
-<dl id="info" class="clearfix" style="width:60%">
+<dl id="info" class="clearfix" style="width:80%">
   <dt>Contact name:</dt>
   <dd><%= h @school.contact_name.blank? ? 'No Contact' : @school.contact_name %></dd>
   <dt>Contact email:</dt>

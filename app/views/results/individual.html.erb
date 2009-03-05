@@ -1,0 +1,30 @@
+<%- content_for :sidebar do -%>
+  <%= render :partial => 'sidebar' %>
+<%- end -%>
+<h1>Individual Results</h1>
+<%- [:wizard, :apprentice].each do |level| -%>
+  <hr />
+  <h3><%= level.to_s.capitalize %> Division</h3>
+  <%- [:large, :small].each do |klass| -%>
+    <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
+      <table>
+        <tr>
+          <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>School</th>
+          <th>Score</th>
+        </tr>
+        <%- @schools.send(klass).collect{ |s| s.teams.send(level).first.students }.flatten.each_with_index do |student, i| -%>
+          <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+            <td><%= h student.name %></td>
+            <td><%= h student.team.school.name %></td>
+            <td><%= student.test_score %></td>
+          </tr>
+        <%- end -%>
+      </table>
+    </div>
+  <%- end -%>
+<%- end -%>
+

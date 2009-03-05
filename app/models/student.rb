@@ -17,12 +17,10 @@ class Student < ActiveRecord::Base
 
   before_save :strip_names
 
-  def level
-    team.level
-  end
+  named_scope :winners, :order => 'test_score DESC, last_name ASC, first_name ASC', :conditions => ['test_score >= ?', 20]
 
-  def school
-    team.school
+  def name
+    first_name + " " + last_name
   end
 
   def blank?

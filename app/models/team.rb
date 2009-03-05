@@ -18,6 +18,13 @@ class Team < ActiveRecord::Base
                             :allow_nil => true
   attr_protected :test_score
 
+  named_scope :wizard, :conditions => ['level = ?', Student::WIZARD], :limit => 1
+  named_scope :apprentice, :conditions => ['level = ?', Student::APPRENTICE], :limit => 1
+  named_scope :participating, :conditions => ['students_count > ?', 0]
+  named_scope :winners, :order => 'team_score DESC'
+
+  before_save :calculate_team_score
+
   def team_test_score
     return 0 if test_score.nil?
     test_score * 5
@@ -27,8 +34,8 @@ class Team < ActiveRecord::Base
     students.map(&:test_score).reject(&:nil?).sort.reverse[0..4].sum
   end
 
-  def team_score
-    team_test_score + student_score_sum
+  def calculate_team_score
+    self.team_score = team_test_score + student_score_sum
   end
 
 end

@@ -1,3 +1,7 @@
+<%- content_for :sidebar do -%>
+  <%= render :partial => 'sidebar' %>
+<%- end -%>
+
 <h2>Create a school</h2>
 <% form_for @school, :url => schools_path, :html => {:method => :post} do |f| %>
 
