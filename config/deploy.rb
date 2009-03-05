@@ -63,7 +63,7 @@ namespace :db do
 
   desc "Rake the databases"
   task :rake_db do
-    run "rake db:migrate RAILS_ENV=production"
+    run "rake -f #{deploy_to}/current/Rakefile db:migrate RAILS_ENV=production"
   end
 end
 
