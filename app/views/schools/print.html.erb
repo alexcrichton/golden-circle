@@ -27,12 +27,12 @@
   <% end %>
 </table>
 <div class="span-12 colborder" style="margin:10px;">
-  <p><%= Configuration.current.test_scores_to_count.times { "________ + "} %>= _________</p>
-  <i>Top <%= Configuration.current.test_scores_to_count %> individual scores and sum.</i>
+  <p><%= Settings.test_scores_to_count.times { "________ + "} %>= _________</p>
+  <i>Top <%= Settings.test_scores_to_count %> individual scores and sum.</i>
 
   <hr />
-  <p>_______ x <%= Configuration.current.team_test_points_per_question %> = ________</p>
-  <i>Number right on team test, then times <%= Configuration.current.team_test_points_per_question %></i>
+  <p>_______ x <%= Settings.team_test_points_per_question %> = ________</p>
+  <i>Number right on team test, then times <%= Settings.team_test_points_per_question %></i>
 </div>
 <div class="span-5 total">
   <p>School Score:</p>

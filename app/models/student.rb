@@ -7,7 +7,7 @@ class Student < ActiveRecord::Base
   validates_uniqueness_of :first_name, :scope => [:last_name, :team_id], :case_sensitive => false
   validates_numericality_of :test_score,
                             :only_integer => true,
-                            :less_than_or_equal_to => Configuration.current.max_student_score,
+                            :less_than_or_equal_to => Settings.max_student_score,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
 

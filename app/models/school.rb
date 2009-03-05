@@ -31,8 +31,8 @@ class School < ActiveRecord::Base
 
   named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
   named_scope :non_exhibition, :conditions => ['name NOT LIKE ?', 'Exhibition']
-  named_scope :large, :conditions => ['enrollment >= ?', Configuration.current.large_school_cutoff], :order => 'name ASC'
-  named_scope :small, :conditions => ['enrollment < ?', Configuration.current.large_school_cutoff], :order => 'name ASC'
+  named_scope :large, :conditions => ['enrollment >= ?', Settings.large_school_cutoff], :order => 'name ASC'
+  named_scope :small, :conditions => ['enrollment < ?', Settings.large_school_cutoff], :order => 'name ASC'
   named_scope :unknown, :conditions => {:enrollment => nil}, :order => 'name ASC'
   named_scope :winners, :order => 'school_score DESC, name ASC'
 
@@ -47,7 +47,7 @@ class School < ActiveRecord::Base
 
   def school_class
     return 'unknown' if enrollment.nil?
-    if enrollment >= Configuration.current.large_school_cutoff
+    if enrollment >= Settings.large_school_cutoff
       'Large School'
     else
       'Small School'

@@ -12,11 +12,11 @@ class Team < ActiveRecord::Base
   validates_uniqueness_of :level, :scope => :school_id
   validates_associated :students, :message => 'are invalid'
   validates_size_of :students,
-                    :maximum => Configuration.current.max_students_on_team,
-                    :message => "have a maximum of #{Configuration.current.max_students_on_team} allowed"
+                    :maximum => Settings.max_students_on_team,
+                    :message => "have a maximum of #{Settings.max_students_on_team} allowed"
   validates_numericality_of :test_score,
                             :only_integer => true,
-                            :less_than_or_equal_to => Configuration.current.max_team_score,
+                            :less_than_or_equal_to => Settings.max_team_score,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
   attr_protected :test_score, :test_score_checked, :student_scores_checked
@@ -42,7 +42,7 @@ class Team < ActiveRecord::Base
   end
 
   def student_score_sum
-    students.map(&:test_score).reject(&:nil?).sort.reverse[0..(Configuration.current.test_scores_to_count - 1)].sum
+    students.map(&:test_score).reject(&:nil?).sort.reverse[0..(Settings.test_scores_to_count - 1)].sum
   end
 
   def recalculate_team_score
