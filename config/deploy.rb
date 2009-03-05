@@ -23,7 +23,7 @@ set :deploy_to, "/srv/www/#{application}"
 # set :scm, :subversion
 
 before "deploy:setup", :db
-after "deploy:update_code", "db:symlink" 
+after "deploy:update_code", "db:symlink", "db:rake_db" 
 
 namespace :db do
   desc "Create database yaml in shared path" 
