@@ -36,7 +36,7 @@
           <th>School</th>
           <th>Score</th>
         </tr>
-        <%- @schools.send(klass).winners.each do |school| -%>
+        <%- @schools.send(klass).sort_by(&:team_score).each do |school| -%>
           <tr class="<%= cycle('even', 'odd') %>">
             <td><%= h school.name %></td>
             <td><%= school.teams.send(level).first.team_score %></td>
