@@ -43,7 +43,7 @@
     <th>School</th>
   </tr>
   <% @proctors.each_with_index do |proctor, i| %>
-    <tr class="<%= i % 2 == 0 ? 'odd' : 'even' %>">
+    <tr class="<%= rowclass(i) %>">
       <td><%= proctor.name %></td>
       <td><%= proctor.school.name %></td>
     </tr>

@@ -23,18 +23,27 @@ class Team < ActiveRecord::Base
   named_scope :participating, :conditions => ['students_count > ?', 0]
   named_scope :winners, :order => 'team_score DESC'
 
-  before_save :calculate_team_score
+  before_save :recalculate_team_score
 
   def team_test_score
     return 0 if test_score.nil?
     test_score * 5
   end
 
+  def team_score
+    if students.reject{ |s| s.updated_at < self.updated_at }.size > 0
+      recalculate_team_score
+      save
+    end
+    super
+  end
+
+
   def student_score_sum
     students.map(&:test_score).reject(&:nil?).sort.reverse[0..4].sum
   end
 
-  def calculate_team_score
+  def recalculate_team_score
     self.team_score = team_test_score + student_score_sum
   end
 

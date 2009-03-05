@@ -29,14 +29,15 @@ class School < ActiveRecord::Base
   attr_protected :admin, :teams
 
   after_create :add_teams
-  before_save :strip_name, :calculate_school_score
+  before_save :strip_name, :recalculate_school_score
 
   named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
   named_scope :non_exhibition, :conditions => ['name NOT LIKE ?', 'Exhibition']
-  named_scope :large, lambda { |opts| {:conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'}.merge(opts || {})}
-  named_scope :small, lambda { |opts| {:conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'}.merge(opts || {})}
-  named_scope :unknown, lambda { |opts| {:conditions => ['enrollment IS ?', nil], :order => 'name ASC'}.merge(opts || {}) }
+  named_scope :large, :conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'
+  named_scope :small, :conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'
+  named_scope :unknown, :conditions => {:enrollment => nil}, :order => 'name ASC'
   named_scope :winners, :order => 'school_score DESC, name ASC'
+
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notification.deliver_password_reset_instructions(self)
@@ -55,7 +56,15 @@ class School < ActiveRecord::Base
     end
   end
 
-  def calculate_school_score
+  def school_score
+    if teams.reject{ |t| t.updated_at < self.updated_at }.size > 0
+      recalculate_school_score
+      save
+    end
+    super
+  end
+
+  def recalculate_school_score
     self.school_score = teams.map(&:team_score).sum
   end
 

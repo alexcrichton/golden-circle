@@ -8,7 +8,7 @@
   <dt>Wizard Team Score:</dt>
   <dd><%= @school.teams.wizard.first.team_score %></dd>
   <dt>Wizard Team Test Score:</dt>
-  <dd><%= @school.teams.wizard.first.test_score %>4</dd>
+  <dd><%= @school.teams.wizard.first.test_score %></dd>
   <dt>Apprentice Team Score:</dt>
   <dd><%= @school.teams.apprentice.first.team_score %></dd>
   <dt>Apprentice Team Test Score:</dt>
@@ -25,8 +25,8 @@
         <th>Name</th>
         <th>Score</th>
       </tr>
-      <%- @school.teams.send(level).first.students.winners.each do |student| -%>
-        <tr>
+      <%- @school.teams.send(level).first.students.winners.each_with_index do |student, i| -%>
+        <tr class="<%= rowclass(i) %>">
           <td><%= h student.name %></td>
           <td><%= student.test_score %></td>
         </tr>

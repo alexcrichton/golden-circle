@@ -17,7 +17,8 @@ class Student < ActiveRecord::Base
 
   before_save :strip_names
 
-  named_scope :winners, :order => 'test_score DESC, last_name ASC, first_name ASC', :conditions => ['test_score >= ?', 20]
+  named_scope :winners, :order => 'test_score DESC, last_name ASC, first_name ASC'
+  named_scope :upper_scores, :conditions => ['test_score >= ?', 20]
 
   def name
     first_name + " " + last_name

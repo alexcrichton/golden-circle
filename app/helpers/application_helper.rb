@@ -1,5 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+
+  def rowclass(i)
+    i % 2 == 0 ? 'even' : 'odd'
+  end
+
   def current_school_session #untested, cargo cult
     return @current_school_session if defined?(@current_school_session)
     @current_school_session = SchoolSession.find

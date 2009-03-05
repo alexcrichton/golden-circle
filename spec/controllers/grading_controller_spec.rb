@@ -23,10 +23,10 @@ describe GradingController do
     end
 
     it 'should find the correct class of schools and level of teams' do
-      School.should_receive(:small_schools).and_return([mock_school])
-      mock_school.stub!(:teams).and_return([])
-      mock_school.should_receive(:wizard_team).and_return(mock_team)
-      mock_team.stub!(:students).and_return([mock_student])
+      School.should_receive(:small).and_return([mock_school])
+      mock_school.should_receive(:teams)
+#      mock_school.should_receive(:wizard).and_return(mock_team)
+#      mock_team.stub!(:students).and_return([mock_student])
       get :statistics, :level => 'Wizard', :class => 'Small'
     end
 

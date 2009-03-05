@@ -16,7 +16,7 @@
     <th>Sweepstakes Score</th>
   </tr>
   <%- @schools.each_with_index do |school, i| -%>
-    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+    <tr class="<%= rowclass(i) %>">
       <td class="num"><%= @schools_rank[i] %></td>
       <td><%= h(school.name) %></td>
       <td class="num"><%= school.teams.apprentice.first.team_score %></td>
@@ -37,7 +37,7 @@
     <th>Total Score</th>
   </tr>
   <%- @teams.each_with_index do |team, i| -%>
-    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+    <tr class="<%= rowclass(i) %>">
       <td class="num"><%= @teams_rank[i] %></td>
       <td><%= h(team.school.name) %></td>
       <td class="num"><%= team.student_score_sum %></td>
@@ -57,7 +57,7 @@
     <th>Score</th>
   </tr>
   <%- @students.each_with_index do |student, i| -%>
-    <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+    <tr class="<%= rowclass(i) %>">
       <td class="num"><%= @students_rank[i] %></td>
       <td><%= h(student.first_name + " " + student.last_name) %></td>
       <td colspan=2><%= student.team.school.name %></td>

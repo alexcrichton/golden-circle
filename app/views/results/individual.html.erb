@@ -16,8 +16,8 @@
           <th>School</th>
           <th>Score</th>
         </tr>
-        <%- @schools.send(klass).collect{ |s| s.teams.send(level).first.students }.flatten.each_with_index do |student, i| -%>
-          <tr class="<%= i % 2 == 0 ? 'even' : 'odd' %>">
+        <%- @schools.send(klass).collect{ |s| s.teams.send(level).first.students.upper_scores }.flatten.sort_by(&:test_score).each_with_index do |student, i| -%>
+          <tr class="<%= rowclass(i) %>">
             <td><%= h student.name %></td>
             <td><%= h student.team.school.name %></td>
             <td><%= student.test_score %></td>
