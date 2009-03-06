@@ -3,24 +3,25 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe GradingController do
 
   include MockSchoolHelper
+  include MockTeamHelper
 
-  describe "GET /stats" do
-    it 'should redirect anonymous users to the login path' do
-      get :statistics
-      response.should redirect_to(login_path)
-    end
-
-    it 'should redirect non-admin users to the login path' do
-      controller.stub!(:current_school).and_return(mock_school(:admin => false))
-      get :statistics
-      response.should redirect_to(login_path)
-    end
-    it 'should allow admin users' do
-      controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      get :statistics
-      response.should be_success
-    end
-  end
+#  describe "GET /stats" do
+#    it 'should redirect anonymous users to the login path' do
+#      get :statistics
+#      response.should redirect_to(login_path)
+#    end
+#
+#    it 'should redirect non-admin users to the login path' do
+#      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+#      get :statistics
+#      response.should redirect_to(login_path)
+#    end
+#    it 'should allow admin users' do
+#      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+#      get :statistics
+#      response.should be_success
+#    end
+#  end
 
   describe "GET /grading/teams" do
     it 'should redirect anonymous users to the login path' do
@@ -90,8 +91,8 @@ describe GradingController do
     end
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      Team.stub!(:find).and_return(mock_model(Team, :students => []))
-      put :update_students, :team_id => 1
+      Team.stub!(:find).and_return(mock_team(:students => [], :student_scores_checked= => true))
+      put :update_students, :team_id => 1, :team => {}
       response.should be_success
     end
   end

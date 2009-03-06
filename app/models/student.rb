@@ -1,13 +1,10 @@
 class Student < ActiveRecord::Base
 
-  WIZARD = 'Wizard'
-  APPRENTICE = 'Apprentice'
-
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :first_name, :scope => [:last_name, :team_id], :case_sensitive => false
   validates_numericality_of :test_score,
                             :only_integer => true,
-                            :less_than_or_equal_to => Settings.max_student_score,
+                            :less_than_or_equal_to => 25,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
 
@@ -19,6 +16,7 @@ class Student < ActiveRecord::Base
 
   named_scope :winners, :order => 'test_score DESC, last_name ASC, first_name ASC'
   named_scope :upper_scores, :conditions => ['test_score >= ?', 20]
+  named_scope :team_contributors, :order => 'test_score DESC', :limit => 5, :select => 'test_score'
 
   def name
     first_name + " " + last_name

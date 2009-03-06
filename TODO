@@ -1,15 +1,16 @@
 [ ] checking status
 	[ ] team test score
 	[ ] team's individual scores
-[ ] /results page
+[x] /results page
 [ ] statistics have more options
 	[ ] blank student scores
 	[ ] blank team scores	
-[ ] exhibition teams as option?
+[x] exhibition teams as option?
+	[ ] add student link?
 
 [ ] delete all scores?
 [ ] delete all schools?
-[ ] CREATE SCHOOLS AFTER  DEADLINE
+[x] CREATE SCHOOLS AFTER  DEADLINE
 [ ] configuration
 	[ ] set deadline
 	[ ] set max team score

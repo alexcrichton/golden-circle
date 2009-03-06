@@ -1,6 +1,6 @@
 class AddExhibitionOption < ActiveRecord::Migration
   def self.up
-    add_column :teams, :is_exhibition, :boolean
+    add_column :teams, :is_exhibition, :boolean, :default => true
   end
 
   def self.down

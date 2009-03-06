@@ -53,8 +53,6 @@ class SchoolsController < ApplicationController
       flash[:notice] = 'School was successfully created.'
       redirect_to(@school)
     else
-      puts @school.errors.size
-      puts @school.errors.on_base
       render :action => "new"
     end
   end

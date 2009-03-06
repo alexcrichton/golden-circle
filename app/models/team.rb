@@ -1,52 +1,49 @@
 class Team < ActiveRecord::Base
 
+  WIZARD = 'Wizard'
+  APPRENTICE = 'Apprentice'
+
   has_many :students,
            :attributes => true,
            :discard_if => :blank?,
            :dependent => :destroy,
-           :validate => false,
-           :order => ['last_name ASC, first_name ASC']
+           :validate => false
   belongs_to :school
 
-  validates_inclusion_of :level, :in => [Student::WIZARD, Student::APPRENTICE]
-  validates_uniqueness_of :level, :scope => :school_id
+  validates_inclusion_of :level, :in => [Team::WIZARD, Team::APPRENTICE]
   validates_associated :students, :message => 'are invalid'
   validates_size_of :students,
-                    :maximum => Settings.max_students_on_team,
-                    :message => "have a maximum of #{Settings.max_students_on_team} allowed"
+                    :maximum => 15,
+                    :message => "have a maximum of 15 allowed"
   validates_numericality_of :test_score,
                             :only_integer => true,
-                            :less_than_or_equal_to => Settings.max_team_score,
+                            :less_than_or_equal_to => 30,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
   attr_protected :test_score, :test_score_checked, :student_scores_checked
 
-  named_scope :wizard, :conditions => ['level = ?', Student::WIZARD], :limit => 1
-  named_scope :apprentice, :conditions => ['level = ?', Student::APPRENTICE], :limit => 1
+  named_scope :non_exhibition, :conditions => {:is_exhibition => false}
+  named_scope :exhibition, :conditions => {:is_exhibition => true}
+  named_scope :wizard, :conditions => {:level => Team::WIZARD}
+  named_scope :apprentice, :conditions => {:level => Team::APPRENTICE}
   named_scope :participating, :conditions => ['students_count > ?', 0]
-  named_scope :winners, :order => 'team_score DESC'
-
-  before_save :recalculate_team_score
+  named_scope :sorted, :order => 'schools.name ASC', :include => [:school]
 
   def team_test_score
     return 0 if test_score.nil?
-    test_score * Settings.team_test_points_per_question
+    test_score * 5
   end
 
-  def team_score
-    if students.reject{ |s| s.updated_at.nil? || s.updated_at < self.updated_at }.size > 0
-      recalculate_team_score
-      save
-    end
-    super
+  def blank?
+    students.size == 0
   end
 
   def student_score_sum
-    students.map(&:test_score).reject(&:nil?).sort.reverse[0..(Settings.test_scores_to_count - 1)].sum
+    students.team_contributors.map(&:test_score).reject(&:nil?).sum
   end
 
-  def recalculate_team_score
-    self.team_score = team_test_score + student_score_sum
+  def team_score
+    team_test_score + student_score_sum
   end
 
 end

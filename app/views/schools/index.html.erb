@@ -22,7 +22,7 @@
     <td class="num"><%= @small_schools.size %></td>
     <td class="num"><b><%= @schools.size %></b></td>
   </tr>
-  <% [Student::APPRENTICE, Student::WIZARD, :all].each do |level| %>
+  <% [Team::APPRENTICE, Team::WIZARD, :all].each do |level| %>
     <tr>
       <th><%= level == :all ? 'Total Student' : level %> Count:</th>
       <td class="num"><%= student_count(@large_schools, level) %></td>

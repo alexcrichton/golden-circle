@@ -1,19 +1,31 @@
 <div class="team">
+  <%- if team.is_exhibition -%>
+    <hr/>
+  <%- end -%>
+  <%= f.hidden_field :is_exhibition %>
   <p>
-    <%= f.label :level, 'Team level:' %> <%= team.level %>
+    <%= f.label :level, 'Team level:' %>
+    <%- if team.is_exhibition -%>
+      <%= f.select :level, [Team::APPRENTICE, Team::WIZARD] %>
+    <%- else -%>
+      <%= team.level %>
+    <%- end -%>
+    <%- if team.is_exhibition -%>
+      <p><%= f.remove_link '[Remove this team]', :class => 'controls' %></p>
+    <%- end -%>
   </p>
   <%= f.hidden_field :level %>
   <%= small_errors(team.students) %>
-  <table id="<%= team.level.downcase.pluralize %>" class="noborder">
+  <table id="<%= team.id %>" class="noborder">
     <caption>
-      Students (<%= team.students.size %>/<%= Settings.max_students_on_team %>)
+      Students <%= team.students.size %>/15
     </caption>
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
       <th>&nbsp;</th>
     </tr>
-    <%= f.render_associated_form(team.students, :new => (team.students.size >= Settings.max_students_on_team ? 0 : 1)) %>
+    <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
   </table>
-  <%= f.add_associated_link('add', team.students.build, :container => "##{team.level.downcase.pluralize}") %>
+  <%= f.add_associated_link('add', team.students.build, :container => "##{team.  id}") %>
 </div>

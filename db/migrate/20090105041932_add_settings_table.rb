@@ -5,12 +5,12 @@ class AddSettingsTable < ActiveRecord::Migration
       t.text   :value, :null => true
       t.timestamps
     end
-    Settings.max_student_score = 25
-    Settings.large_school_cutoff = 200
-    Settings.max_students_on_team = 15
-    Settings.max_team_score = 30
-    Settings.test_scores_to_count = 5
-    Settings.team_test_points_per_question = 5
+#    Settings.max_student_score = 25
+#    Settings.large_school_cutoff = 200
+#    Settings.max_students_on_team = 15
+#    Settings.max_team_score = 30
+#    Settings.test_scores_to_count = 5
+#    Settings.team_test_points_per_question = 5
     Settings.cost_per_student = 4
     Settings.deadline = Time.zone.local(2009, 2, 24, 24, 0, 0)
   end

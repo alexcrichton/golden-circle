@@ -2,7 +2,7 @@
   <legend>Statistics</legend>
   <%- form_tag statistics_path do -%>
     <%= label_tag :level, 'Division:' %>
-    <%= select_tag :level, options_for_select([Student::WIZARD, Student::APPRENTICE]) %>
+    <%= select_tag :level, options_for_select([Team::WIZARD, Team::APPRENTICE]) %>
     <br />
     <%= label_tag :class, 'School Size:' %>
     <%= select_tag :class, options_for_select(['Large', 'Small']) %>

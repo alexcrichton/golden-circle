@@ -25,17 +25,19 @@ class GradingController < ApplicationController
     params[:students] ||= {}
     params[:students].each_pair do |i, v|
       s = @student_hash[i.to_i]
+      next if s.test_score == v['test_score']
       s.test_score = v['test_score']
       s.save
     end
-    @team.student_scores_checked = params[:team][:student_scores_checked]
-    @team.save
+    if (@team.student_scores_checked != params[:team][:student_scores_checked])
+      @team.student_scores_checked = params[:team][:student_scores_checked]
+      @team.save
+    end
     render :action => 'students'
   end
 
-  def config  
+  def config
   end
-
 
   protected
 
@@ -48,10 +50,7 @@ class GradingController < ApplicationController
 
   def load_teams
     @team_hash = {}
-    @teams = Team.find(:all,
-                       :include => [:school],
-                       :conditions => ['level = ? AND students_count > ?', params[:level], 0],
-                       :order => "schools.name ASC")
+    @teams = Team.send(params[:level].downcase).participating.sorted
     @teams.each { |t| @team_hash[t.id] = t}
   end
 

@@ -21,13 +21,17 @@ describe SchoolsController do
 
   describe "responding to POST /schools" do
 
+    before(:each) do
+      Settings.stub!(:deadline).and_return(Time.zone.local(2009,2,25,24,0,0))
+    end
+
     it "should allow anynymous" do
       post :create
       response.should be_success
     end
 
     it 'should allow anyone' do
-      controller.stub!(:current_school).and_return(mock_school)
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
       post :create
       response.should be_success
     end

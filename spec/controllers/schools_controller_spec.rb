@@ -33,7 +33,7 @@ describe SchoolsController do
   describe "responding to POST /schools" do
 
     before(:each) do
-      Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))
+      Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))   
     end
 
     describe  "with successful save" do

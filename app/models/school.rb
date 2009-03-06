@@ -2,7 +2,7 @@ class School < ActiveRecord::Base
 
   acts_as_authentic
 
-  has_many :teams,    :attributes => true, :dependent => :destroy, :validate => false
+  has_many :teams,    :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
   has_many :proctors, :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
   has_many :students, :through => :teams
 
@@ -30,9 +30,8 @@ class School < ActiveRecord::Base
   before_save :strip_name, :recalculate_school_score
 
   named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
-  named_scope :non_exhibition, :conditions => ['name NOT LIKE ?', 'Exhibition']
-  named_scope :large, :conditions => ['enrollment >= ?', Settings.large_school_cutoff], :order => 'name ASC'
-  named_scope :small, :conditions => ['enrollment < ?', Settings.large_school_cutoff], :order => 'name ASC'
+  named_scope :large, :conditions => ['enrollment >= ?', 200], :order => 'name ASC'
+  named_scope :small, :conditions => ['enrollment < ?', 200], :order => 'name ASC'
   named_scope :unknown, :conditions => {:enrollment => nil}, :order => 'name ASC'
   named_scope :winners, :order => 'school_score DESC, name ASC'
 
@@ -47,7 +46,7 @@ class School < ActiveRecord::Base
 
   def school_class
     return 'unknown' if enrollment.nil?
-    if enrollment >= Settings.large_school_cutoff
+    if enrollment >= 200
       'Large School'
     else
       'Small School'
@@ -63,7 +62,7 @@ class School < ActiveRecord::Base
   end
 
   def recalculate_school_score
-    self.school_score = teams.map(&:team_score).sum
+    self.school_score = teams.non_exhibition.map(&:team_score).reject(&:nil?).sum
   end
 
   private
@@ -81,8 +80,11 @@ class School < ActiveRecord::Base
   end
 
   def add_teams
-    self.teams << Team.create(:level => Student::WIZARD)
-    self.teams << Team.create(:level => Student::APPRENTICE)
+    [Team::APPRENTICE,Team::WIZARD].each do |level|
+      team = Team.create(:level => level)
+      team.is_exhibition = false
+      self.teams << team
+    end
   end
 
 end
