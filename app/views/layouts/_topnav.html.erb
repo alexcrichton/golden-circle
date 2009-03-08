@@ -5,7 +5,7 @@
     <li><%= link_to 'Roster', schools_path %></li>
     <li><%= link_to 'Grading', grading_config_path %></li>
   <%- end -%>
-  <%- if current_school -%>
-    <li><%= link_to 'Results', statistics_path %></li>
+  <%- if current_school && current_school.admin -%>
+    <li><%= link_to('Results', current_school.admin ? statistics_path : school_results_path) %></li>
   <%- end -%>
 </ul>

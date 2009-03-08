@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090304231437) do
+ActiveRecord::Schema.define(:version => 20090305041932) do
 
   create_table "proctors", :force => true do |t|
     t.string   "name"
@@ -66,9 +66,10 @@ ActiveRecord::Schema.define(:version => 20090304231437) do
     t.datetime "updated_at"
     t.integer  "test_score"
     t.integer  "students_count",         :default => 0
-    t.boolean  "team_score_checked"
-    t.boolean  "student_scores_checked"
-    t.boolean  "is_exhibition"
+    t.boolean  "team_score_checked",     :default => false, :null => false
+    t.boolean  "student_scores_checked", :default => false, :null => false
+    t.boolean  "is_exhibition",          :default => true,  :null => false
+    t.integer  "exhibition_number"
     t.integer  "team_score"
   end
 

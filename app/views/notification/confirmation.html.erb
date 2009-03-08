@@ -1,44 +1,46 @@
-<img src="http://goldencircle.academycommunity.com/images/logo.png" alt="Golden Circle" /><br />
+<img src="<%= root_url + image_path("logo.png") %>" alt="Golden Circle"><br/>
 <br />
 Thank you for signing up your school for this competition! We would like you to validate the information below
 to ensure that it is accurate. The following is what is currently saved in our database:<br />
 <br>
 <p>
-  <b>School name:</b> <%= @school.name %>
+  <b>School name:</b> <%= @school.name %><br />
+  <b>Contact name:</b> <%= @school.contact_name %><br />
+  <b>Contact phone:</b> <%= @school.contact_phone %><br />
+  <b>9th grade school enrollment:</b> <%= @school.enrollment %> (<%= @school.school_class %>)
 </p>
-<p>
-  <b>Contact name:</b> <%= @school.contact_name %>
-</p>
-<p>
-  <b>Contact phone:</b> <%= @school.contact_phone %>
-</p>
-<p>
-  <b>9th grade school enrollment:</b> <%= @school.enrollment %> (needed to classify the school as large or small)
-</p>
-<h2>Apprentice Team</h2>
-<%= @school.apprentice_team.students.size %> out of 15 max Students Registered
-<ol>
-  <% for student in @school.apprentice_team.students %>
-    <li><%= student.first_name + " " + student.last_name %></li>
-  <% end %>
-</ol>
-<h2>Wizard Team</h2>
-<%= @school.wizard_team.students.size %> out of 15 max Students Registered
-<ol>
-  <% for student in @school.wizard_team.students %>
-    <li><%= student.first_name + " " + student.last_name %></li>
-  <% end %>
-</ol>
+<hr/>
+<h1>Team Information</h1>
+<%- [:apprentice, :wizard].each do |level| -%>
+  <h2><%= level.to_s.capitalize %> Team</h2>
+  <%- team = @school.teams.non_exhibition.send(level).first -%>
+  <%= team.students.size %> out of 15 max Students Registered
+  <ol>
+    <% for student in team.students.by_name %>
+      <li><%=h student.name %></li>
+    <% end %>
+  </ol>
+<%- end -%>
+<h2>Exhibition Teams</h2>
+<%- @school.teams.exhibition.each do |team| -%>
+  <h4>ID: <%= team.id %></h4>
+  <ol>
+    <%- team.students.by_name.each do |student| -%>
+      <li><%=h student.name %></li>
+    <%- end -%>
+  </ol>
+<%- end -%>
 <br />
 <br />
 If any of the above information is inaccurate, please correct it on the
-<a href="http://goldencircle.academycommunity.com">registration website</a>.
+<%= link_to 'registration website', root_url %>.
 Otherwise, your registration is complete and we will see you and your students on the competition day!.
 <br />
 <br />
-As a reminder, the tournament is scheduled for March 3, 2009, and you will need to bring a check for
+As a reminder, the tournament is scheduled for <%= Settings.event_date.strftime '%B %d, %Y'%>, and you will need to bring a check for
 <span style="color:green;font-weight:bold;"><%= number_to_currency @school.cost %></span> payable to "GT Education"
 to the registration table on this date.<br />
+After the tournament, results will be available on the <%= link_to 'website', school_results_url %>.
 Thank you for registering for the Golden Circle Tournament!<br />
 <br />
 <br />

@@ -1,15 +1,15 @@
-[ ] checking status
-	[ ] team test score
-	[ ] team's individual scores
+[x] checking status
+	[x] team test score
+	[x] team's individual scores
 [x] /results page
-[ ] statistics have more options
-	[ ] blank student scores
-	[ ] blank team scores	
+[x] statistics have more options
+	[x] blank student scores
+	[x] blank team scores	
 [x] exhibition teams as option?
-	[ ] add student link?
+	[x] add student link?
 
 [ ] delete all scores?
-[ ] delete all schools?
+[x] delete all schools?
 [x] CREATE SCHOOLS AFTER  DEADLINE
 [ ] configuration
 	[ ] set deadline
@@ -20,5 +20,3 @@
 	[ ] information file upload
 	[ ] right hand links and stuff
 	[ ] backup database? - load from as well
-
-

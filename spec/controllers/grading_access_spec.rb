@@ -4,6 +4,7 @@ describe GradingController do
 
   include MockSchoolHelper
   include MockTeamHelper
+  include MockScopeHelper
 
 #  describe "GET /stats" do
 #    it 'should redirect anonymous users to the login path' do
@@ -54,7 +55,7 @@ describe GradingController do
     end
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      Team.stub!(:find).and_return(mock_model(Team, :students => []))
+      Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name)))
       get :students, :team_id => 1
       response.should be_success
     end
@@ -91,7 +92,7 @@ describe GradingController do
     end
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      Team.stub!(:find).and_return(mock_team(:students => [], :student_scores_checked= => true))
+      Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name), :student_scores_checked= => true))
       put :update_students, :team_id => 1, :team => {}
       response.should be_success
     end

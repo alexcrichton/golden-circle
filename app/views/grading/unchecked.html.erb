@@ -1,0 +1,22 @@
+<%- content_for :sidebar do -%>
+  <%= render :partial => 'sidebar' %>
+<%- end -%>
+
+<h1>Unchecked Scores</h1>
+<p>
+  In other words, those teams and students which haven't had their scores checked yet.<br/>
+  This is slightly important......
+</p>
+<h3>Team Scores</h3>
+<ul>
+  <%- @unchecked_team_scores.each do |team| -%>
+    <li><%= link_to team_name(team), grading_teams_path(:level => team.level) %></li>
+  <%- end -%>
+</ul>
+<hr />
+<h3>Students' Scores</h3>
+<ul>
+  <%- @unchecked_student_scores.each do |team| -%>
+    <li><%= link_to team_name(team), grading_students_path(:team_id => team.id) %></li>
+  <%- end -%>
+</ul>

@@ -1,6 +1,6 @@
 <div id="login_links">
   <% if current_school %>
-    Logged in as: <%= link_to current_school.name, current_school %> | <%= link_to 'Log out', logout_path %>
+    Logged in as: <%= link_to h(current_school.name), current_school %> | <%= link_to 'Log out', logout_path %>
   <% else %>
     <%= link_to 'Log in', login_path %> | <%= link_to 'Register', new_school_path %>
   <% end %>

@@ -27,18 +27,18 @@
   <hr />
   <h3><%= level.to_s.capitalize %> Team Results</h3>
   <%- [:large, :small].each do |klass| -%>
-    <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
+    <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
       <table>
         <tr>
-          <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
+          <td colspan="2" class="separator"><%= klass.to_s.capitalize %> Schools</td>
         </tr>
         <tr>
           <th>School</th>
           <th>Score</th>
         </tr>
-        <%- @schools.send(klass).map { |s| s.teams.send(level).winners }.flatten.sort_by(&:team_score).reverse.each do |team| -%>
+        <%- @teams.send(klass).send(level).each do |team| -%>
           <tr class="<%= cycle('even', 'odd') %>">
-            <td><%= h team.school.name %></td>
+            <td><%= team_name(team) %></td>
             <td><%= team.team_score %></td>
           </tr>
         <%- end -%>

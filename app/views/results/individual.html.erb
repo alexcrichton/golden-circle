@@ -15,10 +15,10 @@
         <th>School</th>
         <th>Score</th>
       </tr>
-      <%- @schools.send(klass).collect{ |s| s.teams.send(level).first.students.upper_scores }.flatten.sort_by(&:test_score).reverse.each do |student| -%>
+      <%- @students.send(klass).send(level).each do |student| -%>
         <tr class="<%= cycle('even', 'odd') %>">
           <td><%= h student.name %></td>
-          <td><%= h student.team.school.name %></td>
+          <td><%= team_name(student.team) %></td>
           <td><%= student.test_score %></td>
         </tr>
       <%- end -%>

@@ -9,15 +9,14 @@
 
 Find:<br />
 <input name="search" type="text" autocomplete="off">
-<br />
-
 <hr />
-<% form_tag(grading_students_path(:team_id => @team.id), :method => :put) do %>
-  <%= error_messages_for :object => @students %>
+<%- form_tag(grading_students_path(:team_id => @team.id), :method => :put) do -%>
+  <%= error_messages_for :object => [@students, @team] %>
   <%- fields_for("team", @team) do |tf| -%>
     <%= tf.check_box :student_scores_checked %>
     <%= tf.label :student_scores_checked, 'These scores have been checked at least once and they are all correctly entered.' %>
   <%- end -%>
+  <br/>
   <table border=1 id="students">
     <tr>
       <td class="separator" colspan="4">All <%= @team.level %> Students of <%= @team.school.name %></td>
@@ -39,5 +38,6 @@ Find:<br />
       <%- end -%>
     <%- end -%>
   </table>
-  <%= submit_tag "Submit Changes", :onclick => "closeOk()" %>
-<% end %>
+  <%= submit_tag "Submit Changes", :onclick => "closeOk()" %> or
+  <%= link_to 'Back to teams', grading_teams_path(:level => @team.level) %>
+<%- end -%>

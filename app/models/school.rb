@@ -1,5 +1,7 @@
 class School < ActiveRecord::Base
 
+  CUTOFF = 200;
+
   acts_as_authentic
 
   has_many :teams,    :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
@@ -30,8 +32,8 @@ class School < ActiveRecord::Base
   before_save :strip_name, :recalculate_school_score
 
   named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
-  named_scope :large, :conditions => ['enrollment >= ?', 200], :order => 'name ASC'
-  named_scope :small, :conditions => ['enrollment < ?', 200], :order => 'name ASC'
+  named_scope :large, :conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'
+  named_scope :small, :conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'
   named_scope :unknown, :conditions => {:enrollment => nil}, :order => 'name ASC'
   named_scope :winners, :order => 'school_score DESC, name ASC'
 
@@ -46,7 +48,7 @@ class School < ActiveRecord::Base
 
   def school_class
     return 'unknown' if enrollment.nil?
-    if enrollment >= 200
+    if enrollment >= CUTOFF
       'Large School'
     else
       'Small School'
@@ -81,9 +83,7 @@ class School < ActiveRecord::Base
 
   def add_teams
     [Team::APPRENTICE,Team::WIZARD].each do |level|
-      team = Team.create(:level => level)
-      team.is_exhibition = false
-      self.teams << team
+      self.teams << Team.create(:level => level, :is_exhibition => false)
     end
   end
 

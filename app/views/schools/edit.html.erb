@@ -70,21 +70,22 @@
     <h3 style="font-weight:bold;text-align:center">Teams</h3>
     <%= small_errors(@school.teams) %>
     <div class="span-8 colborder">
-      <%= f.render_associated_form(@school.teams.non_exhibition.apprentice.first) %>
+      <%- # see note below for why teams are accessed this way -%>
+      <%= f.render_associated_form(@school.teams[0]) %>
     </div>
     <div class="span-8 last">
-      <%= f.render_associated_form(@school.teams.non_exhibition.wizard.first) %>
+      <%= f.render_associated_form(@school.teams[1]) %>
     </div>
   </div>
 
   <hr />
 
-  <h3 style="font-weight:bold;text-align:center">Exhibition Teams <%= f.add_associated_link('[add]', @school.teams.exhibition.build, :container => "#exhibition") %></h3>
+  <h3 style="font-weight:bold;text-align:center">Exhibition Teams <%= special_team_link(f, @school.teams.exhibition.build(:is_exhibition => true)) %></h3>
   <p>
-    All Exhibition teams will still participate, although their scores will not count towards the school's total score.
+    All Exhibition teams will still participate, although their scores will not count towards the school's total score. Once a team is created, it will be assigned an ID number to identify it.
   </p>
   <div id="exhibition">
-    <%# Use this type of access so the errors are rendered correctly when the form has a problem %>
+    <%- # Use this type of access so the errors are rendered correctly when the form has a problem, first two teams are the official ones -%>
     <%= f.render_associated_form(@school.teams[2..@school.teams.length], :new => 0) %>
   </div>
 

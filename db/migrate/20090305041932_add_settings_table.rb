@@ -13,6 +13,7 @@ class AddSettingsTable < ActiveRecord::Migration
 #    Settings.team_test_points_per_question = 5
     Settings.cost_per_student = 4
     Settings.deadline = Time.zone.local(2009, 2, 24, 24, 0, 0)
+    Settings.event_date = Time.zone.local(2009, 3, 3, 12, 0, 0)
   end
 
   def self.down

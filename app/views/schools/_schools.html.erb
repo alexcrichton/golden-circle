@@ -20,8 +20,11 @@
       <td class="num"><%= student_count(school, Team::WIZARD) %></td>
       <td class="num"><%= student_count(school, :all) %></td>
       <td>
-        <%= link_to 'App', print_school_path(school, :level => Team::APPRENTICE) %> |
-        <%= link_to 'Wiz', print_school_path(school, :level => Team::WIZARD) %> |
+        <%= link_to 'App', print_team_path(school.teams.non_exhibition.apprentice.first) %> |
+        <%= link_to 'Wiz', print_team_path(school.teams.non_exhibition.wizard.first) %> |
+        <%- school.teams.exhibition.each do |team| -%>
+          <%= link_to "Ex #{team.id}", print_team_path(team) %> |
+        <%- end -%>
         <%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %>
       </td>
     </tr>

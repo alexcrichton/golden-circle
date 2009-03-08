@@ -1,21 +1,16 @@
 class ResultsController < ApplicationController
 
   before_filter :require_admin, :only => [:statistics]
-before_filter :require_school
+  before_filter :require_school
 
   def statistics
-      params[:level] ||= Student::WIZARD
+      params[:level] ||= Team::WIZARD
       params[:class] ||= 'Large'
 
-      @schools = School.send("#{params[:class].downcase}", :include => {:teams => :students}).sort_by(&:school_score).reverse
-  #    @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
-      team_level = params[:level].downcase
-      @teams = @schools.map { |s| s.teams.participating.send(team_level) }.flatten
+      @schools = School.send(params[:class].downcase).winners
+
+      @teams = @schools.map { |s| s.teams.participating.send(params[:level].downcase) }.flatten
       @teams = @teams.sort_by(&:team_score).reverse
-      # TODO: This statement prevents extra queries, b/c the eager loading doesn't set the associations backwards
-      # problem, though, is that this screws w/ the counter cache and takes longer, so isn't as simple as the
-      # one above...
-      #@teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database
 
       @students = @teams.map(&:students).flatten.sort_by { |s| s.test_score || 0 }.reverse
 
@@ -24,18 +19,17 @@ before_filter :require_school
       @students_rank = rank(@students, :test_score)
   end
 
-
-
   def school
     @school = current_school
   end
 
   def sweepstakes
-    @schools = School.non_exhibition.winners
+    @schools = School.winners
+    @teams = Team.non_exhibition.participating.winners
   end
 
   def individual
-    @schools = School.non_exhibition
+    @students = Student.winners.upper_scores
   end
 
   protected

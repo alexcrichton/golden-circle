@@ -89,13 +89,13 @@ describe GradingController do
 
     it 'should find the team' do
       Team.should_receive(:find).with('434', :include => [:students, :school]).and_return(mock_team)
-      mock_team.stub!(:students).and_return([mock_student])
+      mock_team.stub!(:students).and_return(mock_scope([mock_student], :by_name))
       get :students, :team_id => '434'
     end
 
     it 'should assign the found team to the team variable and students to students' do
       Team.stub!(:find).and_return(mock_team)
-      mock_team.should_receive(:students).and_return([mock_student])
+      mock_team.should_receive(:students).and_return(mock_scope([mock_student], :by_name))
       get :students, :team_id => '3'
       assigns(:team).should == mock_team
       assigns(:students).should == [mock_student]
@@ -139,7 +139,7 @@ describe GradingController do
   describe "PUT /grading/students/1" do
     before(:each) do
       controller.stub!(:require_admin)
-      mock_team(:students => [mock_student], :student_scores_checked= => true)
+      mock_team(:students => mock_scope([mock_student], :by_name), :student_scores_checked= => true)
     end
 
     it 'should succeed' do

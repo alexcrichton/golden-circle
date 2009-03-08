@@ -1,6 +1,6 @@
 <div class="team">
   <%- if team.is_exhibition -%>
-    <hr/>
+    <hr />
   <%- end -%>
   <%= f.hidden_field :is_exhibition %>
   <p>
@@ -9,23 +9,26 @@
       <%= f.select :level, [Team::APPRENTICE, Team::WIZARD] %>
     <%- else -%>
       <%= team.level %>
+      <%= f.hidden_field :level %>
     <%- end -%>
     <%- if team.is_exhibition -%>
-      <p><%= f.remove_link '[Remove this team]', :class => 'controls' %></p>
+      <%= f.remove_link '[Remove this team]', :class => 'controls' %>
     <%- end -%>
   </p>
-  <%= f.hidden_field :level %>
+  <%- if team.is_exhibition && !team.new_record? -%>
+    <p><label>Team ID Number:</label> <%= team.id %></p>
+  <%- end -%>
   <%= small_errors(team.students) %>
-  <table id="<%= team.id %>" class="noborder">
+  <table id="team<%= team.id %>" class="noborder">
     <caption>
-      Students <%= team.students.size %>/15
+      Students (<%= team.students.size %>/15)
     </caption>
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
       <th>&nbsp;</th>
     </tr>
-    <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
+    <%= f.render_associated_form(team.students.by_name, :new => (team.students.size >= 15 ? 0 : 1)) %>
   </table>
-  <%= f.add_associated_link('add', team.students.build, :container => "##{team.  id}") %>
+  <%= f.add_associated_link('add', team.students.build, :container => "#team#{team.id}") %>
 </div>

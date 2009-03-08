@@ -1,13 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :schools, :member => {:print => :get}, :collection => {:show_current => :get, :email => :put}
+  map.resources :schools, :collection => {:show_current => :get, :email => :put}
 
   map.grading_config '/grading/config', :controller => 'grading', :action => 'config'
+  map.print_team '/print/:id', :controller => 'grading', :action => 'print'
+  map.blank_scores '/grading/blanks', :controller => 'grading', :action => 'blanks'
+  map.unchecked_scores '/grading/unchecked', :controller => 'grading', :action => 'unchecked'
   map.grading_teams '/grading/teams/:level', :controller => 'grading', :action => 'update_teams', :conditions => { :method => :put }
   map.grading_teams '/grading/teams/:level', :controller => 'grading', :action => 'teams'
   map.grading_students '/grading/students/:team_id', :controller => 'grading', :action => 'update_students', :conditions => {:method => :put}
   map.grading_students '/grading/students/:team_id', :controller => 'grading', :action => 'students'
-  
+
   map.statistics '/results', :controller => 'results', :action => 'statistics'
   map.school_results '/results/school', :controller => 'results', :action => 'school'
   map.sweepstakes_results '/results/sweepstakes', :controller => 'results', :action => 'sweepstakes'

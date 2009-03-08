@@ -33,7 +33,7 @@ describe SchoolsController do
   describe "responding to POST /schools" do
 
     before(:each) do
-      Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))   
+      Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))
     end
 
     describe  "with successful save" do
@@ -212,44 +212,44 @@ describe SchoolsController do
 
   end
 
-  describe "responding to GET /schools/1/print" do
-
-    before(:each) do
-      controller.stub!(:require_admin)
-      mock_school(:teams => mock_scope([], :wizard))
-    end
-
-    it "should succeed" do
-      School.stub!(:find).and_return(mock_school)
-      get :print, :id => "1", :level => 'wizard'
-      response.should be_success
-    end
-
-    it "should render the 'print' template" do
-      School.stub!(:find).and_return(mock_school)
-      get :print, :id => "1", :level => 'wizard'
-      response.should render_template('print')
-    end
-
-    it "should find the requested school" do
-      School.should_receive(:find).with("37", {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
-      get :print, :id => "37", :level => 'wizard'
-    end
-
-    it "should assign the found school for the view" do
-      School.should_receive(:find).and_return(mock_school)
-      get :print, :id => "1", :level => 'wizard'
-      assigns[:school].should equal(mock_school)
-    end
-
-    it 'should assign the correct team for the view' do
-      School.should_receive(:find).and_return(mock_school)
-      mock_school.should_receive(:teams).and_return(mock_scope([mock_team], :wizard))
-      get :print, :id => '1', :level => 'wizard'
-      assigns[:team].should equal(mock_team)
-    end
-
-  end
+#  describe "responding to GET /schools/1/print" do
+#
+#    before(:each) do
+#      controller.stub!(:require_admin)
+#      mock_school(:teams => mock_scope([], :wizard))
+#    end
+#
+#    it "should succeed" do
+#      School.stub!(:find).and_return(mock_school)
+#      get :print, :id => "1", :level => 'wizard'
+#      response.should be_success
+#    end
+#
+#    it "should render the 'print' template" do
+#      School.stub!(:find).and_return(mock_school)
+#      get :print, :id => "1", :level => 'wizard'
+#      response.should render_template('print')
+#    end
+#
+#    it "should find the requested school" do
+#      School.should_receive(:find).with("37", {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
+#      get :print, :id => "37", :level => 'wizard'
+#    end
+#
+#    it "should assign the found school for the view" do
+#      School.should_receive(:find).and_return(mock_school)
+#      get :print, :id => "1", :level => 'wizard'
+#      assigns[:school].should equal(mock_school)
+#    end
+#
+#    it 'should assign the correct team for the view' do
+#      School.should_receive(:find).and_return(mock_school)
+#      mock_school.should_receive(:teams).and_return(mock_scope([mock_team], :wizard))
+#      get :print, :id => '1', :level => 'wizard'
+#      assigns[:team].should equal(mock_team)
+#    end
+#
+#  end
 
 
   describe "responding to PUT /schools/email" do

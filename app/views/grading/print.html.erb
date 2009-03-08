@@ -1,4 +1,4 @@
-<h1><%= @school.name %></h1>
+<h1><%= team_name(@team) %></h1>
 <h2><%= @school.school_class %> - <%= @team.level.classify.pluralize %></h2>
 <dl id="info" class="clearfix" style="width:80%">
   <dt>Contact name:</dt>
@@ -17,7 +17,7 @@
     <td class="separator">Last Name</td>
     <td class="separator">Score</td>
   </tr>
-  <% @team.students.each_with_index do |student, i| %>
+  <% @team.students.by_name.each_with_index do |student, i| %>
     <tr class="<%= cycle('even', 'odd') %>">
       <td class="num"><%= i + 1 %></td>
       <td><%= student.first_name %></td>
@@ -27,7 +27,7 @@
   <% end %>
 </table>
 <div class="span-12 colborder" style="margin:10px;">
-  <p><%= 5.times { "________ + "} %>= _________</p>
+  <p><%= (["________"] * 5).join " + " %> = _________</p>
   <i>Top 5 individual scores and sum.</i>
 
   <hr />

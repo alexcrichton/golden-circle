@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
   before_filter :load_school
   before_filter :require_school, :only => [:show_current]
   before_filter :require_owner, :only => [:update, :edit, :destroy, :show]
-  before_filter :require_admin, :only => [:index, :print, :email]
+  before_filter :require_admin, :only => [:index, :email]
 
   def index
     @schools = School.all
@@ -12,11 +12,6 @@ class SchoolsController < ApplicationController
     @unknown = @schools.unknown
     @proctors = @schools.collect{ |s| s.proctors }.flatten
 
-    render :layout => 'admin'
-  end
-
-  def print
-    @team = @school.teams.send("#{params[:level].downcase}").first
     render :layout => 'admin'
   end
 
@@ -66,12 +61,9 @@ class SchoolsController < ApplicationController
     # here, when all forms are deleted, no hash is passed here, and nothing is deleted.
     params[:school] ||= {}
     params[:school][:proctor_attributes] ||= {}
-
-    params[:school][:team_attributes] ||= {}
-    params[:school][:team_attributes].each_key do |key|
-      params[:school][:team_attributes][key][:student_attributes] ||= {} if key.to_s.match(/^\d+$/)
+    (params[:school][:team_attributes] ||= {}).each_pair do |team_id, team_attributes|
+      team_attributes[:student_attributes] ||= {} if team_id.to_s.match(/^\d+$/)
     end
-
     if @school.update_attributes(params[:school])
       flash[:notice] = 'School was successfully updated. Please review the form below, it is what was saved in the database.'
       redirect_to(@school)
