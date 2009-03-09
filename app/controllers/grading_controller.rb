@@ -56,9 +56,9 @@ class GradingController < ApplicationController
   end
 
   def update_configuration
-    Settings.event_date = convert_date(params[:settings], :event_date)
-    Settings.deadline = convert_date(params[:settings], :deadline)
-    Settings.cost_per_student = params[:settings][:cost_per_student].to_i
+    Settings.event_date = convert_date(params[:settings], :event_date) if params[:settings][:event_date]
+    Settings.deadline = convert_date(params[:settings], :deadline) if params[:settings][:deadline]
+    Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
     render :action => 'config'
   end
 

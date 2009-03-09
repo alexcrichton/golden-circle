@@ -6,48 +6,30 @@ describe GradingController do
   include MockTeamHelper
   include MockScopeHelper
 
-#  describe "GET /stats" do
-#    it 'should redirect anonymous users to the login path' do
-#      get :statistics
-#      response.should redirect_to(login_path)
-#    end
-#
-#    it 'should redirect non-admin users to the login path' do
-#      controller.stub!(:current_school).and_return(mock_school(:admin => false))
-#      get :statistics
-#      response.should redirect_to(login_path)
-#    end
-#    it 'should allow admin users' do
-#      controller.stub!(:current_school).and_return(mock_school(:admin => true))
-#      get :statistics
-#      response.should be_success
-#    end
-#  end
 
-#  describe "responding to GET /schools/1/print" do
-#
-#    it 'should redirect anonymous to the login page' do
-#      School.stub!(:find)
-#      get :print, :id => 1, :level => 'wizard'
-#      response.should redirect_to(login_path)
-#    end
-#
-#    it 'should redirect non-admins to the login page' do
-#      controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
-#      School.stub!(:find).and_return(mock_school)
-#      get :print, :id => 1, :level => 'wizard'
-#      response.should redirect_to(login_path)
-#    end
-#
-#    it 'should allow an admin school' do
-#      controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil
-#      School.stub!(:find).and_return(mock_school(:teams => mock_scope([], :wizard)))
-#      get :print, :id => 1, :level => 'wizard'
-#      response.should be_success
-#    end
-#
-#  end
-  
+  describe "responding to GET /schools/1/print" do
+
+    it 'should redirect anonymous to the login page' do
+      Team.stub!(:find)
+      get :print, :id => 1
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admins to the login page' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
+      Team.stub!(:find).and_return(mock_team)
+      get :print, :id => 1
+      response.should redirect_to(login_path)
+    end
+
+    it 'should allow an admin school' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil
+      Team.stub!(:find).and_return(mock_team(:school => mock_school))
+      get :print, :id => 1
+      response.should be_success
+    end
+  end
+
 
   describe "GET /grading/teams" do
     it 'should redirect anonymous users to the login path' do
@@ -82,6 +64,60 @@ describe GradingController do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
       Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name)))
       get :students, :team_id => 1
+      response.should be_success
+    end
+  end
+
+  describe "GET /grading/blanks" do
+    it 'should redirect anonymous users to the login path' do
+      get :blanks
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admin users to the login path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      get :blanks
+      response.should redirect_to(login_path)
+    end
+    it 'should allow admin users' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      get :blanks
+      response.should be_success
+    end
+  end
+
+  describe "GET /grading/unchecked" do
+    it 'should redirect anonymous users to the login path' do
+      get :unchecked
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admin users to the login path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      get :unchecked
+      response.should redirect_to(login_path)
+    end
+    it 'should allow admin users' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      get :unchecked
+      response.should be_success
+    end
+  end
+
+  describe "GET /grading/config" do
+    it 'should redirect anonymous users to the login path' do
+      get :config
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admin users to the login path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      get :config
+      response.should redirect_to(login_path)
+    end
+    it 'should allow admin users' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      get :config
       response.should be_success
     end
   end
@@ -122,4 +158,77 @@ describe GradingController do
       response.should be_success
     end
   end
+
+  describe "PUT /grading/backup_database" do
+    it 'should redirect anonymous users to the login path' do
+      put :backup_database
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admin users to the login path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      put :backup_database
+      response.should redirect_to(login_path)
+    end
+    it 'should allow admin users' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      put :backup_database
+      response.should be_success
+    end
+  end
+
+  describe "PUT /grading/restore_database" do
+    it 'should redirect anonymous users to the login path' do
+      put :restore_database
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admin users to the login path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      put :restore_database
+      response.should redirect_to(login_path)
+    end
+    it 'should allow admin users' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      put :restore_database
+      response.should be_success
+    end
+  end
+
+  describe "PUT /upload" do
+    it 'should redirect anonymous users to the login path' do
+      put :upload
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admin users to the login path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      put :upload
+      response.should redirect_to(login_path)
+    end
+    it 'should allow admin users' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      put :upload
+      response.should be_success
+    end
+  end
+
+  describe "PUT /grading/config" do
+    it 'should redirect anonymous users to the login path' do
+      put :update_configuration, :settings => {}
+      response.should redirect_to(login_path)
+    end
+
+    it 'should redirect non-admin users to the login path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      put :update_configuration, :settings => {}
+      response.should redirect_to(login_path)
+    end
+    it 'should allow admin users' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      put :update_configuration, :settings => {}
+      response.should be_success
+    end
+  end
+
 end
