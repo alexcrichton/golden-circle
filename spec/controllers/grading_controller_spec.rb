@@ -7,41 +7,6 @@ describe GradingController do
   include MockTeamHelper
   include MockStudentHelper
 
-#  describe "GET /stats" do
-#
-#    before(:each) do
-#      controller.stub!(:require_admin)
-#    end
-#
-#    it "should succeed" do
-#      get :statistics
-#      response.should be_success
-#    end
-#
-#    it 'should render the correct template' do
-#      get :statistics
-#      response.should render_template('statistics')
-#    end
-#
-#    it 'should find the correct class of schools and level of teams' do
-#      School.should_receive(:small).and_return([mock_school])
-#      mock_school.should_receive(:teams).and_return(mock_scope([mock_team(:school= => true)], :participating, :wizard))
-##      mock_school.should_receive(:wizard).and_return(mock_team)
-#      mock_team.should_receive(:students).and_return([mock_student])
-#      get :statistics, :level => 'Wizard', :class => 'Small'
-#    end
-#
-#    it 'should assign the schools, teams, and students variables' do
-#      School.stub!(:large).and_return([mock_school])
-#      mock_school.stub!(:teams).and_return(mock_scope([mock_team(:school= => true)], :participating, :wizard))
-#      mock_team.stub!(:students).and_return([mock_student])
-#      get :statistics
-#      assigns[:schools].should == [mock_school]
-#      assigns[:teams].should == [mock_team]
-#      assigns[:students].should == [mock_student]
-#    end
-#
-#  end
 
   describe "GET /grading/teams" do
     before(:each) do
@@ -88,7 +53,7 @@ describe GradingController do
     end
 
     it 'should find the team' do
-      Team.should_receive(:find).with('434', :include => [:students, :school]).and_return(mock_team)
+      Team.should_receive(:find).with('434', :include => [:school]).and_return(mock_team)
       mock_team.stub!(:students).and_return(mock_scope([mock_student], :by_name))
       get :students, :team_id => '434'
     end
@@ -149,7 +114,7 @@ describe GradingController do
     end
 
     it 'should find the correct team' do
-      Team.should_receive(:find).with('1', :include=>[:students, :school]).and_return(mock_team)
+      Team.should_receive(:find).with('1', :include=>[:school]).and_return(mock_team)
       put :update_students, :team_id => '1'   , :team => {}, :students => {}
     end
 
@@ -172,4 +137,45 @@ describe GradingController do
       end
     end
   end
+
+#  describe "responding to GET /schools/1/print" do
+#
+#    before(:each) do
+#      controller.stub!(:require_admin)
+#      mock_school(:teams => mock_scope([], :wizard))
+#    end
+#
+#    it "should succeed" do
+#      School.stub!(:find).and_return(mock_school)
+#      get :print, :id => "1", :level => 'wizard'
+#      response.should be_success
+#    end
+#
+#    it "should render the 'print' template" do
+#      School.stub!(:find).and_return(mock_school)
+#      get :print, :id => "1", :level => 'wizard'
+#      response.should render_template('print')
+#    end
+#
+#    it "should find the requested school" do
+#      School.should_receive(:find).with("37", {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
+#      get :print, :id => "37", :level => 'wizard'
+#    end
+#
+#    it "should assign the found school for the view" do
+#      School.should_receive(:find).and_return(mock_school)
+#      get :print, :id => "1", :level => 'wizard'
+#      assigns[:school].should equal(mock_school)
+#    end
+#
+#    it 'should assign the correct team for the view' do
+#      School.should_receive(:find).and_return(mock_school)
+#      mock_school.should_receive(:teams).and_return(mock_scope([mock_team], :wizard))
+#      get :print, :id => '1', :level => 'wizard'
+#      assigns[:team].should equal(mock_team)
+#    end
+#
+#  end
+
+  
 end

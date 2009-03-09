@@ -41,7 +41,8 @@ class SchoolsController < ApplicationController
     # if after deadline, only admin can change things. If the only error is on the base (creation deadline), then
     # allow this to pass by bypassing the one creation validation
     if !save_worked && current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
-      save_worked = @school.save(false)
+      @school.save(false)
+      save_worked = true
     end
 
     if save_worked
@@ -80,7 +81,7 @@ class SchoolsController < ApplicationController
   protected
 
   def load_school
-    @school = School.find(params[:id], :include => [:teams, :students, :proctors]) if params[:id]
+    @school = School.find(params[:id], :include => [:teams, :proctors]) if params[:id]
   end
 
   def require_owner

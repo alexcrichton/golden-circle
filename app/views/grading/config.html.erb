@@ -1,10 +1,55 @@
 <%- content_for :sidebar do -%>
   <%= render :partial => 'grading/sidebar' %>
 <%- end -%>
-THIS IS WHERE THE CONFIGURATION GOES
+<h1>Configuration Panel</h1>
+<div class="span-9 colborder">
+  <h3>Settings</h3>
+  <%- form_for Settings, :url => grading_config_path, :html => {:method => :put} do |f| -%>
+    <p>
+      <%= f.label :deadline, 'Deadline for registration' %>:<br />
+      <%= f.datetime_select :deadline %>
+    </p>
 
+    <p>
+      <%= f.label :event_date, 'Date of the tournament' %>:<br />
+      <%= f.datetime_select :event_date %>
+    </p>
 
-and maybe some things about unchecked scores
+    <p>
+      <%= f.label :cost_per_student, 'Cost per student (in dollars)' %>:<br />
+      <%= f.text_field :cost_per_student, :size => 4 %>
+    </p>
+    <%= f.submit "Submit" %>
+  <%- end -%>
+</div>
+<div class="span-6 last">
+  <h3>Database</h3>
+  <%- form_tag backup_database_path, :method => :put do -%>
+    <%= submit_tag 'Backup Database' %>
+  <%- end -%>
+  <hr />
+  <%- form_tag restore_database_path, :method => :put, :multipart => true do -%>
+    <%= label_tag :upload, 'Restore the database from a previous backup' %>
+    <br />
+    <%= file_field_tag :upload %>
+    <br />
+    <%= submit_tag 'Restore Database',
+                   :confirm => "This command is extremely dangerous, are you sure?\n"+
+                           "It will produce most likely a lot of errors. Most of these\n"+
+                           "can be ignored, however, as what needs to be backed up will\n"+
+                           "be backed up." %>
+  <%- end -%>
 
+  <hr />
+  <h3>Information PDF</h3>
+  <%- form_tag upload_file_path, :method => :put, :multipart => true do -%>
+    <%= label_tag :upload, 'Upload the informational PDF file' %>
+    <br />
+    <%= file_field_tag :upload %>
+    <br />
+    <%= submit_tag 'Upload' %>
+  <%- end -%>
+</div>
+<hr />
 
-etc, etc, etc...
+<%= @text %>

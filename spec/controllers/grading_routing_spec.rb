@@ -11,11 +11,20 @@ describe GradingController do
     it "should map #destroy" do
       route_for(:controller => "grading", :action => "students", :team_id => '3').should == "/grading/students/3"
     end
+#    it 'should map #print' do
+#      route_for(:controller => 'schools', :action => 'print', :id => 1).should == '/schools/1/print'
+#    end
+
+
   end
   describe "route recognition" do
 #    it "should generate params for #new" do
 #      params_from(:get, "/stats").should == {:controller => "grading", :action => "statistics"}
 #    end
+    #    it 'should generate params for #print' do
+    #      params_from(:get, "/schools/1/print").should == {:controller => 'schools', :action => 'print', :id => '1'}
+    #    end
+    
     it "should generate params for #create" do
       params_from(:post, "/grading/teams/random").should == {:controller => "grading", :action => "teams", :level => 'random'}
     end

@@ -26,9 +26,9 @@ describe SchoolsController do
       route_for(:controller => "schools", :action => "destroy", :id => 1).should == "/schools/1"
     end
 
-#    it 'should map #print' do
-#      route_for(:controller => 'schools', :action => 'print', :id => 1).should == '/schools/1/print'
-#    end
+    it 'should map #show_current' do
+      route_for(:controller => 'schools', :action => 'show_current').should == '/schools/show_current'
+    end
 
     it 'should map #email' do
       route_for(:controller => 'schools', :action => 'email').should == '/schools/email'
@@ -64,9 +64,9 @@ describe SchoolsController do
       params_from(:delete, "/schools/1").should == {:controller => "schools", :action => "destroy", :id => "1"}
     end
 
-#    it 'should generate params for #print' do
-#      params_from(:get, "/schools/1/print").should == {:controller => 'schools', :action => 'print', :id => '1'}
-#    end
+    it 'should generate params for #show_current' do
+      params_from(:get, '/schools/show_current').should == {:controller => 'schools', :action => 'show_current'}
+    end
 
     it 'should generate params for #email' do
       params_from(:put, '/schools/email').should == {:controller => 'schools', :action => 'email'}

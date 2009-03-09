@@ -33,7 +33,8 @@ describe SchoolsController do
   describe "responding to POST /schools" do
 
     before(:each) do
-      Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))
+#      Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))
+      Settings.stub!(:deadline).and_return(Time.now + 1.year)
     end
 
     describe  "with successful save" do
@@ -60,6 +61,15 @@ describe SchoolsController do
         School.stub!(:new).and_return(mock_school)
         post :create, :school => {}
         response.flash[:notice].should_not be_nil
+      end
+
+      it 'should allow an admin past the deadline' do
+        controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil;
+        School.stub!(:new).and_return(mock_school(:save => false))
+        mock_school.errors.should_receive(:size).and_return(1)
+        mock_school.errors.should_receive(:on_base).and_return(true)
+        post :create, :school => {}
+        response.should redirect_to(school_url(mock_school))
       end
 
     end
@@ -106,7 +116,7 @@ describe SchoolsController do
     end
 
     it "should find the requested school" do
-      School.should_receive(:find).with("37", :include=>[:teams, :students, :proctors]).and_return(mock_school)
+      School.should_receive(:find).with("37", :include=>[:teams, :proctors]).and_return(mock_school)
       get :show, :id => "37"
     end
 
@@ -136,7 +146,7 @@ describe SchoolsController do
     end
 
     it "should find the requested school" do
-      School.should_receive(:find).with("37", :include => [:teams, :students, :proctors])
+      School.should_receive(:find).with("37", :include => [:teams, :proctors])
       get :edit, :id => "37"
     end
 
@@ -157,13 +167,14 @@ describe SchoolsController do
     describe "with successful update" do
 
       it "should find the requested school" do
-        School.should_receive(:find).with("37", {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
+        School.should_receive(:find).with("37", {:include=>[:teams, :proctors]}).and_return(mock_school)
         put :update, :id => "37"
       end
 
       it "should update the found school" do
         School.stub!(:find).and_return(mock_school)
-        put :update, :id => "1", :school => {'these' => 'params'}
+        mock_school.should_receive(:update_attributes).with({:these => 'params', :proctor_attributes => {}, :team_attributes => {}}.stringify_keys)
+        put :update, :id => "1", :school => {:these => 'params'}
       end
 
       it "should assign the found school to the view" do
@@ -173,14 +184,13 @@ describe SchoolsController do
       end
 
       it "should redirect to the school" do
-        School.stub!(:find).and_return(mock_school)
+        School.stub!(:find).and_return(mock_school(:update_attributes => true))
         put :update, :id => "1"
         response.should redirect_to(school_url(mock_school))
       end
 
       it "should display a flash message" do
-        School.stub!(:find).and_return(mock_school)
-        mock_school.should_receive(:update_attributes).and_return(true)
+        School.stub!(:find).and_return(mock_school(:update_attributes => true))
         put :update, :id => "1"
         response.flash[:notice].should_not be_nil
       end
@@ -190,7 +200,7 @@ describe SchoolsController do
     describe "with failed update" do
 
       it "should update the requested school" do
-        School.should_receive(:find).with("37",  {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
+        School.should_receive(:find).with("37",  {:include=>[:teams, :proctors]}).and_return(mock_school)
         mock_school.should_receive(:update_attributes).with('these' => 'params', 'proctor_attributes' => {}, 'team_attributes' => {})
         put :update, :id => "37", :school => {:these => 'params'}
       end
@@ -206,50 +216,8 @@ describe SchoolsController do
         put :update, :id => "1"
         response.should render_template('edit')
       end
-
-
     end
-
   end
-
-#  describe "responding to GET /schools/1/print" do
-#
-#    before(:each) do
-#      controller.stub!(:require_admin)
-#      mock_school(:teams => mock_scope([], :wizard))
-#    end
-#
-#    it "should succeed" do
-#      School.stub!(:find).and_return(mock_school)
-#      get :print, :id => "1", :level => 'wizard'
-#      response.should be_success
-#    end
-#
-#    it "should render the 'print' template" do
-#      School.stub!(:find).and_return(mock_school)
-#      get :print, :id => "1", :level => 'wizard'
-#      response.should render_template('print')
-#    end
-#
-#    it "should find the requested school" do
-#      School.should_receive(:find).with("37", {:include=>[:teams, :students, :proctors]}).and_return(mock_school)
-#      get :print, :id => "37", :level => 'wizard'
-#    end
-#
-#    it "should assign the found school for the view" do
-#      School.should_receive(:find).and_return(mock_school)
-#      get :print, :id => "1", :level => 'wizard'
-#      assigns[:school].should equal(mock_school)
-#    end
-#
-#    it 'should assign the correct team for the view' do
-#      School.should_receive(:find).and_return(mock_school)
-#      mock_school.should_receive(:teams).and_return(mock_scope([mock_team], :wizard))
-#      get :print, :id => '1', :level => 'wizard'
-#      assigns[:team].should equal(mock_team)
-#    end
-#
-#  end
 
 
   describe "responding to PUT /schools/email" do
@@ -311,7 +279,7 @@ describe SchoolsController do
     end
 
     it 'should find the requested school' do
-      School.should_receive(:find).with('37', :include=>[:teams, :students, :proctors]).and_return(mock_school(:destroy => true))
+      School.should_receive(:find).with('37', :include=>[:teams, :proctors]).and_return(mock_school(:destroy => true))
       delete :destroy, :id => '37'
     end
 

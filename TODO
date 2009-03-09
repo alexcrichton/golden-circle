@@ -8,15 +8,15 @@
 [x] exhibition teams as option?
 	[x] add student link?
 
-[ ] delete all scores?
+[x] delete all scores?
 [x] delete all schools?
 [x] CREATE SCHOOLS AFTER  DEADLINE
-[ ] configuration
-	[ ] set deadline
-	[ ] set max team score
-	[ ] set max individual score
+[x] configuration
+	[x] set deadline
+	X[ ] set max team score
+	X[ ] set max individual score
 	[ ] emails sent? - change text?
 	[ ] text on right
 	[ ] information file upload
 	[ ] right hand links and stuff
-	[ ] backup database? - load from as well
+	[x] backup database? - load from as well

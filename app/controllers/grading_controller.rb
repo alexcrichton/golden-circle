@@ -55,11 +55,66 @@ class GradingController < ApplicationController
   def config
   end
 
+  def update_configuration
+    Settings.event_date = convert_date(params[:settings], :event_date)
+    Settings.deadline = convert_date(params[:settings], :deadline)
+    Settings.cost_per_student = params[:settings][:cost_per_student].to_i
+    render :action => 'config'
+  end
+
+  def upload
+    unless params[:upload].blank?
+      path = File.join('public', 'golden_circle_information.pdf')
+      File.delete(path)
+      File.open(path, "wb") { |f| f.write(params[:upload].read)}
+      flash[:notice] = 'File successfully uploaded!'
+    end
+    render :action => 'config'
+  end
+
+  def backup_database
+    config = School.configurations[RAILS_ENV].symbolize_keys
+    if config[:adapter] == 'mysql'
+      send_data `mysqldump #{config[:database]} -u #{config[:username]} --password="#{config[:password]}"`,
+                :filename => "gc_backup-#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.sql"
+    elsif config[:adapter] == 'sqlite3'
+      send_data `sqlite3 #{config[:database]} '.dump'`,
+                :filename => "gc_backup-#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.sql"
+    else
+      flash[:error] = "Sorry, I don't know how to back up this kind of database"
+      render :action => 'config'
+    end
+  end
+
+  def restore_database
+    if params[:upload].blank?
+      flash[:error] = 'You need to restore from a file!'
+      return render :action => 'config'
+    end
+    path = File.join('tmp', 'restore.sql')
+    File.open(path, "wb") { |f| f.write(params[:upload].read) }
+    config = School.configurations[RAILS_ENV].symbolize_keys
+    if config[:adapter] == 'mysql'
+      flash[:notice] = `mysql -u #{config[:username]} --password="#{config[:password]} -D #{config[:database]} < #{path}"`
+    elsif config[:adapter] == 'sqlite3'
+      flash[:notice] = `sqlite3 #{config[:database]} < #{path}`
+    else
+      flash[:error] = "Sorry, I don't know how to restore this kind of database"
+    end
+    File.delete(path)
+    render :action => 'config'
+  end
+
   protected
+
+  def convert_date(hash, key)
+    args = (1..5).map { |n| hash["#{key}(#{n}i)"]}
+    Time.zone.local(*args)
+  end
 
   def load_students
     @student_hash = {}
-    @team = Team.find(params[:team_id], :include => [:students, :school])
+    @team = Team.find(params[:team_id], :include => [:school])
     @students = @team.students.by_name
     @students.each { |s| @student_hash[s.id] = s }
   end
