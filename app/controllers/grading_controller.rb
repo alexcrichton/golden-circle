@@ -25,11 +25,15 @@ class GradingController < ApplicationController
 
   def update_teams
     params[:teams] ||= {}
+    boolean = true
     params[:teams].each_pair do |id, attrs|
       t = @team_hash[id.to_i]
       t.test_score = attrs['test_score'] if t.test_score != attrs['test_score']
       t.team_score_checked = attrs['team_score_checked'] if t.team_score_checked != attrs['team_score_checked']
-      t.save if t.test_score != attrs['test_score'] || t.team_score_checked != attrs['team_score_checked']
+      boolean = t.save && boolean if t.test_score != attrs['test_score'] || t.team_score_checked != attrs['team_score_checked']
+    end
+    if boolean
+      flash[:notice] = "Teams successfully updated!"
     end
     render :action => 'teams'
   end
@@ -39,15 +43,19 @@ class GradingController < ApplicationController
 
   def update_students
     params[:students] ||= {}
+    boolean = true
     params[:students].each_pair do |id, student_attributes|
       s = @student_hash[id.to_i]
       next if s.test_score == student_attributes['test_score']
       s.test_score = student_attributes['test_score']
-      s.save
+      boolean = s.save && boolean
     end
     if @team.student_scores_checked != params[:team][:student_scores_checked]
       @team.student_scores_checked = params[:team][:student_scores_checked]
-      @team.save
+      boolean = @team.save && boolean
+    end
+    if boolean
+      flash[:notice] = 'Students successfully updated!'
     end
     render :action => 'students'
   end
@@ -56,8 +64,10 @@ class GradingController < ApplicationController
   end
 
   def update_configuration
-    Settings.event_date = convert_date(params[:settings], :event_date) if params[:settings][:event_date]
-    Settings.deadline = convert_date(params[:settings], :deadline) if params[:settings][:deadline]
+    event_date = convert_date(params[:settings], :event_date)
+    Settings.event_date = event_date if event_date
+    deadline = convert_date(params[:settings], :deadline)
+    Settings.deadline = deadline if deadline
     Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
     render :action => 'config'
   end
@@ -108,7 +118,7 @@ class GradingController < ApplicationController
   protected
 
   def convert_date(hash, key)
-    args = (1..5).map { |n| hash["#{key}(#{n}i)"]}
+    args = (1..5).map { |n| val = hash["#{key}(#{n}i)"]; return nil if val.nil?; val}
     Time.zone.local(*args)
   end
 
