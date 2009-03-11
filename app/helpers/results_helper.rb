@@ -5,7 +5,7 @@ module ResultsHelper
       checked = object.teams.non_exhibition.participating.inject(true){ |last, t| last && t.team_score_checked && t.student_scores_checked }
     elsif object.is_a?(Team)
       if check_method.nil?
-        checked = (object.team_score_checked && object.student_scores_checked) || object.students.size == 0    
+        checked = (object.team_score_checked && object.student_scores_checked) || object.students.size == 0
       else
         checked = object.send(check_method)
       end
@@ -24,4 +24,21 @@ module ResultsHelper
     suffix = team.is_exhibition ? " Exhibition #{team.id}" : ""
     h(team.school.name + suffix)
   end
+
+  def rank(score, type)
+    @last ||= {}
+    if @last[type] == nil
+      @last[type] = {}
+      @last[type][:carry] = 0
+      @last[type][:rank] = 1
+    elsif score == @last[type][:score]
+      @last[type][:carry] += 1
+    else
+      @last[type][:rank] += @last[type][:carry] + 1
+      @last[type][:carry] = 0
+    end
+    @last[type][:score] = score
+    @last[type][:rank]
+  end
+
 end

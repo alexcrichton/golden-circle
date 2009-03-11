@@ -57,8 +57,9 @@ body {
 
 .fieldWithErrors {
   padding: 2px;
+  margin: 2px;
   background-color: red;
-  display: table;
+  display: table-cell;
 }
 
 #errorExplanation {

@@ -4,9 +4,14 @@ class School < ActiveRecord::Base
 
   acts_as_authentic
 
-  has_many :teams,    :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
+  has_many :teams,
+           :attributes => true,
+           :discard_if => :blank?,
+           :dependent => :destroy,
+           :validate => false
+
   has_many :proctors, :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
-  has_many :students, :through => :teams
+  has_many :students, :through => :teams, :validate => false
 
   composed_of :phone,
               :mapping => %w(contact_phone phone_number),
@@ -20,16 +25,16 @@ class School < ActiveRecord::Base
                             :greater_than_or_equal_to => 0,
                             :only_integer => true,
                             :on => :update
-  validates_uniqueness_of :name, :case_sensitive => false
-  validates_associated :teams, :message => "are invalid"
-  validates_associated :proctors, :message => 'are invalid'
+  validates_uniqueness_of :name, :case_sensitive => false#, :unless => Proc.new { |school| school.instance_variable_get("@recalculating")}
+  validates_associated :teams, :message => "are invalid"#, :unless => Proc.new { |school| school.instance_variable_get("@recalculating")}
+  validates_associated :proctors, :message => 'are invalid'#, :unless => Proc.new { |school| school.instance_variable_get("@recalculating")}
   validates_associated :phone, :message => 'number is invalid', :on => :update
   validate :submitted_before_deadline?
 
-  attr_protected :admin, :teams
+  attr_protected :admin, :school_score
 
   after_create :add_teams
-  before_save :strip_name, :recalculate_school_score
+  before_save :strip_name
 
   named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
   named_scope :large, :conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'
@@ -55,22 +60,14 @@ class School < ActiveRecord::Base
     end
   end
 
-  def school_score
-    if teams.reject{ |t| t.updated_at.nil? || t.updated_at < self.updated_at }.size > 0
-      recalculate_school_score
-      save
-    end
-    super
-  end
-
   def recalculate_school_score
-    self.school_score = teams.non_exhibition.map(&:team_score).reject(&:nil?).sum
+    self.school_score = teams.non_exhibition.sum(:team_score)
+    save(false)
   end
 
   private
 
   def submitted_before_deadline?
-    # Needs to be before midnight on Tuesday, February 24, 2009
     if new_record? && Time.zone.now > Settings.deadline
       errors.add_to_base("The registration deadline has passed. If you would still like to participate this year, please email golden.circle.contest@gmail.com")
     end

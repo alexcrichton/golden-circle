@@ -11,11 +11,13 @@
         <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
       </tr>
       <tr>
+        <th width=40>Rank</th>
         <th>School</th>
         <th>Score</th>
       </tr>
       <%- @schools.send(klass).each do |school| -%>
         <tr class="<%= cycle('even', 'odd') %>">
+          <td><%= rank(school.school_score, "school_#{klass}") %></td>
           <td><%= h school.name %></td>
           <td><%= school.school_score %></td>
         </tr>
@@ -30,14 +32,16 @@
     <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
       <table>
         <tr>
-          <td colspan="2" class="separator"><%= klass.to_s.capitalize %> Schools</td>
+          <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
         </tr>
         <tr>
+          <th width=40>Rank</th>
           <th>School</th>
           <th>Score</th>
         </tr>
         <%- @teams.send(klass).send(level).each do |team| -%>
           <tr class="<%= cycle('even', 'odd') %>">
+            <td><%= rank(team.test_score, "team_#{level}_#{klass}") %></td>
             <td><%= team_name(team) %></td>
             <td><%= team.team_score %></td>
           </tr>

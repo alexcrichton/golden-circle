@@ -7,23 +7,25 @@ class Team < ActiveRecord::Base
            :attributes => true,
            :discard_if => :blank?,
            :dependent => :destroy,
-           :validate => false#,
-#           :order => ['last_name ASC, first_name ASC']
+           :validate => false
+
   belongs_to :school
 
   validates_inclusion_of :level, :in => [Team::WIZARD, Team::APPRENTICE]
-  validates_associated :students, :message => 'are invalid'
+  validates_associated :students, :message => 'are invalid', :unless => :student_validation_not_needed?
   validates_size_of :students,
                     :maximum => 15,
-                    :message => "have a maximum of 15 allowed"
+                    :message => "have a maximum of 15 allowed",
+                    :unless => :student_validation_not_needed?
   validates_numericality_of :test_score,
                             :only_integer => true,
                             :less_than_or_equal_to => 30,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
-  before_save :ensure_checks_are_correct
-  before_save :recalculate_team_score
-  attr_protected :test_score, :test_score_checked, :student_scores_checked
+
+#  before_save :ensure_checks_are_correct, :unless => :student_validation_not_needed?
+
+  attr_protected :test_score, :test_score_checked, :student_scores_checked, :team_score
 
   named_scope :unchecked_student_scores, :conditions => {:student_scores_checked => false}
   named_scope :unchecked_team_score, :conditions => {:team_score_checked => false}
@@ -44,36 +46,39 @@ class Team < ActiveRecord::Base
   end
 
   def blank?
-    students.size == 0 && is_exhibition
+    is_exhibition && students.size == 0
   end
 
   def student_score_sum
     students.team_contributors.map(&:test_score).reject(&:nil?).sum
   end
 
-  def team_score
-    if students.team_contributors.inject(false){ |last, student| last || student.updated_at > self.updated_at }
-      recalculate_team_score
-    end
-    super
-  end
-
-  def recalculate_team_score
-    self.team_score = team_test_score + student_score_sum
+  def recalculate_team_score(student_scores_changed = true)
+    # only recalculate if the student's or this team's scores have changed
+    self.team_score = team_test_score + student_score_sum if student_scores_changed || test_score_changed?
+    calc_school = team_score_changed? # cache because will be different after save
+    @recalculating = true
+    return_val = save
+    @recalculating = false
+    school.recalculate_school_score if calc_school # well if we've changed, so should the school
+    return return_val
   end
 
   protected
 
-  def ensure_checks_are_correct
-    if team_score_checked && test_score.nil?
-#      errors.add(:team_score_checked, " - this team needs to have a score entered before it is checked off.")
-      self.team_score_checked = false
-    end
-    if student_scores_checked && students.inject(false){ |last, student| last || student.test_score.nil? }
-#      errors.add(:student_scores_checked, " - all scores must be entered before the scores are checked off.")
-      self.student_scores_checked = false
-    end
-    return true
-  end
+#  def ensure_checks_are_correct
+#    if team_score_checked && test_score.nil?
+##      errors.add(:team_score_checked, " - this team needs to have a score entered before it is checked off.")
+#      self.team_score_checked = false
+#    end
+#    if student_scores_checked && students.inject(false){ |last, student| last || student.test_score.nil? }
+##      errors.add(:student_scores_checked, " - all scores must be entered before the scores are checked off.")
+#      self.student_scores_checked = false
+#    end
+#    return true
+#  end
 
+  def student_validation_not_needed?
+    @recalculating
+  end
 end

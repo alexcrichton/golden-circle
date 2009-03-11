@@ -136,7 +136,7 @@ describe GradingController do
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
       put :update_teams, :level => 'wizard'
-      response.should be_success
+      response.should redirect_to(grading_teams_path(:level => 'wizard'))
     end
   end
 
@@ -155,7 +155,7 @@ describe GradingController do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
       Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name), :student_scores_checked= => true))
       put :update_students, :team_id => 1, :team => {}
-      response.should be_success
+      response.should redirect_to(grading_students_path(:team_id => 1))
     end
   end
 
@@ -191,7 +191,7 @@ describe GradingController do
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
       put :restore_database
-      response.should be_success
+      response.should redirect_to(grading_config_path)
     end
   end
 
@@ -209,7 +209,7 @@ describe GradingController do
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
       put :upload
-      response.should be_success
+      response.should redirect_to(grading_config_path)
     end
   end
 
@@ -227,7 +227,7 @@ describe GradingController do
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
       put :update_configuration, :settings => {}
-      response.should be_success
+      response.should redirect_to(grading_config_path)
     end
   end
 

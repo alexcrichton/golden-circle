@@ -15,9 +15,9 @@
     <th>Wizard Score</th>
     <th>Sweepstakes Score</th>
   </tr>
-  <%- @schools.each_with_index do |school, i| -%>
+  <%- @schools.each do |school| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td class="num"><%= @schools_rank[i] %></td>
+      <td class="num"><%= rank(school.school_score, :school)%></td>
       <td><%= h(school.name) %></td>
       <td class="num"><%= school.teams.apprentice.first.team_score %> <%= check_image(school.teams.apprentice.first) %></td>
       <td class="num"><%= school.teams.wizard.first.team_score %> <%= check_image(school.teams.wizard.first) %></td>
@@ -36,9 +36,9 @@
     <th>Test Score</th>
     <th>Total Score</th>
   </tr>
-  <%- @teams.each_with_index do |team, i| -%>
+  <%- @teams.each do |team| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td class="num"><%= @teams_rank[i] %></td>
+      <td class="num"><%= rank(team.team_score, :team) %></td>
       <td><%= team_name(team) %></td>
       <td class="num"><%= team.student_score_sum %> <%= check_image(team, :student_scores_checked) %></td>
       <td class="num"><%= team.team_test_score %> <%= check_image(team, :team_score_checked) %></td>
@@ -48,19 +48,19 @@
 </table>
 <table>
   <tr>
-    <td colspan=5 class="separator"><%= params[:class] %> School Individual <%= params[:level] %> Results</td>
+    <td colspan=4 class="separator"><%= params[:class] %> School Individual <%= params[:level] %> Results</td>
   </tr>
   <tr>
     <th width=40>Rank</th>
     <th>Name</th>
-    <th colspan=2>School</th>
+    <th>School</th>
     <th>Score</th>
   </tr>
-  <%- @students.each_with_index do |student, i| -%>
+  <%- @students.each do |student| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td class="num"><%= @students_rank[i] %></td>
-      <td><%= h(student.first_name + " " + student.last_name) %></td>
-      <td colspan=2><%= team_name(student.team) %></td>
+      <td class="num"><%= rank(student.test_score, :student) %></td>
+      <td><%= h student.name %></td>
+      <td><%= team_name(student.team) %></td>
       <td class="num"><%= student.test_score %> <%= check_image(student) %></td>
     </tr>
   <%- end -%>

@@ -18,18 +18,17 @@
   <%- if team.is_exhibition && !team.new_record? -%>
     <p><label>Team ID Number:</label> <%= team.id %></p>
   <%- end -%>
-  <%- students = team.students.by_name -%>
-  <%= small_errors(students) %>
+  <%= small_errors(team.students) %>
   <table id="team<%= team.id %>" class="noborder">
     <caption>
-      Students (<%= students.size %>/15)
+      Students (<%= team.students.size %>/15)
     </caption>
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
       <th>&nbsp;</th>
     </tr>
-    <%= f.render_associated_form(students, :new => (students.size >= 15 ? 0 : 1)) %>
+    <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
   </table>
-  <%= f.add_associated_link('add', students.build, :container => "#team#{team.id}") %>
+  <%= f.add_associated_link('add', team.students.build, :container => "#team#{team.id}") %>
 </div>

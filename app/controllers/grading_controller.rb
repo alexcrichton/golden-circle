@@ -24,40 +24,55 @@ class GradingController < ApplicationController
   end
 
   def update_teams
-    params[:teams] ||= {}
     boolean = true
     params[:teams].each_pair do |id, attrs|
       t = @team_hash[id.to_i]
-      t.test_score = attrs['test_score'] if t.test_score != attrs['test_score']
-      t.team_score_checked = attrs['team_score_checked'] if t.team_score_checked != attrs['team_score_checked']
-      boolean = t.save && boolean if t.test_score != attrs['test_score'] || t.team_score_checked != attrs['team_score_checked']
+      t.test_score = attrs['test_score']
+      t.team_score_checked = attrs['team_score_checked']
+      boolean = t.recalculate_team_score(false) && boolean if t.changed?
     end
     if boolean
       flash[:notice] = "Teams successfully updated!"
+      redirect_to grading_teams_path(:level => params[:level])
+    else
+      render :action => 'teams'
     end
-    render :action => 'teams'
   end
 
   def students
   end
 
   def update_students
-    params[:students] ||= {}
-    boolean = true
+    boolean = nil
     params[:students].each_pair do |id, student_attributes|
       s = @student_hash[id.to_i]
-      next if s.test_score == student_attributes['test_score']
       s.test_score = student_attributes['test_score']
-      boolean = s.save && boolean
+      if s.changed?
+        boolean = true if boolean.nil?
+        boolean = s.save && boolean
+      end
     end
-    if @team.student_scores_checked != params[:team][:student_scores_checked]
-      @team.student_scores_checked = params[:team][:student_scores_checked]
-      boolean = @team.save && boolean
+    @team.student_scores_checked = params[:team][:student_scores_checked]
+    if boolean.nil?
+      # no students
+      if @team.changed?
+        @team.recalculate_team_score(false) # don't need to recalculate, just the check flag changed
+      else
+        # nothing changed...
+      end
+    elsif boolean
+      #successful saves, score changed
+      @team.recalculate_team_score
+    else
+      # unsuccessful saves...
+      return render :action => 'students'
     end
-    if boolean
+#    if boolean.nil? && @team.recalculate_team_score
       flash[:notice] = 'Students successfully updated!'
-    end
-    render :action => 'students'
+      redirect_to grading_students_path(:team_id => @team.id)
+#    else
+#      render :action => 'students'
+#    end
   end
 
   def config
@@ -69,7 +84,7 @@ class GradingController < ApplicationController
     deadline = convert_date(params[:settings], :deadline)
     Settings.deadline = deadline if deadline
     Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
-    render :action => 'config'
+    redirect_to grading_config_path
   end
 
   def upload
@@ -79,7 +94,7 @@ class GradingController < ApplicationController
       File.open(path, "wb") { |f| f.write(params[:upload].read)}
       flash[:notice] = 'File successfully uploaded!'
     end
-    render :action => 'config'
+    redirect_to grading_config_path
   end
 
   def backup_database
@@ -92,14 +107,14 @@ class GradingController < ApplicationController
                 :filename => "gc_backup-#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.sql"
     else
       flash[:error] = "Sorry, I don't know how to back up this kind of database"
-      render :action => 'config'
+      redirect_to grading_config_path
     end
   end
 
   def restore_database
     if params[:upload].blank?
       flash[:error] = 'You need to restore from a file!'
-      return render :action => 'config'
+      return redirect_to(grading_config_path)
     end
     path = File.join('tmp', 'restore.sql')
     File.open(path, "wb") { |f| f.write(params[:upload].read) }
@@ -112,7 +127,7 @@ class GradingController < ApplicationController
       flash[:error] = "Sorry, I don't know how to restore this kind of database"
     end
     File.delete(path)
-    render :action => 'config'
+    redirect_to grading_config_path
   end
 
   protected

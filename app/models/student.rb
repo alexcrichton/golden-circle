@@ -1,7 +1,7 @@
 class Student < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
-  validates_uniqueness_of :first_name, :scope => [:last_name], :case_sensitive => false
+  validates_uniqueness_of :first_name, :scope => [:last_name], :case_sensitive => false, :unless => :test_score_changed?
   validates_numericality_of :test_score,
                             :only_integer => true,
                             :less_than_or_equal_to => 25,
@@ -17,7 +17,7 @@ class Student < ActiveRecord::Base
   named_scope :winners, :order => 'students.test_score DESC, last_name ASC, first_name ASC', :conditions => ['students.test_score IS NOT ?', nil]
   named_scope :blank_scores, :conditions => {:test_score => nil}, :order => 'last_name ASC, first_name ASC'
   named_scope :upper_scores, :conditions => ['students.test_score >= ?', 20]
-  named_scope :team_contributors, :order => 'students.test_score DESC', :limit => 5, :select => 'students.test_score, updated_at'
+  named_scope :team_contributors, :order => 'students.test_score DESC', :limit => 5
   named_scope :large, :conditions => ['schools.enrollment >= ?', School::CUTOFF], :include => {:team => :school}
   named_scope :small, :conditions => ['schools.enrollment < ?', School::CUTOFF], :include => {:team => :school}
   named_scope :wizard, :conditions => ['teams.level = ?', Team::WIZARD], :include => :team

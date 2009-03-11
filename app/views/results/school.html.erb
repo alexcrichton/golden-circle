@@ -19,14 +19,16 @@
   <div class="span-7 <%= level == 'wizard' ? 'colborder' : 'last' %>">
     <table>
       <tr>
-        <td class="separator" colspan="2"><%= level.capitalize %> Results</td>
+        <td class="separator" colspan="3"><%= level.capitalize %> Results</td>
       </tr>
       <tr>
+        <th width=40>Rank</th>
         <th>Name</th>
         <th>Score</th>
       </tr>
       <%- @school.teams.non_exhibition.send(level).first.students.winners.each do |student| -%>
         <tr class="<%= cycle('even', 'odd') %>">
+          <td><%= rank(student.test_score, "student_#{level}") %></td>
           <td><%= h student.name %></td>
           <td><%= student.test_score %></td>
         </tr>
@@ -41,21 +43,23 @@
 <%- @school.teams.exhibition.each do |team| -%>
   <table>
     <tr>
-      <td class="separator" colspan="2">Exhibition <%= team.id %> Results</td>
+      <td class="separator" colspan="3">Exhibition <%= team.id %> Results</td>
     </tr>
     <tr class="odd">
-      <td colspan="2">
+      <td colspan="3">
         <strong>Team Score:</strong> <%= team.team_score %>
         <br />
         <strong>Team Test Score:</strong> <%= team.test_score || 0 %>
       </td>
     </tr>
     <tr>
+      <th width=40>Rank</th>
       <th>Name</th>
       <th>Score</th>
     </tr>
     <%- team.students.winners.each do |student| -%>
       <tr class="<%= cycle('even', 'odd') %>">
+        <td><%= rank(student.test_score, "exhibition#{team.id}") %></td>
         <td><%= h student.name %></td>
         <td><%= student.test_score %></td>
       </tr>
