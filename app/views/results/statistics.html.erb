@@ -5,11 +5,14 @@
 <h1><%= params[:class] %> Schools - <%= params[:level] %> Division</h1>
 
 <table>
+  <colgroup>
+    <col width="40"/>
+  </colgroup>
   <tr>
-    <td colspan=5 class="separator"><%= params[:class] %> School Sweepstakes</td>
+    <td colspan="5" class="separator"><%= params[:class] %> School Sweepstakes</td>
   </tr>
   <tr>
-    <th width=40>Rank</th>
+    <th>Rank</th>
     <th>Name</th>
     <th>Apprentice Score</th>
     <th>Wizard Score</th>
@@ -26,11 +29,14 @@
   <%- end -%>
 </table>
 <table>
+  <colgroup>
+    <col width="40"/>
+  </colgroup>
   <tr>
-    <td colspan=5 class="separator"><%= params[:class] %> School <%= params[:level] %> Team Results</td>
+    <td colspan="5" class="separator"><%= params[:class] %> School <%= params[:level] %> Team Results</td>
   </tr>
   <tr>
-    <th width=40>Rank</th>
+    <th>Rank</th>
     <th>School Name</th>
     <th>Student Score Sum</th>
     <th>Test Score</th>
@@ -47,11 +53,14 @@
   <%- end -%>
 </table>
 <table>
+  <colgroup>
+    <col width="40"/>
+  </colgroup>
   <tr>
-    <td colspan=4 class="separator"><%= params[:class] %> School Individual <%= params[:level] %> Results</td>
+    <td colspan="4" class="separator"><%= params[:class] %> School Individual <%= params[:level] %> Results</td>
   </tr>
   <tr>
-    <th width=40>Rank</th>
+    <th>Rank</th>
     <th>Name</th>
     <th>School</th>
     <th>Score</th>

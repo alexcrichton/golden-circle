@@ -7,11 +7,14 @@
   <h3><%= level.to_s.capitalize %> Division</h3>
   <%- [:large, :small].each do |klass| -%>
     <table>
+      <colgroup>
+        <col width="40"/>
+      </colgroup>
       <tr>
         <td colspan="4" class="separator"><%= klass.to_s.capitalize %> Schools</td>
       </tr>
       <tr>
-        <th width=40>Rank</th>
+        <th>Rank</th>
         <th>Name</th>
         <th>School</th>
         <th>Score</th>

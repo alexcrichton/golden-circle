@@ -7,11 +7,14 @@
 <%- [:large, :small].each do |klass| -%>
   <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
     <table>
+      <colgroup>
+        <col width="40"/>
+      </colgroup>
       <tr>
         <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
       </tr>
       <tr>
-        <th width=40>Rank</th>
+        <th>Rank</th>
         <th>School</th>
         <th>Score</th>
       </tr>
@@ -31,11 +34,14 @@
   <%- [:large, :small].each do |klass| -%>
     <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
       <table>
+        <colgroup>
+          <col width="40"/>
+        </colgroup>
         <tr>
           <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
         </tr>
         <tr>
-          <th width=40>Rank</th>
+          <th>Rank</th>
           <th>School</th>
           <th>Score</th>
         </tr>

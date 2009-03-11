@@ -105,12 +105,12 @@ class GradingController < ApplicationController
   end
 
   def restore_database
-    if params[:upload].blank?
+    if params[:upload_sql].blank?
       flash[:error] = 'You need to restore from a file!'
       return redirect_to(grading_config_path)
     end
     path = File.join('tmp', 'restore.sql')
-    File.open(path, "wb") { |f| f.write(params[:upload].read) }
+    File.open(path, "wb") { |f| f.write(params[:upload_sql].read) }
     config = School.configurations[RAILS_ENV].symbolize_keys
     if config[:adapter] == 'mysql'
       flash[:notice] = `mysql -u #{config[:username]} --password="#{config[:password]} -D #{config[:database]} < #{path}"`

@@ -18,11 +18,14 @@
 <%- ['wizard', 'apprentice'].each do |level| -%>
   <div class="span-7 <%= level == 'wizard' ? 'colborder' : 'last' %>">
     <table>
+      <colgroup>
+        <col width="40"/>
+      </colgroup>
       <tr>
         <td class="separator" colspan="3"><%= level.capitalize %> Results</td>
       </tr>
       <tr>
-        <th width=40>Rank</th>
+        <th>Rank</th>
         <th>Name</th>
         <th>Score</th>
       </tr>
@@ -42,6 +45,9 @@
 <%- end -%>
 <%- @school.teams.exhibition.each do |team| -%>
   <table>
+    <colgroup>
+      <col width="40"/>
+    </colgroup>
     <tr>
       <td class="separator" colspan="3">Exhibition <%= team.id %> Results</td>
     </tr>
@@ -53,7 +59,7 @@
       </td>
     </tr>
     <tr>
-      <th width=40>Rank</th>
+      <th>Rank</th>
       <th>Name</th>
       <th>Score</th>
     </tr>

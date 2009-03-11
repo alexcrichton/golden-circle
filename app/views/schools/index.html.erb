@@ -3,9 +3,13 @@
 
   <hr />
   <% form_tag email_schools_path, :method => :put do %>
-    The following button will send a confirmation email to all schools so they might validate the information they have
+    <p>
+      The following button will send a confirmation email to all schools so they might validate the information they have
     submitted.
+    </p>
+    <p>
     <%= submit_tag 'Send Email Notification', :confirm => "Are you sure?\nThis will email all schools!" %>
+    </p>
   <% end %>
 </fieldset>
 <table style="width:50%">
@@ -36,7 +40,7 @@
 <%= render :partial => 'schools', :locals => {:title => 'Small Schools', :schools => @small_schools} %>
 <%= render :partial => 'schools', :locals => {:title => 'Unlisted Enrollments', :schools => @unknown} %>
 
-<table border=1 style="width:50%">
+<table border="1" style="width:50%">
   <caption>Available proctors</caption>
   <tr>
     <th>Name</th>

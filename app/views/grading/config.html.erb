@@ -19,35 +19,38 @@
       <%= f.label :cost_per_student, 'Cost per student (in dollars)' %>:<br />
       <%= f.text_field :cost_per_student, :size => 4 %>
     </p>
-    <%= f.submit "Submit" %>
+
+    <p><%= f.submit "Submit" %></p>
   <%- end -%>
 </div>
 <div class="span-6 last">
   <h3>Database</h3>
   <%- form_tag backup_database_path, :method => :put do -%>
-    <%= submit_tag 'Backup Database' %>
+    <p><%= submit_tag 'Backup Database' %></p>
   <%- end -%>
   <hr />
   <%- form_tag restore_database_path, :method => :put, :multipart => true do -%>
-    <%= label_tag :upload, 'Restore the database from a previous backup' %>
-    <br />
-    <%= file_field_tag :upload %>
-    <br />
-    <%= submit_tag 'Restore Database',
-                   :confirm => "This command is extremely dangerous, are you sure?\n"+
-                           "It will produce most likely a lot of errors. Most of these\n"+
-                           "can be ignored, however, as what needs to be backed up will\n"+
-                           "be backed up." %>
+    <p>
+      <%= label_tag :upload_sql, 'Restore the database from a previous backup' %><br />
+      <%= file_field_tag :upload_sql %>
+    </p>
+
+    <p><%= submit_tag 'Restore Database',
+                      :confirm => "This command is extremely dangerous, are you sure?\n"+
+                              "It will produce most likely a lot of errors. Most of these\n"+
+                              "can be ignored, however, as what needs to be backed up will\n"+
+                              "be backed up." %></p>
   <%- end -%>
 
   <hr />
   <h3>Information PDF</h3>
   <%- form_tag upload_file_path, :method => :put, :multipart => true do -%>
-    <%= label_tag :upload, 'Upload the informational PDF file' %>
-    <br />
-    <%= file_field_tag :upload %>
-    <br />
-    <%= submit_tag 'Upload' %>
+    <p>
+      <%= label_tag :upload, 'Upload the informational PDF file' %><br />
+      <%= file_field_tag :upload %>
+    </p>
+
+    <p><%= submit_tag 'Upload' %></p>
   <%- end -%>
 </div>
 <hr />

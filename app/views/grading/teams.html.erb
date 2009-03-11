@@ -8,7 +8,7 @@
 <script type="text/javascript">window.onload = function(){ watch();filter("teams", "search", "tr"); };</script>
 
 Find:<br />
-<input name="search" type="text" autocomplete="off">
+<input name="search" type="text"/>
 <hr />
 
 
@@ -16,7 +16,7 @@ Find:<br />
   <%= error_messages_for :object => @teams %>
   <table id="teams">
     <tr>
-      <td class="separator" colspan=4>All <%= h params[:level] %> Teams</td>
+      <td class="separator" colspan="4">All <%= h params[:level] %> Teams</td>
     </tr>
     <tr>
       <th>School Name</th>
@@ -27,7 +27,7 @@ Find:<br />
     </tr>
     <%- @teams.each do |team| -%>
       <%- fields_for("teams[#{team.id}]", team) do |tf| -%>
-        <tr filter="<%= h(team_name(team) + " " + team.level).gsub(/ /, "_") %>" class="<%= cycle('even', 'odd') %>">
+        <tr class="<%= cycle('even', 'odd') %> filter:<%= h(team_name(team) + " " + team.level).gsub(/ /, "_") %>">
           <td><%= tf.label :test_score, team_name(team) %></td>
           <td><%= h team.level %></td>
           <td><%= tf.text_field :test_score, :size => 5 %> <%= tf.check_box :team_score_checked %></td>
@@ -37,5 +37,5 @@ Find:<br />
       <%- end -%>
     <%- end -%>
   </table>
-  <%= submit_tag "Submit Changes", :onclick => "closeOk()" %>
+  <p><%= submit_tag "Submit Changes", :onclick => "closeOk()" %></p>
 <%- end -%>
