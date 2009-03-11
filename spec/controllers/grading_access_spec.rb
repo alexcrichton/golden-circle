@@ -124,18 +124,18 @@ describe GradingController do
 
   describe "PUT /grading/teams" do
     it 'should redirect anonymous users to the login path' do
-      put :update_teams, :level => 'wizard'
+      put :update_teams, :level => 'wizard', :teams => {}
       response.should redirect_to(login_path)
     end
 
     it 'should redirect non-admin users to the login path' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false))
-      put :update_teams, :level => 'wizard'
+      put :update_teams, :level => 'wizard', :teams => {}
       response.should redirect_to(login_path)
     end
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      put :update_teams, :level => 'wizard'
+      put :update_teams, :level => 'wizard', :teams => {}
       response.should redirect_to(grading_teams_path(:level => 'wizard'))
     end
   end
@@ -153,8 +153,8 @@ describe GradingController do
     end
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name), :student_scores_checked= => true))
-      put :update_students, :team_id => 1, :team => {}
+      Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name), :student_scores_checked= => true, :changed? => false, :id => 1))
+      put :update_students, :team_id => 1, :team => {}, :students => {}
       response.should redirect_to(grading_students_path(:team_id => 1))
     end
   end

@@ -183,24 +183,24 @@ describe GradingController do
 
   describe "PUT /grading/teams" do
     it 'should succeed' do
-      put :update_teams, :level => 'wizard'
+      put :update_teams, :level => 'wizard', :teams => {}
       response.should redirect_to(grading_teams_path(:level => 'wizard'))
     end
 
     it 'should find all teams with the correct parameters' do
       Team.should_receive(:wizard).and_return(mock_scope([mock_team], :participating, :sorted))
-      put :update_teams, :level => 'wizard'
+      put :update_teams, :level => 'wizard', :teams => {}
     end
 
     describe 'with successful update' do
       before(:each) do
-        mock_team(:id => 1, :team_score_checked= => true, :test_score= => true, :save => true)
+        mock_team(:id => 1, :team_score_checked= => true, :test_score= => true, :save => true, :changed? => true)
         Team.stub!(:find).and_return([mock_team])
       end
 
       it 'should update the teams correctly and save them' do
         mock_team.should_receive(:test_score=).with('4')
-        mock_team.should_receive(:save)
+        mock_team.should_receive(:recalculate_team_score)
         put :update_teams, :level => 'wizard', :teams => {'1' => {:test_score => '4'}}
       end
 
@@ -212,13 +212,13 @@ describe GradingController do
 
     describe 'with unsuccessful update' do
       before(:each) do
-        mock_team(:id => 1, :team_score_checked= => true, :test_score= => true, :save => false)
+        mock_team(:id => 1, :team_score_checked= => true, :test_score= => true, :recalculate_team_score => false, :changed? => true)
         Team.stub!(:find).and_return([mock_team])
       end
 
       it 'should assign the found teams to the @teams variable' do
         Team.stub!(:wizard).and_return(mock_scope([mock_team], :participating, :sorted))
-        put :update_teams, :level => 'wizard'
+        put :update_teams, :level => 'wizard', :teams => {}
         assigns[:teams].should == [mock_team]
       end
 
@@ -237,7 +237,7 @@ describe GradingController do
 
   describe "PUT /grading/students/1" do
     before(:each) do
-      mock_team(:students => mock_scope([mock_student], :by_name), :student_scores_checked= => true)
+      mock_team(:students => mock_scope([mock_student], :by_name), :student_scores_checked= => true, :changed? => true, :recalculate_team_score => true, :id => 1)
     end
 
     it 'should succeed' do
@@ -253,6 +253,7 @@ describe GradingController do
 
     describe 'with successful update' do
       before(:each) do
+        mock_student.stub!(:changed?).and_return(true)
         mock_student.stub!(:id).and_return(1)
         mock_student.stub!(:test_score=).and_return(true)
         Team.stub!(:find).and_return(mock_team)
@@ -273,6 +274,7 @@ describe GradingController do
     describe 'with unsuccessful update' do
       before(:each) do
         mock_student.stub!(:id).and_return(1)
+        mock_student.stub!(:changed?).and_return(true)
         mock_student.stub!(:test_score=).and_return(true)
         mock_student.stub!(:save).and_return(false)
         Team.stub!(:find).and_return(mock_team)

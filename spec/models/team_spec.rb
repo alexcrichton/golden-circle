@@ -76,17 +76,19 @@ describe Team do
 
   it 'should calculate team score correctly' do
     @it.attributes = @valid_attributes
+    @it.school = mock_model(School, :recalculate_school_score => true)
     @it.save
     (1..5).each do |s|
       k = Student.new(:first_name => s.to_s, :last_name => s.to_s, :team_id => @it.id)
       k.test_score = s;
       @it.students << k
+      k.save
     end
     @it.test_score = 8
-    @it.save
+    @it.recalculate_team_score
     @it.team_score.should eql(55)
     @it.test_score = 9
-    @it.save
+    @it.recalculate_team_score
     @it.team_score.should eql(60)
   end
 

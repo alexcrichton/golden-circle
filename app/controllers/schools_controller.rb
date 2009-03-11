@@ -41,7 +41,7 @@ class SchoolsController < ApplicationController
     # if after deadline, only admin can change things. If the only error is on the base (creation deadline), then
     # allow this to pass by bypassing the one creation validation
     if !save_worked && current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
-      @school.save_with_validation(false)
+      @school.save(false)
       save_worked = true
     end
 
