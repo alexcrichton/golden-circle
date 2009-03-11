@@ -6,7 +6,7 @@ class SchoolsController < ApplicationController
   before_filter :require_admin, :only => [:index, :email]
 
   def index
-    @schools = School.all
+    @schools = School.all.by_name
     @large_schools = @schools.large
     @small_schools = @schools.small
     @unknown = @schools.unknown

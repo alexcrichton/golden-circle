@@ -11,13 +11,13 @@ class GradingController < ApplicationController
   end
 
   def blanks
-    @teams = Team.blank_scores
-    @students = Student.blank_scores
+    @teams = Team.blank_scores.sorted
+    @students = Student.blank_scores.by_name
   end
 
   def unchecked
-    @unchecked_team_scores = Team.unchecked_team_score
-    @unchecked_student_scores = Team.unchecked_student_scores
+    @unchecked_team_scores = Team.unchecked_team_score.sorted
+    @unchecked_student_scores = Team.unchecked_student_scores.sorted
   end
 
   def teams
@@ -66,9 +66,9 @@ class GradingController < ApplicationController
   end
 
   def config
-    @deadline = Settings.find_by_var('deadline')
-    @event_date = Settings.find_by_var('event_date')
-    @cost_per_student = Settings.find_by_var('cost_per_student')
+#    @deadline = Settings.find_by_var('deadline')
+#    @event_date = Settings.find_by_var('event_date')
+#    @cost_per_student = Settings.find_by_var('cost_per_student')
   end
 
   def update_configuration

@@ -15,7 +15,7 @@ class Student < ActiveRecord::Base
   before_save :strip_names
 
   named_scope :winners, :order => 'students.test_score DESC, last_name ASC, first_name ASC', :conditions => ['students.test_score IS NOT ?', nil]
-  named_scope :blank_scores, :conditions => {:test_score => nil}, :order => 'last_name ASC, first_name ASC'
+  named_scope :blank_scores, :conditions => {:test_score => nil}
   named_scope :upper_scores, :conditions => ['students.test_score >= ?', 20]
   named_scope :team_contributors, :order => 'students.test_score DESC', :limit => 5
   named_scope :large, :conditions => ['schools.enrollment >= ?', School::CUTOFF], :include => {:team => :school}

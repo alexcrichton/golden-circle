@@ -29,7 +29,7 @@ class Team < ActiveRecord::Base
 
   named_scope :unchecked_student_scores, :conditions => {:student_scores_checked => false}
   named_scope :unchecked_team_score, :conditions => {:team_score_checked => false}
-  named_scope :blank_scores, :conditions => {:test_score => nil}, :include => [:school], :order => 'schools.name ASC'
+  named_scope :blank_scores, :conditions => {:test_score => nil}
   named_scope :non_exhibition, :conditions => {:is_exhibition => false}
   named_scope :exhibition, :conditions => {:is_exhibition => true}
   named_scope :wizard, :conditions => {:level => Team::WIZARD}

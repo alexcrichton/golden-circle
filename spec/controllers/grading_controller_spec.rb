@@ -112,23 +112,23 @@ describe GradingController do
     end
 
     it 'should find all blank scored teams' do
-      Team.should_receive(:blank_scores)
+      Team.should_receive(:blank_scores).and_return(mock_scope([], :sorted))
       get :blanks
     end
 
     it 'should find all blank scored students' do
-      Student.should_receive(:blank_scores)
+      Student.should_receive(:blank_scores).and_return(mock_scope([], :by_name))
       get :blanks
     end
 
     it "should assign the blank scored teams for the view" do
-      Team.stub!(:blank_scores).and_return([mock_team])
+      Team.stub!(:blank_scores).and_return(mock_scope([mock_team], :sorted))
       get :blanks
       assigns[:teams].should eql([mock_team])
     end
 
     it "should assign the blank scored students for the view" do
-      Student.stub!(:blank_scores).and_return([mock_student])
+      Student.stub!(:blank_scores).and_return(mock_scope([mock_student], :by_name))
       get :blanks
       assigns[:students].should eql([mock_student])
     end
@@ -147,23 +147,23 @@ describe GradingController do
     end
 
     it 'should find all unchecked team scores' do
-      Team.should_receive(:unchecked_team_score)
+      Team.should_receive(:unchecked_team_score).and_return(mock_scope([], :sorted))
       get :unchecked
     end
 
     it 'should find all unchecked student scores' do
-      Team.should_receive(:unchecked_student_scores)
+      Team.should_receive(:unchecked_student_scores).and_return(mock_scope([], :sorted))
       get :unchecked
     end
 
     it "should assign the unchecked team scores for the view" do
-      Team.stub!(:unchecked_team_score).and_return([mock_team])
+      Team.stub!(:unchecked_team_score).and_return(mock_scope([mock_team], :sorted))
       get :unchecked
       assigns[:unchecked_team_scores].should eql([mock_team])
     end
 
     it "should assign the unchecked student scores for the view" do
-      Team.stub!(:unchecked_student_scores).and_return([mock_team])
+      Team.stub!(:unchecked_student_scores).and_return(mock_scope([mock_team], :sorted))
       get :unchecked
       assigns[:unchecked_student_scores].should eql([mock_team])
     end

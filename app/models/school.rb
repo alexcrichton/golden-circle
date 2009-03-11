@@ -25,9 +25,9 @@ class School < ActiveRecord::Base
                             :greater_than_or_equal_to => 0,
                             :only_integer => true,
                             :on => :update
-  validates_uniqueness_of :name, :case_sensitive => false#, :unless => Proc.new { |school| school.instance_variable_get("@recalculating")}
-  validates_associated :teams, :message => "are invalid"#, :unless => Proc.new { |school| school.instance_variable_get("@recalculating")}
-  validates_associated :proctors, :message => 'are invalid'#, :unless => Proc.new { |school| school.instance_variable_get("@recalculating")}
+  validates_uniqueness_of :name, :case_sensitive => false
+  validates_associated :teams, :message => "are invalid"
+  validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update
   validate :submitted_before_deadline?
 
@@ -36,10 +36,11 @@ class School < ActiveRecord::Base
   after_create :add_teams
   before_save :strip_name
 
-  named_scope :all, :include => [:proctors, :teams, :students], :order => 'name ASC'
-  named_scope :large, :conditions => ['enrollment >= ?', CUTOFF], :order => 'name ASC'
-  named_scope :small, :conditions => ['enrollment < ?', CUTOFF], :order => 'name ASC'
-  named_scope :unknown, :conditions => {:enrollment => nil}, :order => 'name ASC'
+  named_scope :all, :include => [:proctors, :teams, :students]
+  named_scope :large, :conditions => ['enrollment >= ?', CUTOFF]
+  named_scope :small, :conditions => ['enrollment < ?', CUTOFF]
+  named_scope :unknown, :conditions => {:enrollment => nil}
+  named_scope :by_name, :order => 'name ASC'
   named_scope :winners, :order => 'school_score DESC, name ASC'
 
   def deliver_password_reset_instructions!

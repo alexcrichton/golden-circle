@@ -327,7 +327,7 @@ describe SchoolsController do
     end
 
     it 'should find all the schools' do
-      School.should_receive(:all).and_return(mock_scope([], :large, :small, :unknown))
+      School.should_receive(:all).and_return(mock_scope([], :large, :small, :unknown, :by_name))
       get :index
     end
 
