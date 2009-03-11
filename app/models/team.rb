@@ -66,17 +66,17 @@ class Team < ActiveRecord::Base
 
   protected
 
-#  def ensure_checks_are_correct
-#    if team_score_checked && test_score.nil?
-##      errors.add(:team_score_checked, " - this team needs to have a score entered before it is checked off.")
-#      self.team_score_checked = false
-#    end
-#    if student_scores_checked && students.inject(false){ |last, student| last || student.test_score.nil? }
-##      errors.add(:student_scores_checked, " - all scores must be entered before the scores are checked off.")
-#      self.student_scores_checked = false
-#    end
-#    return true
-#  end
+  def ensure_checks_are_correct
+    if team_score_checked && test_score.nil?
+#      errors.add(:team_score_checked, " - this team needs to have a score entered before it is checked off.")
+      self.team_score_checked = false
+    end
+    if student_scores_checked && students.inject(false){ |last, student| last || student.test_score.nil? }
+#      errors.add(:student_scores_checked, " - all scores must be entered before the scores are checked off.")
+      self.student_scores_checked = false
+    end
+    return true
+  end
 
   def student_validation_not_needed?
     @recalculating

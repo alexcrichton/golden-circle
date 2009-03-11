@@ -6,6 +6,7 @@ describe GradingController do
   include MockScopeHelper
   include MockTeamHelper
   include MockStudentHelper
+  include MockSettingsHelper
 
   before(:each) do
     controller.stub!(:require_admin)

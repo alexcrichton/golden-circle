@@ -55,27 +55,20 @@ class GradingController < ApplicationController
     @team.student_scores_checked = params[:team][:student_scores_checked]
     if boolean.nil?
       # no students
-      if @team.changed?
-        @team.recalculate_team_score(false) # don't need to recalculate, just the check flag changed
-      else
-        # nothing changed...
-      end
+      @team.recalculate_team_score(false) if @team.changed? # don't need to recalculate, just the check flag changed
     elsif boolean
-      #successful saves, score changed
-      @team.recalculate_team_score
+      @team.recalculate_team_score #successful saves, score changed
     else
-      # unsuccessful saves...
-      return render :action => 'students'
+      return render :action => 'students' # unsuccessful saves...
     end
-#    if boolean.nil? && @team.recalculate_team_score
-      flash[:notice] = 'Students successfully updated!'
-      redirect_to grading_students_path(:team_id => @team.id)
-#    else
-#      render :action => 'students'
-#    end
+    flash[:notice] = 'Students successfully updated!'
+    redirect_to grading_students_path(:team_id => @team.id)
   end
 
   def config
+    @deadline = Settings.find_by_var('deadline')
+    @event_date = Settings.find_by_var('event_date')
+    @cost_per_student = Settings.find_by_var('cost_per_student')
   end
 
   def update_configuration
