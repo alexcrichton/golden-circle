@@ -6,7 +6,6 @@ describe GradingController do
   include MockScopeHelper
   include MockTeamHelper
   include MockStudentHelper
-  include MockSettingsHelper
 
   before(:each) do
     controller.stub!(:require_admin)
@@ -82,7 +81,7 @@ describe GradingController do
     end
 
     it "should find the requested team" do
-      Team.should_receive(:find).with("37", :include => [:school, :students]).and_return(mock_team)
+      Team.should_receive(:find).with("37", :include => [:school]).and_return(mock_team)
       get :print, :id => "37"
     end
 
@@ -99,75 +98,98 @@ describe GradingController do
     end
   end
 
-  describe "responding to GET /grading/blanks" do
+  describe "responding to GET /grading" do
 
     it "should succeed" do
-      get :blanks
+      get :status
       response.should be_success
     end
 
-    it "should render the 'blanks' template" do
-      get :blanks
-      response.should render_template('blanks')
+    it "should render the 'status' template" do
+      get :status
+      response.should render_template('status')
     end
 
     it 'should find all blank scored teams' do
-      Team.should_receive(:blank_scores).and_return(mock_scope([], :sorted))
-      get :blanks
+      Team.should_receive(:blank_scores).and_return(mock_scope([], :sorted, :participating))
+      get :status
     end
 
     it 'should find all blank scored students' do
       Student.should_receive(:blank_scores).and_return(mock_scope([], :by_name))
-      get :blanks
+      get :status
     end
 
     it "should assign the blank scored teams for the view" do
-      Team.stub!(:blank_scores).and_return(mock_scope([mock_team], :sorted))
-      get :blanks
-      assigns[:teams].should eql([mock_team])
+      Team.stub!(:blank_scores).and_return(mock_scope([mock_team], :sorted, :participating))
+      get :status
+      assigns[:blank_teams].should eql([mock_team])
     end
 
     it "should assign the blank scored students for the view" do
       Student.stub!(:blank_scores).and_return(mock_scope([mock_student], :by_name))
-      get :blanks
-      assigns[:students].should eql([mock_student])
-    end
-  end
-
-  describe "responding to GET /grading/unchecked" do
-
-    it "should succeed" do
-      get :unchecked
-      response.should be_success
-    end
-
-    it "should render the 'unchecked' template" do
-      get :unchecked
-      response.should render_template('unchecked')
+      get :status
+      assigns[:blank_students].should eql([mock_student])
     end
 
     it 'should find all unchecked team scores' do
-      Team.should_receive(:unchecked_team_score).and_return(mock_scope([], :sorted))
-      get :unchecked
+      Team.should_receive(:unchecked_team_score).and_return(mock_scope([], :sorted, :participating))
+      get :status
     end
 
     it 'should find all unchecked student scores' do
-      Team.should_receive(:unchecked_student_scores).and_return(mock_scope([], :sorted))
-      get :unchecked
+      Team.should_receive(:unchecked_student_scores).and_return(mock_scope([], :sorted, :participating))
+      get :status
     end
 
     it "should assign the unchecked team scores for the view" do
-      Team.stub!(:unchecked_team_score).and_return(mock_scope([mock_team], :sorted))
-      get :unchecked
+      Team.stub!(:unchecked_team_score).and_return(mock_scope([mock_team], :sorted, :participating))
+      get :status
       assigns[:unchecked_team_scores].should eql([mock_team])
     end
 
     it "should assign the unchecked student scores for the view" do
-      Team.stub!(:unchecked_student_scores).and_return(mock_scope([mock_team], :sorted))
-      get :unchecked
+      Team.stub!(:unchecked_student_scores).and_return(mock_scope([mock_team], :sorted, :participating))
+      get :status
       assigns[:unchecked_student_scores].should eql([mock_team])
     end
+
   end
+
+#  describe "responding to GET /grading/unchecked" do
+#
+#    it "should succeed" do
+#      get :unchecked
+#      response.should be_success
+#    end
+#
+#    it "should render the 'unchecked' template" do
+#      get :unchecked
+#      response.should render_template('unchecked')
+#    end
+#
+#    it 'should find all unchecked team scores' do
+#      Team.should_receive(:unchecked_team_score).and_return(mock_scope([], :sorted))
+#      get :unchecked
+#    end
+#
+#    it 'should find all unchecked student scores' do
+#      Team.should_receive(:unchecked_student_scores).and_return(mock_scope([], :sorted))
+#      get :unchecked
+#    end
+#
+#    it "should assign the unchecked team scores for the view" do
+#      Team.stub!(:unchecked_team_score).and_return(mock_scope([mock_team], :sorted))
+#      get :unchecked
+#      assigns[:unchecked_team_scores].should eql([mock_team])
+#    end
+#
+#    it "should assign the unchecked student scores for the view" do
+#      Team.stub!(:unchecked_student_scores).and_return(mock_scope([mock_team], :sorted))
+#      get :unchecked
+#      assigns[:unchecked_student_scores].should eql([mock_team])
+#    end
+#  end
 
   describe "responding to GET /grading/config" do
 

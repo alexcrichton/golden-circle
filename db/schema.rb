@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090305041932) do
+ActiveRecord::Schema.define(:version => 20090312031122) do
 
   create_table "proctors", :force => true do |t|
     t.string   "name"
@@ -69,8 +69,16 @@ ActiveRecord::Schema.define(:version => 20090305041932) do
     t.boolean  "team_score_checked",     :default => false, :null => false
     t.boolean  "student_scores_checked", :default => false, :null => false
     t.boolean  "is_exhibition",          :default => true,  :null => false
-    t.integer  "exhibition_number"
     t.integer  "team_score"
+  end
+
+  create_table "uploads", :force => true do |t|
+    t.string   "name"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -38,7 +38,7 @@ class Team < ActiveRecord::Base
   named_scope :small, :conditions => ['schools.enrollment < ?', School::CUTOFF], :include => [:school]
   named_scope :participating, :conditions => ['students_count > ?', 0]
   named_scope :sorted, :order => 'schools.name ASC', :include => [:school]
-  named_scope :winners, :order => 'team_score DESC'
+  named_scope :winners, :order => 'team_score DESC', :conditions => ['team_score IS NOT ?', nil]
 
   def team_test_score
     return 0 if test_score.nil?

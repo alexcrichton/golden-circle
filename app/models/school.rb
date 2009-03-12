@@ -41,7 +41,7 @@ class School < ActiveRecord::Base
   named_scope :small, :conditions => ['enrollment < ?', CUTOFF]
   named_scope :unknown, :conditions => {:enrollment => nil}
   named_scope :by_name, :order => 'name ASC'
-  named_scope :winners, :order => 'school_score DESC, name ASC'
+  named_scope :winners, :order => 'school_score DESC, name ASC', :conditions => ['school_score IS NOT ?', nil]
 
   def deliver_password_reset_instructions!
     reset_perishable_token!

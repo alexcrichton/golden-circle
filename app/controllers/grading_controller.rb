@@ -5,19 +5,17 @@ class GradingController < ApplicationController
   before_filter :load_students, :only => [:students, :update_students]
 
   def print
-    @team = Team.find(params[:id], :include => [:school, :students])
+    @team = Team.find(params[:id], :include => [:school])
     @school = @team.school
     render :layout => 'admin'
   end
 
-  def blanks
-    @teams = Team.blank_scores.sorted
-    @students = Student.blank_scores.by_name
-  end
+  def status
+    @blank_teams = Team.blank_scores.participating.sorted
+    @blank_students = Student.blank_scores.by_name
 
-  def unchecked
-    @unchecked_team_scores = Team.unchecked_team_score.sorted
-    @unchecked_student_scores = Team.unchecked_student_scores.sorted
+    @unchecked_team_scores = Team.unchecked_team_score.participating.sorted
+    @unchecked_student_scores = Team.unchecked_student_scores.participating.sorted
   end
 
   def teams
@@ -66,9 +64,6 @@ class GradingController < ApplicationController
   end
 
   def config
-#    @deadline = Settings.find_by_var('deadline')
-#    @event_date = Settings.find_by_var('event_date')
-#    @cost_per_student = Settings.find_by_var('cost_per_student')
   end
 
   def update_configuration
@@ -77,49 +72,6 @@ class GradingController < ApplicationController
     deadline = convert_date(params[:settings], :deadline)
     Settings.deadline = deadline if deadline
     Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
-    redirect_to grading_config_path
-  end
-
-  def upload
-    unless params[:upload].blank?
-      path = File.join('public', 'golden_circle_information.pdf')
-      File.delete(path)
-      File.open(path, "wb") { |f| f.write(params[:upload].read)}
-      flash[:notice] = 'File successfully uploaded!'
-    end
-    redirect_to grading_config_path
-  end
-
-  def backup_database
-    config = School.configurations[RAILS_ENV].symbolize_keys
-    if config[:adapter] == 'mysql'
-      send_data `mysqldump #{config[:database]} -u #{config[:username]} --password="#{config[:password]}"`,
-                :filename => "gc_backup-#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.sql"
-    elsif config[:adapter] == 'sqlite3'
-      send_data `sqlite3 #{config[:database]} '.dump'`,
-                :filename => "gc_backup-#{Time.now.year}-#{Time.now.month}-#{Time.now.day}.sql"
-    else
-      flash[:error] = "Sorry, I don't know how to back up this kind of database"
-      redirect_to grading_config_path
-    end
-  end
-
-  def restore_database
-    if params[:upload_sql].blank?
-      flash[:error] = 'You need to restore from a file!'
-      return redirect_to(grading_config_path)
-    end
-    path = File.join('tmp', 'restore.sql')
-    File.open(path, "wb") { |f| f.write(params[:upload_sql].read) }
-    config = School.configurations[RAILS_ENV].symbolize_keys
-    if config[:adapter] == 'mysql'
-      flash[:notice] = `mysql -u #{config[:username]} --password="#{config[:password]} -D #{config[:database]} < #{path}"`
-    elsif config[:adapter] == 'sqlite3'
-      flash[:notice] = `sqlite3 #{config[:database]} < #{path}`
-    else
-      flash[:error] = "Sorry, I don't know how to restore this kind of database"
-    end
-    File.delete(path)
     redirect_to grading_config_path
   end
 

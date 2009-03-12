@@ -23,7 +23,7 @@ to ensure that it is accurate. The following is what is currently saved in our d
 <%- end -%>
 <h2>Exhibition Teams</h2>
 <%- @school.teams.exhibition.each do |team| -%>
-  <h4>ID: <%= team.id %></h4>
+  <p>ID: <%= team.id %></p>
   <ol>
     <%- team.students.by_name.each do |student| -%>
       <li><%=h student.name %></li>
@@ -46,6 +46,6 @@ Thank you for registering for the Golden Circle Tournament!<br />
 <br />
 - Golden Circle Administration<br />
 <br />
-Questions? Please contact: <%= mail_to 'golden.circle.contest@email.com' %><br/>
+Questions? Please contact: <%= mail_to 'golden.circle.contest@gmail.com' %><br/>
 
 

@@ -17,9 +17,9 @@
     <td class="separator">Last Name</td>
     <td class="separator">Score</td>
   </tr>
-  <% @team.students.by_name.each_with_index do |student, i| %>
-    <tr class="<%= cycle('even', 'odd') %>">
-      <td class="num"><%= i + 1 %></td>
+  <% @team.students.by_name.each do |student| %>
+    <tr class="<%= cycle('even', 'odd', :name => 'rowclass') %>">
+      <td class="num"><%= cycle(*1..15) %></td>
       <td><%= student.first_name %></td>
       <td><%= student.last_name %></td>
       <td>&nbsp;</td>

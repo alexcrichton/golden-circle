@@ -1,0 +1,14 @@
+<h1>Editing upload</h1>
+
+<% form_for(@upload) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :upload %><br/>
+    <%= f.file_field :upload %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', uploads_path %>

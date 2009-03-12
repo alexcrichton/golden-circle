@@ -3,7 +3,13 @@
   <ul>
     <li><%= link_to 'Wizard Scores', grading_teams_path(:level => Team::WIZARD) %></li>
     <li><%= link_to 'Apprentice Scores', grading_teams_path(:level => Team::APPRENTICE) %></li>
-    <li><%= link_to 'Blank Scores', blank_scores_path %></li>
-    <li><%= link_to 'Unchecked Scores', unchecked_scores_path %></li>
+  </ul>
+</fieldset>
+<fieldset>
+  <legend>Information</legend>
+  <ul>
+    <li><%= link_to 'Status', grading_status_path %></li>
+    <li><%= link_to 'Configuration', grading_config_path %></li>
+    <li><%= link_to 'Backup/Restore', uploads_path %></li>
   </ul>
 </fieldset>
