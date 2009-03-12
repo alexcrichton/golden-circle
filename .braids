@@ -1,4 +1,11 @@
 --- 
+vendor/plugins/paperclip: 
+  squashed: true
+  url: git://github.com/thoughtbot/paperclip.git
+  branch: master
+  type: git
+  revision: f44ede70f849acf3ae3403cc1d5e1439fa0fac91
+  remote: braid/vendor/plugins/paperclip
 vendor/plugins/attribute_fu: 
   squashed: true
   url: git://github.com/giraffesoft/attribute_fu.git
