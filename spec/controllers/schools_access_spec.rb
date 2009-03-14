@@ -102,28 +102,28 @@ describe SchoolsController do
   describe "responding to PUT /schools/1" do
     it 'should redirect anonymous to the login page' do
       School.stub!(:find)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(login_path)
     end
 
     it 'should allow the owner' do
       controller.stub!(:current_school).and_return(mock_school)
       School.stub!(:find).and_return(mock_school)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(school_path(mock_school))
     end
 
     it 'should redirect non-owners to the login page' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
       School.stub!(:find).and_return(mock_school)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(login_path)
     end
 
     it 'should allow an admin school' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil
       School.stub!(:find).and_return(mock_school)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(school_path(mock_school))
     end
 

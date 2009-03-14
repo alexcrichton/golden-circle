@@ -168,7 +168,7 @@ describe SchoolsController do
 
       it "should find the requested school" do
         School.should_receive(:find).with("37", {:include=>[:teams, :proctors]}).and_return(mock_school)
-        put :update, :id => "37"
+        put :update, :id => "37", :school => {}
       end
 
       it "should update the found school" do
@@ -179,19 +179,19 @@ describe SchoolsController do
 
       it "should assign the found school to the view" do
         School.stub!(:find).and_return(mock_school)
-        put :update, :id => "1"
+        put :update, :id => "1", :school => {}
         assigns(:school).should equal(mock_school)
       end
 
       it "should redirect to the school" do
         School.stub!(:find).and_return(mock_school(:update_attributes => true))
-        put :update, :id => "1"
+        put :update, :id => "1", :school => {}
         response.should redirect_to(school_url(mock_school))
       end
 
       it "should display a flash message" do
         School.stub!(:find).and_return(mock_school(:update_attributes => true))
-        put :update, :id => "1"
+        put :update, :id => "1", :school => {}
         response.flash[:notice].should_not be_nil
       end
 
@@ -207,13 +207,13 @@ describe SchoolsController do
 
       it "should expose the school as @school" do
         School.stub!(:find).and_return(mock_school(:update_attributes => false))
-        put :update, :id => "1"
+        put :update, :id => "1", :school => {}
         assigns(:school).should equal(mock_school)
       end
 
       it "should re-render the 'edit' template" do
         School.stub!(:find).and_return(mock_school(:update_attributes => false))
-        put :update, :id => "1"
+        put :update, :id => "1", :school => {}
         response.should render_template('edit')
       end
     end

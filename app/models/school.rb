@@ -2,7 +2,8 @@ class School < ActiveRecord::Base
 
   CUTOFF = 200;
 
-  acts_as_authentic
+  acts_as_authentic :email_field_validation_options => {:if => :openid_identifier_blank?},
+                    :password_field_validation_options => {:if => :openid_identifier_blank?}
 
   has_many :teams,
            :attributes => true,
@@ -26,9 +27,11 @@ class School < ActiveRecord::Base
                             :only_integer => true,
                             :on => :update
   validates_uniqueness_of :name, :case_sensitive => false
+  validates_uniqueness_of :openid_identifier, :allow_blank => true
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update
+  validate :normalize_openid_identifier
   validate :submitted_before_deadline?
 
   attr_protected :admin, :school_score
@@ -66,7 +69,20 @@ class School < ActiveRecord::Base
     save(false)
   end
 
+  def openid_identifier_blank?
+    openid_identifier.blank?
+  end
+
   private
+
+  # from online Authlogic tutorial
+  def normalize_openid_identifier
+    begin
+      self.openid_identifier = OpenIdAuthentication.normalize_identifier(openid_identifier) if !openid_identifier.blank?
+    rescue OpenIdAuthentication::InvalidOpenId => e
+      errors.add(:openid_identifier, e.message)
+    end
+  end
 
   def submitted_before_deadline?
     if new_record? && Time.zone.now > Settings.deadline
@@ -80,7 +96,7 @@ class School < ActiveRecord::Base
   end
 
   def add_teams
-    [Team::APPRENTICE,Team::WIZARD].each do |level|
+    [Team::APPRENTICE, Team::WIZARD].each do |level|
       self.teams << Team.create(:level => level, :is_exhibition => false)
     end
   end

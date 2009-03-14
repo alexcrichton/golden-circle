@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090312031122) do
+ActiveRecord::Schema.define(:version => 20090314033944) do
+
+  create_table "open_id_authentication_associations", :force => true do |t|
+    t.integer "issued"
+    t.integer "lifetime"
+    t.string  "handle"
+    t.string  "assoc_type"
+    t.binary  "server_url"
+    t.binary  "secret"
+  end
+
+  create_table "open_id_authentication_nonces", :force => true do |t|
+    t.integer "timestamp",  :null => false
+    t.string  "server_url"
+    t.string  "salt",       :null => false
+  end
 
   create_table "proctors", :force => true do |t|
     t.string   "name"
@@ -39,8 +54,10 @@ ActiveRecord::Schema.define(:version => 20090312031122) do
     t.datetime "updated_at"
     t.string   "perishable_token",  :default => "",    :null => false
     t.integer  "school_score"
+    t.string   "openid_identifier"
   end
 
+  add_index "schools", ["openid_identifier"], :name => "index_schools_on_openid_identifier"
   add_index "schools", ["perishable_token"], :name => "index_schools_on_perishable_token"
 
   create_table "settings", :force => true do |t|
@@ -62,15 +79,14 @@ ActiveRecord::Schema.define(:version => 20090312031122) do
   create_table "teams", :force => true do |t|
     t.integer  "school_id"
     t.string   "level"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "test_score"
     t.integer  "students_count",         :default => 0
-    t.integer  "team_score"
     t.boolean  "team_score_checked",     :default => false, :null => false
     t.boolean  "student_scores_checked", :default => false, :null => false
     t.boolean  "is_exhibition",          :default => true,  :null => false
+    t.integer  "team_score"
   end
 
   create_table "uploads", :force => true do |t|

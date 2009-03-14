@@ -9,13 +9,15 @@ class SchoolSessionsController < ApplicationController
   def create
     @school_session = SchoolSession.new(params[:school_session])
 
-    if @school_session.save
-      @current_school = @school_session.school
-      @current_school_session = @school_session
-      flash[:notice] = 'Login successful!'
-      redirect_to show_current_schools_path
-    else
-      render :action => :new
+    @school_session.save do |result|
+      if result
+        @current_school = @school_session.school
+        @current_school_session = @school_session
+        flash[:notice] = "Login successful!"
+        redirect_back_or_default show_current_schools_path
+      else
+        render :action => :new
+      end
     end
   end
 

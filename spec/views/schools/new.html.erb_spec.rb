@@ -5,8 +5,8 @@ describe "/schools/new.html.erb" do
 
   before(:each) do
     assigns[:school] = mock_school(:new_record? => true)
-    Settings.event_date = Time.now
-    Settings.deadline = Time.now
+    Settings.stub!(:event_date).and_return(Time.now)
+    Settings.stub!(:deadline).and_return(Time.now)
     render "/schools/new.html.erb"
   end
 
