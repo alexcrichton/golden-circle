@@ -105,8 +105,6 @@ describe PasswordResetsController do
 
     it "should update the requested school's passwords and OpenID" do
       School.stub!(:find_using_perishable_token).and_return(mock_school)
-#      mock_school.should_receive(:password=).with('asdf')
-#      mock_school.should_receive(:password_confirmation=).with('asdf')
       mock_school.should_receive(:update_attributes).with({:password => 'asdf', :password_confirmation => 'asdf', :openid_identifier => 'asdf'}.stringify_keys)
       put :update, :id => 'awefaefawefawef', :school => {:password => 'asdf', :password_confirmation => 'asdf', :openid_identifier => 'asdf', :asdf => 'asdf'}
     end

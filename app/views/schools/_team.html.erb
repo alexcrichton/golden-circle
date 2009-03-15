@@ -19,7 +19,7 @@
   <%= small_errors(team.students) %>
   <table id="team<%= team.id %>" class="noborder">
     <caption>
-      Students (<%= team.students.size %>/Team::MAXSTUDENTS)
+      Students (<%= team.students.size %>/<%= Team::MAXSTUDENTS %>)
     </caption>
     <tr>
       <th>First Name</th>

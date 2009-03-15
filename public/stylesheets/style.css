@@ -58,13 +58,12 @@ body {
 .fieldWithErrors {
   padding: 2px;
   margin: 2px;
-  background-color: red;
+  background-color: #e00;
   display: table-cell;
 }
 
 #errorExplanation {
-#width : 400 px;
-  border: 2px solid red;
+  border: 2px solid #a00;
   padding: 7px;
   padding-bottom: 3px;
   margin-bottom: 20px;
@@ -103,7 +102,6 @@ img#logo {
   border-right: solid #d1d1d1 1px;
   background: white;
   margin: 0;
-  background: solid #fff 1px;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -125,7 +123,7 @@ div#footer p {
 
 #topnav {
   list-style: none;
-  margin: 0px;
+  margin: 0;
   padding: 0; /*Push-10*/
   margin-left: 400px;
   font-size: 1.25em;
@@ -138,8 +136,6 @@ ul#topnav li {
   height: 25px;
   margin: 0;
   margin-top: 35px;
-  padding-left: 10px;
-  padding-right: 10px;
   padding: 0;
   border-left: solid #505050 1px;
 }
@@ -171,7 +167,7 @@ ul#topnav li:hover {
 
 #info dd {
   float: left;
-  margin-left: 0; /*Span-10*/
+  margin-left: 0;
   width: 390px;
   margin-bottom: 5px;
   padding: 3px 0;
@@ -179,7 +175,7 @@ ul#topnav li:hover {
 
 #info dt {
   float: left;
-  margin-right: 10px; /*span-4*/
+  margin-right: 10px;
   width: 250px;
   padding: 3px 0;
 }
@@ -187,16 +183,10 @@ ul#topnav li:hover {
 .controls {
   float: right;
   margin-left: 3px;
-  margin-right: 3px; /*Comment for admin*/
-/*	display:none;*/
+  margin-right: 3px;
 }
 
-.bottomlink {
-  float: right;
-  font-size: 90%;
-}
-
-td.separator {
+.separator {
   background: #066;
   font-weight: bold;
   text-align: center;
@@ -206,11 +196,11 @@ td.separator {
   border-top: 15px solid #fff;
 }
 
-td.num {
+.num {
   text-align: right;
 }
 
-p#strong {
+p.strong {
   padding: 10px;
   color: #000;
   font-weight: bold;
