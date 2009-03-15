@@ -4,7 +4,7 @@ describe "/school_sessions/new.html.erb" do
   include MockSchoolSessionHelper
 
   before(:each) do
-    assigns[:school_session] = mock_school_session(:new_record? => true, :openid_identifier => 'random')
+    assigns[:school_session] = mock_school_session(:new_record? => true, :authenticating_with_openid? => false, :openid_identifier => 'random')
     Settings.stub!(:event_date).and_return(Time.now)
     Settings.stub!(:deadline).and_return(Time.now)
     render "/school_sessions/new.html.erb"

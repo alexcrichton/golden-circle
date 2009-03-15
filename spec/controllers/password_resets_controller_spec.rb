@@ -103,11 +103,12 @@ describe PasswordResetsController do
       response.should redirect_to(login_path)
     end
 
-    it "should update the requested school's passwords" do
+    it "should update the requested school's passwords and OpenID" do
       School.stub!(:find_using_perishable_token).and_return(mock_school)
-      mock_school.should_receive(:password=).with('asdf')
-      mock_school.should_receive(:password_confirmation=).with('asdf')
-      put :update, :id => 'awefaefawefawef', :school => {:password => 'asdf', :password_confirmation => 'asdf'}
+#      mock_school.should_receive(:password=).with('asdf')
+#      mock_school.should_receive(:password_confirmation=).with('asdf')
+      mock_school.should_receive(:update_attributes).with({:password => 'asdf', :password_confirmation => 'asdf', :openid_identifier => 'asdf'}.stringify_keys)
+      put :update, :id => 'awefaefawefawef', :school => {:password => 'asdf', :password_confirmation => 'asdf', :openid_identifier => 'asdf', :asdf => 'asdf'}
     end
 
     it 'should redirect to the updated school' do
@@ -119,7 +120,7 @@ describe PasswordResetsController do
 
     it "should render the 'edit' template on a failed update" do
       School.stub!(:find_using_perishable_token).and_return(mock_school)
-      mock_school.stub!(:save).and_return(false)
+      mock_school.stub!(:update_attributes).and_return(false)
       put :update, :id => 'aw4ea43ggg', :school => {}
       response.should render_template('edit')
     end

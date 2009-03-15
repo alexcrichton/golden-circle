@@ -2,8 +2,7 @@ class School < ActiveRecord::Base
 
   CUTOFF = 200;
 
-  acts_as_authentic :email_field_validation_options => {:if => :openid_identifier_blank?},
-                    :password_field_validation_options => {:if => :openid_identifier_blank?}
+  acts_as_authentic :password_field_validation_options => {:if => :openid_identifier_blank?}
 
   has_many :teams,
            :attributes => true,

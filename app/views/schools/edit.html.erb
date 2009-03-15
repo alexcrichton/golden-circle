@@ -5,7 +5,7 @@
 <%= javascript_include_tag 'notifychange' %>
 <script type="text/javascript">window.onload = function(){ watch(); };</script>
 
-<% form_for(@school) do |f| %>
+<%- form_for(@school) do |f| -%>
   <%= f.error_messages %>
 
   <div class="clearfix">
@@ -25,7 +25,7 @@
     </div>
     <div class="span-7 payment">
       The amount due for this team is
-      <span style="color:green;font-weight:bold;"><%= number_to_currency @school.cost %></span>. Please
+      <span style="color:#008000;font-weight:bold;"><%= number_to_currency @school.cost %></span>. Please
       bring the check payable to GT Education to the registration table.
     </div>
     <hr />
@@ -40,7 +40,7 @@
         <p>
           <%= f.label :email %>
           <%- if current_school && current_school.id == @school.id -%>
-            <%= link_to '[Change Password]', current_password_resets_path %>
+            <%= link_to '[Change Password/OpenID]', current_password_resets_path %>
           <%- end -%>
           <br />
           <%= f.text_field :email %>
@@ -95,7 +95,6 @@
     Press this button to save the form!<br />
     <%= f.submit "Save Changes", :onclick => "closeOk()" %>
   </p>
-
-<% end %>
+<%- end -%>
 
 

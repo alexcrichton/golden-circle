@@ -3,12 +3,20 @@
 
 var input;
 function focusFirstInput() {
-	var inputs = document.getElementsByTagName("input");
-	for ( var i = 0; i < inputs.length; i++)
-		if (inputs[i].type != "hidden") {
-			input = inputs[i];
-			break;
-		}
-	if (input != null)
-		input.focus();
+  var inputs = document.getElementsByTagName("input");
+  for (var i = 0; i < inputs.length; i++)
+    if (inputs[i].type != "hidden") {
+      input = inputs[i];
+      break;
+    }
+  if (input != null)
+    input.focus();
+}
+
+function toggle(id) {
+  var element = document.getElementById(id);
+  if (element.style.display == 'none')
+    element.style.display = '';
+  else
+    element.style.display = 'none';
 }

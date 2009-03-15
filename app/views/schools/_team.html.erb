@@ -1,7 +1,5 @@
 <div class="team">
-  <%- if team.is_exhibition -%>
-    <hr />
-  <%- end -%>
+  <%= '<hr/>' if team.is_exhibition %>
   <%= f.hidden_field :is_exhibition %>
   <p>
     <%= f.label :level, 'Team level:' %>
@@ -21,14 +19,14 @@
   <%= small_errors(team.students) %>
   <table id="team<%= team.id %>" class="noborder">
     <caption>
-      Students (<%= team.students.size %>/15)
+      Students (<%= team.students.size %>/Team::MAXSTUDENTS)
     </caption>
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
       <th>&nbsp;</th>
     </tr>
-    <%= f.render_associated_form(team.students, :new => (team.students.size >= 15 ? 0 : 1)) %>
+    <%= f.render_associated_form(team.students, :new => (team.students.size >= Team::MAXSTUDENTS ? 0 : 1)) %>
   </table>
   <%= f.add_associated_link('add', team.students.build, :container => "#team#{team.id}") %>
 </div>

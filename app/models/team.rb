@@ -2,6 +2,7 @@ class Team < ActiveRecord::Base
 
   WIZARD = 'Wizard'
   APPRENTICE = 'Apprentice'
+  MAXSTUDENTS = 15
 
   has_many :students,
            :attributes => true,
@@ -14,7 +15,7 @@ class Team < ActiveRecord::Base
   validates_inclusion_of :level, :in => [Team::WIZARD, Team::APPRENTICE]
   validates_associated :students, :message => 'are invalid', :unless => :student_validation_not_needed?
   validates_size_of :students,
-                    :maximum => 15,
+                    :maximum => MAXSTUDENTS,
                     :message => "have a maximum of 15 allowed",
                     :unless => :student_validation_not_needed?
   validates_numericality_of :test_score,

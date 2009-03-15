@@ -1,18 +1,5 @@
 <%= f.error_messages %>
 
-<%- javascript_tag do -%>
-  function toggleForm(){
-    swap(document.getElementById('password_container'));
-    swap(document.getElementById('openid_input_container'));
-  }
-  function swap(element){
-    if(element.style.display == 'none')
-      element.style.display = '';
-    else
-      element.style.display = 'none';
-  }
-<%- end -%>
-
 <p>
   <%= f.label :email %><br />
   <%= f.text_field :email %>
@@ -23,7 +10,7 @@
 </p>
 <div id="password_container"<% if @school && !@school.openid_identifier.blank? %>style="display:none"<% end %>>
   <p>
-    <%= f.label :password %> (or <%= link_to_function 'use OpenID', 'toggleForm()' %>)<br />
+    <%= f.label :password %> (or <%= link_to_function 'use OpenID', "toggle('password_container');toggle('openid_input_container')" %>)<br />
     <%= f.password_field :password %>
   </p>
 
@@ -34,7 +21,7 @@
 </div>
 <div id="openid_input_container" <% if !@school || @school.openid_identifier.blank?  %>style="display:none"<% end %>>
   <p>
-    <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'use a password', 'toggleForm()' %>)<br />
+    <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'use a password', "toggle('password_container');toggle('openid_input_container')" %>)<br />
     <%= f.text_field :openid_identifier %>
   </p>
 </div>

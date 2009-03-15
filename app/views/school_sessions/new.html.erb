@@ -2,26 +2,13 @@
   <%= render :partial => 'schools/sidebar' %>
 <%- end -%>
 
-<%- javascript_tag do -%>
-  function toggle(){
-    swap(document.getElementById('login_container'));
-    swap(document.getElementById('openid_container'));
-  }
-  function swap(element){
-    if(element.style.display == 'none')
-      element.style.display = '';
-    else
-      element.style.display = 'none';
-  }
-<%- end -%>
-
 <div class="colborder span-8">
   <h2>Login School</h2>
   <%- form_for @school_session, :url => school_session_path do |f| -%>
     <%= f.error_messages %>
-    <div id="login_container" <% unless @school_session.openid_identifier.blank? %> style="display: none;"<% end %>>
+    <div id="login_container" <% if @school_session.authenticating_with_openid? %>style="display: none;"<% end %>>
       <p>
-        <%= f.label :email %> (or <%= link_to_function 'use OpenID', "toggle()" %>)<br />
+        <%= f.label :email %> (or <%= link_to_function 'use OpenID', "toggle('login_container');toggle('openid_container')" %>)<br />
         <%= f.text_field :email %>
       </p>
 
@@ -30,9 +17,9 @@
         <%= f.password_field :password %>
       </p>
     </div>
-    <div id="openid_container" <% if @school_session.openid_identifier.blank? %> style="display: none;"<% end %>>
+    <div id="openid_container" <% unless @school_session.authenticating_with_openid? %>style="display: none;"<% end %>>
       <p>
-        <%= f.label :openid_identifier, 'OpenID' %> (or <%= link_to_function 'use regular email/password', "toggle()" %>)<br />
+        <%= f.label :openid_identifier, 'OpenID' %> (or <%= link_to_function 'use email/password', "toggle('login_container');toggle('openid_container')" %>)<br />
         <%= f.text_field :openid_identifier %>
       </p>
     </div>

@@ -2,11 +2,24 @@
 
 <% form_for @school, :url => password_reset_path(:id => params[:id]), :method => :put do |f| %>
   <%= f.error_messages %>
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %><br />
-  <br />
-  <%= f.submit "Update my password and log me in" %>
+  <div id="password_container" <% if !@school.openid_identifier.blank? %>style="display:none"<% end %>>
+    <p>
+      <%= f.label :password %> (or <%= link_to_function 'change your OpenID', "toggle('password_container');toggle('openid_container')" %>)<br />
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
+    </p>
+  </div>
+
+  <div id="openid_container" <% if @school.openid_identifier.blank? %>style="display:none"<% end %>>
+    <p>
+      <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'change your password', "toggle('password_container');toggle('openid_container')" %>)<br/>
+      <%= f.text_field :openid_identifier %>
+    </p>
+  </div>
+  <p>
+    <%= f.submit "Update and log me in" %>
+  </p>
 <% end %>
