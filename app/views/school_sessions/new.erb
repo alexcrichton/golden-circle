@@ -1,5 +1,5 @@
 <%- content_for :sidebar do -%>
-  <%= render :partial => 'schools/sidebar' %>
+  <%= render 'schools/sidebar' %>
 <%- end -%>
 
 <div class="colborder span-8">
@@ -39,8 +39,7 @@
 <div class="last span-7">
   <h2>Register a School</h2>
   <%- form_for :school, :url => schools_path, :html => {:method => :post} do |f| -%>
-
-    <%= render :partial => 'schools/form', :locals => {:f => f} %>
+    <%= render 'schools/form', :f => f %>
     <p>
       <%= f.submit "Register School" %>
     </p>

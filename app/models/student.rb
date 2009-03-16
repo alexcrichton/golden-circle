@@ -7,7 +7,6 @@ class Student < ActiveRecord::Base
                             :less_than_or_equal_to => 25,
                             :greater_than_or_equal_to => 0,
                             :allow_nil => true
-
   attr_protected :test_score
 
   belongs_to :team, :counter_cache => true

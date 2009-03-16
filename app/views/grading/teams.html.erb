@@ -1,5 +1,5 @@
 <%- content_for :sidebar do -%>
-  <%= render :partial => 'grading/sidebar' %>
+  <%= render 'grading/sidebar' %>
 <%- end -%>
 
 <h1>Editing Team Scores</h1>
@@ -31,7 +31,7 @@ Find:<br />
           <td><%= tf.label :test_score, team_name(team) %></td>
           <td><%= h team.level %></td>
           <td><%= tf.text_field :test_score, :size => 5 %> <%= tf.check_box :team_score_checked %></td>
-          <td><%= h team.school.school_class %></td>
+          <td><%= team.school.school_class %></td>
           <td><%= link_to 'Individual Scores', grading_students_path(:team_id => team.id) %></td>
         </tr>
       <%- end -%>

@@ -7,14 +7,14 @@
     <%= stylesheet_link_tag "blueprint/screen.css", :media => "screen, projection, print" %>
     <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
     <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
-    <%= stylesheet_link_tag "style.css", :media =>"screen, print" %>
-    <%= stylesheet_link_tag "print.css", :media =>"print" %>
+    <%= stylesheet_link_tag "style.css", :media => "screen, print" %>
+    <%= stylesheet_link_tag "print.css", :media => "print" %>
     <%= javascript_include_tag 'application', 'jquery', 'jquery.template' %>
   </head>
   <body onload="focusFirstInput()">
     <div class="header">
-      <a href="/"><%= image_tag "logo.png", :id=>"logo", :alt=>"Golden Circle" %></a>
-      <%= render :partial => 'layouts/login_links' %>
-      <%= render :partial => 'layouts/topnav' %>
+      <a href="/"><%= image_tag "logo.png", :id => "logo", :alt => "Golden Circle" %></a>
+      <%= render 'layouts/login_links' %>
+      <%= render 'layouts/topnav' %>
     </div>
 

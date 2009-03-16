@@ -1,6 +1,5 @@
 <fieldset style="float:left;width:40%;margin-right:20px;">
   <h1>School Index</h1>
-
   <hr />
   <%- form_tag email_schools_path, :method => :put do -%>
     <p>
@@ -36,9 +35,9 @@
   <%- end -%>
 </table>
 <hr />
-<%= render :partial => 'schools', :locals => {:title => 'Large Schools', :schools => @large_schools} %>
-<%= render :partial => 'schools', :locals => {:title => 'Small Schools', :schools => @small_schools} %>
-<%= render :partial => 'schools', :locals => {:title => 'Unlisted Enrollments', :schools => @unknown} %>
+<%= render 'schools', :title => 'Large Schools', :schools => @large_schools %>
+<%= render 'schools', :title => 'Small Schools', :schools => @small_schools %>
+<%= render 'schools', :title => 'Unlisted Enrollments', :schools => @unknown %>
 
 <table border="1" style="width:50%">
   <caption>Available proctors</caption>

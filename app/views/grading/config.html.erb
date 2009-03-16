@@ -1,5 +1,5 @@
 <%- content_for :sidebar do -%>
-  <%= render :partial => 'grading/sidebar' %>
+  <%= render 'grading/sidebar' %>
 <%- end -%>
 <h1>Configuration Panel</h1>
 <%- form_for Settings, :url => grading_config_path, :html => {:method => :put} do |f| -%>

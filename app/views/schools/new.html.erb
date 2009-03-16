@@ -1,12 +1,10 @@
 <%- content_for :sidebar do -%>
-  <%= render :partial => 'schools/sidebar' %>
+  <%= render 'schools/sidebar' %>
 <%- end -%>
 
 <h2>Create a school</h2>
 <%- form_for @school, :url => schools_path, :html => {:method => :post} do |f| -%>
-
-  <%= render :partial => 'schools/form', :locals => {:f => f} %>
-
+  <%= render 'schools/form', :f => f %>
   <p>
     <%= f.submit "Register School" %>
   </p>
