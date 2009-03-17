@@ -4,12 +4,10 @@ class Team < ActiveRecord::Base
   APPRENTICE = 'Apprentice'
   MAXSTUDENTS = 15
 
-  has_many :students,
-           :attributes => true,
-           :discard_if => :blank?,
-           :dependent => :destroy,
-           :validate => false
-#  accepts_nested_attributes_for :students, :reject_if => :blank?, :allow_destroy => true
+  has_many :students, :dependent => :destroy, :validate => false
+  accepts_nested_attributes_for :students,
+                                :reject_if => lambda{ |s| s['first_name'].blank? && s['last_name'].blank? },
+                                :allow_destroy => true
 
   belongs_to :school
 
@@ -45,10 +43,6 @@ class Team < ActiveRecord::Base
   def team_test_score
     return 0 if test_score.nil?
     test_score * 5
-  end
-
-  def blank?
-    is_exhibition && students.size == 0
   end
 
   def student_score_sum

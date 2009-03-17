@@ -1,11 +1,8 @@
 <div class="proctor">
   <p>
     <%= f.label :name %>
+    (<%= f.hidden_field :_delete  %><%= remove_link 'Remove', '.proctor' %>)
+    <br />
     <%= f.text_field :name %>
   </p>
-  <% unless f.object.new_record? %>
-    <!-- For existing records we add a checkbox to be able to delete records. -->
-    <%= f.label :_delete, "Remove:" %>
-    <%= f.check_box :_delete %>
-  <% end %>
 </div>

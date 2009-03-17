@@ -1,5 +1,5 @@
 <tr class="student">
   <td><%= f.text_field :first_name, :size => 10 %></td>
   <td><%= f.text_field :last_name, :size => 10 %></td>
-  <td><%= f.remove_link 'remove' %></td>
+  <td><%= f.hidden_field :_delete %><%= remove_link 'remove', '.student' %></td>
 </tr>

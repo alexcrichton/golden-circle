@@ -27,7 +27,7 @@ Find:<br />
     </tr>
     <%- @teams.each do |team| -%>
       <%- fields_for("teams[#{team.id}]", team) do |tf| -%>
-        <tr class="<%= cycle('even', 'odd') %> filter:<%= h(team_name(team) + " " + team.level).gsub(/ /, "_") %>">
+        <tr class="<%= cycle('even', 'odd') %> filter:<%= h(team_name(team) + "_" + team.level).gsub(/ /, "_") %>">
           <td><%= tf.label :test_score, team_name(team) %></td>
           <td><%= h team.level %></td>
           <td><%= tf.text_field :test_score, :size => 5 %> <%= tf.check_box :team_score_checked %></td>

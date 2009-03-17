@@ -5,21 +5,20 @@ class School < ActiveRecord::Base
   acts_as_authentic :password_field_validation_options => {:if => :openid_identifier_blank?}
 
   has_many :teams,
-           :attributes => true,
-           :discard_if => :blank?,
            :dependent => :destroy,
            :validate => false
+  has_many :students, :through => :teams, :validate => false
+  accepts_nested_attributes_for :teams,
+                                :allow_destroy => true
 
   has_many :proctors, :dependent => :destroy, :validate => false
-  accepts_nested_attributes_for :proctors, :reject_if => :blank?, :allow_destroy => true
-  has_many :students, :through => :teams, :validate => false
+  accepts_nested_attributes_for :proctors, :reject_if => lambda{ |p| p['name'].blank? }, :allow_destroy => true
 
   composed_of :phone,
               :mapping => %w(contact_phone phone_number),
               :allow_nil => true,
               :constructor => Phone.constructor,
               :converter => Phone.converter
-#  accepts_nested_attributes_for :phone
 
   validates_presence_of :name
   validates_presence_of :contact_name, :enrollment, :phone, :on => :update
@@ -67,7 +66,7 @@ class School < ActiveRecord::Base
 
   def recalculate_school_score
     self.school_score = teams.non_exhibition.sum(:team_score)
-    save(false)
+    save(false) # saves time, don't be stupid when calling this method
   end
 
   def openid_identifier_blank?
@@ -75,8 +74,8 @@ class School < ActiveRecord::Base
   end
 
   private
-
   # from online Authlogic tutorial
+
   def normalize_openid_identifier
     begin
       self.openid_identifier = OpenIdAuthentication.normalize_identifier(openid_identifier) if !openid_identifier.blank?

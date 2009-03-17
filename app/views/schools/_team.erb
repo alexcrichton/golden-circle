@@ -1,23 +1,24 @@
 <div class="team">
-  <%= '<hr/>' if team.is_exhibition -%>
-  <%= f.hidden_field :is_exhibition %>
+  <% team = f.object %>
+  <%= '<hr/>' if team.is_exhibition %>
   <p>
+    <%= f.hidden_field :is_exhibition %>
     <%= f.label :level, 'Team level:' %>
-    <%- if team.is_exhibition -%>
+    <% if team.is_exhibition %>
       <%= f.select :level, [Team::APPRENTICE, Team::WIZARD] %>
-    <%- else -%>
+      <%= f.hidden_field :_delete %>
+
+      <%= remove_link '[Remove this team]', ".team", :class => 'controls' %>
+    <% else %>
       <%= team.level %>
       <%= f.hidden_field :level %>
-    <%- end -%>
-    <%- if team.is_exhibition -%>
-      <%= f.remove_link '[Remove this team]', :class => 'controls' %>
-    <%- end -%>
+    <% end %>
   </p>
-  <%- if team.is_exhibition && !team.new_record? -%>
+  <% if team.is_exhibition && !team.new_record? %>
     <p><label>Team ID Number:</label> <%= team.id %></p>
-  <%- end -%>
+  <% end %>
   <%= small_errors(team.students) %>
-  <table id="team<%= team.id %>" class="noborder">
+  <table id="students<%= team.new_record? ? f.options[:child_index] : team.id %>" class="noborder">
     <caption>
       Students (<%= team.students.size %>/<%= Team::MAXSTUDENTS %>)
     </caption>
@@ -26,7 +27,10 @@
       <th>Last Name</th>
       <th>&nbsp;</th>
     </tr>
-    <%= f.render_associated_form(team.students, :new => (team.students.size >= Team::MAXSTUDENTS ? 0 : 1)) %>
+    <% team.students.build if team.students.size < Team::MAXSTUDENTS %>
+    <% f.fields_for :students do |sf| %>
+      <%= render 'student', :f => sf %>
+    <% end %>
   </table>
-  <%= f.add_associated_link('add', team.students.build, :container => "#team#{team.id}") %>
+  <%= add_link 'add', "students#{team.new_record? ? f.options[:child_index] : team.id}", :var => 'student' %>
 </div>
