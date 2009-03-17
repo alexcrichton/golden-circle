@@ -9,6 +9,7 @@ class Team < ActiveRecord::Base
            :discard_if => :blank?,
            :dependent => :destroy,
            :validate => false
+#  accepts_nested_attributes_for :students, :reject_if => :blank?, :allow_destroy => true
 
   belongs_to :school
 

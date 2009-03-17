@@ -10,7 +10,8 @@ class School < ActiveRecord::Base
            :dependent => :destroy,
            :validate => false
 
-  has_many :proctors, :attributes => true, :discard_if => :blank?, :dependent => :destroy, :validate => false
+  has_many :proctors, :dependent => :destroy, :validate => false
+  accepts_nested_attributes_for :proctors, :reject_if => :blank?, :allow_destroy => true
   has_many :students, :through => :teams, :validate => false
 
   composed_of :phone,
@@ -18,6 +19,7 @@ class School < ActiveRecord::Base
               :allow_nil => true,
               :constructor => Phone.constructor,
               :converter => Phone.converter
+#  accepts_nested_attributes_for :phone
 
   validates_presence_of :name
   validates_presence_of :contact_name, :enrollment, :phone, :on => :update

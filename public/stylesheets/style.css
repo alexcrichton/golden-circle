@@ -1,4 +1,4 @@
-hr {
+chr {
   margin: 20px 0px;
 }
 
@@ -98,7 +98,7 @@ img#logo {
   left: 10px;
 }
 
-.container {
+#container {
   border-right: solid #d1d1d1 1px;
   background: white;
   margin: 0;

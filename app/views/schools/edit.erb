@@ -1,12 +1,19 @@
-<%- content_for :sidebar do -%>
+<% content_for :sidebar do %>
   <%= render 'schools/sidebar' %>
-<%- end -%>
+<% end %>
+<% content_for :jsinclude do %>
+  <%= javascript_include_tag 'prototype' %>
+<% end %>
 
-<%= javascript_include_tag 'notifychange' %>
-<script type="text/javascript">window.onload = function(){ watch(); };</script>
-
-<%- form_for(@school) do |f| -%>
+<% form_for(@school) do |f| %>
   <%= f.error_messages %>
+
+  <% content_for :jstemplates do %>
+    <%= "var proctor='#{generate_template(f, :proctors)}'" %>
+    window.onload = function(){ watch(); };
+  <% end %>
+
+
 
   <div class="clearfix">
     <div class="span-9">
@@ -47,7 +54,7 @@
         </p>
         <fieldset>
           <legend>Phone</legend>
-          <% f.fields_for :phone, @school.phone do |pf| %>
+          <% f.fields_for :phone do |pf| %>
             <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
             <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
             <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
@@ -59,9 +66,17 @@
     <div class="span-8 last">
       <%= small_errors(@school.proctors) %>
       <fieldset id="proctors">
-        <legend>Proctors <%= f.add_associated_link('[add]', @school.proctors.build) %></legend>
+        <legend>Proctors <%= link_to_function '[add]', "$('proctors').insert({bottom:replace_ids(proctor)})" %></legend>
         <p>We need proctors. Let us know if you can proctor.</p>
-        <%= f.render_associated_form(@school.proctors, :new => 1) %>
+        <% f.fields_for :proctors do |pf| %>
+          <%= render 'proctor', :f => pf %>
+          <!--<div class="proctor">-->
+            <!--<%#= f.label :name %>-->
+            <!--<%#= f.text_field :name %>-->
+            <!--<%#= remove_link pf %>-->
+          <!--</div>-->
+        <% end %>
+        <%#= f.render_associated_form(@school.proctors, :new => 1) %>
       </fieldset>
     </div>
   </div>
@@ -71,22 +86,22 @@
     <%= small_errors(@school.teams) %>
     <div class="span-8 colborder">
       <%- # see note below for why teams are accessed this way -%>
-      <%= f.render_associated_form(@school.teams[0]) %>
+      <%#= f.render_associated_form(@school.teams[0]) %>
     </div>
     <div class="span-8 last">
-      <%= f.render_associated_form(@school.teams[1]) %>
+      <%#= f.render_associated_form(@school.teams[1]) %>
     </div>
   </div>
 
   <hr />
 
-  <h3 style="font-weight:bold;text-align:center">Exhibition Teams <%= special_team_link(f, @school.teams.exhibition.build(:is_exhibition => true)) %></h3>
+  <h3 style="font-weight:bold;text-align:center">Exhibition Teams <%#= special_team_link(f, @school.teams.exhibition.build(:is_exhibition => true)) %></h3>
   <p>
     All Exhibition teams will still participate, although their scores will not count towards the school's total score. Once a team is created, it will be assigned an ID number to identify it.
   </p>
   <div id="exhibition">
     <%- # Use this type of access so the errors are rendered correctly when the form has a problem, first two teams are the official ones -%>
-    <%= f.render_associated_form(@school.teams[2..@school.teams.length], :new => 0) %>
+    <%#= f.render_associated_form(@school.teams[2..@school.teams.length], :new => 0) %>
   </div>
 
   <hr/>
