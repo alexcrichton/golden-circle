@@ -11,10 +11,6 @@ describe GradingController do
       route_for(:controller => "grading", :action => "status").should == "/grading"
     end
 
-#    it "should map #unchecked" do
-#      route_for(:controller => "grading", :action => "unchecked").should == "/grading/unchecked"
-#    end
-
     it "should map #config" do
       route_for(:controller => "grading", :action => "config").should == "/grading/config"
     end
@@ -24,7 +20,7 @@ describe GradingController do
     end
 
     it 'should map #print' do
-      route_for(:controller => 'grading', :action => 'print', :id => 1).should == '/print/1'
+      route_for(:controller => 'grading', :action => 'print', :id => '1').should == '/print/1'
     end
   end
 
@@ -40,10 +36,6 @@ describe GradingController do
     it "should generate params for #status" do
       params_from(:get, "/grading").should == {:controller => "grading", :action => "status"}
     end
-#
-#    it "should generate params for #unchecked" do
-#      params_from(:get, "/grading/unchecked").should == {:controller => "grading", :action => "unchecked"}
-#    end
 
     it "should generate params for #students" do
       params_from(:get, "/grading/students/3").should == {:controller => "grading", :action => "students", :team_id => '3'}
@@ -60,21 +52,5 @@ describe GradingController do
     it "should generate params for #update_students" do
       params_from(:put, "/grading/students/3").should == {:controller => "grading", :action => "update_students", :team_id => '3'}
     end
-
-#    it "should generate params for #update_configuration" do
-#      params_from(:put, "/grading/config").should == {:controller => "grading", :action => "update_configuration"}
-#    end
-#
-#    it "should generate params for #upload" do
-#      params_from(:put, "/upload").should == {:controller => "grading", :action => "upload"}
-#    end
-#
-#    it "should generate params for #backup_database" do
-#      params_from(:put, "/grading/backup").should == {:controller => "grading", :action => "backup_database"}
-#    end
-#
-#    it "should generate params for #restore_database" do
-#      params_from(:put, "/grading/restore").should == {:controller => "grading", :action => "restore_database"}
-#    end
   end
 end

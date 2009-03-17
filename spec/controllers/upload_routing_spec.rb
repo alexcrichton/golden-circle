@@ -12,11 +12,11 @@ describe UploadsController do
     end
 
     it "should map #transfer" do
-      route_for(:controller => "uploads", :action => "transfer", :id => 1).should == "/uploads/1/transfer"
+      route_for(:controller => "uploads", :action => "transfer", :id => '1').should == "/uploads/1/transfer"
     end
 
     it "should map #edit" do
-      route_for(:controller => "uploads", :action => "edit", :id => 1).should == "/uploads/1/edit"
+      route_for(:controller => "uploads", :action => "edit", :id => '1').should == "/uploads/1/edit"
     end
   end
 

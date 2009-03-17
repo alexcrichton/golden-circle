@@ -173,7 +173,7 @@ describe SchoolsController do
 
       it "should update the found school" do
         School.stub!(:find).and_return(mock_school)
-        mock_school.should_receive(:update_attributes).with({:these => 'params', :proctor_attributes => {}, :team_attributes => {}}.stringify_keys)
+        mock_school.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "1", :school => {:these => 'params'}
       end
 
@@ -201,7 +201,7 @@ describe SchoolsController do
 
       it "should update the requested school" do
         School.should_receive(:find).with("37",  {:include=>[:teams, :proctors]}).and_return(mock_school)
-        mock_school.should_receive(:update_attributes).with('these' => 'params', 'proctor_attributes' => {}, 'team_attributes' => {})
+        mock_school.should_receive(:update_attributes).with('these' => 'params')
         put :update, :id => "37", :school => {:these => 'params'}
       end
 

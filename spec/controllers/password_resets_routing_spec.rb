@@ -6,9 +6,9 @@ describe PasswordResetsController do
       route_for(:controller => "password_resets", :action => "new").should == "/password_resets/new"
     end
 
-    it "should map #update" do
-      route_for(:controller => "password_resets", :action => "update", :id => 1).should == "/password_resets/1"
-    end
+#    it "should map #update" do
+#      route_for(:controller => "password_resets", :action => "update", :id => 1).should == "/password_resets/1"
+#    end
 
     it 'should map #current' do
       route_for(:controller => 'password_resets', :action => 'current').should == '/password_resets/current'

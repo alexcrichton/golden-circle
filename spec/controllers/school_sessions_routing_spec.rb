@@ -5,9 +5,9 @@ describe SchoolSessionsController do
     it "should map #new" do
       route_for(:controller => "school_sessions", :action => "new").should == "/login"
     end
-    it "should map #create" do
-      route_for(:controller => "school_sessions", :action => "create").should == "/school_session"
-    end
+#    it "should map #create" do
+#      route_for(:controller => "school_sessions", :action => "create").should == "/school_session"
+#    end
     it "should map #destroy" do
       route_for(:controller => "school_sessions", :action => "destroy").should == "/logout"
     end

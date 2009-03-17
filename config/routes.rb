@@ -4,13 +4,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :schools, :collection => {:show_current => :get, :email => :put}
 
-#  map.restore_database '/grading/restore', :controller => 'grading', :action => 'restore_database', :conditions => {:method => :put}
-#  map.upload_file '/upload', :controller => 'grading', :action => 'upload', :conditions => {:method => :put}
-#  map.backup_database '/grading/backup', :controller => 'grading', :action => 'backup_database', :conditions => {:method => :put}
-
-
   map.print_team '/print/:id', :controller => 'grading', :action => 'print'
-
   map.grading_status '/grading', :controller => 'grading', :action => 'status'
   map.grading_config '/grading/config', :controller => 'grading', :action => 'update_configuration', :conditions => {:method => :put}
   map.grading_config '/grading/config', :controller => 'grading', :action => 'config'
