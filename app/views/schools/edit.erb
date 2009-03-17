@@ -1,7 +1,9 @@
-<% content_for :jsinclude do %>
-  <%= javascript_include_tag 'notifychange' %>
+<% content_for :sidebar do %>
+  <%= render 'schools/sidebar' %>
 <% end %>
-<%= javascript_tag 'window.onload = function(){ watch(); };' %>
+<% content_for :jsinclude do %>
+  <%= javascript_include_tag 'prototype', 'notifychange' %>
+<% end %>
 
 <% form_for(@school) do |f| %>
   <%= f.error_messages %>
@@ -11,9 +13,10 @@
     <%= "var team='#{generate_template(f, :teams)}'" %>
     <%= "var student='#{}'" %>
   <% end %>
+  <%= javascript_tag 'window.onload = function(){ watch(); };' %>
 
-  <div class="clearfix">
-    <div class="span-9">
+  <div class="clearfix" id="school-info">
+    <div class="span-8">
       <fieldset>
         <legend>School</legend>
         <p>
@@ -30,7 +33,7 @@
     <div class="span-7 payment">
       The amount due for this team is
       <span style="color:#008000;font-weight:bold;"><%= number_to_currency @school.cost %></span>. Please
-      bring the check payable to GT Education to the registration table.
+      bring a check payable to <i>GT Education</i> to the registration table.
     </div>
     <hr />
     <div class="span-8 colborder">
@@ -49,14 +52,15 @@
           <br />
           <%= f.text_field :email %>
         </p>
-        <fieldset>
-          <legend>Phone</legend>
+
+        <p>
+          <label>Phone</label><br />
           <% f.fields_for :phone, @school.phone do |pf| %>
             <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
             <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
             <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
           <% end %>
-        </fieldset>
+        </p>
       </fieldset>
     </div>
 

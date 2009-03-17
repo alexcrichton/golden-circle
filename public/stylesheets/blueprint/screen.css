@@ -52,13 +52,13 @@ ol {list-style-type:decimal;}
 dl {margin:0 0 1.5em 0;}
 dl dt {font-weight:bold;}
 dd {margin-left:1.5em;}
-table {margin-bottom:1.4em;width:100%;border-width:0;
+table {margin-bottom:1em;width:100%;border-width:0;
   border-bottom:1px solid #066;padding:0;border-collapse:collapse;}
 th {font-weight:bold;background:#C3D9FF;}
 th, td {padding:4px 10px 4px 5px;border:2px solid #066}
 tr.even td {background:#E5ECF9;}
 tr.odd td {background:#ffc}
-table.noborder th, table.noborder td {border:none;border-width:0;}
+table.noborder th, table.noborder td {border:none;}
 table.noborder {border:none;}
 tfoot {font-style:italic;}
 caption {background:#066;color:#fff;padding-left:5px;font-weight:bold;}
