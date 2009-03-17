@@ -1,9 +1,7 @@
-<% content_for :sidebar do %>
-  <%= render 'schools/sidebar' %>
-<% end %>
 <% content_for :jsinclude do %>
-  <%= javascript_include_tag 'prototype', 'notifychange' %>
+  <%= javascript_include_tag 'notifychange' %>
 <% end %>
+<%= javascript_tag 'window.onload = function(){ watch(); };' %>
 
 <% form_for(@school) do |f| %>
   <%= f.error_messages %>
@@ -13,7 +11,6 @@
     <%= "var team='#{generate_template(f, :teams)}'" %>
     <%= "var student='#{}'" %>
   <% end %>
-  <%= javascript_tag 'window.onload = function(){ watch(); };' %>
 
   <div class="clearfix">
     <div class="span-9">

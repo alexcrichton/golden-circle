@@ -1,25 +1,25 @@
-<%- content_for :sidebar do -%>
+<% content_for :sidebar do %>
   <%= render 'schools/sidebar' %>
-<%- end -%>
+<% end %>
 
 <div class="colborder span-8">
   <h2>Login School</h2>
-  <%- form_for @school_session, :url => school_session_path do |f| -%>
+  <% form_for @school_session, :url => school_session_path do |f| %>
     <%= f.error_messages %>
-    <div id="login_container" <% if @school_session.authenticating_with_openid? %>style="display: none;"<% end %>>
+    <div id="login_container" <%= 'style="display:none"' if @school_session.authenticating_with_openid? %>>
       <p>
-        <%= f.label :email %> (or <%= link_to_function 'use OpenID', "toggle('login_container');toggle('openid_container')" %>)<br />
+        <%= f.label :email %> (or <%= link_to_function 'use OpenID', "$('login_container').toggle();$('openid_container').toggle()" %>)<br />
         <%= f.text_field :email %>
       </p>
 
       <p>
-        <%= f.label :password %><br />
+        <%= f.label :password %> (<%= link_to "Forgot password?", new_password_reset_path %>)<br />
         <%= f.password_field :password %>
       </p>
     </div>
-    <div id="openid_container" <% unless @school_session.authenticating_with_openid? %>style="display: none;"<% end %>>
+    <div id="openid_container" <%= 'style="display:none"' unless @school_session.authenticating_with_openid? %>>
       <p>
-        <%= f.label :openid_identifier, 'OpenID' %> (or <%= link_to_function 'use email/password', "toggle('login_container');toggle('openid_container')" %>)<br />
+        <%= f.label :openid_identifier, 'OpenID' %> (or <%= link_to_function 'use email/password', "$('login_container').toggle();$('openid_container').toggle()" %>)<br />
         <%= f.text_field :openid_identifier %>
       </p>
     </div>
@@ -31,17 +31,16 @@
     <p>
       <%= f.submit "Login" %>
     </p>
-  <%- end -%>
+  <% end %>
   <br />
-  <%= link_to "Forgot password", new_password_reset_path %>
 
 </div>
 <div class="last span-7">
   <h2>Register a School</h2>
-  <%- form_for :school, :url => schools_path, :html => {:method => :post} do |f| -%>
+  <% form_for :school, :url => schools_path, :html => {:method => :post} do |f| %>
     <%= render 'schools/form', :f => f %>
     <p>
       <%= f.submit "Register School" %>
     </p>
-  <%- end -%>
+  <% end %>
 </div>

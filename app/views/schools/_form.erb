@@ -8,9 +8,9 @@
   <%= f.label :name, 'School Name' %><br />
   <%= f.text_field :name %>
 </p>
-<div id="password_container"<% if @school && !@school.openid_identifier.blank? %>style="display:none"<% end %>>
+<div id="password_container" <%= 'style="display:none"' if @school && !@school.openid_identifier.blank? %>>
   <p>
-    <%= f.label :password %> (or <%= link_to_function 'use OpenID', "toggle('password_container');toggle('openid_input_container')" %>)<br />
+    <%= f.label :password %> (or <%= link_to_function 'use OpenID', "$('password_container').toggle();$('openid_input_container').toggle()" %>)<br />
     <%= f.password_field :password %>
   </p>
   <p>
@@ -18,9 +18,9 @@
     <%= f.password_field :password_confirmation %>
   </p>
 </div>
-<div id="openid_input_container" <% if !@school || @school.openid_identifier.blank?  %>style="display:none"<% end %>>
+<div id="openid_input_container" <%= 'style="display:none"' if !@school || @school.openid_identifier.blank? %>>
   <p>
-    <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'use a password', "toggle('password_container');toggle('openid_input_container')" %>)<br />
+    <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'use a password', "$('password_container').toggle();$('openid_input_container').toggle()" %>)<br />
     <%= f.text_field :openid_identifier %>
   </p>
 </div>

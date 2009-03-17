@@ -9,7 +9,7 @@
     <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
     <%= stylesheet_link_tag "style.css", :media => "screen, print" %>
     <%= stylesheet_link_tag "print.css", :media => "print" %>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'application', 'prototype' %>
     <%= yield(:jsinclude) %>
     <% javascript_tag do %>
       <%= yield(:jstemplates) %>

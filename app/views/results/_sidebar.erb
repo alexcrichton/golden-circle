@@ -4,9 +4,7 @@
     <%- form_tag statistics_path do -%>
       <p>
         <%= label_tag :level, 'Division:' %>
-        <%= select_tag :level, options_for_select([Team::WIZARD, Team::APPRENTICE]) %>
-      </p>
-      <p>
+        <%= select_tag :level, options_for_select([Team::WIZARD, Team::APPRENTICE]) %><br/>
         <%= label_tag :class, 'School Size:' %>
         <%= select_tag :class, options_for_select(['Large', 'Small']) %>
       </p>

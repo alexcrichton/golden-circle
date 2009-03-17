@@ -10,7 +10,7 @@
     </div>
 
     <div class="span-6 last" style="padding-left:5px" id="right">
-      <%= yield :sidebar %>
+      <%= yield(:sidebar) || render('sidebar') %>
     </div>
 
   </div>
