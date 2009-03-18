@@ -11,9 +11,8 @@
   <% content_for :jstemplates do %>
     <%= "var proctor='#{generate_template(f, :proctors)}'" %>
     <%= "var team='#{generate_template(f, :teams)}'" %>
-    <%= "var student='#{}'" %>
   <% end %>
-  <%= javascript_tag 'window.onload = function(){ watch(); };' %>
+  <%= javascript_tag 'window.onload = function(){ initApp();watch(); };' %>
 
   <div class="clearfix" id="school-info">
     <div class="span-8">
@@ -46,9 +45,7 @@
 
         <p>
           <%= f.label :email %>
-          <% if current_school && current_school.id == @school.id %>
-            <%= link_to '[Change Password/OpenID]', current_password_resets_path %>
-          <% end %>
+          <%= link_to '[Change Password/OpenID]', current_password_resets_path if current_school.id == @school.id %>
           <br />
           <%= f.text_field :email %>
         </p>
@@ -93,10 +90,14 @@
   </div>
 
   <hr />
-  <h3 style="font-weight:bold;text-align:center">Exhibition
-    Teams <%= add_link '[add]', 'exhibition', :var => 'team' %></h3>
-  <p>All Exhibition teams will still participate, although their scores will not count towards the school's total score.
-    Once a team is created, it will be assigned an ID number to identify it.</p>
+  <div id="ex_info">
+    <h3>Exhibition
+      Teams <%= add_link '[add]', 'exhibition', :var => 'team' %></h3>
+    <p>
+      All Exhibition teams will still participate, although their scores will not count towards the school's total
+      score. Once a team is created, it will be assigned an ID number to identify it.
+    </p>
+  </div>
   <div id="exhibition">
     <% @school.teams.each do |team| %>
       <% f.fields_for :teams, team do |etf| %>

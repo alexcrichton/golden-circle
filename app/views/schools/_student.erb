@@ -1,4 +1,4 @@
-<tr class="student">
+<tr class="removable student <%= cycle('even', 'odd', :name => :student_row_class) %>">
   <td><%= f.text_field :first_name, :size => 10 %></td>
   <td><%= f.text_field :last_name, :size => 10 %></td>
   <td><%= f.hidden_field :_delete %><%= remove_link 'remove', '.student' %></td>

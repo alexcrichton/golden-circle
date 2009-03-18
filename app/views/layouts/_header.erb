@@ -15,7 +15,7 @@
       <%= yield(:jstemplates) %>
     <% end -%>
   </head>
-  <body onload="focusFirstInput()">
+  <body onload="initApp()">
     <div class="header">
       <a href="/"><%= image_tag "logo.png", :id => "logo", :alt => "Golden Circle" %></a>
       <%= render 'layouts/login_links' %>

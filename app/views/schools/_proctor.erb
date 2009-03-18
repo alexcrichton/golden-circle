@@ -1,7 +1,7 @@
-<div class="proctor">
+<div class="proctor removable">
   <p>
     <%= f.label :name %>
-    (<%= f.hidden_field :_delete  %><%= remove_link 'Remove', '.proctor' %>)
+    (<%= f.hidden_field :_delete  %><%= remove_link 'remove', '.proctor' %>)
     <br />
     <%= f.text_field :name %>
   </p>

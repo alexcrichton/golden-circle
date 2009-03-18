@@ -25,12 +25,13 @@ module SchoolsHelper
   end
 
   def remove_link(name, container, opts = {})
+    opts[:class] = (opts[:class] ||= "").to_s + " remove_link"
     link_to_function name, "$(this).up('#{container}').hide();$(this).previous('input[type=hidden]').value = '1'", opts
   end
 
   def add_link(name, container, opts = {})
     opts[:var] ||= container.singularize
-    link_to_function name, "$('#{container}').insert({bottom:replace_ids(#{opts.delete(:var)})})", opts
+    link_to_function name, "$('#{container}').insert({bottom:replace_ids(#{opts.delete(:var)})});addRemoves()", opts
   end
 
 end

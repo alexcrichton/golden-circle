@@ -1,7 +1,7 @@
 <% content_for :jsinclude  do %>
   <%= javascript_include_tag 'filter', 'notifychange' %>
 <% end %>
-<%= javascript_tag 'window.onload = function(){ watch();filter("students", "search", "tr"); };' %>
+<%= javascript_tag 'window.onload = function(){ initApp();watch();filter("students", "search", "tr"); };' %>
 
 <h1>Editing Individual Scores</h1>
 

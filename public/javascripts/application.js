@@ -1,6 +1,20 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+
+function initApp() {
+  focusFirstInput();
+  addRemoves();
+}
+
+function addRemoves(){
+  var links = document.getElementsByClassName("remove_link");
+  for(var i = 0; i < links.length; i++){
+    links[i].onmouseover = function(){ this.up('.removable').addClassName('remove-highlight'); };
+    links[i].onmouseout = function(){ this.up('.removable').removeClassName('remove-highlight') };
+  }
+}
+
 var input;
 function focusFirstInput() {
   var inputs = document.getElementsByTagName("input");

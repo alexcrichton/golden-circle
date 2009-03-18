@@ -4,10 +4,10 @@ fieldset {
   border-right: 5px solid #f5f5f5; /*  padding: 0;*/
   background: #fafafa;
 }
+
 fieldset:hover {
-  background-image: url(/images/fieldsetback.png);
-  /*background-repeat: repeat-y;*/
-  /*background: #e6eded;*/
+  background-image: url(/images/fieldsetback.png); /*background-repeat: repeat-y;*/
+/*background: #e6eded;*/
 }
 
 fieldset legend {
@@ -37,7 +37,7 @@ fieldset fieldset {
 }
 
 /*.team fieldset {*/
-  /*margin-bottom: 30px;*/
+/*margin-bottom: 30px;*/
 /*}*/
 
 /*TODO: Fix duplication, especially on lists*/
@@ -151,7 +151,7 @@ ul#topnav li a {
 }
 
 ul#topnav li:hover {
-  /*text-decoration: underline;*/
+/*text-decoration: underline;*/
   color: #000;
   background-image: url(/images/topnavback.png);
 }
@@ -215,8 +215,7 @@ p.strong {
 }
 
 div.payment {
-  font-size: 12pt;
-  /*background: #E5ECF9;*/
+  font-size: 12pt; /*background: #E5ECF9;*/
   border: 2px solid #066;
   text-align: center;
   padding: 5px;
@@ -256,17 +255,51 @@ div.main {
   padding-right: 15px;
 }
 
-div#school-info{
+div#school-info {
   margin-bottom: 10px;
 }
 
-.login{
+.login {
   width: 222px;
   background-image: url(/images/fieldsetback.png);
   padding: 5px;
   border: 3px solid #066;
 }
-.login h2{
-  text-align:center;
-  font-weight:bold;
+
+.login h2 {
+  text-align: center;
+  font-weight: bold;
+}
+
+#ex_info {
+  /*background-image: url(/images/exhibition_banner.png);*/
+  /*background-repeat: repeat-x;*/
+  padding-top: 12px;
+}
+
+#ex_info h3 {
+  font-weight: bold;
+  text-align: center
+}
+
+tr.odd:hover td {
+  background: #fafab6;
+}
+
+tr.even:hover td {
+  background: #ceddf6;
+}
+
+.remove-highlight {
+  padding: 5px;
+  background: #b90101;
+}
+
+tr.remove-highlight td {
+  background: inherit;
+}
+
+tr.remove-highlight:hover td {
+/* Fix becuase of above CSS w/ hovering on even and odd rows.*/
+  background: inherit;
 }
