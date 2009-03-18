@@ -2,7 +2,7 @@
   <%= render 'schools/sidebar' %>
 <% end %>
 <% content_for :jsinclude do %>
-  <%= javascript_include_tag 'prototype', 'notifychange' %>
+  <%= javascript_include_tag 'notifychange' %>
 <% end %>
 
 <% form_for(@school) do |f| %>
@@ -11,7 +11,14 @@
   <% content_for :jstemplates do %>
     <%= "var proctor='#{generate_template(f, :proctors)}'" %>
     <%= "var team='#{generate_template(f, :teams)}'" %>
+
   <% end %>
+  <% f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
+    <% content_for :jstemplates do %>
+      <%= "var student='#{generate_template(tf, :students)}'" %>
+    <% end %>
+  <% end %>
+
   <%= javascript_tag 'window.onload = function(){ initApp();watch(); };' %>
 
   <div class="clearfix" id="school-info">
@@ -65,7 +72,7 @@
       <% @school.proctors.build %>
       <%= small_errors(@school.proctors) %>
       <fieldset id="proctors">
-        <legend>Proctors <%= add_link '[add]', 'proctors' %></legend>
+        <legend>Proctors <%= add_link '[add]', '#proctors', :var => 'proctor' %></legend>
         <p>We need proctors. Let us know if you can proctor.</p>
         <% f.fields_for :proctors do |pf| %>
           <%= render 'proctor', :f => pf %>
@@ -77,12 +84,10 @@
   <div>
     <h3 style="font-weight:bold;text-align:center">Teams</h3>
     <% @school.teams.each do |team| %>
+
       <% next if team.is_exhibition %>
       <div class="span-8 <%= cycle 'colborder', 'last', :team_non_ex_class %>">
         <% f.fields_for :teams, team do |tf| %>
-          <% content_for :jstemplates do %>
-            <%= "var student='#{generate_template(tf, :students)}'" %>
-          <% end %>
           <%= render 'team', :f => tf %>
         <% end %>
       </div>
@@ -90,21 +95,20 @@
   </div>
 
   <hr />
-  <div id="ex_info">
+  <div id="exhibition">
     <h3>Exhibition
-      Teams <%= add_link '[add]', 'exhibition', :var => 'team' %></h3>
+      Teams <%= add_link '[add]', '#exhibition', :var => 'team' %></h3>
     <p>
       All Exhibition teams will still participate, although their scores will not count towards the school's total
       score. Once a team is created, it will be assigned an ID number to identify it.
     </p>
-  </div>
-  <div id="exhibition">
     <% @school.teams.each do |team| %>
       <% f.fields_for :teams, team do |etf| %>
         <%= render 'team', :f => etf %>
       <% end if team.is_exhibition %>
     <% end %>
   </div>
+
 
   <hr />
 

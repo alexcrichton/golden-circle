@@ -14,24 +14,34 @@ module SchoolsHelper
     options[:partial] ||= method.to_s.singularize
     options[:form_builder_local] ||= :f
 
-    form_builder.fields_for(method, options[:object], :child_index => 'NEW_RECORD') do |f|
-      render(options[:partial], options[:form_builder_local] => f )
+    form_builder.fields_for(method, options.delete(:object), :child_index => 'NEW_RECORD') do |f|
+      render(options.delete(:partial), {options.delete(:form_builder_local) => f}.merge(options) )
     end
 
   end
 
   def generate_template(form_builder, method, options = {})
-    escape_javascript generate_html(form_builder, method, options = {})
+    escape_javascript generate_html(form_builder, method, options)
   end
 
   def remove_link(name, container, opts = {})
     opts[:class] = (opts[:class] ||= "").to_s + " remove_link"
-    link_to_function name, "$(this).up('#{container}').hide();$(this).previous('input[type=hidden]').value = '1'", opts
+    opts[:after] ||= ""
+    opts[:before] ||= ""
+    js = "$(this).up('#{container}').hide();$(this).previous('input[type=hidden]').value = '1'"
+    link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 
   def add_link(name, container, opts = {})
     opts[:var] ||= container.singularize
-    link_to_function name, "$('#{container}').insert({bottom:replace_ids(#{opts.delete(:var)})});addRemoves()", opts
+    opts[:before] ||= ""
+    opts[:after] ||= ""
+    js = "add_template(#{opts.delete(:var)}, $(this), '#{container}'#{" ,'" + opts[:parent] + "'" if opts[:parent]})"
+    link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
+  end
+
+  def extract_team_id(name)
+    name.match(/teams_attributes\]\[(\w+)\]/)[1]
   end
 
 end

@@ -1,4 +1,4 @@
-<div class="team removable">
+<div class="team<%= ' removable' if f.object.is_exhibition%>">
   <% team = f.object %>
   <%= '<hr/>' if team.is_exhibition %>
   <p>
@@ -18,19 +18,25 @@
     <p><label>Team ID Number:</label> <%= team.id %></p>
   <% end %>
   <%= small_errors(team.students) %>
-  <table id="students<%= team.new_record? ? f.options[:child_index] : team.id %>" class="noborder">
+  <% id =  extract_team_id(f.object_name) %>
+  <%= javascript_tag "count#{extract_team_id(f.object_name)} = #{team.students.size}" %>
+  <table id="students" class="noborder">
     <caption>
-      Students (<%= team.students.size %>/<%= Team::MAXSTUDENTS %>)
+      Students (<span id="count<%= extract_team_id(f.object_name) %>"><%= team.students.size %></span>/<%= Team::MAXSTUDENTS %>)
     </caption>
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
       <th>&nbsp;</th>
     </tr>
-    <% team.students.build if team.students.size < Team::MAXSTUDENTS %>
     <% f.fields_for :students do |sf| %>
       <%= render 'student', :f => sf %>
     <% end %>
   </table>
-  <%= add_link 'add', "students#{team.new_record? ? f.options[:child_index] : team.id}", :var => 'student' %>
+  <%= add_link 'add',
+               "#students",
+               :parent => ".team",
+               :var => 'student',
+               :after => "changeCount('count#{extract_team_id(f.object_name)}', 1)",
+               :before => "if(count#{extract_team_id(f.object_name)} >= 15) return false" %>
 </div>
