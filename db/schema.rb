@@ -79,14 +79,15 @@ ActiveRecord::Schema.define(:version => 20090314033944) do
   create_table "teams", :force => true do |t|
     t.integer  "school_id"
     t.string   "level"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "test_score"
     t.integer  "students_count",         :default => 0
+    t.integer  "team_score"
     t.boolean  "team_score_checked",     :default => false, :null => false
     t.boolean  "student_scores_checked", :default => false, :null => false
     t.boolean  "is_exhibition",          :default => true,  :null => false
-    t.integer  "team_score"
   end
 
   create_table "uploads", :force => true do |t|
