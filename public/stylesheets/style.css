@@ -260,20 +260,13 @@ div#school-info {
 }
 
 .login {
-  width: 222px;
-  background-image: url(/images/fieldsetback.png);
+  width: 250px;
+  float: left;
   padding: 5px;
-  border: 3px solid #066;
-}
-
-.login h2 {
-  text-align: center;
-  font-weight: bold;
+  margin-right: 90px;
 }
 
 #exhibition {
-  /*background-image: url(/images/exhibition_banner.png);*/
-  /*background-repeat: repeat-x;*/
   padding-top: 12px;
 }
 
@@ -288,18 +281,4 @@ tr.odd:hover td {
 
 tr.even:hover td {
   background: #ceddf6;
-}
-
-.remove-highlight {
-  padding: 5px;
-  background: #b90101;
-}
-
-tr.remove-highlight td {
-  background: inherit;
-}
-
-tr.remove-highlight:hover td {
-/* Fix becuase of above CSS w/ hovering on even and odd rows.*/
-  background: inherit;
 }

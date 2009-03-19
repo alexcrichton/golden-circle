@@ -7,8 +7,6 @@
   <dd><%= mail_to @school.email %></dd>
   <dt>Contact phone:</dt>
   <dd><%= h @school.contact_phone.blank? ? 'No Phone' : @school.contact_phone %></dd>
-  <dt>Student Count:</dt>
-  <dd><%= @team.students.size %></dd>
 </dl>
 <table border="1" class="print">
   <tr>
