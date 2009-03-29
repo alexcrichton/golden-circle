@@ -2,7 +2,7 @@ class School < ActiveRecord::Base
 
   CUTOFF = 200;
 
-  acts_as_authentic :password_field_validation_options => {:if => :openid_identifier_blank?}
+  acts_as_authentic #:password_field_validation_options => {:if => :openid_identifier_blank?}
 
   has_many :teams,
            :dependent => :destroy,
@@ -26,8 +26,8 @@ class School < ActiveRecord::Base
                             :greater_than_or_equal_to => 0,
                             :only_integer => true,
                             :on => :update
-  validates_uniqueness_of :name, :case_sensitive => false
-  validates_uniqueness_of :openid_identifier, :allow_blank => true
+  validates_uniqueness_of :name, :case_sensitive => false, :if => :name_changed?
+  validates_uniqueness_of :openid_identifier, :allow_blank => true, :if => :openid_identifier_changed?
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update

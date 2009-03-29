@@ -2,25 +2,26 @@
 
 <p>
   <%= f.label :email %><br />
-  <%= f.text_field :email, :size => 25 %>
+  <%= f.text_field :email, :size => 25, :tabindex => 1234 %>
 </p>
 <p>
   <%= f.label :name, 'School Name' %><br />
-  <%= f.text_field :name, :size => 25 %>
+  <%= f.text_field :name, :size => 25, :tabindex => 1235 %>
 </p>
-<div id="password_container" <%= 'style="display:none"' if @school && !@school.openid_identifier.blank? %>>
+<br/>
+<div id="password" <%= 'style="display:none"' if @school && !@school.openid_identifier.blank? %>>
   <p>
-    <%= f.label :password %> (or <%= link_to_function 'OpenID', "$('password_container').toggle();$('openid_input_container').toggle()" %>)<br />
-    <%= f.password_field :password, :size => 25 %>
+    <%= f.label :password %> (or <%= link_to_function 'OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>)<br />
+    <%= f.password_field :password, :size => 25, :tabindex => 1236 %>
   </p>
   <p>
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, :size => 25 %>
+    <%= f.password_field :password_confirmation, :size => 25, :tabindex => 1237 %>
   </p>
 </div>
-<div id="openid_input_container" <%= 'style="display:none"' if !@school || @school.openid_identifier.blank? %>>
+<div id="openid" <%= 'style="display:none"' if !@school || @school.openid_identifier.blank? %>>
   <p>
-    <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'password', "$('password_container').toggle();$('openid_input_container').toggle()" %>)<br />
-    <%= f.text_field :openid_identifier, :size => 25 %>
+    <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'password', "$('#openid').slideUp();$('#password').slideDown()" %>)<br />
+    <%= f.text_field :openid_identifier, :size => 25, :tabindex => 1238 %>
   </p>
 </div>

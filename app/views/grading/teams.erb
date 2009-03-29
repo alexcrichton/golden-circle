@@ -1,8 +1,9 @@
 <% content_for :jsinclude do %>
   <%= javascript_include_tag 'filter', 'notifychange' %>
 <% end %>
-
-<%= javascript_tag 'window.onload = function(){ initApp();watch();filter("teams", "search", "tr"); };' %>
+<% content_for :jstemplates do %>
+  $(document).ready(function(){filter("#teams tr", "search")})
+<% end %>
 
 <h1>Editing Team Scores</h1>
 
@@ -36,5 +37,5 @@ Find:<br />
       <% end %>
     <% end %>
   </table>
-  <p><%= submit_tag "Submit Changes", :onclick => "closeOk()" %></p>
+  <p><%= submit_tag "Submit Changes", :onclick => "setConfirmUnload(false)" %></p>
 <% end %>

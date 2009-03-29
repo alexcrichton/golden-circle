@@ -5,9 +5,9 @@
 
 <% form_for @school, :url => password_reset_path(:id => params[:id]), :method => :put do |f| %>
   <%= f.error_messages %>
-  <div id="password_container" <%= 'style="display:none"' if !@school.openid_identifier.blank? %>>
+  <div id="password" <%= 'style="display:none"' if !@school.openid_identifier.blank? %>>
     <p>
-      <%= f.label :password %> (or <%= link_to_function 'change your OpenID', "$('password_container').toggle();$('openid_container').toggle()" %>)<br />
+      <%= f.label :password %> (or <%= link_to_function 'change your OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>)<br />
       <%= f.password_field :password %>
     </p>
     <p>
@@ -16,9 +16,9 @@
     </p>
   </div>
 
-  <div id="openid_container" <%= 'style="display:none"' if @school.openid_identifier.blank? %>>
+  <div id="openid" <%= 'style="display:none"' if @school.openid_identifier.blank? %>>
     <p>
-      <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'change your password', "$('password_container').toggle();$('openid_container').toggle()" %>)<br/>
+      <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'change your password', "$('#openid').slideUp();$('#password').slideDown();" %>)<br/>
       <%= f.text_field :openid_identifier %>
     </p>
   </div>

@@ -19,8 +19,6 @@
     <% end %>
   <% end %>
 
-  <%= javascript_tag 'window.onload = function(){ initApp();watch(); };' %>
-
   <div class="clearfix" id="school-info">
     <div class="span-8">
       <fieldset>
@@ -114,7 +112,7 @@
 
   <p class="strong">
     Press this button to save the form!<br />
-    <%= f.submit "Save Changes", :onclick => "closeOk()" %>
+    <%= f.submit "Save Changes", :onclick => "setConfirmUnload(false)" %>
   </p>
 <% end %>
 

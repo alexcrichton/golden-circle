@@ -1,14 +1,7 @@
-var container;
-var rows;
-var input;
-var last_filter = null;
-var filters;
+var elTag, last_filter = null, filters;
 
-function filter(containerID, inputName, tag) {
-  container = document.getElementById(containerID);
-  input = document.getElementsByName(inputName)[0];
-  input.focus();
-  rows = container.getElementsByTagName(tag);
+function filter(tag, inputName) {
+  var rows = $(elTag = tag);
   filters = new Array(rows.length);
   for (var i = 0; i < filters.length; i++) {
     var classNames = rows[i].className.split(" ")
@@ -17,7 +10,11 @@ function filter(containerID, inputName, tag) {
         filters[i] = classNames[j].substr(7, classNames[j].length).toLowerCase()
     }
   }
-  document.onkeyup = keyHandler;
+  var input = $('input[name=' + inputName + ']')
+  $(document).keyup(function(){
+    filterText(input.attr('value'));
+    last_filter = input.attr('value');
+  });
 }
 
 function matches(words, searches, index) {
@@ -42,21 +39,14 @@ function matches(words, searches, index) {
 function filterText(text) {
   if (text == last_filter)
     return;
-  for (var i = 0; i < rows.length; i++) {
-    var att = filters[i];
-    if (att == null)
+  var text_arr = text.toLowerCase().split(" ");
+  for (var i = 0; i < filters.length; i++) {
+    if (filters[i] == null)
       continue;
-    if (matches(att.split("_"), text.toLowerCase().split(" "), 0)) {
-      rows[i].style.visibility = "visible";
-      rows[i].style.display = "";
+    if (matches(filters[i].split("_"), text_arr, 0)) {
+      $(elTag + ':eq(' + i + ')').show()
     } else {
-      rows[i].style.visibility = "hidden";
-      rows[i].style.display = "none";
+      $(elTag + ':eq(' + i + ')').hide()
     }
   }
-}
-
-function keyHandler(event) {
-  filterText(input.value)
-  last_filter = input.value
 }
