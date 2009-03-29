@@ -2,15 +2,13 @@ class School < ActiveRecord::Base
 
   CUTOFF = 200;
 
-  acts_as_authentic #:password_field_validation_options => {:if => :openid_identifier_blank?}
+  acts_as_authentic do |c|
+    #c.validates_password_field_options :if => :openid_identifier_blank?
+  end
 
-  has_many :teams,
-           :dependent => :destroy,
-           :validate => false
+  has_many :teams, :dependent => :destroy, :validate => false
+  accepts_nested_attributes_for :teams, :allow_destroy => true
   has_many :students, :through => :teams, :validate => false
-  accepts_nested_attributes_for :teams,
-                                :allow_destroy => true
-
   has_many :proctors, :dependent => :destroy, :validate => false
   accepts_nested_attributes_for :proctors, :reject_if => lambda{ |p| p['name'].blank? }, :allow_destroy => true
 
@@ -31,7 +29,7 @@ class School < ActiveRecord::Base
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update
-  validate :normalize_openid_identifier
+  validate :normalize_openid_identifier, :if => :openid_identifier_changed?
   validate :submitted_before_deadline?
 
   attr_protected :admin, :school_score
@@ -97,7 +95,9 @@ class School < ActiveRecord::Base
 
   def add_teams
     [Team::APPRENTICE, Team::WIZARD].each do |level|
-      self.teams << Team.create(:level => level, :is_exhibition => false)
+      t = Team.create(:level => level)
+      t.is_exhibition = false
+      self.teams << t 
     end
   end
 

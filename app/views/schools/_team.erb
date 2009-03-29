@@ -2,7 +2,6 @@
   <% team = f.object %>
   <%= '<hr/>' if team.is_exhibition %>
   <p>
-    <%= f.hidden_field :is_exhibition %>
     <%= f.label :level, 'Team level:' %>
     <% if team.is_exhibition %>
       <%= f.select :level, [Team::APPRENTICE, Team::WIZARD] %>

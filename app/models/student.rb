@@ -1,7 +1,10 @@
 class Student < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
-  validates_uniqueness_of :first_name, :scope => [:last_name], :case_sensitive => false, :unless => :test_score_changed?
+  validates_uniqueness_of :first_name,
+                          :scope => [:last_name],
+                          :case_sensitive => false,
+                          :if => Proc.new{ |s| s.first_name_changed? || s.last_name_changed? }
   validates_numericality_of :test_score,
                             :only_integer => true,
                             :less_than_or_equal_to => 25,

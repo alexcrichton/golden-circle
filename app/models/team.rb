@@ -15,7 +15,7 @@ class Team < ActiveRecord::Base
   validates_associated :students, :message => 'are invalid', :unless => :student_validation_not_needed?
   validates_size_of :students,
                     :maximum => MAXSTUDENTS,
-                    :message => "have a maximum of 15 allowed",
+                    :message => "have a maximum of #{MAXSTUDENTS} allowed",
                     :unless => :student_validation_not_needed?
   validates_numericality_of :test_score,
                             :only_integer => true,
@@ -25,7 +25,7 @@ class Team < ActiveRecord::Base
 
 #  before_save :ensure_checks_are_correct, :unless => :student_validation_not_needed?
 
-  attr_protected :test_score, :test_score_checked, :student_scores_checked, :team_score
+  attr_protected :test_score, :test_score_checked, :student_scores_checked, :team_score, :is_exhibition
 
   named_scope :unchecked_student_scores, :conditions => {:student_scores_checked => false}
   named_scope :unchecked_team_score, :conditions => {:team_score_checked => false}
