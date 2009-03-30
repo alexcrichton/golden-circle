@@ -5,7 +5,7 @@ require 'san_juan'
 set :application, "goldencircle.academycommunity.com"
 
 set :scm, :git
-set :repository,  "git@academycommunity.com:golden_circle.git"
+set :repository,  "git@github.com:alexc605/golden_circle.git"
 set :branch, "master"
 set :deploy_via, :remote_cache
 
