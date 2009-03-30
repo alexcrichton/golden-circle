@@ -1,0 +1,19 @@
+<h1>Configuration Panel</h1>
+<%- form_for Settings, :url => grading_config_path, :html => {:method => :put} do |f| -%>
+  <p>
+    <%= f.label :deadline, 'Deadline for registration' %>:<br />
+    <%= f.datetime_select :deadline %>
+  </p>
+
+  <p>
+    <%= f.label :event_date, 'Date of the tournament' %>:<br />
+    <%= f.datetime_select :event_date %>
+  </p>
+
+  <p>
+    <%= f.label :cost_per_student, 'Cost per student (in dollars)' %>:<br />
+    <%= f.text_field :cost_per_student, :size => 4 %>
+  </p>
+
+  <p><%= f.submit "Submit" %> <%= link_to 'Upload information file', uploads_path %></p>
+<%- end -%>

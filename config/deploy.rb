@@ -26,36 +26,6 @@ before "deploy:setup", :db
 after "deploy:update_code", "db:symlink", "db:rake_db" 
 
 namespace :db do
-  desc "Create database yaml in shared path" 
-  task :default do
-    db_config = ERB.new <<-EOF
-    base: &base
-      adapter: mysql
-      socket: /tmp/mysql.sock
-      username: golden
-      password: N)+;3^Df
-
-    development:
-      database: gc_development
-      <<: *base
-
-    test:
-      database: gc_test
-      <<: *base
-
-    production:
-      database: gc_production
-      <<: *base
-      
-    profile:
-      database: gc_production
-      <<: *base
-    EOF
-
-    run "mkdir -p #{shared_path}/config" 
-    put db_config.result, "#{shared_path}/config/database.yml" 
-  end
-
   desc "Make symlink for database yaml" 
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"

@@ -1,21 +1,23 @@
-<%- content_for :sidebar do -%>
-  <%= render :partial => 'sidebar' %>
-<%- end -%>
 <h1>Awards</h1>
 <hr />
 <h3>Sweepstakes Results</h3>
 <%- [:large, :small].each do |klass| -%>
   <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
     <table>
+      <colgroup>
+        <col width="40"/>
+      </colgroup>
       <tr>
         <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
       </tr>
       <tr>
+        <th>Rank</th>
         <th>School</th>
         <th>Score</th>
       </tr>
       <%- @schools.send(klass).each do |school| -%>
         <tr class="<%= cycle('even', 'odd') %>">
+          <td><%= rank(school.school_score, "school_#{klass}") %></td>
           <td><%= h school.name %></td>
           <td><%= school.school_score %></td>
         </tr>
@@ -27,18 +29,23 @@
   <hr />
   <h3><%= level.to_s.capitalize %> Team Results</h3>
   <%- [:large, :small].each do |klass| -%>
-    <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
+    <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
       <table>
+        <colgroup>
+          <col width="40"/>
+        </colgroup>
         <tr>
           <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
         </tr>
         <tr>
+          <th>Rank</th>
           <th>School</th>
           <th>Score</th>
         </tr>
-        <%- @schools.send(klass).map { |s| s.teams.send(level).winners }.flatten.sort_by(&:team_score).reverse.each do |team| -%>
+        <%- @teams.send(klass).send(level).each do |team| -%>
           <tr class="<%= cycle('even', 'odd') %>">
-            <td><%= h team.school.name %></td>
+            <td><%= rank(team.test_score, "team_#{level}_#{klass}") %></td>
+            <td><%= team_name(team) %></td>
             <td><%= team.team_score %></td>
           </tr>
         <%- end -%>

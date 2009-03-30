@@ -8,3 +8,4 @@ log/*
 .idea
 tmp
 coverage
+tmp

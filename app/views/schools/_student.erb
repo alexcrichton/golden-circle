@@ -1,0 +1,7 @@
+<tr class="student">
+  <td><%= f.text_field :first_name, :size => 10 %></td>
+  <td><%= f.text_field :last_name, :size => 10 %></td>
+  <td><%= f.hidden_field :_delete %><%= remove_link 'remove',
+                                                    '.student',
+                                                    :after => "changeCount('count#{extract_team_id(f.object_name)}', -1)" %></td>
+</tr>

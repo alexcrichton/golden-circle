@@ -29,10 +29,8 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    @school.password = params[:school][:password]
-    @school.password_confirmation = params[:school][:password_confirmation]
-    if @school.save
-      flash[:notice] = "Password successfully updated"
+    if @school.update_attributes(params[:school].slice(:password, :password_confirmation, :openid_identifier))
+      flash[:notice] = "Password/OpenID successfully updated"
       redirect_to @school
     else
       render :action => 'edit'

@@ -9,20 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090304231437) do
+ActiveRecord::Schema.define(:version => 20090314033944) do
 
-  create_table "configurations", :force => true do |t|
-    t.datetime "deadline"
-    t.integer  "max_team_score"
-    t.integer  "max_student_score"
-    t.text     "right_hand_information"
-    t.text     "confirmation_email"
-    t.integer  "test_scores_to_count"
-    t.integer  "max_students_on_team"
-    t.integer  "team_test_points_per_question"
-    t.integer  "large_school_cutoff"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "open_id_authentication_associations", :force => true do |t|
+    t.integer "issued"
+    t.integer "lifetime"
+    t.string  "handle"
+    t.string  "assoc_type"
+    t.binary  "server_url"
+    t.binary  "secret"
+  end
+
+  create_table "open_id_authentication_nonces", :force => true do |t|
+    t.integer "timestamp",  :null => false
+    t.string  "server_url"
+    t.string  "salt",       :null => false
   end
 
   create_table "proctors", :force => true do |t|
@@ -53,9 +54,18 @@ ActiveRecord::Schema.define(:version => 20090304231437) do
     t.datetime "updated_at"
     t.string   "perishable_token",  :default => "",    :null => false
     t.integer  "school_score"
+    t.string   "openid_identifier"
   end
 
+  add_index "schools", ["openid_identifier"], :name => "index_schools_on_openid_identifier"
   add_index "schools", ["perishable_token"], :name => "index_schools_on_perishable_token"
+
+  create_table "settings", :force => true do |t|
+    t.string   "var",        :null => false
+    t.text     "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "students", :force => true do |t|
     t.string   "last_name"
@@ -69,15 +79,24 @@ ActiveRecord::Schema.define(:version => 20090304231437) do
   create_table "teams", :force => true do |t|
     t.integer  "school_id"
     t.string   "level"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "test_score"
     t.integer  "students_count",         :default => 0
-    t.boolean  "test_score_checked"
-    t.boolean  "team_score_checked"
-    t.boolean  "student_scores_checked"
-    t.boolean  "is_exhibition"
     t.integer  "team_score"
+    t.boolean  "team_score_checked",     :default => false, :null => false
+    t.boolean  "student_scores_checked", :default => false, :null => false
+    t.boolean  "is_exhibition",          :default => true,  :null => false
+  end
+
+  create_table "uploads", :force => true do |t|
+    t.string   "name"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

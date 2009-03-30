@@ -1,0 +1,41 @@
+<% content_for :jsinclude do %>
+  <%= javascript_include_tag 'filter', 'notifychange' %>
+<% end %>
+<% content_for :jstemplates do %>
+  $(document).ready(function(){filter("#teams tr", "search")})
+<% end %>
+
+<h1>Editing Team Scores</h1>
+
+
+Find:<br />
+<input name="search" type="text"/>
+<hr />
+
+<% form_tag(grading_teams_path(:level => params[:level]), :method => :put) do %>
+  <%= error_messages_for :object => @teams %>
+  <table id="teams">
+    <tr>
+      <td class="separator" colspan="4">All <%= h params[:level] %> Teams</td>
+    </tr>
+    <tr>
+      <th>School Name</th>
+      <th>Level</th>
+      <th>Score</th>
+      <th>School Size</th>
+      <th></th>
+    </tr>
+    <% @teams.each do |team| %>
+      <% fields_for("teams[#{team.id}]", team) do |tf| %>
+        <tr class="<%= cycle('even', 'odd') %> filter:<%= h(team_name(team) + "_" + team.level).gsub(/ /, "_") %>">
+          <td><%= tf.label :test_score, team_name(team) %></td>
+          <td><%= h team.level %></td>
+          <td><%= tf.text_field :test_score, :size => 5 %> <%= tf.check_box :team_score_checked %></td>
+          <td><%= team.school.school_class %></td>
+          <td><%= link_to 'Individual Scores', grading_students_path(:team_id => team.id) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+  <p><%= submit_tag "Submit Changes", :onclick => "setConfirmUnload(false)" %></p>
+<% end %>

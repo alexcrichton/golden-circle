@@ -1,0 +1,28 @@
+<% content_for :sidebar do %>
+  <%= render 'schools/sidebar' %>
+<% end %>
+<h1>Change My Password</h1>
+
+<% form_for @school, :url => password_reset_path(:id => params[:id]), :method => :put do |f| %>
+  <%= f.error_messages %>
+  <div id="password" <%= 'style="display:none"' if !@school.openid_identifier.blank? %>>
+    <p>
+      <%= f.label :password %> (or <%= link_to_function 'change your OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>)<br />
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
+    </p>
+  </div>
+
+  <div id="openid" <%= 'style="display:none"' if @school.openid_identifier.blank? %>>
+    <p>
+      <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'change your password', "$('#openid').slideUp();$('#password').slideDown();" %>)<br/>
+      <%= f.text_field :openid_identifier %>
+    </p>
+  </div>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>

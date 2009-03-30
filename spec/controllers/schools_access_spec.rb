@@ -21,13 +21,17 @@ describe SchoolsController do
 
   describe "responding to POST /schools" do
 
+    before(:each) do
+      Settings.stub!(:deadline).and_return(Time.zone.local(2009,2,25,24,0,0))
+    end
+
     it "should allow anynymous" do
       post :create
       response.should be_success
     end
 
     it 'should allow anyone' do
-      controller.stub!(:current_school).and_return(mock_school)
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
       post :create
       response.should be_success
     end
@@ -98,56 +102,33 @@ describe SchoolsController do
   describe "responding to PUT /schools/1" do
     it 'should redirect anonymous to the login page' do
       School.stub!(:find)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(login_path)
     end
 
     it 'should allow the owner' do
       controller.stub!(:current_school).and_return(mock_school)
       School.stub!(:find).and_return(mock_school)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(school_path(mock_school))
     end
 
     it 'should redirect non-owners to the login page' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
       School.stub!(:find).and_return(mock_school)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(login_path)
     end
 
     it 'should allow an admin school' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil
       School.stub!(:find).and_return(mock_school)
-      put :update, :id => 1
+      put :update, :id => 1, :school => {}
       response.should redirect_to(school_path(mock_school))
     end
 
   end
 
-  describe "responding to GET /schools/1/print" do
-
-    it 'should redirect anonymous to the login page' do
-      School.stub!(:find)
-      get :print, :id => 1, :level => 'wizard'
-      response.should redirect_to(login_path)
-    end
-
-    it 'should redirect non-admins to the login page' do
-      controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
-      School.stub!(:find).and_return(mock_school)
-      get :print, :id => 1, :level => 'wizard'
-      response.should redirect_to(login_path)
-    end
-
-    it 'should allow an admin school' do
-      controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil
-      School.stub!(:find).and_return(mock_school(:teams => mock_scope([], :wizard)))
-      get :print, :id => 1, :level => 'wizard'
-      response.should be_success
-    end
-
-  end
 
   describe "responding to PUT /schools/email" do
 
@@ -177,7 +158,7 @@ describe SchoolsController do
       response.should redirect_to(login_path)
     end
 
-    it 'should a logged in school' do
+    it 'should allow a logged in school' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
       get :show_current
       response.should be_success

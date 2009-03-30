@@ -1,0 +1,31 @@
+<h5>Information</h5>
+<p>
+  The Golden Circle 9th Grade Math Championships will be held <%= Settings.event_date.strftime '%A, %B %d, %Y' %> at
+  Central Campus. Bus parking is one block west of 1920 Grand Ave. Car parking is in the lot at the corner of 19th and
+  Grand (directly north of the school). To register a team, create an account on this website and then supply the
+  required
+  information.<br /> <%= link_to 'More information...', transfer_upload_path(Upload.find_by_name('information')) %>
+  [pdf]
+</p>
+
+<hr />
+
+<h5>Registration Deadline</h5>
+<p style="color:#f00;font-weight:bold"><%= Settings.deadline.strftime '%A, %B %d' %></p>
+
+<hr />
+
+<h5>Questions?</h5>
+<p><%= mail_to 'golden.circle.contest@gmail.com' %></p>
+<hr />
+
+<% if current_school %>
+  <h5>Roster Changes:</h5>
+  <p>
+    You may change your roster at any time before the event by updating your school on this website. We would prefer,
+    however, that all changes be posted by <%= Settings.deadline.strftime '%A, %B %d' %>. You can still make changes
+    after this date.
+  </p>
+<% end %>
+
+

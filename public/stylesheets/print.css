@@ -2,7 +2,7 @@ body {
   background: inherit;
 }
 
-.container {
+#container {
   border-right: 0;
 }
 

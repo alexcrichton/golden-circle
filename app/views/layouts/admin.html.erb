@@ -1,6 +1,6 @@
 <%= render :partial => 'layouts/header' %>
-<div class="container">
-  <%= render :partial => 'layouts/flash_messages' %>
+<div id="container">
+  <%= render 'layouts/flash_messages' %>
   <%= yield %>
 </div>
-<%= render :partial => 'layouts/footer' %>
+<%= render 'layouts/footer' %>

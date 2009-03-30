@@ -2,9 +2,9 @@
 # from the project root directory.
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
-Dir[File.dirname(__FILE__)+'/shared/*.rb'].each { |shared| require shared }
 require 'spec'
 require 'spec/rails'
+Dir[File.dirname(__FILE__)+'/shared/*.rb'].each { |shared| require shared }
 
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true

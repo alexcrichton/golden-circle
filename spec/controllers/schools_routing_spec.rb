@@ -11,28 +11,28 @@ describe SchoolsController do
     end
 
     it "should map #edit" do
-      route_for(:controller => "schools", :action => "edit", :id => 1).should == "/schools/1/edit"
+      route_for(:controller => "schools", :action => "edit", :id => '1').should == "/schools/1/edit"
     end
 
     it "should map #show" do
-      route_for(:controller => "schools", :action => "show", :id => 1).should == "/schools/1"
+      route_for(:controller => "schools", :action => "show", :id => '1').should == "/schools/1"
     end
 
-    it "should map #update" do
-      route_for(:controller => "schools", :action => "update", :id => 1).should == "/schools/1"
+#    it "should map #update" do
+#      route_for(:controller => "schools", :action => "update", :id => '1').should == "/schools/1"
+#    end
+
+#    it "should map #destroy" do
+#      route_for(:controller => "schools", :action => "destroy", :id => '1').should == "/schools/1"
+#    end
+
+    it 'should map #show_current' do
+      route_for(:controller => 'schools', :action => 'show_current').should == '/schools/show_current'
     end
 
-    it "should map #destroy" do
-      route_for(:controller => "schools", :action => "destroy", :id => 1).should == "/schools/1"
-    end
-
-    it 'should map #print' do
-      route_for(:controller => 'schools', :action => 'print', :id => 1).should == '/schools/1/print'
-    end
-
-    it 'should map #email' do
-      route_for(:controller => 'schools', :action => 'email').should == '/schools/email'
-    end
+#    it 'should map #email' do
+#      route_for(:controller => 'schools', :action => 'email').should == '/schools/email'
+#    end
   end
 
   describe "route recognition" do
@@ -64,8 +64,8 @@ describe SchoolsController do
       params_from(:delete, "/schools/1").should == {:controller => "schools", :action => "destroy", :id => "1"}
     end
 
-    it 'should generate params for #print' do
-      params_from(:get, "/schools/1/print").should == {:controller => 'schools', :action => 'print', :id => '1'}
+    it 'should generate params for #show_current' do
+      params_from(:get, '/schools/show_current').should == {:controller => 'schools', :action => 'show_current'}
     end
 
     it 'should generate params for #email' do

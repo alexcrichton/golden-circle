@@ -5,7 +5,7 @@ describe Team do
   before(:each) do
     @valid_attributes = {
       :school_id => "1",
-      :level => Student::WIZARD,
+      :level => Team::WIZARD,
     }
     @it = Team.new
   end
@@ -23,11 +23,11 @@ describe Team do
     @it.should be_valid
   end
 
-  it "should be invalid with an non-unique level" do
-    Team.create!(@valid_attributes)
-    @it.attributes = @valid_attributes
-    @it.should_not be_valid
-  end
+#  it "should be invalid with an non-unique level" do
+#    Team.create!(@valid_attributes)
+#    @it.attributes = @valid_attributes
+#    @it.should_not be_valid
+#  end
 
   it "should not be invalid with an non-unique level when between schools" do
     Team.create!(@valid_attributes.merge(:school_id => 2))
@@ -56,6 +56,7 @@ describe Team do
       k = Student.new(:first_name => s.to_s, :last_name => s.to_s)
       k.test_score = s
       @it.students << k
+      @it.save
     end
     p.call(1)
     @it.student_score_sum.should eql(1)
@@ -75,17 +76,19 @@ describe Team do
 
   it 'should calculate team score correctly' do
     @it.attributes = @valid_attributes
+    @it.school = mock_model(School, :recalculate_school_score => true)
     @it.save
     (1..5).each do |s|
       k = Student.new(:first_name => s.to_s, :last_name => s.to_s, :team_id => @it.id)
       k.test_score = s;
       @it.students << k
+      k.save
     end
     @it.test_score = 8
-    @it.save
+    @it.recalculate_team_score
     @it.team_score.should eql(55)
     @it.test_score = 9
-    @it.save
+    @it.recalculate_team_score
     @it.team_score.should eql(60)
   end
 

@@ -4,84 +4,94 @@ class GradingController < ApplicationController
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
 
+  def print
+    @team = Team.find(params[:id], :include => [:school])
+    @school = @team.school
+    render :layout => 'admin'
+  end
+
+  def status
+    @blank_teams = Team.blank_scores.participating.sorted
+    @blank_students = Student.blank_scores.by_name
+
+    @unchecked_team_scores = Team.unchecked_team_score.participating.sorted
+    @unchecked_student_scores = Team.unchecked_student_scores.participating.sorted
+  end
+
   def teams
   end
 
   def update_teams
-    params[:teams] ||= {}
-    params[:teams].each_pair do |i, v|
-      t = @team_hash[i.to_i]
-      t.test_score = v['test_score']
-      t.save
+    boolean = true
+    params[:teams].each_pair do |id, attrs|
+      t = @team_hash[id.to_i]
+      t.test_score = attrs['test_score']
+      t.team_score_checked = attrs['team_score_checked']
+      boolean = t.recalculate_team_score(false) && boolean if t.changed?
     end
-    render :action => 'teams'
+    if boolean
+      flash[:notice] = "Teams successfully updated!"
+      redirect_to grading_teams_path(:level => params[:level])
+    else
+      render :action => 'teams'
+    end
   end
 
   def students
   end
 
   def update_students
-    params[:students] ||= {}
-    params[:students].each_pair do |i, v|
-      s = @student_hash[i.to_i]
-      s.test_score = v['test_score']
-      s.save
+    boolean = nil
+    params[:students].each_pair do |id, student_attributes|
+      s = @student_hash[id.to_i]
+      s.test_score = student_attributes['test_score']
+      if s.changed?
+        boolean = true if boolean.nil?
+        boolean = s.save && boolean
+      end
     end
-    render :action => 'students'
+    @team.student_scores_checked = params[:team][:student_scores_checked]
+    if boolean.nil?
+      # no students
+      @team.recalculate_team_score(false) if @team.changed? # don't need to recalculate, just the check flag changed
+    elsif boolean
+      @team.recalculate_team_score #successful saves, score changed
+    else
+      return render :action => 'students' # unsuccessful saves...
+    end
+    flash[:notice] = 'Students successfully updated!'
+    redirect_to grading_students_path(:team_id => @team.id)
   end
 
-  def statistics
-    params[:level] ||= Student::WIZARD
-    params[:class] ||= 'Large'
+  def config
+  end
 
-    @schools = School.send("#{params[:class].downcase}", :include => {:teams => :students}).sort_by(&:school_score).reverse
-#    @schools.each { |s| s.teams.each { |t| t.school = s }} # prevents a query to database
-    team_level = params[:level].downcase
-    @teams = @schools.map { |s| s.teams.participating.send(team_level) }.flatten
-    @teams = @teams.sort_by(&:team_score).reverse
-    # TODO: This statement prevents extra queries, b/c the eager loading doesn't set the associations backwards
-    # problem, though, is that this screws w/ the counter cache and takes longer, so isn't as simple as the
-    # one above...
-    #@teams.each { |t| t.students.each { |s| s.team = t }} # prevents a query to database
-
-    @students = @teams.map(&:students).flatten.sort_by { |s| s.test_score || 0 }.reverse
-
-    @teams_rank = rank(@teams, :team_score)
-    @schools_rank = rank(@schools, :school_score)
-    @students_rank = rank(@students, :test_score)
+  def update_configuration
+    event_date = convert_date(params[:settings], :event_date)
+    Settings.event_date = event_date if event_date
+    deadline = convert_date(params[:settings], :deadline)
+    Settings.deadline = deadline if deadline
+    Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
+    redirect_to grading_config_path
   end
 
   protected
 
-  def rank(collection, method)
-    rank = Array.new(collection.size)
-    rank[0] = 1
-    size = 0;
-    for i in 1...collection.size
-      rank[i] = rank[i -1];
-      if collection[i].send(method) == collection[i - 1].send(method)
-        size += 1
-      else
-        rank[i] += size + 1
-        size = 0
-      end
-    end
-    rank
+  def convert_date(hash, key)
+    args = (1..5).map { |n| val = hash["#{key}(#{n}i)"]; return nil if val.nil?; val}
+    Time.zone.local(*args)
   end
 
   def load_students
     @student_hash = {}
-    @team = Team.find(params[:team_id], :include => [:students, :school])
-    @students = @team.students
+    @team = Team.find(params[:team_id], :include => [:school])
+    @students = @team.students.by_name
     @students.each { |s| @student_hash[s.id] = s }
   end
 
   def load_teams
     @team_hash = {}
-    @teams = Team.find(:all,
-                       :include => [:school],
-                       :conditions => ['level = ? AND students_count > ?', params[:level], 0],
-                       :order => "schools.name ASC")
+    @teams = Team.send(params[:level].downcase).participating.sorted
     @teams.each { |t| @team_hash[t.id] = t}
   end
 

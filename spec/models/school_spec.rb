@@ -10,9 +10,11 @@ describe School do
       :name => "Central Academy",
       :contact_name => "Thomas Edison",
       :contact_phone => "555 555 5555",
-      :enrollment => "500"
+      :enrollment => "500",
+      :openid_identifier => 'asdf'
     }
     Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))
+    Settings.stub!(:deadline).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))
     @it = School.new
   end
 
@@ -26,9 +28,9 @@ describe School do
     @it.save
     @it.teams.size.should eql(2)
     @it.teams.apprentice.first.should_not be_nil
-    @it.teams.apprentice.first.level.should eql(Student::APPRENTICE)
+    @it.teams.apprentice.first.level.should eql(Team::APPRENTICE)
     @it.teams.wizard.first.should_not be_nil
-    @it.teams.wizard.first.level.should eql(Student::WIZARD)
+    @it.teams.wizard.first.level.should eql(Team::WIZARD)
   end
 
   it 'should classify the school correctly' do
@@ -50,6 +52,7 @@ describe School do
   end
 
   it 'should calculate the cost right' do
+    Settings.stub!(:cost_per_student).and_return(4)
     @it.attributes = @valid_attributes
     @it.cost.should eql(0)
     @it.students << Student.new
@@ -89,8 +92,8 @@ describe School do
     @it.should_not be_valid
   end
 
-  it "should be invalid without a password" do
-    @it.attributes = @valid_attributes.except(:password)
+  it "should be invalid without a password and OpenID identifier" do
+    @it.attributes = @valid_attributes.except(:password).except(:openid_identifier)
     @it.should_not be_valid
     @it.password = @valid_attributes[:password]
     @it.should be_valid

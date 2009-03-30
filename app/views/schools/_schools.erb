@@ -1,0 +1,32 @@
+<table>
+  <tr>
+    <td class="separator" colspan="7"><%= title %></td>
+  </tr>
+  <tr>
+    <th>School name</th>
+    <th>Contact email</th>
+    <th>Enrollment</th>
+    <th>Apprentices</th>
+    <th>Wizards</th>
+    <th>Students</th>
+    <th>Actions</th>
+  </tr>
+  <%- schools.each do |school| -%>
+    <tr class="<%= cycle('even', 'odd') %>">
+      <td><%= link_to(h(school.name), school) %></td>
+      <td><%= mail_to(school.email) %></td>
+      <td class="num"><%= h school.enrollment %></td>
+      <td class="num"><%= student_count(school, Team::APPRENTICE) %></td>
+      <td class="num"><%= student_count(school, Team::WIZARD) %></td>
+      <td class="num"><%= student_count(school, :all) %></td>
+      <td>
+        <%= link_to 'App', print_team_path(school.teams.non_exhibition.apprentice.first) %> |
+        <%= link_to 'Wiz', print_team_path(school.teams.non_exhibition.wizard.first) %> |
+        <%- school.teams.exhibition.each do |team| -%>
+          <%= link_to "Ex #{team.id}", print_team_path(team) %> |
+        <%- end -%>
+        <%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <%- end -%>
+</table>

@@ -1,0 +1,9 @@
+<h2>Create a school</h2>
+<%- form_for @school, :url => schools_path, :html => {:method => :post} do |f| -%>
+  <%= render 'schools/form', :f => f %>
+  <p>
+    <%= f.submit "Register School" %>
+  </p>
+<%- end -%>
+<br />
+<%= link_to 'Back Home', root_path %>

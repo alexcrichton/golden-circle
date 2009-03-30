@@ -3,20 +3,15 @@ class SchoolsController < ApplicationController
   before_filter :load_school
   before_filter :require_school, :only => [:show_current]
   before_filter :require_owner, :only => [:update, :edit, :destroy, :show]
-  before_filter :require_admin, :only => [:index, :print, :email]
+  before_filter :require_admin, :only => [:index, :email]
 
   def index
-    @schools = School.all
+    @schools = School.all.by_name
     @large_schools = @schools.large
     @small_schools = @schools.small
     @unknown = @schools.unknown
     @proctors = @schools.collect{ |s| s.proctors }.flatten
 
-    render :layout => 'admin'
-  end
-
-  def print
-    @team = @school.teams.send("#{params[:level].downcase}").first
     render :layout => 'admin'
   end
 
@@ -40,10 +35,17 @@ class SchoolsController < ApplicationController
   end
 
   def create
-    current_school_session.destroy if current_school_session
     @school = School.new(params[:school])
 
-    if @school.save
+    save_worked = @school.save
+    # if after deadline, only admin can change things. If the only error is on the base (creation deadline), then
+    # allow this to pass by bypassing the one creation validation
+    if !save_worked && current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
+      @school.save(false)
+      save_worked = true
+    end
+
+    if save_worked
       flash[:notice] = 'School was successfully created.'
       redirect_to(@school)
     else
@@ -58,14 +60,10 @@ class SchoolsController < ApplicationController
     # if the forms were all cleared, we have to make sure that attribute_fu knows this and the
     # attributes= methods are called with blank hashes so all items are deleted. If this is not
     # here, when all forms are deleted, no hash is passed here, and nothing is deleted.
-    params[:school] ||= {}
-    params[:school][:proctor_attributes] ||= {}
-
-    params[:school][:team_attributes] ||= {}
-    params[:school][:team_attributes].each_key do |key|
-      params[:school][:team_attributes][key][:student_attributes] ||= {} if key.to_s.match(/^\d+$/)
-    end
-
+#    params[:school][:proctor_attributes] ||= {}
+#    (params[:school][:team_attributes] ||= {}).each_pair do |team_id, team_attributes|
+#      team_attributes[:student_attributes] ||= {} if team_id.to_s.match(/^\d+$/)
+#    end
     if @school.update_attributes(params[:school])
       flash[:notice] = 'School was successfully updated. Please review the form below, it is what was saved in the database.'
       redirect_to(@school)
@@ -82,7 +80,7 @@ class SchoolsController < ApplicationController
   protected
 
   def load_school
-    @school = School.find(params[:id], :include => [:teams, :students, :proctors]) if params[:id]
+    @school = School.find(params[:id], :include => [:teams, :proctors]) if params[:id]
   end
 
   def require_owner
