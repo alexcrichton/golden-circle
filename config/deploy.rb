@@ -5,7 +5,7 @@ require 'san_juan'
 set :application, "goldencircle.academycommunity.com"
 
 set :scm, :git
-set :repository,  "git://github.com/alexc605/golden-circle.git"
+set :repository, "git://github.com/alexc605/golden-circle.git"
 set :branch, "master"
 set :deploy_via, :remote_cache
 
@@ -29,20 +29,13 @@ namespace :db do
 
 end
 
-namespace :slicehost do
-desc "install required gems"
-  task :install_required_gems do
-    run "cd #{deploy_to}/current; rake gems:install"
-  end
-end
-
 set :web_server, "academycommunity.com"
 
 role :app, web_server
 role :web, web_server
 role :db,  web_server, :primary => true
 
-thin_app = "thin-goldencircle.academycommunity.com"
+thin_app = "thin-#{application}"
 
 san_juan.role :app, [thin_app]
 
@@ -50,17 +43,17 @@ set :god_config_path, "/etc/god.conf"
 
 namespace :deploy do
   desc "Use god to restart the app" 
-    task :restart do
-      god.app.send(thin_app).restart
-    end
+  task :restart do
+    god.app.send(thin_app).restart
+  end
 
-    desc "Use god to start the app" 
-    task :start do
-      god.app.send(thin_app).start
-    end
+  desc "Use god to start the app" 
+  task :start do
+    god.app.send(thin_app).start
+  end
 
-    desc "Use god to stop the app" 
-    task :stop do
-      god.app.send(thin_app).stop
-    end
+  desc "Use god to stop the app" 
+  task :stop do
+    god.app.send(thin_app).stop
+  end
 end
