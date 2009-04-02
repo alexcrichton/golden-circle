@@ -57,15 +57,8 @@ class SchoolsController < ApplicationController
   end
 
   def update
-    # if the forms were all cleared, we have to make sure that attribute_fu knows this and the
-    # attributes= methods are called with blank hashes so all items are deleted. If this is not
-    # here, when all forms are deleted, no hash is passed here, and nothing is deleted.
-#    params[:school][:proctor_attributes] ||= {}
-#    (params[:school][:team_attributes] ||= {}).each_pair do |team_id, team_attributes|
-#      team_attributes[:student_attributes] ||= {} if team_id.to_s.match(/^\d+$/)
-#    end
     if @school.update_attributes(params[:school])
-      flash[:notice] = 'School was successfully updated. Please review the form below, it is what was saved in the database.'
+      flash[:notice] = 'School successfully updated. Please review the form below to ensure accuracy.'
       redirect_to(@school)
     else
       render :action => "edit"

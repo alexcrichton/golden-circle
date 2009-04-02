@@ -1,7 +1,7 @@
 class School < ActiveRecord::Base
 
-  CUTOFF = 200;
-
+  CUTOFF = 200
+  
   acts_as_authentic do |c|
     #c.validates_password_field_options :if => :openid_identifier_blank?
   end
@@ -97,7 +97,7 @@ class School < ActiveRecord::Base
     [Team::APPRENTICE, Team::WIZARD].each do |level|
       t = Team.create(:level => level)
       t.is_exhibition = false
-      self.teams << t 
+      self.teams << t
     end
   end
 
