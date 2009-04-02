@@ -1,14 +1,14 @@
 <%- if flash[:notice] -%>
   <div class="notice">
     <p style="float:left"><%= flash[:notice] %></p>
-    <%= link_to_function '[show/hide]', '$(this).parent().fadeOut()', :style => 'float:right' %>
+    <%= link_to_function '[hide]', '$(this).parent().fadeOut()', :style => 'float:right' %>
     &nbsp; <%# needed for some reason... -%>
   </div>
 <%- end -%>
 <%- if flash[:error] -%>
   <div class="error">
     <p style="float:left"><%= flash[:error] %></p>
-    <%= link_to_function '[show/hide]', '$(this).parent().fadeOut()', :style => 'float:right' %>
+    <%= link_to_function '[hide]', '$(this).parent().fadeOut()', :style => 'float:right' %>
     &nbsp; <%# needed for some reason... -%>
   </div>
 <%- end -%>
