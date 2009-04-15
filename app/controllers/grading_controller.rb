@@ -7,7 +7,7 @@ class GradingController < ApplicationController
   def print
     @team = Team.find(params[:id], :include => [:school])
     @school = @team.school
-    render :layout => 'admin'
+    render :layout => 'wide'
   end
 
   def status

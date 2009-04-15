@@ -23,11 +23,9 @@ class School < ActiveRecord::Base
                             :only_integer => true,
                             :on => :update
   validates_uniqueness_of :name, :case_sensitive => false, :if => :name_changed?
-  validates_uniqueness_of :openid_identifier, :allow_blank => true, :if => :openid_identifier_changed?
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update
-  validate :normalize_openid_identifier, :if => :openid_identifier_changed?
   validate :submitted_before_deadline?
 
   attr_protected :admin, :school_score
@@ -65,21 +63,7 @@ class School < ActiveRecord::Base
     save(false) # saves time, don't be stupid when calling this method
   end
 
-  def openid_identifier_blank?
-    openid_identifier.blank?
-  end
-
   private
-  # from online Authlogic tutorial
-
-  def normalize_openid_identifier
-    begin
-      self.openid_identifier = OpenIdAuthentication.normalize_identifier(openid_identifier) if !openid_identifier.blank?
-    rescue OpenIdAuthentication::InvalidOpenId => e
-      errors.add(:openid_identifier, e.message)
-    end
-  end
-
   def submitted_before_deadline?
     if new_record? && Time.zone.now > Settings.deadline
       errors.add_to_base("The registration deadline has passed. If you would still like to participate this year, please email golden.circle.contest@gmail.com")

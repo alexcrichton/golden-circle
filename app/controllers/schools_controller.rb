@@ -12,7 +12,7 @@ class SchoolsController < ApplicationController
     @unknown = @schools.unknown
     @proctors = @schools.collect{ |s| s.proctors }.flatten
 
-    render :layout => 'admin'
+    render :layout => 'wide'
   end
 
   def email
