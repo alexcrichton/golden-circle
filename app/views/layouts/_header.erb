@@ -13,6 +13,7 @@
     <%= yield(:jsinclude) %>
     <% javascript_tag do %>
       <%= yield(:jstemplates) %>
+      <%= yield(:js) %>
     <% end -%>
   </head>
   <body>

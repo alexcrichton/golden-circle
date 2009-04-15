@@ -30,6 +30,7 @@
 //    input.focus();
 //}
 
+
 function changeCount(count, dif) {
   var updated = eval(count) + dif;
   eval(count + "=" + updated);

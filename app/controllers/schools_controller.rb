@@ -37,19 +37,16 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(params[:school])
 
-    save_worked = @school.save
-    # if after deadline, only admin can change things. If the only error is on the base (creation deadline), then
-    # allow this to pass by bypassing the one creation validation
-    if !save_worked && current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
-      @school.save(false)
-      save_worked = true
-    end
-
-    if save_worked
-      flash[:notice] = 'School was successfully created.'
-      redirect_to(@school)
-    else
-      render :action => "new"
+    @school.save do |result|
+      if result
+        flash[:notice] = 'School was successfully created.'
+        redirect_to(@school)
+      elsif current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
+        @school.save(false)
+        redirect_to(@school)
+      else
+        render :action => "new"
+      end
     end
   end
 

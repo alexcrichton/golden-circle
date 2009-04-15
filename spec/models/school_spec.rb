@@ -11,7 +11,7 @@ describe School do
       :contact_name => "Thomas Edison",
       :contact_phone => "555 555 5555",
       :enrollment => "500",
-      :openid_identifier => 'asdf'
+      :openid_identifier => ''
     }
     Time.zone.stub!(:now).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))
     Settings.stub!(:deadline).and_return(Time.zone.local(2009, 2, 24, 23, 0, 0))

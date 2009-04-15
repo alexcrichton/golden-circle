@@ -2,9 +2,7 @@ class School < ActiveRecord::Base
 
   CUTOFF = 200
   
-  acts_as_authentic do |c|
-    #c.validates_password_field_options :if => :openid_identifier_blank?
-  end
+  acts_as_authentic
 
   has_many :teams, :dependent => :destroy, :validate => false
   accepts_nested_attributes_for :teams, :allow_destroy => true
