@@ -19,7 +19,7 @@
   <%= small_errors(team.students) %>
   <% id =  extract_team_id(f.object_name) %>
   <%= javascript_tag "count#{extract_team_id(f.object_name)} = #{team.students.size}" %>
-  <table id="students" class="noborder sortable">
+  <table id="students<%= extract_team_id(f.object_name) %>" class="noborder sortable">
     <caption>
       Students
       (<span id="count<%= extract_team_id(f.object_name) %>"><%= team.students.size %></span>/<%= Team::MAXSTUDENTS %>)
@@ -34,7 +34,7 @@
     <% end %>
   </table>
   <%= add_link 'add',
-               "#students",
+               "#students#{extract_team_id(f.object_name)}",
                :parent => ".team",
                :var => 'student',
                :after => "changeCount('count#{extract_team_id(f.object_name)}', 1);" +
