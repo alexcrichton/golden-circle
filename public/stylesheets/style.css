@@ -36,11 +36,6 @@ fieldset fieldset {
   background-image: none;
 }
 
-/*.team fieldset {*/
-/*margin-bottom: 30px;*/
-/*}*/
-
-/*TODO: Fix duplication, especially on lists*/
 body {
   margin: 0;
   padding: 0;
@@ -100,21 +95,24 @@ img#logo {
 }
 
 #container {
-  border-right: solid #d1d1d1 1px;
+  border: solid #d1d1d1;
+  border-width: 0 1px;
   background: white;
-  margin: 0;
+  margin: 0 auto;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
 div#footer {
-  background: #e5e5e5; /*margin: 0 -10px;*/
+  background: #e5e5e5;
+  margin: 0 auto;
   padding: 10px;
   border: solid #d1d1d1 4px;
   border-left: none;
   border-right: none;
   text-align: center;
+  float: none;
   color: #555;
 }
 
@@ -146,7 +144,6 @@ ul#topnav li a {
   margin: 0 10px 0 7px;
   vertical-align: super;
   text-decoration: none;
-  color: inherit;
   color: #444;
 }
 
@@ -203,22 +200,20 @@ ul#topnav li:hover {
   text-align: right;
 }
 
-p.strong {
+.save {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.save .inner {
   padding: 10px;
   color: #000;
   font-weight: bold;
   font-size: 10pt;
-  width: 40%;
-  border: 4px solid #066;
-  text-align: center;
-  margin-left: 180px;
 }
 
 div.payment {
-  font-size: 12pt; /*background: #E5ECF9;*/
-  border: 2px solid #066;
-  text-align: center;
-  padding: 5px;
+  font-size: 12pt; 
   margin-top: 20px;
   float: right;
 }
@@ -250,24 +245,31 @@ div.sum {
   float: right;
 }
 
-div.main {
-  border-right: solid #ddd 1px;
-  padding-right: 15px;
-}
-
 div#school-info {
   margin-bottom: 10px;
 }
 
 .login {
-  width: 250px;
-  float: left;
-  padding: 5px;
-  margin-right: 90px;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.outer {
+  background: #ddd none repeat scroll 0 0;
+  padding: 0;
+}
+
+.inner {
+  padding: 4px;
+  background: white;
+  margin: 0;
 }
 
 #exhibition {
   padding-top: 12px;
+  border: solid #ccc;
+  border-width: 1px 0;
+  margin: 5px 0;
 }
 
 #exhibition h3 {
@@ -281,4 +283,8 @@ tr.odd:hover td {
 
 tr.even:hover td {
   background: #ceddf6;
+}
+
+.tcenter {
+  text-align: center;
 }

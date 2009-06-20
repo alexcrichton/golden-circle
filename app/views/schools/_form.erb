@@ -2,33 +2,31 @@
 
 <p>
   <%= f.label :email %><br />
-  <%= f.text_field :email, :size => 25, :tabindex => 1234 %>
+  <%= f.text_field :email, :size => 40, :tabindex => 1234 %>
 </p>
 <p>
   <%= f.label :name, 'School Name' %><br />
-  <%= f.text_field :name, :size => 25, :tabindex => 1235 %>
+  <%= f.text_field :name, :size => 40, :tabindex => 1235 %>
 </p>
 <br/>
 <div id="password">
   <p>
     <%= f.label :password %> (or <%= link_to_function 'OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>)<br />
-    <%= f.password_field :password, :size => 25, :tabindex => 1236 %>
+    <%= f.password_field :password, :size => 40, :tabindex => 1236 %>
   </p>
   <p>
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, :size => 25, :tabindex => 1237 %>
+    <%= f.password_field :password_confirmation, :size => 40, :tabindex => 1237 %>
   </p>
 </div>
 <div id="openid">
   <p>
     <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'password', "$('#openid').slideUp();$('#password').slideDown()" %>)<br />
-    <%= f.text_field :openid_identifier, :size => 25, :tabindex => 1238 %>
+    <%= f.text_field :openid_identifier, :size => 40, :tabindex => 1238 %>
   </p>
 </div>
 
-<% content_for :js do %>
-  $(document).ready(function(){
-    $('#<%= @school && !@school.openid_identifier.blank? ? 'password' : 'openid' %>').hide();
-  });
+<% content_for :jsload do %>
+  $('#<%= @school && !@school.openid_identifier.blank? ? 'password' : 'openid' %>').hide();
 <% end %>
 

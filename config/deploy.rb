@@ -1,8 +1,12 @@
 require 'erb'
-# http://github.com/jnewland/san_juan/tree/master For god integration
-require 'san_juan'
 
-set :application, "goldencircle.academycommunity.com"
+set :web_server, "gc.alexcrichton.com"
+
+role :app, web_server
+role :web, web_server
+role :db,  web_server, :primary => true
+
+set :application, "goldencircle"
 
 set :scm, :git
 set :repository, "git://github.com/alexcrichton/golden-circle.git"
@@ -22,38 +26,25 @@ before "deploy:setup", :db
 after "deploy:update_code", "db:symlink" 
 
 namespace :db do
+  task :default do
+    run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/files"
+  end
   desc "Make symlink for database yaml" 
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/files #{latest_release}/public/files"
   end
 
 end
-
-set :web_server, "academycommunity.com"
-
-role :app, web_server
-role :web, web_server
-role :db,  web_server, :primary => true
-
-thin_app = "thin-#{application}"
-
-san_juan.role :app, [thin_app]
-
-set :god_config_path, "/etc/god.conf"
-
-namespace :deploy do
-  desc "Use god to restart the app" 
-  task :restart do
-    god.app.send(thin_app).restart
+namespace :deploy do 
+  task :restart, :roles => :app do
+    run "touch #{current_release}/tmp/restart.txt"
   end
-
-  desc "Use god to start the app" 
-  task :start do
-    god.app.send(thin_app).start
+  task :start, :roles => :app do
+    run "touch #{current_release}/tmp/restart.txt"
   end
-
-  desc "Use god to stop the app" 
-  task :stop do
-    god.app.send(thin_app).stop
+  task :stop, :roles => :app do
+    # Do nothing
   end
 end

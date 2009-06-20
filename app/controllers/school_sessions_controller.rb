@@ -3,7 +3,8 @@ class SchoolSessionsController < ApplicationController
   before_filter :require_school, :only => [:destroy]
 
   def new
-    @school_session = SchoolSession.new
+    @school_session = SchoolSession.new(:remember_me => true)
+    render :layout => 'wide'
   end
 
   def create

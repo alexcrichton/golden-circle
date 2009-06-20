@@ -4,6 +4,9 @@
 <% content_for :jsinclude do %>
   <%= javascript_include_tag 'notifychange' %>
 <% end %>
+<% content_for :jsload do %>
+  $('.inner').corner('8px').parent().css('padding', '2px').corner('10px');
+<% end %>
 
 <% form_for(@school) do |f| %>
   <%= f.error_messages %>
@@ -11,7 +14,6 @@
   <% content_for :jstemplates do %>
     <%= "var proctor='#{generate_template(f, :proctors)}'" %>
     <%= "var team='#{generate_template(f, :teams)}'" %>
-
   <% end %>
   <% f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
     <% content_for :jstemplates do %>
@@ -24,39 +26,43 @@
       <fieldset>
         <legend>School</legend>
         <p>
-          <%= f.label :name %><br />
+          <%= f.label :name %><br/>
           <%= f.text_field :name %>
         </p>
 
         <p>
-          <%= f.label :enrollment, '9th grade school enrollment' %><br />
+          <%= f.label :enrollment, '9th grade school enrollment' %><br/>
           <%= f.text_field :enrollment, :size => 4 %>
         </p>
       </fieldset>
     </div>
-    <div class="span-7 payment">
-      The amount due for this team is
-      <span style="color:#008000;font-weight:bold;"><%= number_to_currency @school.cost %></span>. Please
-      bring a check payable to <i>GT Education</i> to the registration table.
+    <div class="span-7 payment outer tcenter">
+      <div class="inner">
+        The amount due for this team is
+        <span style="color:#008000;font-weight:bold;"><%= number_to_currency @school.cost %></span>.
+        <% if @school.cost > 0 %>
+          Please bring a check payable to <em>GT Education</em> to the registration table.
+        <% end %>
+      </div>
     </div>
-    <hr />
+    <hr/>
     <div class="span-8 colborder">
       <fieldset>
         <legend>School Contact</legend>
         <p>
-          <%= f.label :contact_name, "Name" %><br />
+          <%= f.label :contact_name, "Name" %><br/>
           <%= f.text_field :contact_name %>
         </p>
 
         <p>
           <%= f.label :email %>
           <%= link_to '[Change Password/OpenID]', current_password_resets_path if current_school.id == @school.id %>
-          <br />
+          <br/>
           <%= f.text_field :email %>
         </p>
 
         <p>
-          <label>Phone</label><br />
+          <label>Phone</label><br/>
           <% f.fields_for :phone, @school.phone do |pf| %>
             <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
             <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
@@ -92,10 +98,12 @@
     <% end %>
   </div>
 
-  <hr />
+  <br clear="both"/>
+
   <div id="exhibition">
     <h3>Exhibition
       Teams <%= add_link '[add]', '#exhibition', :var => 'team' %></h3>
+
     <p>
       All Exhibition teams will still participate, although their scores will not count towards the school's total
       score. Once a team is created, it will be assigned an ID number to identify it.
@@ -107,13 +115,12 @@
     <% end %>
   </div>
 
-
-  <hr />
-
-  <p class="strong">
-    Press this button to save the form!<br />
-    <%= f.submit "Save Changes", :onclick => "setConfirmUnload(false)" %>
-  </p>
+  <div class="tcenter outer save">
+    <div class="inner">
+      Press this button to save the form!<br/>
+      <%= f.submit "Save Changes", :onclick => "setConfirmUnload(false)" %>
+    </div>
+  </div>
 <% end %>
 
 
