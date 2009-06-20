@@ -16,7 +16,7 @@
   </tr>
   <% @schools.each do |school| %>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td class="num"><%= rank(school.school_score, :school)%></td>
+      <td class="num"><%= rank(school.school_score, :school) %></td>
       <td><%= h(school.name) %></td>
       <td class="num"><%= school.teams.apprentice.first.team_score %> <%= check_image(school.teams.apprentice.first) %></td>
       <td class="num"><%= school.teams.wizard.first.team_score %> <%= check_image(school.teams.wizard.first) %></td>

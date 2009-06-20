@@ -1,5 +1,5 @@
 <h1>Awards</h1>
-<hr />
+<hr/>
 <h3>Sweepstakes Results</h3>
 <% [:large, :small].each do |klass| %>
   <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
@@ -26,7 +26,7 @@
   </div>
 <% end %>
 <% [:wizard, :apprentice].each do |level| %>
-  <hr />
+  <hr/>
   <h3><%= level.to_s.capitalize %> Team Results</h3>
   <% [:large, :small].each do |klass| %>
     <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">

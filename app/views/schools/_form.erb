@@ -1,26 +1,29 @@
 <%= f.error_messages %>
 
 <p>
-  <%= f.label :email %><br />
+  <%= f.label :email %><br/>
   <%= f.text_field :email, :size => 40, :tabindex => 1234 %>
 </p>
 <p>
-  <%= f.label :name, 'School Name' %><br />
+  <%= f.label :name, 'School Name' %><br/>
   <%= f.text_field :name, :size => 40, :tabindex => 1235 %>
 </p>
 <div id="password">
   <p>
-    <%= f.label :password %> (or <%= link_to_function 'OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>)<br />
+    <%= f.label :password %> (or <%= link_to_function 'OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>
+    )<br/>
     <%= f.password_field :password, :size => 40, :tabindex => 1236 %>
   </p>
+
   <p>
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %><br/>
     <%= f.password_field :password_confirmation, :size => 40, :tabindex => 1237 %>
   </p>
 </div>
 <div id="openid">
   <p>
-    <%= f.label :openid_identifier, 'OpenID Identifier' %> (or <%= link_to_function 'password', "$('#openid').slideUp();$('#password').slideDown()" %>)<br />
+    <%= f.label :openid_identifier, 'OpenID Identifier' %>
+    (or <%= link_to_function 'password', "$('#openid').slideUp();$('#password').slideDown()" %>)<br/>
     <%= f.text_field :openid_identifier, :size => 40, :tabindex => 1238 %>
   </p>
 </div>

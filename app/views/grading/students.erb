@@ -7,9 +7,9 @@
 
 <h1>Editing Individual Scores</h1>
 
-Find:<br />
-<input name="search" type="text" />
-<hr />
+Find:<br/>
+<input name="search" type="text"/>
+<hr/>
 <% form_tag(grading_students_path(:team_id => @team.id), :method => :put) do %>
   <%= error_messages_for :object => [@students, @team] %>
   <% fields_for @team do |tf| %>

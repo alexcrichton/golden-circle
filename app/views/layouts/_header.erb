@@ -9,12 +9,12 @@
   <%= javascript_include_tag 'jquery', 'application', 'corner' %>
   <%= yield(:jsinclude) %>
   <script type="text/javascript">
-  //<![CDATA[
+    //<![CDATA[
     <%= yield(:jstemplates) %>
     <%= yield(:js) %>
-    $(function(){
-      <%= yield(:jsload) %>
+    $(function() {
+    <%= yield(:jsload) %>
     });
-  //]]>
+    //]]>
   </script>
 </head>
