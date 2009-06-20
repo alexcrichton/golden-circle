@@ -12,12 +12,12 @@
   <%= f.error_messages %>
 
   <% content_for :jstemplates do %>
-    <%= "var proctor='#{generate_template(f, :proctors)}'" %>
-    <%= "var team='#{generate_template(f, :teams)}'" %>
+    var proctor='<%= generate_template(f, :proctors) %>';
+    var team='<%= generate_template(f, :teams) %>';
   <% end %>
   <% f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
     <% content_for :jstemplates do %>
-      <%= "var student='#{generate_template(tf, :students)}'" %>
+      var student='<%= generate_template(tf, :students) %>';
     <% end %>
   <% end %>
 
@@ -98,7 +98,7 @@
     <% end %>
   </div>
 
-  <br clear="both"/>
+  <hr/>
 
   <div id="exhibition">
     <h3>Exhibition

@@ -1,13 +1,13 @@
-<%- content_for :sidebar do -%>
+<% content_for :sidebar do %>
   <%= render 'grading/sidebar' %>
-<%- end -%>
+<% end %>
 <h1>Database</h1>
 
-<%- form_tag backup_uploads_path, :method => :put do -%>
+<% form_tag backup_uploads_path, :method => :put do %>
   <p><%= submit_tag 'Backup Database' %> or</p>
-<%- end -%>
+<% end %>
 
-<%- form_for @backup, :url => upload_path(@backup, :restore => true), :html => {:multipart => true} do |f| -%>
+<% form_for @backup, :url => upload_path(@backup, :restore => true), :html => {:multipart => true} do |f| %>
   <p>
     <%= f.label :upload, 'Restore the database from a previous backup' %><br />
     <%= f.file_field :upload %>
@@ -18,14 +18,14 @@
                           "It will produce most likely a lot of errors. Most of these\n"+
                           "can be ignored, however, as what needs to be backed up will\n"+
                           "be backed up." %></p>
-<%- end -%>
+<% end %>
 <hr />
 <h1>Information PDF</h1>
-<%- form_for @information, :html => {:multipart => true} do |f| -%>
+<% form_for @information, :html => {:multipart => true} do |f| %>
   <p>
     <%= f.label :upload, 'Upload the informational PDF file' %><br />
     <%= f.file_field :upload %>
   </p>
 
   <p><%= f.submit 'Upload' %></p>
-<%- end -%>
+<% end %>

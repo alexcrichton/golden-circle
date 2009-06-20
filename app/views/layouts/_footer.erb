@@ -1,8 +1,18 @@
 <div class="span-24" id="footer">
-  <p>® 2009, Golden Circle</p>
+  <p>
+    ® 2009, Golden Circle
+
+  </p>
+
+  <div style="float:right;top:-24px;position:relative;">
+    <a href="http://validator.w3.org/check?uri=referer"><img
+  src="http://www.w3.org/Icons/valid-xhtml10-blue"
+  alt="Valid XHTML 1.0 Strict" height="31" width="88"/></a>
+  </div>
+
 </div>
-<%- # Google Analytics    -%>
-<%- if RAILS_ENV == 'production' -%>
+<% # Google Analytics      %>
+<% if RAILS_ENV == 'production' %>
   <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -14,4 +24,4 @@
     } catch(err) {
     }
   </script>
-<%- end -%>
+<% end %>

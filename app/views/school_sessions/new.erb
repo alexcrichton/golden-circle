@@ -26,14 +26,14 @@
           <%= f.text_field :openid_identifier, :size => 40, :tabindex => 3 %>
         </p>
       </div>
-      <p>
+      <div>
         <%= f.check_box :remember_me, :tabindex => 4 %>
-        <%= f.label :remember_me %><br/>
+        <%= f.label :remember_me %>
         <div class="tcenter">
-        <%= f.submit "Login", :tabindex => 5, :onclick => "$('#pass-login:hidden').find('input').attr('value', '');" +
-          "$('#openid-login:hidden').find('input').attr('value', '')" %>
-          </div>
-      </p>
+          <%= f.submit "Login", :tabindex => 5, :onclick => "$('#pass-login:hidden').find('input').attr('value', '');" +
+            "$('#openid-login:hidden').find('input').attr('value', '')" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

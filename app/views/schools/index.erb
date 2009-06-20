@@ -1,7 +1,7 @@
 <fieldset style="float:left;width:40%;margin-right:20px;">
   <h1>School Index</h1>
   <hr />
-  <%- form_tag email_schools_path, :method => :put do -%>
+  <% form_tag email_schools_path, :method => :put do %>
     <p>
       The following button will send a confirmation email to all schools so they might validate the information they have
     submitted.
@@ -9,7 +9,7 @@
     <p>
     <%= submit_tag 'Send Email Notification', :confirm => "Are you sure?\nThis will email all schools!" %>
     </p>
-  <%- end -%>
+  <% end %>
 </fieldset>
 <table style="width:50%">
   <caption>Statistics</caption>
@@ -25,14 +25,14 @@
     <td class="num"><%= @small_schools.size %></td>
     <td class="num"><b><%= @schools.size %></b></td>
   </tr>
-  <%- [Team::APPRENTICE, Team::WIZARD, :all].each do |level| -%>
+  <% [Team::APPRENTICE, Team::WIZARD, :all].each do |level| %>
     <tr>
       <th><%= level == :all ? 'Total Student' : level %> Count:</th>
       <td class="num"><%= student_count(@large_schools, level) %></td>
       <td class="num"><%= student_count(@small_schools, level) %></td>
       <td class="num"><span style="font-weight:bold"><%= student_count(@schools, level) %></span></td>
     </tr>
-  <%- end -%>
+  <% end %>
 </table>
 <hr />
 <%= render 'schools', :title => 'Large Schools', :schools => @large_schools %>
@@ -45,10 +45,10 @@
     <th>Name</th>
     <th>School</th>
   </tr>
-  <%- @proctors.each do |proctor| -%>
+  <% @proctors.each do |proctor| %>
     <tr class="<%= cycle('even', 'odd') %>">
       <td><%= proctor.name %></td>
       <td><%= proctor.school.name %></td>
     </tr>
-  <%- end -%>
+  <% end %>
 </table>

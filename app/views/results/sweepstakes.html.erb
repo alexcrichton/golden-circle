@@ -1,7 +1,7 @@
 <h1>Awards</h1>
 <hr />
 <h3>Sweepstakes Results</h3>
-<%- [:large, :small].each do |klass| -%>
+<% [:large, :small].each do |klass| %>
   <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
     <table>
       <colgroup>
@@ -15,20 +15,20 @@
         <th>School</th>
         <th>Score</th>
       </tr>
-      <%- @schools.send(klass).each do |school| -%>
+      <% @schools.send(klass).each do |school| %>
         <tr class="<%= cycle('even', 'odd') %>">
           <td><%= rank(school.school_score, "school_#{klass}") %></td>
           <td><%= h school.name %></td>
           <td><%= school.school_score %></td>
         </tr>
-      <%- end -%>
+      <% end %>
     </table>
   </div>
-<%- end -%>
-<%- [:wizard, :apprentice].each do |level| -%>
+<% end %>
+<% [:wizard, :apprentice].each do |level| %>
   <hr />
   <h3><%= level.to_s.capitalize %> Team Results</h3>
-  <%- [:large, :small].each do |klass| -%>
+  <% [:large, :small].each do |klass| %>
     <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
       <table>
         <colgroup>
@@ -42,14 +42,14 @@
           <th>School</th>
           <th>Score</th>
         </tr>
-        <%- @teams.send(klass).send(level).each do |team| -%>
+        <% @teams.send(klass).send(level).each do |team| %>
           <tr class="<%= cycle('even', 'odd') %>">
             <td><%= rank(team.test_score, "team_#{level}_#{klass}") %></td>
             <td><%= team_name(team) %></td>
             <td><%= team.team_score %></td>
           </tr>
-        <%- end -%>
+        <% end %>
       </table>
     </div>
-  <%- end -%>
-<%- end -%>
+  <% end %>
+<% end %>

@@ -14,7 +14,7 @@
     <th>Wizard Score</th>
     <th>Sweepstakes Score</th>
   </tr>
-  <%- @schools.each do |school| -%>
+  <% @schools.each do |school| %>
     <tr class="<%= cycle('even', 'odd') %>">
       <td class="num"><%= rank(school.school_score, :school)%></td>
       <td><%= h(school.name) %></td>
@@ -22,7 +22,7 @@
       <td class="num"><%= school.teams.wizard.first.team_score %> <%= check_image(school.teams.wizard.first) %></td>
       <td class="num"><%= school.school_score %> <%= check_image(school) %></td>
     </tr>
-  <%- end -%>
+  <% end %>
 </table>
 <table>
   <colgroup>
@@ -38,7 +38,7 @@
     <th>Test Score</th>
     <th>Total Score</th>
   </tr>
-  <%- @teams.each do |team| -%>
+  <% @teams.each do |team| %>
     <tr class="<%= cycle('even', 'odd') %>">
       <td class="num"><%= rank(team.team_score, :team) %></td>
       <td><%= team_name(team) %></td>
@@ -46,7 +46,7 @@
       <td class="num"><%= team.team_test_score %> <%= check_image(team, :team_score_checked) %></td>
       <td class="num"><%= team.team_score %> <%= check_image(team) %></td>
     </tr>
-  <%- end -%>
+  <% end %>
 </table>
 <table>
   <colgroup>
@@ -61,12 +61,12 @@
     <th>School</th>
     <th>Score</th>
   </tr>
-  <%- @students.each do |student| -%>
+  <% @students.each do |student| %>
     <tr class="<%= cycle('even', 'odd') %>">
       <td class="num"><%= rank(student.test_score, :student) %></td>
       <td><%= h student.name %></td>
       <td><%= team_name(student.team) %></td>
       <td class="num"><%= student.test_score %> <%= check_image(student) %></td>
     </tr>
-  <%- end -%>
+  <% end %>
 </table>

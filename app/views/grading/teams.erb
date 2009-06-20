@@ -1,8 +1,8 @@
 <% content_for :jsinclude do %>
   <%= javascript_include_tag 'filter', 'notifychange' %>
 <% end %>
-<% content_for :jstemplates do %>
-  $(document).ready(function(){filter("#teams tr", "search")})
+<% content_for :jsload do %>
+  filter("#teams tr", "search");
 <% end %>
 
 <h1>Editing Team Scores</h1>
@@ -23,7 +23,7 @@ Find:<br />
       <th>Level</th>
       <th>Score</th>
       <th>School Size</th>
-      <th></th>
+      <th>&nbsp;</th>
     </tr>
     <% @teams.each do |team| %>
       <% fields_for("teams[#{team.id}]", team) do |tf| %>

@@ -8,11 +8,13 @@
   <%= stylesheet_link_tag "print.css", :media => "print" %>
   <%= javascript_include_tag 'jquery', 'application', 'corner' %>
   <%= yield(:jsinclude) %>
-  <% javascript_tag do %>
+  <script type="text/javascript">
+  //<![CDATA[
     <%= yield(:jstemplates) %>
     <%= yield(:js) %>
     $(function(){
       <%= yield(:jsload) %>
     });
-  <% end %>
+  //]]>
+  </script>
 </head>

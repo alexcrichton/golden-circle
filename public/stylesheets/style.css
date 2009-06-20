@@ -267,8 +267,7 @@ div#school-info {
 
 #exhibition {
   padding-top: 12px;
-  border: solid #ccc;
-  border-width: 1px 0;
+  border-bottom: 1px solid #ccc;
   margin: 5px 0;
 }
 

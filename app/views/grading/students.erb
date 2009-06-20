@@ -1,8 +1,8 @@
 <% content_for :jsinclude  do %>
   <%= javascript_include_tag 'filter', 'notifychange' %>
 <% end %>
-<% content_for :jstemplates do %>
-  $(document).ready(function(){filter("#students tr", "search")})
+<% content_for :jsload do %>
+  filter("#students tr", "search");
 <% end %>
 
 <h1>Editing Individual Scores</h1>

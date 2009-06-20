@@ -45,6 +45,6 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt"
   end
   task :stop, :roles => :app do
-    # Do nothing
+    # Do nothing, don't want to kill nginx
   end
 end

@@ -12,7 +12,7 @@
   <dd><%= @school.teams.non_exhibition.apprentice.first.test_score || 0 %></dd>
 </dl>
 
-<%- ['wizard', 'apprentice'].each do |level| -%>
+<% ['wizard', 'apprentice'].each do |level| %>
   <div class="span-7 <%= level == 'wizard' ? 'colborder' : 'last' %>">
     <table>
       <colgroup>
@@ -26,21 +26,21 @@
         <th>Name</th>
         <th>Score</th>
       </tr>
-      <%- @school.teams.non_exhibition.send(level).first.students.winners.each do |student| -%>
+      <% @school.teams.non_exhibition.send(level).first.students.winners.each do |student| %>
         <tr class="<%= cycle('even', 'odd') %>">
           <td><%= rank(student.test_score, "student_#{level}") %></td>
           <td><%= h student.name %></td>
           <td><%= student.test_score %></td>
         </tr>
-      <%- end -%>
+      <% end %> <%# students %>
     </table>
   </div>
-<%- end -%>
+<% end %> <%# wizard/apprentice level %>
 <hr />
-<%- if @school.teams.exhibition.size > 0 -%>
+<% if @school.teams.exhibition.size > 0 %>
   <h2>Exhibition Team Results</h2>
-<%- end -%>
-<%- @school.teams.exhibition.each do |team| -%>
+<% end %>
+<% @school.teams.exhibition.each do |team| %>
   <table>
     <colgroup>
       <col width="40"/>
@@ -60,13 +60,13 @@
       <th>Name</th>
       <th>Score</th>
     </tr>
-    <%- team.students.winners.each do |student| -%>
+    <% team.students.winners.each do |student| %>
       <tr class="<%= cycle('even', 'odd') %>">
         <td><%= rank(student.test_score, "exhibition#{team.id}") %></td>
         <td><%= h student.name %></td>
         <td><%= student.test_score %></td>
       </tr>
-    <%- end -%>
+    <% end %> <%# students of exhibition team %>
   </table>
   <hr />
-<%- end -%>
+<% end %> <%# exhibition teams %>

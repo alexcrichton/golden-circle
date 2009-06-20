@@ -17,8 +17,12 @@
     <p><label>Team ID Number:</label> <%= team.id %></p>
   <% end %>
   <%= small_errors(team.students) %>
-  <% id =  extract_team_id(f.object_name) %>
-  <%= javascript_tag "count#{extract_team_id(f.object_name)} = #{team.students.size}" %>
+  <% id = extract_team_id(f.object_name) %>
+  <%# This can't be done through javascript_tag because the CDATA tag messes up the variable at the header
+  of the page. %>
+  <script type="text/javascript">
+    <%= "count#{extract_team_id(f.object_name)} = #{team.students.size}" %>;
+  </script>
   <table id="students<%= extract_team_id(f.object_name) %>" class="noborder sortable">
     <caption>
       Students
@@ -38,7 +42,7 @@
                :parent => ".team",
                :var => 'student',
                :after => "changeCount('count#{extract_team_id(f.object_name)}', 1);" +
-                       "$(this).parents('.team').find('tr:last').addClass(count#{extract_team_id(f.object_name)} % 2 == 1 ? 'odd' : 'even')",
+                 "$(this).parents('.team').find('tr:last').addClass(count#{extract_team_id(f.object_name)} % 2 == 1 ? 'odd' : 'even')",
                :before => "if(count#{extract_team_id(f.object_name)} >= #{Team::MAXSTUDENTS}) return false" %>
 
 </div>

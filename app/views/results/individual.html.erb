@@ -1,8 +1,8 @@
 <h1>Individual Results</h1>
-<%- [:wizard, :apprentice].each do |level| -%>
-  <hr />
+<% [:wizard, :apprentice].each do |level| %>
+  <hr/>
   <h3><%= level.to_s.capitalize %> Division</h3>
-  <%- [:large, :small].each do |klass| -%>
+  <% [:large, :small].each do |klass| %>
     <table>
       <colgroup>
         <col width="40"/>
@@ -16,15 +16,15 @@
         <th>School</th>
         <th>Score</th>
       </tr>
-      <%- @students.send(klass).send(level).each do |student| -%>
+      <% @students.send(klass).send(level).each do |student| %>
         <tr class="<%= cycle('even', 'odd') %>">
           <td><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
           <td><%= h student.name %></td>
           <td><%= team_name(student.team) %></td>
           <td><%= student.test_score %></td>
         </tr>
-      <%- end -%>
+      <% end %><%# students %>
     </table>
-  <%- end -%>
-<%- end -%>
+  <% end %><%# large and small schools %>
+<% end %><%# wizards and apprentices %>
 

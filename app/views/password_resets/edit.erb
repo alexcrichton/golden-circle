@@ -27,8 +27,6 @@
   </p>
 <% end %>
 
-<% content_for :js do %>
-  $(document).ready(function(){
-    $('#<%= @school.openid_identifier.blank? ? 'openid' : 'password' %>').hide()
-  });
+<% content_for :jsload do %>
+  $('#<%= @school.openid_identifier.blank? ? 'openid' : 'password' %>').hide();
 <% end %>
