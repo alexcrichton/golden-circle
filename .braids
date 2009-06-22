@@ -4,5 +4,5 @@ vendor/plugins/open_id_authentication:
   branch: master
   url: git://github.com/rails/open_id_authentication.git
   type: git
-  revision: e6df78367b257886021785ba0260a4b5a4eca793
+  revision: 079b91f70602814c98d4345e198f743bb56b76b5
   remote: braid/vendor/plugins/open-id-authentication
