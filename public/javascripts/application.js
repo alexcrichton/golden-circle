@@ -32,9 +32,10 @@
 
 
 function changeCount(count, dif) {
-  var updated = eval(count) + dif;
-  eval(count + "=" + updated);
-  $('#' + count).html(updated);
+  if(typeof(window[count]) == "undefined")
+    window[count] = 0;
+  window[count] += dif;
+  $('#' + count).html(window[count]);
 }
 
 function replace_ids(s, parent) {

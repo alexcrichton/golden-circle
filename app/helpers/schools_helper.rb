@@ -46,8 +46,8 @@ module SchoolsHelper
     # append it
     js = "#{selector}.append($(replace_ids(#{var})).addClass('loading').css('display', 'none'))"
     # fade it in
-    opts[:after] << ";#{selector}.find('.loading').fadeIn().find('input').bind('change',function(){setConfirmUnload(true)});"
-    opts[:after] << "#{selector}.find('.loading').removeClass('loading')"
+    opts[:after] << ";#{selector}.find('.loading').fadeIn('normal', function(){$(this).removeClass('loading');}).find('input').bind('change',function(){setConfirmUnload(true)});"
+    #opts[:after] << "#{selector}.find('.loading').removeClass('loading')"
     link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 

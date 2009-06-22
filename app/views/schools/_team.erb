@@ -1,12 +1,12 @@
 <div class="team<%= ' removable' if f.object.is_exhibition %>">
   <% team = f.object %>
+  <% id = extract_team_id(f.object_name) %>
   <%= '<hr/>' if team.is_exhibition %>
   <p>
     <%= f.label :level, 'Team level:' %>
     <% if team.is_exhibition %>
       <%= f.select :level, [Team::APPRENTICE, Team::WIZARD] %>
       <%= f.hidden_field :_delete %>
-
       <%= remove_link '[Remove this team]', ".team", :class => 'controls' %>
     <% else %>
       <%= team.level %>
@@ -16,17 +16,14 @@
   <% if team.is_exhibition && !team.new_record? %>
     <p><label>Team ID Number:</label> <%= team.id %></p>
   <% end %>
+  <% content_for :js do %>
+    count<%= id %> = <%= team.students.size %>;
+  <% end %>
   <%= small_errors(team.students) %>
-  <% id = extract_team_id(f.object_name) %>
-  <%# This can't be done through javascript_tag because the CDATA tag messes up the variable at the header
-  of the page. %>
-  <script type="text/javascript">
-    <%= "count#{extract_team_id(f.object_name)} = #{team.students.size}" %>;
-  </script>
-  <table id="students<%= extract_team_id(f.object_name) %>" class="noborder sortable">
+  <table id="students<%= id %>" class="noborder sortable">
     <caption>
       Students
-      (<span id="count<%= extract_team_id(f.object_name) %>"><%= team.students.size %></span>/<%= Team::MAXSTUDENTS %>)
+      (<span id="count<%= id %>"><%= team.students.size %></span>/<%= Team::MAXSTUDENTS %>)
     </caption>
     <tr>
       <th>First Name</th>
@@ -38,11 +35,10 @@
     <% end %>
   </table>
   <%= add_link 'add',
-               "#students#{extract_team_id(f.object_name)}",
+               "#students#{id}",
                :parent => ".team",
                :var => 'student',
-               :after => "changeCount('count#{extract_team_id(f.object_name)}', 1);" +
-                 "$(this).parents('.team').find('tr:last').addClass(count#{extract_team_id(f.object_name)} % 2 == 1 ? 'odd' : 'even')",
-               :before => "if(count#{extract_team_id(f.object_name)} >= #{Team::MAXSTUDENTS}) return false" %>
-
+               :after => "changeCount('count#{id}', 1);" +
+                 "$(this).parents('.team').find('tr:last').addClass(count#{id} % 2 == 0 ? 'odd' : 'even')",
+               :before => "if(typeof(count#{id}) != 'undefined' && count#{id} >= #{Team::MAXSTUDENTS}) return false" %>
 </div>
