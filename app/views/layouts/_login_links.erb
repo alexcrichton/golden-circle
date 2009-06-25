@@ -1,9 +1,14 @@
 <div id="login_links">
   <% if current_school %>
-    Logged in as: <%= link_to h(current_school.name), current_school %> | <%= link_to 'Log out', logout_path %>
-    <br/>
+    Logged in as: <%= link_to h(current_school.name), current_school %> | <%= link_to 'Log out', logout_path %> |
     <%= link_to 'Register new school', new_school_path if current_school.admin %>
   <% else %>
     <%= link_to 'Log in', login_path %> | <%= link_to 'Register', new_school_path %>
+  <% end %>
+  <br/>
+  <% if !request.ssl? %>
+    <%= link_to 'Use a secure connection', ssl_prefer_path(:prefer => true) %><br/>
+  <% else %>
+    <%= link_to 'Use a non-secure connection', ssl_prefer_path(:prefer => false) %>
   <% end %>
 </div>

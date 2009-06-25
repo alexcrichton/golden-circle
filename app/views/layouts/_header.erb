@@ -1,5 +1,5 @@
 <head>
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <title>Golden Circle</title>
   <%= stylesheet_link_tag "blueprint/screen.css", :media => "screen, projection, print" %>
   <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
@@ -8,13 +8,11 @@
   <%= stylesheet_link_tag "print.css", :media => "print" %>
   <%= javascript_include_tag 'jquery', 'application', 'corner' %>
   <%= yield(:jsinclude) %>
-  <script type="text/javascript">
-    //<![CDATA[
+  <% javascript_tag do %>
     <%= yield(:jstemplates) %>
     <%= yield(:js) %>
     $(function() {
-    <%= yield(:jsload) %>
+      <%= yield(:jsload) %>
     });
-    //]]>
-  </script>
+  <% end %>
 </head>

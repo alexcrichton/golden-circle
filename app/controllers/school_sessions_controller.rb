@@ -1,10 +1,10 @@
 class SchoolSessionsController < ApplicationController
 
   before_filter :require_school, :only => [:destroy]
+  layout 'wide'
 
   def new
     @school_session = SchoolSession.new(:remember_me => true)
-    render :layout => 'wide'
   end
 
   def create
@@ -29,5 +29,10 @@ class SchoolSessionsController < ApplicationController
 
     flash[:notice] = 'Logout successful!'
     redirect_to login_path
+  end
+
+  def ssl_prefer
+    cookies[:prefer_ssl] = params[:prefer]
+    redirect_to :back
   end
 end
