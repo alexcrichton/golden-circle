@@ -32,11 +32,7 @@ class SchoolSessionsController < ApplicationController
   end
 
   def ssl_prefer
-    if (params[:prefer] == 'true')
-      cookies[:prefer_ssl] = {:value => params[:prefer], :expires => Time.now + 1.year}
-    else
-      cookies.delete :prefer_ssl
-    end
+    cookies[:prefer_ssl] = {:value => params[:prefer] == 'true' ? 'true' : 'false', :expires => Time.now + 1.year}
     redirect_to :back
   end
 end
