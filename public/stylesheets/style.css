@@ -253,6 +253,9 @@ div#school-info {
   width: 350px;
   margin: 0 auto;
 }
+.login input[type=text], .login input[type=password]{
+  width: 335px;
+}
 
 .outer {
   background: #ddd none repeat scroll 0 0;
@@ -276,6 +279,11 @@ div#school-info {
   text-align: center
 }
 
+#exhibition .team {
+  border-top: 1px solid #ccc;
+  margin-top: 5px;
+}
+
 tr.odd:hover td {
   background: #fafab6;
 }
@@ -286,4 +294,8 @@ tr.even:hover td {
 
 .tcenter {
   text-align: center;
+}
+
+#secureconnection {
+  display: none;
 }

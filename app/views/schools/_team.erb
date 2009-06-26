@@ -1,7 +1,7 @@
 <div class="team<%= ' removable' if f.object.is_exhibition %>">
   <% team = f.object %>
   <% id = extract_team_id(f.object_name) %>
-  <%= '<hr/>' if team.is_exhibition %>
+  <!--<%= '<hr/>' if team.is_exhibition %>-->
   <p>
     <%= f.label :level, 'Team level:' %>
     <% if team.is_exhibition %>
@@ -17,7 +17,7 @@
     <p><label>Team ID Number:</label> <%= team.id %></p>
   <% end %>
   <% content_for :js do %>
-    count<%= id %> = <%= team.students.size %>;
+    $['count<%= id %>'] = <%= team.students.size %>;
   <% end %>
   <%= small_errors(team.students) %>
   <table id="students<%= id %>" class="noborder sortable">
@@ -39,6 +39,7 @@
                :parent => ".team",
                :var => 'student',
                :after => "changeCount('count#{id}', 1);" +
-                 "$(this).parents('.team').find('tr:last').addClass(count#{id} % 2 == 0 ? 'odd' : 'even')",
-               :before => "if(typeof(count#{id}) != 'undefined' && count#{id} >= #{Team::MAXSTUDENTS}) return false" %>
+                 "$(this).parents('.team').find('tr:last').addClass($['count#{id}'] % 2 == 0 ? 'odd' : 'even')",
+               :before => "if(typeof($['count#{id}']) != 'undefined' &&" +
+                 "$['count#{id}'] >= #{Team::MAXSTUDENTS}) return false" %>
 </div>

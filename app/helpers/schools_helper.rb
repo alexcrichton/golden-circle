@@ -28,8 +28,9 @@ module SchoolsHelper
     opts[:class] = (opts[:class] ||= "").to_s + " remove_link"
     opts[:after] ||= ""
     opts[:before] ||= ""
-    js = "$(this).parents('#{container}').fadeOut('fast');$(this).prev('input[type=hidden]').attr('value', 1)"
-    opts[:after] << ";setConfirmUnload(true)"
+    js = "remove($(this).parents('#{container}'));"
+    #js = "$(this).parents('#{container}').fadeOut('fast');$(this).prev('input[type=hidden]').attr('value', 1)"
+    #opts[:after] << ";setConfirmUnload(true)"
     link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 
@@ -37,17 +38,7 @@ module SchoolsHelper
     opts[:var] ||= container.singularize
     opts[:before] ||= ""
     opts[:after] ||= ""
-    parent = opts.delete(:parent)
-    var = opts.delete(:var)
-    # replace PARENT_ID stuff as well
-    var << " ,$(this).parents('#{parent}')" if parent
-    # where we be putting this new element?
-    selector = parent ? "$(this).parents('#{parent}').find('#{container}')" : "$(this).parents('#{container}')"
-    # append it
-    js = "#{selector}.append($(replace_ids(#{var})).addClass('loading').css('display', 'none'))"
-    # fade it in
-    opts[:after] << ";#{selector}.find('.loading').fadeIn('normal', function(){$(this).removeClass('loading');}).find('input').bind('change',function(){setConfirmUnload(true)});"
-    #opts[:after] << "#{selector}.find('.loading').removeClass('loading')"
+    js = "add_new(#{opts.delete(:var)}, '#{container}', '#{opts.delete(:parent)}')"
     link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 

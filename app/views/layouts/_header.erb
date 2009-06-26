@@ -6,7 +6,7 @@
   <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
   <%= stylesheet_link_tag "style.css", :media => "screen, print" %>
   <%= stylesheet_link_tag "print.css", :media => "print" %>
-  <%= javascript_include_tag 'jquery', 'application', 'corner' %>
+  <%= javascript_include_tag((RAILS_ENV == 'production' ? 'jquery.min' : 'jquery'), 'application', 'corner') %>
   <%= yield(:jsinclude) %>
   <% javascript_tag do %>
     <%= yield(:jstemplates) %>

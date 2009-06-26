@@ -11,19 +11,19 @@
         <p>
           <%= f.label :email %>
           (or <%= link_to_function 'OpenID', "$('#pass-login').slideUp();$('#openid-login').slideDown()" %>)<br/>
-          <%= f.text_field :email, :size => 40, :tabindex => 1 %>
+          <%= f.text_field :email, :tabindex => 1 %>
         </p>
 
         <p>
           <%= f.label :password %> (<%= link_to "Forgot password?", new_password_reset_path %>)<br/>
-          <%= f.password_field :password, :size => 40, :tabindex => 2 %>
+          <%= f.password_field :password, :tabindex => 2 %>
         </p>
       </div>
       <div id="openid-login">
         <p>
           <%= f.label :openid_identifier, 'OpenID' %>
           (or <%= link_to_function 'email/password', "$('#openid-login').slideUp();$('#pass-login').slideDown()" %>)
-          <%= f.text_field :openid_identifier, :size => 40, :tabindex => 3 %>
+          <%= f.text_field :openid_identifier, :tabindex => 3 %>
         </p>
       </div>
       <div>

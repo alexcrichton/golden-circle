@@ -1,18 +1,35 @@
-
 function changeCount(count, dif) {
-  if(typeof(window[count]) == "undefined")
-    window[count] = 0;
-  window[count] += dif;
-  $('#' + count).html(window[count]);
+  if (typeof($[count]) == "undefined")
+    $[count] = 0;
+  $[count] += dif;
+  //console.log(typeof(eval(count) + ''));
+  $('span#' + count).text($[count]);
 }
 
 function replace_ids(s, parent) {
-  if (parent != null) {
-    var parent_id = parent.find('input')[0].name.match(/.*\[(\d+)\]/)[1];
+  if (parent != '') {
+    var parent_id = $(parent).find('input')[0].name.match(/.*\[(\d+)\]/)[1];
     s = s.replace(/PARENT_ID/g, parent_id);
   }
   var new_id = new Date().getTime();
   return s.replace(/NEW_RECORD/g, new_id);
+}
+
+function add_new(text, container_selector, parent_selector) {
+  var container = parent_selector == null ? $(container_selector) : $(parent_selector + ' ' + container_selector)
+  var new_element = $(replace_ids(text, parent_selector));
+  new_element.addClass('loading').hide().fadeIn('fast', function() {
+    $(this).removeClass('loading').find('input').bind('change', function(){
+      setConfirmUnload(true);
+    });
+  });
+  container.append(new_element);
+}
+
+function remove(container){
+  container.fadeOut('fast');
+  container.find('input[type=hidden]').attr('value', 1);
+  setConfirmUnload(true);
 }
 
 $(function() {
@@ -21,4 +38,6 @@ $(function() {
   var input = $('input').not('input[type=hidden]').get(0);
   if (input != null)
     input.focus();
+  if($.browser.mozilla)
+    $('#secureconnection').show();
 });
