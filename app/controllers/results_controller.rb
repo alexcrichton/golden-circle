@@ -2,6 +2,7 @@ class ResultsController < ApplicationController
 
   before_filter :require_admin, :only => [:statistics]
   before_filter :require_school
+  before_filter :require_after_event
 
   def statistics
     params[:level] ||= Team::WIZARD
@@ -22,6 +23,15 @@ class ResultsController < ApplicationController
 
   def individual
     @students = Student.winners.upper_scores
+  end
+
+  private
+  def require_after_event
+    if Settings.event_date > Time.now && !current_school.admin
+      flash[:notice] = 'Please wait until after the event is finished.'
+      redirect_to root_path
+      return false
+    end
   end
 
 end
