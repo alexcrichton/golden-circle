@@ -23,7 +23,9 @@
 <h1>Information PDF</h1>
 <% form_for @information, :html => {:multipart => true} do |f| %>
   <p>
-    <%= f.label :upload, 'Upload the informational PDF file' %><br/>
+    <%= f.label :upload, 'Upload the informational PDF file' %>
+    (<%= link_to 'Current one', transfer_upload_path(Upload.find_by_name('information')) %>)
+    <br/>
     <%= f.file_field :upload %>
   </p>
 

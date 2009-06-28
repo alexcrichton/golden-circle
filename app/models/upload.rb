@@ -1,6 +1,6 @@
 class Upload < ActiveRecord::Base
 
-  has_attached_file :upload, :path => ":rails_root/tmp/:basename.:extension"
+  has_attached_file :upload, :path => ":rails_root/public/files/:basename.:extension"
   attr_protected :upload_file_path, :upload_content_type, :upload_file_size
   validates_presence_of :name
   validates_uniqueness_of :name
