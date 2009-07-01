@@ -4,6 +4,10 @@ describe ResultsController do
 
   include MockSchoolHelper
 
+  before(:each) do
+    Settings.event_date = Time.now + 1.year
+  end
+
   describe "GET /results/stats" do
     it 'should redirect anonymous users to the login path' do
       get :statistics
@@ -15,6 +19,7 @@ describe ResultsController do
       get :statistics
       response.should redirect_to(login_path)
     end
+
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
       get :statistics
@@ -28,7 +33,20 @@ describe ResultsController do
       response.should redirect_to(login_path)
     end
 
-    it 'should allow all users' do
+    it 'should not allow all users before the event date and redirect back to the root path' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      get :school
+      response.should redirect_to(root_path)
+    end
+
+    it 'should allow admin schools before the event date' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      get :school
+      response.should be_success
+    end
+
+    it 'should allow all users after the event date' do
+      Settings.event_date = Time.now - 1.year
       controller.stub!(:current_school).and_return(mock_school(:admin => false))
       get :school
       response.should be_success
@@ -41,9 +59,22 @@ describe ResultsController do
       response.should redirect_to(login_path)
     end
 
-    it 'should allow all users' do
+    it 'should not allow all users before the event date and redirect back to the root path' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false))
-      get :sweepstakes
+      get :school
+      response.should redirect_to(root_path)
+    end
+
+    it 'should allow admin schools before the event date' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      get :school
+      response.should be_success
+    end
+
+    it 'should allow all users after the event date' do
+      Settings.event_date = Time.now - 1.year
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      get :school
       response.should be_success
     end
   end
@@ -54,9 +85,22 @@ describe ResultsController do
       response.should redirect_to(login_path)
     end
 
-    it 'should allow all users' do
+    it 'should not allow all users before the event date and redirect ack to the root path' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false))
-      get :individual
+      get :school
+      response.should redirect_to(root_path)
+    end
+
+    it 'should allow admin schools before the event date' do
+      controller.stub!(:current_school).and_return(mock_school(:admin => true))
+      get :school
+      response.should be_success
+    end
+
+    it 'should allow all users after the event date' do
+      Settings.event_date = Time.now - 1.year
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      get :school
       response.should be_success
     end
   end

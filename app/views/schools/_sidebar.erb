@@ -22,13 +22,11 @@
 <p><%= mail_to 'golden.circle.contest@gmail.com' %></p>
 <hr />
 
-<% if current_school %>
-  <h5>Roster Changes:</h5>
-  <p>
-    You may change your roster at any time before the event by updating your school on this website. We would prefer,
-    however, that all changes be posted by <%= Settings.deadline.strftime '%A, %B %l' %>. You can still make changes
-    after this date.
-  </p>
-<% end %>
+<h5>Roster Changes:</h5>
+<p>
+  You may change your roster at any time before the event by updating your school on this website. We would prefer,
+  however, that all changes be posted by <%= Settings.deadline.strftime '%A, %B %l' %>. You can still make changes after
+  this date.
+</p>
 
 

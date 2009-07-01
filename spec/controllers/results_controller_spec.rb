@@ -10,6 +10,7 @@ describe ResultsController do
   before(:each) do
     controller.stub!(:require_school)
     controller.stub!(:require_admin)
+    controller.stub!(:require_after_event)
   end
 
   describe 'responding to GET /results/school' do
