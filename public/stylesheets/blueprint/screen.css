@@ -17,7 +17,7 @@ table {border-collapse:separate;border-spacing:0;}
 caption, th, td {text-align:left;font-weight:normal;}
 table, td, th {vertical-align:middle}
 blockquote:before, blockquote:after, q:before, q:after {content:"";}
-blockquote, q {quotes:"" "";}
+/*blockquote, q {quotes:"" "";}*/
 a img {border:none;}
 
 /* typography.css */

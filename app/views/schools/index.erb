@@ -1,11 +1,10 @@
 <fieldset style="float:left;width:40%;margin-right:20px;">
   <h1>School Index</h1>
-  <hr/>
+  <hr />
   <% form_tag email_schools_path, :method => :put do %>
     <p>
       The following button will send a confirmation email to all schools so they might validate the information they
-      have
-      submitted.
+      have submitted.
     </p>
 
     <p>
@@ -25,18 +24,18 @@
     <th>School Count:</th>
     <td class="num"><%= @large_schools.size %></td>
     <td class="num"><%= @small_schools.size %></td>
-    <td class="num"><b><%= @schools.size %></b></td>
+    <td class="num"><strong><%= @schools.size %></strong></td>
   </tr>
   <% [Team::APPRENTICE, Team::WIZARD, :all].each do |level| %>
     <tr>
       <th><%= level == :all ? 'Total Student' : level %> Count:</th>
       <td class="num"><%= student_count(@large_schools, level) %></td>
       <td class="num"><%= student_count(@small_schools, level) %></td>
-      <td class="num"><span style="font-weight:bold"><%= student_count(@schools, level) %></span></td>
+      <td class="num"><strong><%= student_count(@schools, level) %></strong></td>
     </tr>
   <% end %>
 </table>
-<hr/>
+<hr />
 <%= render 'schools', :title => 'Large Schools', :schools => @large_schools %>
 <%= render 'schools', :title => 'Small Schools', :schools => @small_schools %>
 <%= render 'schools', :title => 'Unlisted Enrollments', :schools => @unknown %>
@@ -49,8 +48,8 @@
   </tr>
   <% @proctors.each do |proctor| %>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= proctor.name %></td>
-      <td><%= proctor.school.name %></td>
+      <td><%= h proctor.name %></td>
+      <td><%= h proctor.school.name %></td>
     </tr>
   <% end %>
 </table>

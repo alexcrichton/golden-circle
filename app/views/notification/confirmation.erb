@@ -1,15 +1,14 @@
-<img src="<%= root_url + image_path("logo.png") %>" alt="Golden Circle"><br/>
-<br/>
+<img src="<%= root_url + image_path("logo.png") %>" alt="Golden Circle"><br />
+<br />
 Thank you for signing up your school for this competition! We would like you to validate the information below
-to ensure that it is accurate. The following is what is currently saved in our database:<br/>
-<br/>
+to ensure that it is accurate. The following is what is currently saved in our database:<br />
+<br />
 <p>
-  <strong>School name:</strong> <%= @school.name %><br/>
-  <strong>Contact name:</strong> <%= @school.contact_name %><br/>
-  <strong>Contact phone:</strong> <%= @school.contact_phone %><br/>
+  <strong>School name:</strong> <%= @school.name %><br /><strong>Contact name:</strong> <%= @school.contact_name %>
+  <br /><strong>Contact phone:</strong> <%= @school.contact_phone %><br />
   <strong>9th grade school enrollment:</strong> <%= @school.enrollment %> (<%= @school.school_class %>)
 </p>
-<hr/>
+<hr />
 <h1>Team Information</h1>
 <% [:apprentice, :wizard].each do |level| %>
   <h2><%= level.to_s.capitalize %> Team</h2>
@@ -30,22 +29,22 @@ to ensure that it is accurate. The following is what is currently saved in our d
     <% end %>
   </ol>
 <% end %>
-<br/>
-<br/>
+<br />
+<br />
 If any of the above information is inaccurate, please correct it on the
 <%= link_to 'registration website', root_url %>.
 Otherwise, your registration is complete and we will see you and your students on the competition day!.
-<br/>
-<br/>
+<br />
+<br />
 As a reminder, the tournament is scheduled for <%= Settings.event_date.strftime '%B %l, %Y' %>, and you will need to bring a check for
 <span style="color:green;font-weight:bold;"><%= number_to_currency @school.cost %></span> payable to &quot;GT Education&quot;
-to the registration table on this date.<br/>
+to the registration table on this date.<br />
 After the tournament, results will be available on the <%= link_to 'website', school_results_url %>.
-Thank you for registering for the Golden Circle Tournament!<br/>
-<br/>
-<br/>
-- Golden Circle Administration<br/>
-<br/>
+Thank you for registering for the Golden Circle Tournament!<br />
+<br />
+<br />
+- Golden Circle Administration<br />
+<br />
 Questions? Please contact: <%= mail_to 'golden.circle.contest@gmail.com' %><br/>
 
 

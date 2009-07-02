@@ -10,12 +10,12 @@
       <div id="pass-login">
         <p>
           <%= f.label :email %>
-          (or <%= link_to_function 'OpenID', "$('#pass-login').slideUp();$('#openid-login').slideDown()" %>)<br/>
+          (or <%= link_to_function 'OpenID', "$('#pass-login').slideUp();$('#openid-login').slideDown()" %>)<br />
           <%= f.text_field :email, :tabindex => 1 %>
         </p>
 
         <p>
-          <%= f.label :password %> (<%= link_to "Forgot password?", new_password_reset_path %>)<br/>
+          <%= f.label :password %> (<%= link_to "Forgot password?", new_password_reset_path %>)<br />
           <%= f.password_field :password, :tabindex => 2 %>
         </p>
       </div>
@@ -37,7 +37,7 @@
     <% end %>
   </div>
 </div>
-<br/>
+<br />
 <div class="login outer">
   <div class="inner">
     <h2>Register a School</h2>

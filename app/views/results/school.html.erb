@@ -16,7 +16,7 @@
   <div class="span-7 <%= level == 'wizard' ? 'colborder' : 'last' %>">
     <table>
       <colgroup>
-        <col width="40"/>
+        <col width="40" />
       </colgroup>
       <tr>
         <td class="separator" colspan="3"><%= level.capitalize %> Results</td>
@@ -36,14 +36,14 @@
     </table>
   </div>
 <% end %> <%# wizard/apprentice level %>
-<hr/>
+<hr />
 <% if @school.teams.exhibition.size > 0 %>
   <h2>Exhibition Team Results</h2>
 <% end %>
 <% @school.teams.exhibition.each do |team| %>
   <table>
     <colgroup>
-      <col width="40"/>
+      <col width="40" />
     </colgroup>
     <tr>
       <td class="separator" colspan="3">Exhibition <%= team.id %> Results</td>
@@ -51,8 +51,7 @@
     <tr class="odd">
       <td colspan="3">
         <strong>Team Score:</strong> <%= team.team_score || 0 %>
-        <br/>
-        <strong>Team Test Score:</strong> <%= team.test_score || 0 %>
+        <br /> <strong>Team Test Score:</strong> <%= team.test_score || 0 %>
       </td>
     </tr>
     <tr>
@@ -68,5 +67,5 @@
       </tr>
     <% end %> <%# students of exhibition team %>
   </table>
-  <hr/>
+  <hr />
 <% end %> <%# exhibition teams %>

@@ -7,18 +7,17 @@ function changeCount(count, dif) {
 }
 
 function replace_ids(s, parent) {
-  if (parent != '') {
-    var parent_id = $(parent).find('input')[0].name.match(/.*\[(\d+)\]/)[1];
+  if (parent != null) {
+    var parent_id = parent.find('input')[0].name.match(/.*\[(\d+)\]/)[1];
     s = s.replace(/PARENT_ID/g, parent_id);
   }
   var new_id = new Date().getTime();
   return s.replace(/NEW_RECORD/g, new_id);
 }
 
-function add_new(text, container_selector, parent_selector) {
-  var container = parent_selector == null ? $(container_selector) : $(parent_selector + ' ' + container_selector)
-  var new_element = $(replace_ids(text, parent_selector));
-  new_element.addClass('loading').hide().fadeIn('fast', function() {
+function add_new(text, container, parent) {
+  var new_element = $(replace_ids(text, parent));
+  new_element.hide().addClass('loading').fadeIn('fast', function() {
     $(this).removeClass('loading').find('input').bind('change', function(){
       setConfirmUnload(true);
     });

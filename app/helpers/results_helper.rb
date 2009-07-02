@@ -1,6 +1,7 @@
 module ResultsHelper
 
   def check_image(object, check_method = nil)
+    checked = nil
     if object.is_a?(School)
       checked = object.teams.non_exhibition.participating.inject(true){ |last, t| last && t.team_score_checked && t.student_scores_checked }
     elsif object.is_a?(Team)
@@ -20,11 +21,19 @@ module ResultsHelper
     end
   end
 
+  # Gets the team name for the specified team. Team names are in the form of the school name with the suffix of
+  # 'Exhibition :id' if they are exhibition teams. 
   def team_name(team)
     suffix = team.is_exhibition ? " Exhibition #{team.id}" : ""
     h(team.school.name + suffix)
   end
 
+  # Calculates the ranks of scores on the fly. This must be called sequentially with the scores already
+  # in order. Basically, just sort the array of scores/score objects in the controller and then use this
+  # method in the view to display the rank of each score, starting with the highest or first place one.
+  # Takes two arguments:
+  #   :score => the score of this object
+  #   :type => the type of the object. This is any identifier to separate it from other ranks being calculated  
   def rank(score, type)
     @last ||= {}
     if @last[type] == nil

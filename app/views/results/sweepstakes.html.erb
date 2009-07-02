@@ -1,11 +1,11 @@
 <h1>Awards</h1>
-<hr/>
+<hr />
 <h3>Sweepstakes Results</h3>
 <% [:large, :small].each do |klass| %>
   <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
     <table>
       <colgroup>
-        <col width="40"/>
+        <col width="40" />
       </colgroup>
       <tr>
         <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
@@ -26,13 +26,13 @@
   </div>
 <% end %>
 <% [:wizard, :apprentice].each do |level| %>
-  <hr/>
+  <hr />
   <h3><%= level.to_s.capitalize %> Team Results</h3>
   <% [:large, :small].each do |klass| %>
     <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
       <table>
         <colgroup>
-          <col width="40"/>
+          <col width="40" />
         </colgroup>
         <tr>
           <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>

@@ -54,6 +54,8 @@ class SchoolsController < ApplicationController
   end
 
   def update
+    params[:school].delete(:password)
+    params[:school].delete(:password_confirmation)
     if @school.update_attributes(params[:school])
       flash[:notice] = 'School successfully updated. Please review the form below to ensure accuracy.'
       redirect_to(@school)

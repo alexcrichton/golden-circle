@@ -1,7 +1,6 @@
 <div class="team<%= ' removable' if f.object.is_exhibition %>">
   <% team = f.object %>
   <% id = extract_team_id(f.object_name) %>
-  <!--<%= '<hr/>' if team.is_exhibition %>-->
   <p>
     <%= f.label :level, 'Team level:' %>
     <% if team.is_exhibition %>
@@ -22,8 +21,7 @@
   <%= small_errors(team.students) %>
   <table id="students<%= id %>" class="noborder sortable">
     <caption>
-      Students
-      (<span id="count<%= id %>"><%= team.students.size %></span>/<%= Team::MAXSTUDENTS %>)
+      Students (<span id="count<%= id %>"><%= team.students.size %></span>/<%= Team::MAXSTUDENTS %>)
     </caption>
     <tr>
       <th>First Name</th>
@@ -34,12 +32,9 @@
       <%= render 'student', :f => sf %>
     <% end %>
   </table>
-  <%= add_link 'add',
-               "#students#{id}",
+  <%= add_link 'add', "#students#{id}", 
                :parent => ".team",
-               :var => 'student',
                :after => "changeCount('count#{id}', 1);" +
-                 "$(this).parents('.team').find('tr:last').addClass($['count#{id}'] % 2 == 0 ? 'odd' : 'even')",
-               :before => "if(typeof($['count#{id}']) != 'undefined' &&" +
-                 "$['count#{id}'] >= #{Team::MAXSTUDENTS}) return false" %>
+                 "$('#students#{id}').find('tr:last').addClass($['count#{id}'] % 2 == 1 ? 'odd' : 'even')",
+               :before => "if($['count#{id}'] != null && $['count#{id}'] >= #{Team::MAXSTUDENTS}) return false" %>
 </div>

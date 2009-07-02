@@ -8,9 +8,9 @@
 <h1>Editing Team Scores</h1>
 
 
-Find:<br/>
-<input name="search" type="text"/>
-<hr/>
+Find:<br />
+<input name="search" type="text" />
+<hr />
 
 <% form_tag(grading_teams_path(:level => params[:level]), :method => :put) do %>
   <%= error_messages_for :object => @teams %>

@@ -11,7 +11,7 @@ class Notification < ActionMailer::Base
   def confirmation(school)
     subject        "Golden Circle Contest Confirmation of Registration"
     recipients     school.email
-    from           'golden.circle.contest@gmail.com'
+    from           'Golden Circle Notifier <golden.circle.contest@gmail.com>'
     sent_on        Time.now
     body           :school => school
   end

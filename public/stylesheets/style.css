@@ -213,7 +213,7 @@ ul#topnav li:hover {
 }
 
 div.payment {
-  font-size: 12pt; 
+  font-size: 12pt;
   margin-top: 20px;
   float: right;
 }
@@ -253,7 +253,8 @@ div#school-info {
   width: 350px;
   margin: 0 auto;
 }
-.login input[type=text], .login input[type=password]{
+
+.login input[type=text], .login input[type=password] {
   width: 335px;
 }
 
@@ -299,3 +300,12 @@ tr.even:hover td {
 #secureconnection {
   display: none;
 }
+
+.flash a {
+  float: right;
+}
+
+.flash p {
+  float: left;
+}
+

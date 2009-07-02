@@ -2,8 +2,8 @@
   <h1>Blank</h1>
 
   <p>
-    Those teams and students which haven't had scores entered yet.
-    These might need to be entered in to have the correct results...
+    Those teams and students which haven't had scores entered yet. These might need to be entered in to have the correct
+    results...
   </p>
   <% if @blank_teams.size > 0 %>
     <h3>Teams</h3>
@@ -12,7 +12,7 @@
         <li><%= link_to team_name(team), grading_teams_path(:level => team.level) %> (<%= team.level %>)</li>
       <% end %>
     </ul>
-    <hr/>
+    <hr />
   <% end %>
   <% if @blank_students.size > 0 %>
     <h3>Students</h3>
@@ -27,8 +27,7 @@
   <h1>Unchecked</h1>
 
   <p>
-    The teams and students which haven't had their scores checked yet.
-    This is slightly important...
+    The teams and students which haven't had their scores checked yet. This is slightly important...
   </p>
 
   <% if @unchecked_team_scores.size > 0 %>
@@ -38,7 +37,7 @@
         <li><%= link_to team_name(team), grading_teams_path(:level => team.level) %> (<%= team.level %>)</li>
       <% end %>
     </ul>
-    <hr/>
+    <hr />
   <% end %>
   <% if @unchecked_student_scores.size > 0 %>
     <h3>Students</h3>

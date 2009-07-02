@@ -20,8 +20,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def current
-    @school = current_school
-    @school.reset_perishable_token!
+    (@school = current_school).reset_perishable_token!
     redirect_to edit_password_reset_path(:id => @school.perishable_token)
   end
 
@@ -41,12 +40,16 @@ class PasswordResetsController < ApplicationController
 
   def load_school_using_perishable_token
     @school = School.find_using_perishable_token(params[:id])
-    unless @school
+    if @school.nil?
       flash[:error] = "We're sorry, but we could not locate your account. " +
               "If you are having issues try copying and pasting the URL " +
               "from your email into your browser or restarting the " +
               "reset password process."
-      redirect_to login_path
+      return redirect_to login_path
+    end
+    if current_school && current_school.id != @school.id
+      flash[:error] = "You can't edit someone else's password!"
+      redirect_to root_path
     end
   end
 end
