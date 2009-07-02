@@ -6,15 +6,17 @@
     <%= link_to 'Log in', login_path %> | <%= link_to 'Register', new_school_path %>
   <% end %>
   <br />
-
-  <div id="secureconnection">
-    <% if !request.ssl? %>
-      <%= link_to 'Use a secure connection', ssl_prefer_path(:prefer => true),
-                  :onclick => cookies[:prefer_ssl].nil? ? "alert('You may be prompted to confirm a security exception.\\n" +
-                    "This is normal and ok to allow.')" : '' %>
-      <br />
-    <% else %>
-      <%= link_to 'Use a non-secure connection', ssl_prefer_path(:prefer => false) %>
-    <% end %>
-  </div>
+  <% if cookies[:prefer_ssl] %>
+    <div id="secureconnection">
+      <% if !request.ssl? %>
+        <%= link_to 'Use a secure connection', ssl_prefer_school_session_path(:prefer => true) %>
+      <% else %>
+        <%= link_to 'Use a non-secure connection', ssl_prefer_school_session_path(:prefer => false) %>
+      <% end %>
+    </div>
+  <% else %>
+    <div id="secureconnection">
+      <%= link_to 'Learn about using a secure connection', about_secure_school_session_path %>
+    </div>
+  <% end %>
 </div>

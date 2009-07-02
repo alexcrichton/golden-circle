@@ -1,0 +1,64 @@
+<h1>About a Secure Connection</h1>
+
+<div>
+  <p>
+    Secure connections (<%= link_to 'SSL', 'http://en.wikipedia.org/wiki/Transport_Layer_Security' %>) prevent anyone
+    from eavesdropping on your connection and viewing sensitive information such as passwords. For this website, this
+    mainly applies to your login/password combination. By default this website does not support a secure connection
+    because it requires a signed certificate which costs more than we can afford and doesn't warrant enough need with
+    only one password at risk.
+  </p>
+  <p>
+    If you are concerned, however, about this fact you have one of two options.
+  </p>
+  <ol>
+    <li>Login with an OpenID because OpenID providers normally have encrypted login pages</li>
+    <li>Install our custom Certificate Authority (CA) certificate in your browser so you trust our website's certificate
+      and will not receive a warning when you visit this website over https.
+    </li>
+  </ol>
+  <p>
+    To perform the latter of these choices, the specific method depends on your browser. The generic method, however, is
+    to download our <%= link_to 'certificate', 'http://alexcrichton.com/cert' %>, and if it is not automatically
+    installed, double click on it to install it. It is a good idea to ensure the certificate's fingerprint matches that
+    below (the 'SHA1 Fingerprint=' section).
+  </p>
+
+    <pre id="fingerprint">
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 Fingerprint=56:C7:00:48:4B:DE:A5:4A:D1:1D:4A:E2:32:01:7B:B2:DD:C5:F4:03
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iEYEARECAAYFAkpMTc0ACgkQymuaFbtbogt0LwCfU3IVvUknyZbNB4OHK0/Z1JL4
+gbIAnRgKr5QOIvOUV6yYcsJRInvnt0wH
+=SU/A
+-----END PGP SIGNATURE-----
+    </pre>
+
+  <p>
+    A more detailed tutorial of how to install a CA certificate can be
+    found <%= link_to 'here', 'http://wiki.cacert.org/wiki/BrowserClients' %>. When it asks you to download a
+    certificate or click on a link for one, substitute the above link.
+  </p>
+  <hr />
+
+
+  <h3>Important</h3>
+  <ul>
+    <li>You will not see this page again but rather an option to switch between secure/non-secure connections</li>
+    <li>You can still visit this page by going to this URL</li>
+    <li>
+      If you experience troubles with connecting due to invalid certificates (the CA didn't install properly), clear
+      your cookies for this website
+    </li>
+  </ul>
+  <p>
+    Once you have installed our CA Certificate, you can
+    now <%= link_to 'view this site', ssl_prefer_school_session_path(:prefer => true) %> over an encrypted
+    connection.
+  </p>
+</div>

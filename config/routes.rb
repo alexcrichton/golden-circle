@@ -21,8 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :password_resets, :collection => {:current => :get}, :only => [:new, :create, :edit, :update]
   map.logout '/logout', :controller => "school_sessions", :action => "destroy"
   map.login '/login', :controller => "school_sessions", :action => "new"
-  map.ssl_prefer '/ssl_prefer', :controller => "school_sessions", :action => "ssl_prefer"
-  map.resource :school_session, :only => [:create]
+  map.resource :school_session, :only => [:create], :collection => {:about_secure => :get, :ssl_prefer => :get}
 
   map.root :controller => "schools", :action => "show_current"
 

@@ -4,6 +4,7 @@ db/*.sqlite3
 .*.swp
 config/database.yml*
 config/database.yml
+public/files
 log/*
 .idea
 tmp
