@@ -5,6 +5,8 @@ function setConfirmUnload(on) {
 }
 
 $(document).ready(function() {
+  if ($('#exhibition').length == 0)
+    return;
   $('form :input').bind("change", function() {
     confirmUnload = true;
   });

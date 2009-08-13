@@ -1,0 +1,14 @@
+--- 
+javascripts: 
+- base: 
+  - jquery
+  - corner
+  - notifychange
+  - corner
+  - application
+stylesheets: 
+- base: 
+  - blueprint/screen
+  - style
+- ie:
+  - blueprint/ie

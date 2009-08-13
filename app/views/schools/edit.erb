@@ -1,9 +1,3 @@
-<% content_for :sidebar do %>
-  <%= render 'schools/sidebar' %>
-<% end %>
-<% content_for :jsinclude do %>
-  <%= javascript_include_tag 'notifychange' %>
-<% end %>
 <% content_for :jsload do %>
   $('.inner').corner('8px').parent().css('padding', '2px').corner('10px');
 <% end %>

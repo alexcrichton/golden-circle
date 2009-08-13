@@ -1,13 +1,12 @@
 fieldset {
   border: none;
   border-left: 5px solid #f5f5f5;
-  border-right: 5px solid #f5f5f5; /*  padding: 0;*/
+  border-right: 5px solid #f5f5f5;
   background: #fafafa;
 }
 
 fieldset:hover {
-  background-image: url(/images/fieldsetback.png); /*background-repeat: repeat-y;*/
-/*background: #e6eded;*/
+  background-image: url(/images/fieldsetback.png);
 }
 
 fieldset legend {
@@ -309,3 +308,31 @@ tr.even:hover td {
   float: left;
 }
 
+@media print {
+  body {
+    background: inherit;
+  }
+
+  #container {
+    border-right: 0;
+  }
+
+  .header {
+    display: none;
+  }
+
+  #footer {
+    display: none;
+  }
+
+  #right {
+    display: none;
+    visibility: collapse;
+  }
+
+  div.main {
+    border-right: 0;
+    width: 100%;
+  }
+
+}

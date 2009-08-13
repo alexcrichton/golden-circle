@@ -4,12 +4,9 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <meta name="description" content="The Golden Circle web site registration and grading system" />
   <meta name="keywords" content="golden circle, math tournament, des moines, central academy" />
-  <%= stylesheet_link_tag "blueprint/screen.css", :media => "screen, projection, print" %>
-  <%= stylesheet_link_tag "blueprint/print.css", :media => "print" %>
-  <!--[if IE]><%= stylesheet_link_tag "blueprint/ie.css", :media => "screen, projection" %><![endif]-->
-  <%= stylesheet_link_tag "style.css", :media => "screen, print" %>
-  <%= stylesheet_link_tag "print.css", :media => "print" %>
-  <%= javascript_include_tag((Rails.env.production? ? 'jquery.min' : 'jquery'), 'application', 'corner') %>
+  <%= stylesheet_link_merged :base, :media => 'screen, print' %>
+  <!--[if IE]><%= stylesheet_link_merged :ie, :media => "screen, projection" %><![endif]-->
+  <%= javascript_include_merged :base %>
   <%= yield(:jsinclude) %>
   <% javascript_tag do %>
     <%= yield(:jstemplates) %>
