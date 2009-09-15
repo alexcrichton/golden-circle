@@ -1,6 +1,6 @@
 require 'erb'
 
-set :web_server, "gc.alexcrichton.com"
+set :web_server, "goldencircle.dyndns.org"
 
 role :app, web_server
 role :web, web_server
