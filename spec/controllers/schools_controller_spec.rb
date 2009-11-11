@@ -118,18 +118,18 @@ describe SchoolsController do
     end
 
     it "should render the 'edit' template" do
-      School.stub!(:find).and_return(mock_school)
+      School.stub!(:find_by_slug).and_return(mock_school)
       get :show, :id => "1"
       response.should render_template('edit')
     end
 
     it "should find the requested school" do
-      School.should_receive(:find).with("37", :include=>[:teams, :proctors]).and_return(mock_school)
+      School.should_receive(:find_by_slug).with("37", :include=>[:teams, :proctors]).and_return(mock_school)
       get :show, :id => "37"
     end
 
     it "should assign the found for the view" do
-      School.should_receive(:find).and_return(mock_school)
+      School.stub!(:find_by_slug).and_return(mock_school)
       get :show, :id => "1"
       assigns[:school].should equal(mock_school)
     end
@@ -142,24 +142,24 @@ describe SchoolsController do
     end
 
     it "should succeed" do
-      School.stub!(:find)
+      School.stub!(:find_by_slug)
       get :edit, :id => "1"
       response.should be_success
     end
 
     it "should render the 'edit' template" do
-      School.stub!(:find)
+      School.stub!(:find_by_slug)
       get :edit, :id => "1"
       response.should render_template('edit')
     end
 
     it "should find the requested school" do
-      School.should_receive(:find).with("37", :include => [:teams, :proctors])
+      School.should_receive(:find_by_slug).with("37", :include => [:teams, :proctors])
       get :edit, :id => "37"
     end
 
     it "should assign the found school for the view" do
-      School.should_receive(:find).and_return(mock_school)
+      School.stub!(:find_by_slug).and_return(mock_school)
       get :edit, :id => "1"
       assigns[:school].should equal(mock_school)
     end
@@ -175,30 +175,30 @@ describe SchoolsController do
     describe "with successful update" do
 
       it "should find the requested school" do
-        School.should_receive(:find).with("37", {:include=>[:teams, :proctors]}).and_return(mock_school)
+        School.should_receive(:find_by_slug).with("37", {:include=>[:teams, :proctors]}).and_return(mock_school)
         put :update, :id => "37", :school => {}
       end
 
       it "should update the found school" do
-        School.stub!(:find).and_return(mock_school)
+        School.stub!(:find_by_slug).and_return(mock_school)
         mock_school.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "1", :school => {:these => 'params'}
       end
 
       it "should assign the found school to the view" do
-        School.stub!(:find).and_return(mock_school)
+        School.stub!(:find_by_slug).and_return(mock_school)
         put :update, :id => "1", :school => {}
         assigns(:school).should equal(mock_school)
       end
 
       it "should redirect to the school" do
-        School.stub!(:find).and_return(mock_school(:update_attributes => true))
+        School.stub!(:find_by_slug).and_return(mock_school(:update_attributes => true))
         put :update, :id => "1", :school => {}
         response.should redirect_to(school_url(mock_school))
       end
 
       it "should display a flash message" do
-        School.stub!(:find).and_return(mock_school(:update_attributes => true))
+        School.stub!(:find_by_slug).and_return(mock_school(:update_attributes => true))
         put :update, :id => "1", :school => {}
         response.flash[:notice].should_not be_nil
       end
@@ -208,19 +208,19 @@ describe SchoolsController do
     describe "with failed update" do
 
       it "should update the requested school" do
-        School.should_receive(:find).with("37",  {:include=>[:teams, :proctors]}).and_return(mock_school)
+        School.should_receive(:find_by_slug).with("37",  {:include=>[:teams, :proctors]}).and_return(mock_school)
         mock_school.should_receive(:update_attributes).with('these' => 'params')
         put :update, :id => "37", :school => {:these => 'params'}
       end
 
       it "should expose the school as @school" do
-        School.stub!(:find).and_return(mock_school(:update_attributes => false))
+        School.stub!(:find_by_slug).and_return(mock_school(:update_attributes => false))
         put :update, :id => "1", :school => {}
         assigns(:school).should equal(mock_school)
       end
 
       it "should re-render the 'edit' template" do
-        School.stub!(:find).and_return(mock_school(:update_attributes => false))
+        School.stub!(:find_by_slug).and_return(mock_school(:update_attributes => false))
         put :update, :id => "1", :school => {}
         response.should render_template('edit')
       end
@@ -287,18 +287,18 @@ describe SchoolsController do
     end
 
     it 'should find the requested school' do
-      School.should_receive(:find).with('37', :include=>[:teams, :proctors]).and_return(mock_school(:destroy => true))
+      School.should_receive(:find_by_slug).with('37', :include=>[:teams, :proctors]).and_return(mock_school(:destroy => true))
       delete :destroy, :id => '37'
     end
 
     it "should destroy the requested school" do
-      School.should_receive(:find).and_return(mock_school)
+      School.should_receive(:find_by_slug).and_return(mock_school)
       mock_school.should_receive(:destroy)
       delete :destroy, :id => "1"
     end
 
     it "should redirect to the schools page" do
-      School.stub!(:find).and_return(mock_school(:destroy => true))
+      School.stub!(:find_by_slug).and_return(mock_school(:destroy => true))
       delete :destroy, :id => "1"
       response.should redirect_to(schools_path)
     end
