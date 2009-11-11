@@ -308,6 +308,26 @@ tr.even:hover td {
   float: left;
 }
 
+#tabs, .container {
+  overflow:auto;
+}
+
+div.loader {
+  border: 1px solid #ccc;
+  width: 500px;
+  height: 500px;
+}
+
+.graph {
+  float: left;
+  margin: 5px;
+}
+
+div.loader.loading {
+  background: url(/images/ajax-big.gif) no-repeat center center;
+}
+
+
 @media print {
   body {
     background: inherit;

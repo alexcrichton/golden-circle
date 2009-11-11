@@ -50,4 +50,22 @@ module ResultsHelper
     @last[type][:rank]
   end
 
+  def google_chart(opts)
+    opts[:chs] ||= '200x200'
+    @loaders ||= 0
+    @loaders += 1
+    content_for :js do
+      <<-EOF
+$(function(){      
+  $('<img/>').load(function(){
+    $('#graph#{@loaders}').removeClass('loading').append(this);
+  }).error(function () {
+    $('#graph#{@loaders}').removeClass('loading').text("Couldn't load graph");
+  }).attr('src', 'http://chart.apis.google.com/chart?#{opts.to_query}');
+});
+      EOF
+    end
+    "<div id=\"graph#{@loaders}\" class=\"loading loader graph\" " +
+            "style=\"width:#{opts[:chs].split('x')[0]}px;height:#{opts[:chs].split('x')[1]}px\"></div>"
+  end
 end

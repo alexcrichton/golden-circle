@@ -40,6 +40,11 @@ class Team < ActiveRecord::Base
   named_scope :sorted, :order => 'schools.name ASC', :include => [:school]
   named_scope :winners, :order => 'team_score DESC', :conditions => ['team_score IS NOT ?', nil]
 
+  def self.max_team_score
+    # 5 student scores of 25 + max team test score * 5
+    5 * 25 + 30 * 5
+  end
+
   def team_test_score
     return 0 if test_score.nil?
     test_score * 5

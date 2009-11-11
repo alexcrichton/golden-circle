@@ -1,55 +1,61 @@
 <h1>Awards</h1>
-<hr />
-<h3>Sweepstakes Results</h3>
-<% [:large, :small].each do |klass| %>
-  <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
-    <table>
-      <colgroup>
-        <col width="40" />
-      </colgroup>
-      <tr>
-        <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
-      </tr>
-      <tr>
-        <th>Rank</th>
-        <th>School</th>
-        <th>Score</th>
-      </tr>
-      <% @schools.send(klass).each do |school| %>
-        <tr class="<%= cycle('even', 'odd') %>">
-          <td><%= rank(school.school_score, "school_#{klass}") %></td>
-          <td><%= h school.name %></td>
-          <td><%= school.school_score %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-<% end %>
-<% [:wizard, :apprentice].each do |level| %>
-  <hr />
-  <h3><%= level.to_s.capitalize %> Team Results</h3>
-  <% [:large, :small].each do |klass| %>
-    <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
-      <table>
-        <colgroup>
-          <col width="40" />
-        </colgroup>
-        <tr>
-          <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
-        </tr>
-        <tr>
-          <th>Rank</th>
-          <th>School</th>
-          <th>Score</th>
-        </tr>
-        <% @teams.send(klass).send(level).each do |team| %>
-          <tr class="<%= cycle('even', 'odd') %>">
-            <td><%= rank(team.test_score, "team_#{level}_#{klass}") %></td>
-            <td><%= team_name(team) %></td>
-            <td><%= team.team_score %></td>
+
+<div id="tabs">
+  <ul>
+    <li><%= link_to 'Sweepstakes', '#sweepstakes' %></li>
+    <li><%= link_to 'Wizard Teams', '#wizard' %></li>
+    <li><%= link_to 'Apprentice Teams', '#apprentice' %></li>
+  </ul>
+  <div id="sweepstakes">
+    <h3>Sweepstakes Results</h3>
+    <% [:large, :small].each do |klass| %>
+      <div class="span-7 <%= klass == :large ? 'colborder' : 'last' %>">
+        <table>
+          <colgroup>
+            <col width="40"/>
+          </colgroup>
+          <tr>
+            <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
           </tr>
-        <% end %>
-      </table>
-    </div>
-  <% end %>
-<% end %>
+          <tr>
+            <th>Rank</th>
+            <th>School</th>
+            <th>Score</th>
+          </tr>
+          <% @schools.send(klass).each do |school| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+              <td><%= rank(school.school_score, "school_#{klass}") %></td>
+              <td><%= h school.name %></td>
+              <td><%= school.school_score %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+    <% max = (@schools[0].school_score * 1.1).to_i %>
+    <% [:large, :small].each do |klass| %>
+      <% arr = @schools.send(klass)[0..4] %>
+      <% data1 = arr.map { |s| s.teams.apprentice.first.team_score } %>
+      <% data2 = arr.map { |s| s.teams.wizard.first.team_score } %>
+      <% i = -1 %>
+      <%= google_chart :cht => 'bhs',
+                       :chco => '4D89F9,C6D9FD',
+                       :chds => "0,#{max}",
+                       :chd => "t:#{data1.join ','}|#{data2.join ','}",
+                       :chxt => 'x',
+                       :chxr => "0,0,#{max}",
+                       :chm => arr.map{|s| "t#{s.name},000000,1,#{i += 1},11"}.join('|'),
+                       :chs => '300x300',
+                       :chbh => '40,5,5',
+                       :chtt => "Sweepstakes|#{klass.to_s.capitalize} Schools",
+                       :chdl => 'Apprentice|Wizard' %>
+    <% end %>
+
+  </div>
+  <div id="wizard">
+    <%= render 'level_results', :level => 'wizard' %>
+  </div>
+  <div id="apprentice">
+    <%= render 'level_results', :level => 'apprentice' %>
+  </div>
+</div>

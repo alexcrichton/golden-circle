@@ -1,0 +1,43 @@
+<h3><%= level.to_s.capitalize %> Team Results</h3>
+<% [:large, :small].each do |klass| %>
+  <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
+    <table>
+      <colgroup>
+        <col width="40"/>
+      </colgroup>
+      <tr>
+        <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
+      </tr>
+      <tr>
+        <th>Rank</th>
+        <th>School</th>
+        <th>Score</th>
+      </tr>
+      <% @teams.send(klass).send(level).each do |team| %>
+        <tr class="<%= cycle('even', 'odd') %>">
+          <td><%= rank(team.team_score, "team_#{level}_#{klass}") %></td>
+          <td><%= team_name(team) %></td>
+          <td><%= team.team_score %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+
+<% max = (@teams.send(level)[0].team_score * 1.1).to_i %>
+<% [:large, :small].each do |klass| %>
+  <% arr = @teams.send(klass).send(level)[0..4] %>
+  <% i = -1 %>
+  <%= google_chart :cht => 'bhs',
+                   :chco => '4D89F9,C6D9FD',
+                   :chds => "0,#{max}",
+                   :chd => "t:#{arr.map { |s| s.student_score_sum }.join ','}|#{arr.map { |s| s.team_test_score }.join ','}", 
+                   :chxt => 'x',
+                   :chxr => "0,0,#{max}", 
+                   :chm => arr.map{|t| "t#{t.school.name},000000,1,#{i += 1},11"}.join('|'),
+                   :chs => '300x300',
+                   :chbh => '40,5,5',
+                   :chtt => "#{level.to_s.capitalize}|#{klass.to_s.capitalize} Schools",
+                   :chdl => 'Student scores|Team Test' %>
+
+<% end %>

@@ -39,6 +39,7 @@ $(function() {
     input.focus();
   if ($.browser.mozilla)
     $('#secureconnection').show();
+  $('#tabs').tabs();
 });
 
 $(function() {

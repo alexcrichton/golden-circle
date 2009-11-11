@@ -1,71 +1,39 @@
 <h1><%= h @school.name %>'s Results </h1>
-<dl id="info" class="clearfix">
-  <dt>Total Score:</dt>
-  <dd><%= h @school.school_score || 0 %></dd>
-  <dt>Wizard Team Score:</dt>
-  <dd><%= @school.teams.non_exhibition.wizard.first.team_score || 0 %></dd>
-  <dt>Wizard Team Test Score:</dt>
-  <dd><%= @school.teams.non_exhibition.wizard.first.test_score || 0 %></dd>
-  <dt>Apprentice Team Score:</dt>
-  <dd><%= @school.teams.non_exhibition.apprentice.first.team_score || 0 %></dd>
-  <dt>Apprentice Team Test Score:</dt>
-  <dd><%= @school.teams.non_exhibition.apprentice.first.test_score || 0 %></dd>
-</dl>
-
-<% ['wizard', 'apprentice'].each do |level| %>
-  <div class="span-7 <%= level == 'wizard' ? 'colborder' : 'last' %>">
-    <table>
-      <colgroup>
-        <col width="40" />
-      </colgroup>
+<div class="container">
+  <div class="span-6">
+    <table id="info" class="noborder">
       <tr>
-        <td class="separator" colspan="3"><%= level.capitalize %> Results</td>
+        <td>Total Score:</td>
+        <td><%= @school.school_score || 0 %></td>
       </tr>
       <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Score</th>
+        <td>Wizard Team Score:</td>
+        <td><%= @school.teams.non_exhibition.wizard.first.team_score || 0 %></td>
       </tr>
-      <% @school.teams.non_exhibition.send(level).first.students.winners.each do |student| %>
-        <tr class="<%= cycle('even', 'odd') %>">
-          <td><%= rank(student.test_score, "student_#{level}") %></td>
-          <td><%= h student.name %></td>
-          <td><%= student.test_score %></td>
-        </tr>
-      <% end %> <%# students %>
+      <tr>
+        <td>Wizard Team Test Score:</td>
+        <td><%= @school.teams.non_exhibition.wizard.first.team_test_score || 0 %></td>
+      </tr>
+      <tr>
+        <td>Apprentice Team Score:</td>
+        <td><%= @school.teams.non_exhibition.apprentice.first.team_score || 0 %></td>
+      </tr>
+      <tr>
+        <td>Apprentice Team Test Score:</td>
+        <td><%= @school.teams.non_exhibition.apprentice.first.team_test_score || 0 %></td>
+      </tr>
     </table>
   </div>
-<% end %> <%# wizard/apprentice level %>
-<hr />
-<% if @school.teams.exhibition.size > 0 %>
-  <h2>Exhibition Team Results</h2>
+
+  <% scope = @school.teams.non_exhibition %>
+  <%= google_chart :cht => 'p',
+                   :chs => '400x150',
+                   :chd => "t:#{scope.wizard.first.student_score_sum},#{scope.wizard.first.team_test_score}," +
+                           "#{scope.apprentice.first.student_score_sum},#{scope.apprentice.first.team_test_score}",
+                   :chl => 'Wizard Students|Wizard Team Test|Apprentice Students|Apprentice Team Test',
+                   :chtt => 'Breakdown of Score' %>
+</div>
+<h2>Team Results</h2>
+<% @school.teams.find(:all, :order => 'is_exhibition').each do |team| %>
+  <%= render 'team', :team => team %>
 <% end %>
-<% @school.teams.exhibition.each do |team| %>
-  <table>
-    <colgroup>
-      <col width="40" />
-    </colgroup>
-    <tr>
-      <td class="separator" colspan="3">Exhibition <%= team.id %> Results</td>
-    </tr>
-    <tr class="odd">
-      <td colspan="3">
-        <strong>Team Score:</strong> <%= team.team_score || 0 %>
-        <br /> <strong>Team Test Score:</strong> <%= team.test_score || 0 %>
-      </td>
-    </tr>
-    <tr>
-      <th>Rank</th>
-      <th>Name</th>
-      <th>Score</th>
-    </tr>
-    <% team.students.winners.each do |student| %>
-      <tr class="<%= cycle('even', 'odd') %>">
-        <td><%= rank(student.test_score, "exhibition#{team.id}") %></td>
-        <td><%= h student.name %></td>
-        <td><%= student.test_score %></td>
-      </tr>
-    <% end %> <%# students of exhibition team %>
-  </table>
-  <hr />
-<% end %> <%# exhibition teams %>

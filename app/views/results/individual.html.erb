@@ -1,30 +1,50 @@
 <h1>Individual Results</h1>
-<% [:wizard, :apprentice].each do |level| %>
-  <hr />
-  <h3><%= level.to_s.capitalize %> Division</h3>
-  <% [:large, :small].each do |klass| %>
-    <table>
-      <colgroup>
-        <col width="40" />
-      </colgroup>
-      <tr>
-        <td colspan="4" class="separator"><%= klass.to_s.capitalize %> Schools</td>
-      </tr>
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>School</th>
-        <th>Score</th>
-      </tr>
-      <% @students.send(klass).send(level).each do |student| %>
-        <tr class="<%= cycle('even', 'odd') %>">
-          <td><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
-          <td><%= h student.name %></td>
-          <td><%= team_name(student.team) %></td>
-          <td><%= student.test_score %></td>
-        </tr>
-        <% end %><%# students %>
-    </table>
-  <% end %><%# large and small schools %>
-<% end %><%# wizards and apprentices %>
+
+<div id="tabs">
+  <ul>
+    <li><%= link_to 'Wizard - Large', '#wizard-large' %></li>
+    <li><%= link_to 'Wizard - Small', '#wizard-small' %></li>
+    <li><%= link_to 'Apprentice - Large', '#apprentice-large' %></li>
+    <li><%= link_to 'Apprentice - Small', '#apprentice-small' %></li>
+  </ul>
+  <% [:wizard, :apprentice].each do |level| %>
+    <% [:large, :small].each do |klass| %>
+      <div id="<%= "#{level}-#{klass}" %>">
+        <table>
+          <colgroup>
+            <col width="40"/>
+          </colgroup>
+          <tr>
+            <td colspan="4" class="separator"><%= klass.to_s.capitalize %> Schools</td>
+          </tr>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>School</th>
+            <th>Score</th>
+          </tr>
+          <% @students.send(klass).send(level).each do |student| %>
+            <tr class="<%= cycle('even', 'odd') %>">
+              <td><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
+              <td><%= h student.name %></td>
+              <td><%= team_name(student.team) %></td>
+              <td><%= student.test_score %></td>
+            </tr>
+          <% end %>
+        </table>
+        <% dataset = (0..25).map{ |i| Student.send(klass).send(level).select{ |s| s.test_score == i}.count } %>
+        <% puts dataset.inspect %>
+        <%= google_chart :cht => 'bvg',
+                         :chds => "0,#{dataset.max}",
+                         :chd => "t:#{dataset.join ','}",
+                         :chxt => 'x,y',
+                         :chxr => "1,0,#{dataset.max},1",
+                         :chxl => "0:|#{(0..25).to_a.join('|')}|",
+                         :chs => '600x300',
+                         :chbh => 'a,5,5',
+                         :chtt => "Score distribution" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 
