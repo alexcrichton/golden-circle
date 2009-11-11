@@ -1,7 +1,6 @@
 <%= error_messages_for :school_session %>
 <% content_for :jsload do %>
   $('#<%= @school_session.openid_identifier.blank? ? 'openid-login' : 'pass-login' %>').hide();
-  $('.inner').corner("round 8px").parent().css('padding', '2px').corner("round 10px");
 <% end %>
 <div class="login outer">
   <div class="inner">
@@ -41,7 +40,7 @@
 <div class="login outer">
   <div class="inner">
     <h2>Register a School</h2>
-    <% form_for :school, :url => schools_path, :html => {:method => :post} do |f| %>
+    <% form_for School.new, :html => {:method => :post, :class => 'new_school'} do |f| %>
       <%= render 'schools/form', :f => f %>
       <p class="tcenter">
         <%= f.submit "Register School" %>

@@ -40,8 +40,24 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-end
 
-require 'ssl_requirement'
-ActionController::Base.send(:include, SslRequirement)
+  config.to_prepare do
+    require 'ssl_requirement'
+    ActionController::Base.send(:include, SslRequirement)
+    require 'acts_as_slug'
+    ActiveRecord::Base.class_eval do
+      include Acts::Slug
+
+      def to_xml(options = {})
+        # protect attributes registered with attr_protected
+        default_except = self.class.protected_attributes.to_a
+        options[:except] = (options[:except] ? options[:except] | default_except : default_except)
+        super
+      end
+    end
+    ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(:default => '%l:%M%p %m/%d/%Y')
+  end
+
+
+end
 

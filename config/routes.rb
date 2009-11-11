@@ -2,7 +2,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :uploads, :collection => {:backup => :put, :restore => :get}, :member => {:transfer => :get}, :only => [:index, :update, :edit]
 
-  map.resources :schools, :collection => {:show_current => :get, :email => :put}
+  map.resources :schools, :collection => {:show_current => :get,
+                                          :email => :put,
+                                          :valid_name => :post,
+                                          :valid_email => :post}
 
   map.print_team '/print/:id', :controller => 'grading', :action => 'print'
   map.grading_status '/grading', :controller => 'grading', :action => 'status'

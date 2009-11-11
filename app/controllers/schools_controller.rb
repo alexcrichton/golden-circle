@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
 
-  before_filter :load_school
+  before_filter :load_school, :except => [:valid_name, :valid_email]
   before_filter :require_school, :only => [:show_current]
   before_filter :require_owner, :only => [:update, :edit, :destroy, :show]
   before_filter :require_admin, :only => [:index, :email]
@@ -69,10 +69,20 @@ class SchoolsController < ApplicationController
     redirect_to(schools_path)
   end
 
+  def valid_name
+    @school = School.find(:first, :conditions => {:name => params[:school][:name]}) if params[:school][:name] != params[:school][:default_name]
+    render :text => (@school.nil? ? 'true' : 'false')
+  end
+
+  def valid_email
+    @school = School.find(:first, :conditions => {:email => params[:school][:email]}) if params[:school][:email] != params[:school][:default_email]
+    render :text => (@school.nil? ? 'true' : 'false')
+  end
+
   protected
 
   def load_school
-    @school = School.find(params[:id], :include => [:teams, :proctors]) if params[:id]
+    @school = School.find_by_slug(params[:id], :include => [:teams, :proctors]) if params[:id]
   end
 
   def require_owner

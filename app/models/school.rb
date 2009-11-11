@@ -3,6 +3,7 @@ class School < ActiveRecord::Base
   CUTOFF = 200
   
   acts_as_authentic
+  acts_as_slug
 
   has_many :teams, :dependent => :destroy, :validate => false
   accepts_nested_attributes_for :teams, :allow_destroy => true

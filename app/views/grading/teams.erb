@@ -1,18 +1,10 @@
-<% content_for :jsinclude do %>
-  <%= javascript_include_tag 'filter', 'notifychange' %>
-<% end %>
-<% content_for :jsload do %>
-  filter("#teams tr", "search");
-<% end %>
-
 <h1>Editing Team Scores</h1>
-
 
 Find:<br />
 <input name="search" type="text" />
 <hr />
 
-<% form_tag(grading_teams_path(:level => params[:level]), :method => :put) do %>
+<% form_tag(grading_teams_path(:level => params[:level]), :method => :put, :class => 'grading') do %>
   <%= error_messages_for :object => @teams %>
   <table id="teams">
     <tr>

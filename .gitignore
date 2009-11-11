@@ -5,8 +5,9 @@ db/*.sqlite3
 config/database.yml*
 config/database.yml
 public/files
+public/javascripts/cache
+public/stylesheets/cache
 log/*
 .idea
-tmp
 coverage
 tmp

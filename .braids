@@ -1,8 +1,0 @@
---- 
-vendor/plugins/open_id_authentication: 
-  squashed: true
-  branch: master
-  url: git://github.com/rails/open_id_authentication.git
-  type: git
-  revision: 079b91f70602814c98d4345e198f743bb56b76b5
-  remote: braid/vendor/plugins/open-id-authentication

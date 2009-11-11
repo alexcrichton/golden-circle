@@ -1,8 +1,4 @@
-<% content_for :jsload do %>
-  $('.inner').corner('8px').parent().css('padding', '2px').corner('10px');
-<% end %>
-
-<% form_for(@school) do |f| %>
+<% form_for(@school, :html => {:class => 'edit_school'}) do |f| %>
   <%= f.error_messages %>
 
   <% content_for :jstemplates do %>

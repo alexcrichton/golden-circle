@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
 
 
   def ssl_required?
-    puts cookies
     return cookies[:prefer_ssl] == 'true'
   end
 end
