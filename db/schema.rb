@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091111020432) do
+ActiveRecord::Schema.define(:version => 20091111023436) do
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20091111020432) do
 
   add_index "schools", ["openid_identifier"], :name => "index_schools_on_openid_identifier"
   add_index "schools", ["perishable_token"], :name => "index_schools_on_perishable_token"
+  add_index "schools", ["slug"], :name => "index_schools_on_slug"
 
   create_table "settings", :force => true do |t|
     t.string   "var",        :null => false
