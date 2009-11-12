@@ -42,8 +42,6 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 
   config.to_prepare do
-    require 'ssl_requirement'
-    ActionController::Base.send(:include, SslRequirement)
     require 'acts_as_slug'
     ActiveRecord::Base.class_eval do
       include Acts::Slug

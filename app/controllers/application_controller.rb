@@ -13,8 +13,4 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '2bc5e62fe0ec71976a2d8a0bc2328c5b'
 
-
-  def ssl_required?
-    return cookies[:prefer_ssl] == 'true'
-  end
 end
