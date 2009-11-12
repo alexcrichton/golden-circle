@@ -3,6 +3,7 @@ class GradingController < ApplicationController
   before_filter :require_admin
   before_filter :load_teams, :only => [:teams, :update_teams]
   before_filter :load_students, :only => [:students, :update_students]
+  layout 'wide'
 
   def print
     @team = Team.find(params[:id], :include => [:school])

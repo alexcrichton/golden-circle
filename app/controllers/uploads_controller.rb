@@ -3,6 +3,7 @@ class UploadsController < ApplicationController
   before_filter :require_admin, :except => [:transfer]
   before_filter :load_upload
   before_filter :require_information_transfer, :only => [:transfer]
+  layout 'wide'
 
   def index
     @information = Upload.find_by_name('information')

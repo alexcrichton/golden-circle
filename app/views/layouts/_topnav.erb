@@ -2,7 +2,21 @@
   <li><%= link_to 'Home', root_path %></li>
   <% if current_school && current_school.admin %>
     <li><%= link_to 'Roster', schools_path %></li>
-    <li><%= link_to 'Grading', grading_status_path %></li>
+    <li>
+      <span>Grading</span>
+      <ul>
+        <li><%= link_to 'Wizard', grading_teams_path(Team::WIZARD) %></li>
+        <li><%= link_to 'Apprentice', grading_teams_path(Team::APPRENTICE) %></li>
+        <li><%= link_to 'Status', grading_status_path %></li>
+      </ul>
+    </li>
+    <li>
+      <span>Admin</span>
+      <ul>
+        <li><%= link_to 'Configuration', grading_config_path %></li>
+        <li><%= link_to 'Backup/Restore', uploads_path %></li>
+      </ul>
+    </li>
   <% end %>
   <% if current_school && (Time.now > Settings.event_date || current_school.admin) %>
     <li>
