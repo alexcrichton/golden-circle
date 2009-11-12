@@ -58,8 +58,8 @@ th {font-weight:bold;background:#C3D9FF;}
 th, td {padding:4px 10px 4px 5px;border:2px solid #066}
 tr.even td {background:#E5ECF9;}
 tr.odd td {background:#ffc}
-table.noborder th, table.noborder td {border:none;}
-table.noborder {border:1px solid #066;}
+table.noborder, table.noborder th, table.noborder td {border:none;}
+/*table.noborder {border:1px solid #066;}*/
 tfoot {font-style:italic;}
 caption {background:#066;color:#fff;padding-left:5px;font-weight:bold;}
 .small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}

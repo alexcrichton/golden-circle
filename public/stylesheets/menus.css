@@ -1,0 +1,64 @@
+.menu {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  margin: auto 0 0 0;
+}
+
+.menu li {
+  text-align: center;
+  margin-left: 10px;
+  float: left;
+  position: relative;
+  /*background: black;*/
+}
+
+.menu a, .menu span {
+  display: inline-block;
+  /*color: black;*/
+  text-decoration: none;
+  /*background: white;*/
+  padding: 5px 7px;
+}
+
+.menu li ul a:hover, .menu li ul span:hover {
+  /*background: #cccccc;*/
+  /*background: #fffdd7;*/
+  /*color: #035482;*/
+}
+
+/* IE 6 is a douche and doesn't support > */
+.menu li.selected > a, .menu li.selected > span {
+  /*background-image: url(/images/topnavback.png);*/
+  /*background: #fffdd7;*/
+  /*color: #035482;*/
+}
+
+.menu ul {
+  display: none;
+  font-size: 10pt;
+  list-style: none;
+  position: absolute;
+  margin: 0;
+  background: #fff; /* needed for some random reason for IE */
+  top: 100%;
+  left: 0;
+}
+
+.menu ul li {
+  text-align: left;
+  float: none;
+  margin: 0;
+  border: solid #012f52 1px;
+}
+
+.menu ul li a, .menu ul li span {
+  padding: 5px 10px; 
+  display: block;
+}
+
+.menu ul ul {
+  left: 99%;
+  top: -1px;
+}
+

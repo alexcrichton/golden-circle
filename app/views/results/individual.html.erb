@@ -25,22 +25,23 @@
           </tr>
           <% @students.send(klass).send(level).each do |student| %>
             <tr class="<%= cycle('even', 'odd') %>">
-              <td><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
+              <td class="num"><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
               <td><%= h student.name %></td>
               <td><%= team_name(student.team) %></td>
-              <td><%= student.test_score %></td>
+              <td class="num"><%= student.test_score %></td>
             </tr>
           <% end %>
         </table>
         <% dataset = (0..25).map{ |i| Student.send(klass).send(level).select{ |s| s.test_score == i}.count } %>
         <% puts dataset.inspect %>
         <%= google_chart :cht => 'bvg',
+                         :chco => '006666',
                          :chds => "0,#{dataset.max}",
                          :chd => "t:#{dataset.join ','}",
                          :chxt => 'x,y',
                          :chxr => "1,0,#{dataset.max},1",
                          :chxl => "0:|#{(0..25).to_a.join('|')}|",
-                         :chs => '600x300',
+                         :chs => '900x300',
                          :chbh => 'a,5,5',
                          :chtt => "Score distribution" %>
       </div>

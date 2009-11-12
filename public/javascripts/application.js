@@ -44,11 +44,23 @@ $(function() {
 
 $(function() {
   $('.inner').corner('8px').parent().css('padding', '2px').corner('10px');
+
+  $('.menu li').hover(
+          function() {
+            $(this).addClass('ui-state-hover');
+            $(this).find('ul:first').show();
+          },
+          function() {
+            $(this).removeClass('ui-state-hover');
+            $(this).find('ul:first').hide();
+          }).addClass('ui-state-default');
+  $('.menu > li > a, .menu > li > span').corner("top 9px").parent().css('padding', '1px 1px 0 1px').corner("round top 10px");
+
 });
 
-$(function(){
+$(function() {
   if ($('form.edit_school').length == 0)
-      return;
+    return;
   $('form.edit_school').validate({
     rules: {
       'school[email]': {

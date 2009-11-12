@@ -1,10 +1,26 @@
-<ul id="topnav">
+<ul id="topnav" class="menu">
   <li><%= link_to 'Home', root_path %></li>
   <% if current_school && current_school.admin %>
     <li><%= link_to 'Roster', schools_path %></li>
     <li><%= link_to 'Grading', grading_status_path %></li>
   <% end %>
   <% if current_school && (Time.now > Settings.event_date || current_school.admin) %>
-    <li><%= link_to('Results', current_school.admin ? statistics_path : school_results_path) %></li>
+    <li>
+      <span>Results</span>
+      <ul>
+        <li><%= link_to 'Your School', school_results_path %></li>
+        <li><%= link_to 'Sweepstakes', sweepstakes_results_path %></li>
+        <li><%= link_to 'Individual', individual_results_path %></li>
+        <% if current_school.admin %>
+          <li>
+            <span>Statistics</span>
+            <ul>
+              <li style="width:110px;"><%= link_to 'Large Schools', statistics_path('large') %></li>
+              <li style="width:110px;"><%= link_to 'Small Schools', statistics_path('small') %></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </li>
   <% end %>
 </ul>

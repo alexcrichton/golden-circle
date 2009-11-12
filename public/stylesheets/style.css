@@ -128,29 +128,29 @@ div#footer p {
   width: 550px;
 }
 
-ul#topnav li {
-  text-align: left;
-  float: left;
-  height: 25px;
-  margin: 0;
-  margin-top: 35px;
-  padding: 0;
-  border-left: solid #505050 1px;
-}
+/*ul#topnav li {*/
+  /*text-align: left;*/
+  /*float: left;*/
+  /*height: 25px;*/
+  /*margin: 0;*/
+  /*margin-top: 35px;*/
+  /*padding: 0;*/
+  /*border-left: solid #505050 1px;*/
+/*}*/
 
-ul#topnav li a {
-  display: block; /* width: 63px;*/
-  margin: 0 10px 0 7px;
-  vertical-align: super;
-  text-decoration: none;
-  color: #444;
-}
+/*ul#topnav li a {*/
+  /*display: block; *//* width: 63px;*/
+  /*margin: 0 10px 0 7px;*/
+  /*vertical-align: super;*/
+  /*text-decoration: none;*/
+  /*color: #444;*/
+/*}*/
 
-ul#topnav li:hover {
+/*ul#topnav li:hover {*/
 /*text-decoration: underline;*/
-  color: #000;
-  background-image: url(/images/topnavback.png);
-}
+  /*color: #000;*/
+  /*background-image: url(/images/topnavback.png);*/
+/*}*/
 
 /*  .column div { margin:10px; }*/
 #login_links {
@@ -202,9 +202,6 @@ ul#topnav li:hover {
 .save {
   width: 50%;
   margin: 0 auto;
-}
-
-.save .inner {
   padding: 10px;
   color: #000;
   font-weight: bold;

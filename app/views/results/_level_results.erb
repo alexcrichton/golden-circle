@@ -1,6 +1,7 @@
 <h3><%= level.to_s.capitalize %> Team Results</h3>
+<div class="container">
 <% [:large, :small].each do |klass| %>
-  <div class="span-7 <%= cycle('colborder', 'last', :name => :divclass) %>">
+  <div class="span-10 <%= cycle('colborder', 'last', :name => :divclass) %>">
     <table>
       <colgroup>
         <col width="40"/>
@@ -15,14 +16,15 @@
       </tr>
       <% @teams.send(klass).send(level).each do |team| %>
         <tr class="<%= cycle('even', 'odd') %>">
-          <td><%= rank(team.team_score, "team_#{level}_#{klass}") %></td>
+          <td class="num"><%= rank(team.team_score, "team_#{level}_#{klass}") %></td>
           <td><%= team_name(team) %></td>
-          <td><%= team.team_score %></td>
+          <td class="num"><%= team.team_score %></td>
         </tr>
       <% end %>
     </table>
   </div>
 <% end %>
+</div>
 
 <% max = (@teams.send(level)[0].team_score * 1.1).to_i %>
 <% [:large, :small].each do |klass| %>
@@ -35,7 +37,7 @@
                    :chxt => 'x',
                    :chxr => "0,0,#{max}", 
                    :chm => arr.map{|t| "t#{t.school.name},000000,1,#{i += 1},11"}.join('|'),
-                   :chs => '300x300',
+                   :chs => '420x300',
                    :chbh => '40,5,5',
                    :chtt => "#{level.to_s.capitalize}|#{klass.to_s.capitalize} Schools",
                    :chdl => 'Student scores|Team Test' %>

@@ -7,19 +7,27 @@ ActionController::Routing::Routes.draw do |map|
                                           :valid_name => :post,
                                           :valid_email => :post}
 
-  map.print_team '/print/:id', :controller => 'grading', :action => 'print'
-  map.grading_status '/grading', :controller => 'grading', :action => 'status'
-  map.grading_config '/grading/config', :controller => 'grading', :action => 'update_configuration', :conditions => {:method => :put}
-  map.grading_config '/grading/config', :controller => 'grading', :action => 'config'
-  map.grading_teams '/grading/teams/:level', :controller => 'grading', :action => 'update_teams', :conditions => { :method => :put }
-  map.grading_teams '/grading/teams/:level', :controller => 'grading', :action => 'teams'
-  map.grading_students '/grading/students/:team_id', :controller => 'grading', :action => 'update_students', :conditions => {:method => :put}
-  map.grading_students '/grading/students/:team_id', :controller => 'grading', :action => 'students'
+  map.with_options :controller => 'grading' do |grading|
+    grading.with_options :conditions => {:method => :get} do |get|
+      get.print_team '/print/:id', :action => 'print'
+      get.grading_status '/grading', :action => 'status'
+      get.grading_config '/grading/config', :action => 'config'
+      get.grading_teams '/grading/teams/:level', :action => 'teams'
+      get.grading_students '/grading/students/:team_id', :action => 'students'
+    end
+    grading.with_options :conditions => {:method => :put} do |put|
+      put.grading_config '/grading/config', :action => 'update_configuration'
+      put.grading_teams '/grading/teams/:level', :action => 'update_teams'
+      put.grading_students '/grading/students/:team_id', :action => 'update_students'
+    end
+  end
 
-  map.statistics '/results/stats', :controller => 'results', :action => 'statistics'
-  map.school_results '/results/school', :controller => 'results', :action => 'school'
-  map.sweepstakes_results '/results/sweepstakes', :controller => 'results', :action => 'sweepstakes'
-  map.individual_results '/results/individual', :controller => 'results', :action => 'individual'
+  map.with_options :controller => 'results', :conditions => {:method => :get} do |result|
+    result.statistics '/results/stats/:klass', :action => 'statistics'
+    result.school_results '/results/school', :action => 'school'
+    result.sweepstakes_results '/results/sweepstakes', :action => 'sweepstakes'
+    result.individual_results '/results/individual', :action => 'individual'
+  end
 
   map.resources :password_resets, :collection => {:current => :get}, :only => [:new, :create, :edit, :update]
   map.logout '/logout', :controller => "school_sessions", :action => "destroy"

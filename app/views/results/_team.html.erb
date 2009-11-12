@@ -1,19 +1,22 @@
-<div class="span-7">
+<div class="span-9">
   <table>
     <colgroup>
       <col width="40"/>
     </colgroup>
     <tr>
-      <td class="separator" colspan="3"><%= team.is_exhibition ? "Exhibition #{team.id}" : team.level.capitalize %> Results</td>
-    </tr>
-    <% if team.is_exhibition %>
-    <tr class="odd">
-      <td colspan="3">
-        <strong>Team Score:</strong> <%= team.team_score || 0 %>
-        <br/> <strong>Team Test Score:</strong> <%= team.test_score || 0 %>
+      <td class="separator" colspan="3">
+        <%= team.is_exhibition ? "Exhibition #{team.id}" : team.level.capitalize %>
+        Results
       </td>
     </tr>
-      <% end %>
+    <% if team.is_exhibition %>
+      <tr class="odd">
+        <td colspan="3">
+          <strong>Team Score:</strong> <%= team.team_score || 0 %>
+          <br/> <strong>Team Test Score:</strong> <%= team.test_score || 0 %>
+        </td>
+      </tr>
+    <% end %>
     <tr>
       <th>Rank</th>
       <th>Name</th>
@@ -21,15 +24,16 @@
     </tr>
     <% team.students.winners.each do |student| %>
       <tr class="<%= cycle('even', 'odd') %>">
-        <td><%= rank(student.test_score, "student_team_#{team.id}") %></td>
+        <td class="num"><%= rank(student.test_score, "student_team_#{team.id}") %></td>
         <td><%= h student.name %></td>
-        <td><%= student.test_score %></td>
+        <td class="num"><%= student.test_score %></td>
       </tr>
     <% end %>
   </table>
 </div>
-<%= google_chart :cht => 'p',
-                 :chs => '350x150',
+<%= google_chart :cht => 'p3',
+                 :chco => '006666',
+                 :chs => '550x180',
                  :chd => "t:#{team.team_test_score},#{team.students.team_contributors.map(&:test_score).join(',')}",
                  :chl => 'Team Test|' + team.students.team_contributors.map(&:name).join('|'),
                  :chtt => 'Team Score' %>

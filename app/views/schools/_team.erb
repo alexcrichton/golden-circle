@@ -16,12 +16,12 @@
     <p><label>Team ID Number:</label> <%= team.id %></p>
   <% end %>
   <% content_for :js do %>
-    $['count<%= id %>'] = <%= team.students.size %>;
+    $['count<%= id %>'] = <%= team.students.count %>;
   <% end %>
   <%= small_errors(team.students) %>
-  <table id="students<%= id %>" class="noborder sortable">
+  <table id="students<%= id %>" class="noborder sortable" style="border:1px solid #066">
     <caption>
-      Students (<span id="count<%= id %>"><%= team.students.size %></span>/<%= Team::MAXSTUDENTS %>)
+      Students (<span id="count<%= id %>"><%= team.students.count %></span>/<%= Team::MAXSTUDENTS %>)
     </caption>
     <tr>
       <th>First Name</th>

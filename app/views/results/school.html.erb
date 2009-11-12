@@ -1,6 +1,6 @@
 <h1><%= h @school.name %>'s Results </h1>
 <div class="container">
-  <div class="span-6">
+  <div class="span-6 ui-widget-content ui-accordion-content ui-helper-reset ui-accordion-content-active">
     <table id="info" class="noborder">
       <tr>
         <td>Total Score:</td>
@@ -26,8 +26,9 @@
   </div>
 
   <% scope = @school.teams.non_exhibition %>
-  <%= google_chart :cht => 'p',
-                   :chs => '400x150',
+  <%= google_chart :cht => 'p3',
+                   :chco => '006666',
+                   :chs => '600x200',
                    :chd => "t:#{scope.wizard.first.student_score_sum},#{scope.wizard.first.team_test_score}," +
                            "#{scope.apprentice.first.student_score_sum},#{scope.apprentice.first.team_test_score}",
                    :chl => 'Wizard Students|Wizard Team Test|Apprentice Students|Apprentice Team Test',

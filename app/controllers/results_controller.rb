@@ -3,13 +3,13 @@ class ResultsController < ApplicationController
   before_filter :require_admin, :only => [:statistics]
   before_filter :require_school
   before_filter :require_after_event
+  layout 'wide'
 
   def statistics
-    params[:level] ||= Team::WIZARD
-    params[:class] ||= 'Large'
-    @schools = School.winners.send(params[:class].downcase)
-    @teams = Team.winners.send(params[:class].downcase).send(params[:level].downcase)
-    @students = Student.winners.send(params[:class].downcase).send(params[:level].downcase)
+    params[:klass] ||= 'large'
+    @schools = School.winners.send(params[:klass])
+    @teams = Team.winners.send(params[:klass])
+    @students = Student.winners.send(params[:klass])
   end
 
   def school
