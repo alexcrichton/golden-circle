@@ -1,20 +1,20 @@
 <ul id="topnav" class="menu">
   <li><%= link_to 'Home', root_path %></li>
   <% if current_school && current_school.admin %>
-    <li><%= link_to 'Roster', schools_path %></li>
-    <li>
-      <span>Grading</span>
-      <ul>
-        <li><%= link_to 'Wizard', grading_teams_path(Team::WIZARD) %></li>
-        <li><%= link_to 'Apprentice', grading_teams_path(Team::APPRENTICE) %></li>
-        <li><%= link_to 'Status', grading_status_path %></li>
-      </ul>
-    </li>
     <li>
       <span>Admin</span>
       <ul>
+        <li><%= link_to 'Roster', schools_path %></li>
         <li><%= link_to 'Configuration', grading_config_path %></li>
         <li><%= link_to 'Backup/Restore', uploads_path %></li>
+        <li>
+          <span>Grading »</span>
+          <ul>
+            <li><%= link_to 'Wizard', grading_teams_path(Team::WIZARD) %></li>
+            <li><%= link_to 'Apprentice', grading_teams_path(Team::APPRENTICE) %></li>
+            <li><%= link_to 'Status', grading_status_path %></li>
+          </ul>
+        </li>
       </ul>
     </li>
   <% end %>
@@ -27,7 +27,7 @@
         <li><%= link_to 'Individual', individual_results_path %></li>
         <% if current_school.admin %>
           <li>
-            <span>Statistics</span>
+            <span>Statistics »</span>
             <ul>
               <li style="width:110px;"><%= link_to 'Large Schools', statistics_path('large') %></li>
               <li style="width:110px;"><%= link_to 'Small Schools', statistics_path('small') %></li>

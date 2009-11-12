@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :uploads, :collection => {:backup => :put, :restore => :get}, :member => {:transfer => :get}, :only => [:index, :update, :edit]
+  map.resources :uploads, :collection => {:backup => :put, :restore => :get},
+                :member => {:transfer => :get},
+                :only => [:index, :update, :edit]
 
   map.resources :schools, :collection => {:show_current => :get,
                                           :email => :put,

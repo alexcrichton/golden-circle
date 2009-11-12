@@ -293,10 +293,6 @@ tr.even:hover td {
   text-align: center;
 }
 
-#secureconnection {
-  display: none;
-}
-
 .flash a {
   float: right;
 }
@@ -324,6 +320,15 @@ div.loader.loading {
   background: url(/images/ajax-big.gif) no-repeat center center;
 }
 
+h3.ui-widget-header {
+  text-align: center;
+  margin: 0;
+  padding: 0.4em;
+}
+
+div.ui-widget-content {
+  padding: 0.4em;
+}
 
 @media print {
   body {

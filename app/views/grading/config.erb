@@ -1,4 +1,7 @@
-<h1>Configuration Panel</h1>
+
+<div class="ui-widget-content ui-corner-all span-11">
+  <h3 class="ui-widget-header ui-corner-all">Configuration Panel</h3>
+
 <% form_for Settings, :url => grading_config_path, :html => {:method => :put} do |f| %>
   <p>
     <%= f.label :deadline, 'Deadline for registration' %>:<br />
@@ -17,3 +20,4 @@
 
   <p><%= f.submit "Submit" %> <%= link_to 'Upload information file', uploads_path %></p>
 <% end %>
+</div>
