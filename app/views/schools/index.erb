@@ -1,17 +1,16 @@
-<fieldset style="float:left;width:40%;margin-right:20px;">
-  <h1>School Index</h1>
-  <hr />
+<div class="upload ui-widget-content ui-corner-all span-10">
+  <h3 class="ui-widget-header ui-corner-all">Notify Schools</h3>
   <% form_tag email_schools_path, :method => :put do %>
     <p>
       The following button will send a confirmation email to all schools so they might validate the information they
       have submitted.
     </p>
 
-    <p>
+    <p class="tcenter">
       <%= submit_tag 'Send Email Notification', :confirm => "Are you sure?\nThis will email all schools!" %>
     </p>
   <% end %>
-</fieldset>
+</div>
 <table style="width:50%">
   <caption>Statistics</caption>
   <tr>

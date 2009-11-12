@@ -6,7 +6,7 @@ module SchoolsHelper
 
   def student_count(schools, level)
     schools = [schools] unless schools.is_a?(Array)
-    schools.collect{ |s| s.teams }.flatten.collect{ |t| t.level == level || level == :all ? t.students.size : 0 }.sum
+    schools.collect{ |s| s.teams }.flatten.collect{ |t| t.level == level || level == :all ? t.students_count : 0 }.sum
   end
 
   def generate_html(form_builder, method, options = {})

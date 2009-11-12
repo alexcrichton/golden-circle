@@ -34,7 +34,7 @@
 <%= google_chart :cht => 'p3',
                  :chco => '006666',
                  :chs => '550x180',
-                 :chd => "t:#{team.team_test_score},#{team.students.team_contributors.map(&:test_score).join(',')}",
-                 :chl => 'Team Test|' + team.students.team_contributors.map(&:name).join('|'),
+                 :chd => "t:#{team.team_test_score},#{(cache = team.students.team_contributors).map(&:test_score).join(',')}",
+                 :chl => 'Team Test|' + cache.map(&:name).join('|'),
                  :chtt => 'Team Score' %>
 <hr/>

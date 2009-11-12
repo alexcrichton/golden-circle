@@ -22,7 +22,7 @@ class ResultsController < ApplicationController
   end
 
   def individual
-    @students = Student.winners.upper_scores
+    @students = Student.winners.scoped(:include => :team)
   end
 
   private

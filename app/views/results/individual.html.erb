@@ -23,7 +23,8 @@
             <th>School</th>
             <th>Score</th>
           </tr>
-          <% @students.send(klass).send(level).each do |student| %>
+          <% (cache = @students.send(klass).send(level)).each do |student| %>
+            <% next if student.test_score < 20 %>
             <tr class="<%= cycle('even', 'odd') %>">
               <td class="num"><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
               <td><%= h student.name %></td>
@@ -32,7 +33,7 @@
             </tr>
           <% end %>
         </table>
-        <% dataset = (0..25).map{ |i| Student.send(klass).send(level).select{ |s| s.test_score == i}.count } %>
+        <% dataset = (0..25).map{ |i| cache.select{ |s| s.test_score == i}.count } %>
         <% puts dataset.inspect %>
         <%= google_chart :cht => 'bvg',
                          :chco => '006666',
