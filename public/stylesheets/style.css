@@ -1,3 +1,11 @@
+input#school_openid_identifier, input#school_session_openid_identifier {
+  background: url(http://openid.net/images/login-bg.gif) no-repeat;
+  background-color: #fff;
+  background-position: 0 50%;
+  color: #000;
+  padding-left: 18px;
+}
+
 fieldset {
   border: none;
   border-left: 5px solid #f5f5f5;

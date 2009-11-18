@@ -29,6 +29,7 @@ class School < ActiveRecord::Base
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update, :unless => :password_changed?
   validate :submitted_before_deadline?
+  validate :owns_openid_identifier
 
   attr_protected :admin, :school_score
 
@@ -74,6 +75,11 @@ class School < ActiveRecord::Base
     if new_record? && Time.zone.now > Settings.deadline
       errors.add_to_base("The registration deadline has passed. If you would still like to participate this year, please email golden.circle.contest@gmail.com")
     end
+  end
+
+  def owns_openid_identifier
+    return if errors.size > 0
+    #TODO
   end
 
   def strip_name
