@@ -5,7 +5,7 @@
     <%= f.label :level, 'Team level:' %>
     <% if team.is_exhibition %>
       <%= f.select :level, [Team::APPRENTICE, Team::WIZARD] %>
-      <%= f.hidden_field :_delete %>
+      <%= f.hidden_field :_destroy %>
       <%= remove_link '[Remove this team]', ".team", :class => 'controls' %>
     <% else %>
       <%= team.level %>
