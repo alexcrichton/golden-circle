@@ -2,9 +2,9 @@ db/*.sqlite3
 .buildpath
 .project
 .*.swp
-config/database.yml*
 config/database.yml
 public/files
+public/system
 public/javascripts/cache
 public/stylesheets/cache
 log/*
