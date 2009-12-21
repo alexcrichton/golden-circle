@@ -6,7 +6,7 @@ class Upload < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_attachment_presence :upload
   validates_attachment_size :upload, :less_than => 10.megabytes
-  validates_attachment_content_type :upload, :content_type => ['x-application/sql', 'x-application/pdf', 'application/octet-stream']
+  validates_attachment_content_type :upload, :content_type => ['x-application/sql', 'x-application/pdf', 'application/octet-stream', 'application/x-pdf', 'application/x-sql']
 
 
   def self.dump_database
