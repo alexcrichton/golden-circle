@@ -69,15 +69,16 @@ class SchoolsController < ApplicationController
     @school.destroy
     redirect_to(schools_path)
   end
-
-  def valid_name
-    @school = School.find(:first, :conditions => {:name => params[:school][:name]}) if params[:school][:name] != params[:school][:default_name]
-    render :text => (@school.nil? ? 'true' : 'false')
-  end
-
-  def valid_email
-    @school = School.find(:first, :conditions => {:email => params[:school][:email]}) if params[:school][:email] != params[:school][:default_email]
-    render :text => (@school.nil? ? 'true' : 'false')
+  
+  def valid
+    @field = params[:field].to_sym
+    @school = School.new(params[:school])
+    if params[:default] == @school[@field]
+      render :text => 'true'
+    else
+      @school.valid? # get errors if they exist
+      render :text => (@school.errors.on(@field).blank? ? 'true' : 'false')
+    end
   end
 
   protected

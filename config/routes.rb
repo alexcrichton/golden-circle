@@ -6,8 +6,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :schools, :collection => {:show_current => :get,
                                           :email => :put,
-                                          :valid_name => :post,
-                                          :valid_email => :post}
+                                          :valid => :post}
 
   map.with_options :controller => 'grading' do |grading|
     grading.with_options :conditions => {:method => :get} do |get|
