@@ -7,8 +7,7 @@
   <%= f.error_messages %>
   <div id="password">
     <p>
-      <%= f.label :password %>
-      (or <%= link_to_function 'change your OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>)<br />
+      <%= f.label :password %><br />
       <%= f.password_field :password %>
     </p>
 
@@ -17,19 +16,8 @@
       <%= f.password_field :password_confirmation %>
     </p>
   </div>
-
-  <div id="openid">
-    <p>
-      <%= f.label :openid_identifier, 'OpenID Identifier' %>
-      (or <%= link_to_function 'change your password', "$('#openid').slideUp();$('#password').slideDown();" %>)<br />
-      <%= f.text_field :openid_identifier %>
-    </p>
-  </div>
   <p>
     <%= f.submit "Update" %>
   </p>
 <% end %>
 
-<% content_for :jsload do %>
-  $('#<%= @school.openid_identifier.blank? ? 'openid' : 'password' %>').hide();
-<% end %>

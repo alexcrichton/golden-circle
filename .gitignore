@@ -11,3 +11,4 @@ log/*
 .idea
 coverage
 tmp
+mkmf.log

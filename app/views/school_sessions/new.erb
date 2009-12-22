@@ -1,15 +1,11 @@
 <%= error_messages_for :school_session %>
-<% content_for :jsload do %>
-  $('#<%= @school_session.openid_identifier.blank? ? 'openid-login' : 'pass-login' %>').hide();
-<% end %>
 <div class="login outer">
   <div class="inner">
     <h2>Login School</h2>
     <% form_for @school_session, :url => school_session_path do |f| %>
       <div id="pass-login">
         <p>
-          <%= f.label :email %>
-          (or <%= link_to_function 'OpenID', "$('#pass-login').slideUp();$('#openid-login').slideDown()" %>)<br />
+          <%= f.label :email %><br/>
           <%= f.text_field :email, :tabindex => 1 %>
         </p>
 
@@ -18,19 +14,11 @@
           <%= f.password_field :password, :tabindex => 2 %>
         </p>
       </div>
-      <div id="openid-login">
-        <p>
-          <%= f.label :openid_identifier, 'OpenID' %>
-          (or <%= link_to_function 'email/password', "$('#openid-login').slideUp();$('#pass-login').slideDown()" %>)
-          <%= f.text_field :openid_identifier, :tabindex => 3 %>
-        </p>
-      </div>
       <div>
         <%= f.check_box :remember_me, :tabindex => 4 %>
         <%= f.label :remember_me %>
         <div class="tcenter">
-          <%= f.submit "Login", :tabindex => 5, :onclick => "$('#pass-login:hidden').find('input').attr('value', '');" +
-            "$('#openid-login:hidden').find('input').attr('value', '')" %>
+          <%= f.submit "Login", :tabindex => 5 %>
         </div>
       </div>
     <% end %>

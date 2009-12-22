@@ -46,7 +46,7 @@
 
         <p>
           <%= f.label :email %>
-          <%= link_to '[Change Password/OpenID]', current_password_resets_path if current_school.id == @school.id %>
+          <%= link_to '[Change Password]', current_password_resets_path if current_school.id == @school.id %>
           <br />
           <%= f.text_field :email %>
         </p>

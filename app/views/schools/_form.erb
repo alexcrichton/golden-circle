@@ -10,8 +10,7 @@
 </p>
 <div id="password">
   <p>
-    <%= f.label :password %> (or <%= link_to_function 'OpenID', "$('#password').slideUp();$('#openid').slideDown()" %>
-    )<br />
+    <%= f.label :password %><br />
     <%= f.password_field :password, :tabindex => 1236 %>
   </p>
 
@@ -20,15 +19,3 @@
     <%= f.password_field :password_confirmation, :tabindex => 1237 %>
   </p>
 </div>
-<div id="openid">
-  <p>
-    <%= f.label :openid_identifier, 'OpenID Identifier' %>
-    (or <%= link_to_function 'password', "$('#openid').slideUp();$('#password').slideDown()" %>)<br />
-    <%= f.text_field :openid_identifier, :tabindex => 1238 %>
-  </p>
-</div>
-
-<% content_for :jsload do %>
-  $('#<%= @school && !@school.openid_identifier.blank? ? 'password' : 'openid' %>').hide();
-<% end %>
-
