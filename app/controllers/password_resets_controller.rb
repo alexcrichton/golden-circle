@@ -5,6 +5,7 @@ class PasswordResetsController < ApplicationController
   before_filter :require_school, :only => [:current]
 
   def new
+    render :layout => 'wide'
   end
 
   def create

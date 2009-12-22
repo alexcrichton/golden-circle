@@ -5,18 +5,4 @@
   <% else %>
     <%= link_to 'Log in', login_path %> | <%= link_to 'Register', new_school_path %>
   <% end %>
-  <br />
-  <% if cookies[:prefer_ssl] %>
-    <div id="secureconnection">
-      <% if !request.ssl? %>
-        <%= link_to 'Use a secure connection', ssl_prefer_school_session_path(:prefer => true) %>
-      <% else %>
-        <%= link_to 'Use a non-secure connection', ssl_prefer_school_session_path(:prefer => false) %>
-      <% end %>
-    </div>
-  <% else %>
-    <div id="secureconnection">
-      <%= link_to 'Learn about using a secure connection', about_secure_school_session_path %>
-    </div>
-  <% end %>
 </div>

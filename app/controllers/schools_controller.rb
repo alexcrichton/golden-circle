@@ -32,6 +32,7 @@ class SchoolsController < ApplicationController
 
   def new
     @school = School.new
+    render :layout => 'wide' if current_school.nil?
   end
 
   def create
