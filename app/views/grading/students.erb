@@ -4,7 +4,8 @@ Find:<br />
 <input name="search" type="text" />
 <hr />
 <% form_tag(grading_students_path(:team_id => @team.id), :method => :put, :class => 'grading') do %>
-  <%= error_messages_for :object => [@students, @team] %>
+  <%= error_messages_for @students %>
+  <%= error_messages_for @team %>
   <% fields_for @team do |tf| %>
     <p>
       <%= tf.check_box :student_scores_checked %>
