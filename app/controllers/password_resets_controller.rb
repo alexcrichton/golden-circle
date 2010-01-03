@@ -46,7 +46,7 @@ class PasswordResetsController < ApplicationController
               "If you are having issues try copying and pasting the URL " +
               "from your email into your browser or restarting the " +
               "reset password process."
-      return redirect_to login_path
+      return redirect_to(login_path)
     end
     if current_school && current_school.id != @school.id
       flash[:error] = "You can't edit someone else's password!"

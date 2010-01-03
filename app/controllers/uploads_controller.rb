@@ -39,7 +39,7 @@ class UploadsController < ApplicationController
   end
 
   def transfer
-    return send_file @upload.upload.path, :type => @upload.upload_content_type  
+    return send_file(@upload.upload.path, :type => @upload.upload_content_type)
   end
 
   protected

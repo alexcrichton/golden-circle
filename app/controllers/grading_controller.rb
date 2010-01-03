@@ -58,7 +58,7 @@ class GradingController < ApplicationController
     elsif boolean
       @team.recalculate_team_score #successful saves, score changed
     else
-      return render :action => 'students' # unsuccessful saves...
+      return render(:action => 'students') # unsuccessful saves...
     end
     flash[:notice] = 'Students successfully updated!'
     redirect_to grading_students_path(:team_id => @team.id)
