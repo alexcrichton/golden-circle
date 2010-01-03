@@ -8,7 +8,7 @@ class CreateUploads < ActiveRecord::Migration
       t.timestamps
     end
     Upload.create!(:upload => File.open('public/golden_circle_information.pdf'), :name => 'information')
-    Upload.create!(:name => 'db_backup', :upload => File.open("tmp/db_backup.sql", File::RDWR|File::CREAT))
+#    Upload.create!(:name => 'db_backup', :upload => File.open("tmp/db_backup.sql", File::RDWR|File::CREAT))
   end
 
   def self.down
