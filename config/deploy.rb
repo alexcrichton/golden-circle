@@ -1,8 +1,4 @@
-set :web_server, "10.10.10.113"
-
-role :app, web_server
-role :web, web_server
-role :db,  web_server, :primary => true
+server "eve.alexcrichton.com", :app, :web, :db, :primary => true
 
 set :scm, :git
 set :repository, "git://github.com/alexcrichton/golden-circle.git"
