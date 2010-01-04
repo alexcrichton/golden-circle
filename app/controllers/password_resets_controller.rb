@@ -1,11 +1,11 @@
 class PasswordResetsController < ApplicationController
 
-  before_filter :require_no_school, :only => [:create, :new]
   before_filter :load_school_using_perishable_token, :only => [:edit, :update]
-  before_filter :require_school, :only => [:current]
+  before_filter { |c| c.unauthorized! if c.cannot? :reset, 'password' }
+
+  layout 'wide'
 
   def new
-    render :layout => 'wide'
   end
 
   def create
@@ -20,17 +20,12 @@ class PasswordResetsController < ApplicationController
     end
   end
 
-  def current
-    (@school = current_school).reset_perishable_token!
-    redirect_to edit_password_reset_path(:id => @school.perishable_token)
-  end
-
   def edit
   end
 
   def update
-    if @school.update_attributes(params[:school].slice(:password, :password_confirmation, :openid_identifier))
-      flash[:notice] = "Password/OpenID successfully updated"
+    if @school.update_attributes(params[:school].slice(:password, :password_confirmation))
+      flash[:notice] = "Password successfully updated"
       redirect_to @school
     else
       render :action => 'edit'
@@ -47,10 +42,6 @@ class PasswordResetsController < ApplicationController
               "from your email into your browser or restarting the " +
               "reset password process."
       return redirect_to(login_path)
-    end
-    if current_school && current_school.id != @school.id
-      flash[:error] = "You can't edit someone else's password!"
-      redirect_to root_path
     end
   end
 end

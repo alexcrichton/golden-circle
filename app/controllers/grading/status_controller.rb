@@ -1,6 +1,6 @@
 class Grading::StatusController < ApplicationController
   
-  before_filter :require_admin
+  before_filter { |c| c.unauthorized! if c.cannot? :grade, School }
   layout 'wide'
 
   def show

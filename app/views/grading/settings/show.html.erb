@@ -2,7 +2,7 @@
 <div class="ui-widget-content ui-corner-all span-11">
   <h3 class="ui-widget-header ui-corner-all">Configuration Panel</h3>
 
-<% form_for Settings, :url => grading_config_path do |f| %>
+<% form_for Settings, :url => grading_settings_path do |f| %>
   <p>
     <%= f.label :deadline, 'Deadline for registration' %>:<br />
     <%= f.datetime_select :deadline %>

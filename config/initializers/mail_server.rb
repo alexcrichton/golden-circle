@@ -9,5 +9,3 @@ ActionMailer::Base.smtp_settings = {
    :user_name => "golden.circle.contest",
    :password => "newtonphi",
 }
-
-ActionMailer::Base.default_url_options[:host] = "gc.alexcrichton.com"

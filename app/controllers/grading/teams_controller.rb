@@ -1,6 +1,6 @@
 class Grading::TeamsController < ApplicationController
-
-  before_filter :require_admin
+  
+  before_filter { |c| c.unauthorized! if c.cannot? :grade, School }
   before_filter :load_teams
   layout 'wide'
 

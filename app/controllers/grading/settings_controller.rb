@@ -1,6 +1,7 @@
-class Grading::ConfigController < ApplicationController
-
-  before_filter :require_admin
+class Grading::SettingsController < ApplicationController
+  
+  authorize_resource :class => Settings
+  
   layout 'wide'
 
   def show
@@ -15,7 +16,7 @@ class Grading::ConfigController < ApplicationController
 
     flash[:notice] = "Settings successfully updated!"
 
-    redirect_to grading_config_path
+    redirect_to grading_settings_path
   end
 
   protected

@@ -1,8 +1,7 @@
 class UploadsController < ApplicationController
 
-  before_filter :require_admin, :except => [:transfer]
-  before_filter :load_upload
-  before_filter :require_information_transfer, :only => [:transfer]
+  load_authorize_resource
+
   layout 'wide'
 
   def index
@@ -40,18 +39,6 @@ class UploadsController < ApplicationController
 
   def transfer
     return send_file(@upload.upload.path, :type => @upload.upload_content_type)
-  end
-
-  protected
-
-  def load_upload
-    @upload = Upload.find(params[:id]) if params[:id]
-  end
-
-  def require_information_transfer
-    if @upload.name != 'information'
-      require_admin
-    end
   end
 
 end

@@ -29,7 +29,6 @@ class School < ActiveRecord::Base
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update, :unless => :password_changed?
   validate :submitted_before_deadline?
-  validate :owns_openid_identifier
 
   attr_protected :admin, :school_score
 
@@ -77,14 +76,8 @@ class School < ActiveRecord::Base
     end
   end
 
-  def owns_openid_identifier
-    return if errors.size > 0
-    #TODO
-  end
-
   def strip_name
-    # need selfs here or otherwise won't work. god knows why...
-    self.name = self.name.strip if self.name
+    self[:name] = self[:name].strip if self[name]
   end
 
   def add_teams

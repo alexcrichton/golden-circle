@@ -1,2 +1,0 @@
-module Grading::ConfigHelper
-end

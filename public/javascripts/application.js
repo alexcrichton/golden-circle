@@ -131,20 +131,22 @@ $(function() {
         required: true,
         email: true,
         remote: {
-          url: '/schools/valid_email',
+          url: '/schools/valid',
           type: 'post',
           data: {
-            'school[default_email]': $('input#school_email').val()
+            field: 'email',
+            'default': $('input#school_email').val()
           }
         }
       },
       'school[name]': {
         required: true,
         remote: {
-          url: '/schools/valid_name',
+          url: '/schools/valid',
           type: 'post',
           data: {
-            'school[default_name]': $('input#school_name').val()
+            field: 'name',
+            'default': $('input#school_name').val()
           }
         }
       },

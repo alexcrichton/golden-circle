@@ -1,5 +1,5 @@
 <div class="header">
-  <%= link_to image_tag("logo.png", :id => "logo", :alt => "Golden Circle"), root_path %>
+  <%= link_to image_tag("logo.png", :id => "logo", :alt => "Golden Circle"), current_school ? root_path : login_path %>
   <%= render 'layouts/login_links' %>
   <%= render 'layouts/topnav' %>
 </div>
