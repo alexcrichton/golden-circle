@@ -86,8 +86,10 @@ class GradingController < ApplicationController
   def load_students
     @student_hash = {}
     @team = Team.find(params[:team_id], :include => [:school])
-    @students = @team.students.by_name
-    @students.each { |s| @student_hash[s.id] = s }
+    if @team
+      @students = @team.students.by_name
+      @students.each { |s| @student_hash[s.id] = s }
+    end
   end
 
   def load_teams

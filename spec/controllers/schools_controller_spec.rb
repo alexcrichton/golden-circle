@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe SchoolsController do
+
   include MockSchoolHelper
   include MockTeamHelper
-  include MockScopeHelper
 
   describe "responding to GET /schools/new" do
 
@@ -319,24 +319,6 @@ describe SchoolsController do
     it "should render the 'index' template" do
       get :index
       response.should render_template('index')
-    end
-
-    it "should expose all schools as @schools" do
-      School.should_receive(:find).and_return([mock_school(:school_class => 'big', :proctors => true)])
-      get :index
-      assigns[:schools].should == [mock_school]
-    end
-
-    it "should expose all the proctors as @proctors" do
-      School.stub!(:find).and_return([mock_school(:school_class => 'big')])
-      mock_school.should_receive(:proctors).and_return(true)
-      get :index
-      assigns[:proctors].should == [true]
-    end
-
-    it 'should find all the schools' do
-      School.should_receive(:all).and_return(mock_scope([], :large, :small, :unknown, :by_name))
-      get :index
     end
 
   end

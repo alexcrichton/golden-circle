@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe GradingController do
 
   include MockSchoolHelper
-  include MockScopeHelper
   include MockTeamHelper
   include MockStudentHelper
 
@@ -21,11 +20,6 @@ describe GradingController do
     it 'should render the correct template' do
       get :teams, :level => 'wizard'
       response.should render_template('teams')
-    end
-
-    it 'should find all the teams' do
-      Team.should_receive(:apprentice).and_return(mock_scope([], :participating, :sorted))
-      get :teams, :level => 'apprentice'
     end
 
     it 'should assign the found teams to the teams variable' do
@@ -49,20 +43,14 @@ describe GradingController do
       response.should render_template('students')
     end
 
-    it 'should find the team' do
-      Team.should_receive(:find).with('434', :include => [:school]).and_return(mock_team(:students => mock_scope([mock_student], :by_name)))
+    it 'should find the correct team' do
+      Team.should_receive(:find).with('434', :include => [:school])
       get :students, :team_id => '434'
     end
 
-    it 'should assign the found team to the team variable and students to students' do
-      Team.stub!(:find).and_return(mock_team(:students => mock_scope([mock_student], :by_name)))
-      get :students, :team_id => '3'
-      assigns(:team).should == mock_team
-      assigns(:students).should == [mock_student]
-    end
   end
 
-  describe "responding to GET /print/1" do
+  describe "responding to GET :print" do
 
     before(:each) do
       mock_team(:school => mock_school)
@@ -74,124 +62,22 @@ describe GradingController do
       response.should be_success
     end
 
-    it "should render the 'print' template" do
-      Team.stub!(:find).and_return(mock_team)
-      get :print, :id => "1"
-      response.should render_template('print')
-    end
-
     it "should find the requested team" do
       Team.should_receive(:find).with("37", :include => [:school]).and_return(mock_team)
       get :print, :id => "37"
     end
 
-    it "should assign the found team for the view" do
-      Team.should_receive(:find).and_return(mock_team)
-      get :print, :id => "1"
-      assigns[:team].should equal(mock_team)
-    end
-
-    it 'should assign the correct school for the view' do
-      Team.should_receive(:find).and_return(mock_team)
-      get :print, :id => '1'
-      assigns[:school].should == mock_school
-    end
   end
 
-  describe "responding to GET /grading" do
+  describe "responding to GET :status" do
 
     it "should succeed" do
       get :status
       response.should be_success
     end
-
-    it "should render the 'status' template" do
-      get :status
-      response.should render_template('status')
-    end
-
-    it 'should find all blank scored teams' do
-      Team.should_receive(:blank_scores).and_return(mock_scope([], :sorted, :participating))
-      get :status
-    end
-
-    it 'should find all blank scored students' do
-      Student.should_receive(:blank_scores).and_return(mock_scope([], :by_name))
-      get :status
-    end
-
-    it "should assign the blank scored teams for the view" do
-      Team.stub!(:blank_scores).and_return(mock_scope([mock_team], :sorted, :participating))
-      get :status
-      assigns[:blank_teams].should eql([mock_team])
-    end
-
-    it "should assign the blank scored students for the view" do
-      Student.stub!(:blank_scores).and_return(mock_scope([mock_student], :by_name))
-      get :status
-      assigns[:blank_students].should eql([mock_student])
-    end
-
-    it 'should find all unchecked team scores' do
-      Team.should_receive(:unchecked_team_score).and_return(mock_scope([], :sorted, :participating))
-      get :status
-    end
-
-    it 'should find all unchecked student scores' do
-      Team.should_receive(:unchecked_student_scores).and_return(mock_scope([], :sorted, :participating))
-      get :status
-    end
-
-    it "should assign the unchecked team scores for the view" do
-      Team.stub!(:unchecked_team_score).and_return(mock_scope([mock_team], :sorted, :participating))
-      get :status
-      assigns[:unchecked_team_scores].should eql([mock_team])
-    end
-
-    it "should assign the unchecked student scores for the view" do
-      Team.stub!(:unchecked_student_scores).and_return(mock_scope([mock_team], :sorted, :participating))
-      get :status
-      assigns[:unchecked_student_scores].should eql([mock_team])
-    end
-
   end
 
-#  describe "responding to GET /grading/unchecked" do
-#
-#    it "should succeed" do
-#      get :unchecked
-#      response.should be_success
-#    end
-#
-#    it "should render the 'unchecked' template" do
-#      get :unchecked
-#      response.should render_template('unchecked')
-#    end
-#
-#    it 'should find all unchecked team scores' do
-#      Team.should_receive(:unchecked_team_score).and_return(mock_scope([], :sorted))
-#      get :unchecked
-#    end
-#
-#    it 'should find all unchecked student scores' do
-#      Team.should_receive(:unchecked_student_scores).and_return(mock_scope([], :sorted))
-#      get :unchecked
-#    end
-#
-#    it "should assign the unchecked team scores for the view" do
-#      Team.stub!(:unchecked_team_score).and_return(mock_scope([mock_team], :sorted))
-#      get :unchecked
-#      assigns[:unchecked_team_scores].should eql([mock_team])
-#    end
-#
-#    it "should assign the unchecked student scores for the view" do
-#      Team.stub!(:unchecked_student_scores).and_return(mock_scope([mock_team], :sorted))
-#      get :unchecked
-#      assigns[:unchecked_student_scores].should eql([mock_team])
-#    end
-#  end
-
-  describe "responding to GET /grading/config" do
+  describe "responding to GET :config" do
 
     it "should succeed" do
       get :config
@@ -204,14 +90,14 @@ describe GradingController do
     end
   end
 
-  describe "PUT /grading/teams" do
+  describe "PUT :update_teams" do
     it 'should succeed' do
       put :update_teams, :level => 'wizard', :teams => {}
       response.should redirect_to(grading_teams_path(:level => 'wizard'))
     end
 
     it 'should find all teams with the correct parameters' do
-      Team.should_receive(:wizard).and_return(mock_scope([mock_team], :participating, :sorted))
+      Team.stub_chain(:wizard, :participating, :sorted => [])
       put :update_teams, :level => 'wizard', :teams => {}
     end
 
@@ -239,12 +125,6 @@ describe GradingController do
         Team.stub!(:find).and_return([mock_team])
       end
 
-      it 'should assign the found teams to the @teams variable' do
-        Team.stub!(:wizard).and_return(mock_scope([mock_team], :participating, :sorted))
-        put :update_teams, :level => 'wizard', :teams => {}
-        assigns[:teams].should == [mock_team]
-      end
-
       it 'should update the teams correctly and save them' do
         mock_team.should_receive(:test_score=).with('-1')
         put :update_teams, :level => 'wizard', :teams => {'1' => {:test_score => '-1'}}
@@ -260,7 +140,7 @@ describe GradingController do
 
   describe "PUT /grading/students/1" do
     before(:each) do
-      mock_team(:students => mock_scope([mock_student], :by_name), :student_scores_checked= => true, :changed? => true, :recalculate_team_score => true, :id => 1)
+      mock_team(:student_scores_checked= => true, :changed? => true, :recalculate_team_score => true, :id => 1).stub_chain(:students, :by_name => [mock_student])
     end
 
     it 'should succeed' do
