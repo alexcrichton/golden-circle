@@ -16,12 +16,8 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :teams, :only => [], :member => {:print => :get}
 
-  map.with_options :controller => 'results', :conditions => {:method => :get} do |result|
-    result.statistics '/results/stats/:klass', :action => 'statistics'
-    result.school_results '/results/school', :action => 'school'
-    result.sweepstakes_results '/results/sweepstakes', :action => 'sweepstakes'
-    result.individual_results '/results/individual', :action => 'individual'
-  end
+  map.resource :results, :only => [], :member => {:school => :get, :sweepstakes => :get, :individual => :get}
+  map.statistics '/results/statistics/:klass', :controller => 'results', :action => 'statistics', :conditions => {:method => :get}
 
   map.resources :password_resets, :collection => {:current => :get}, :only => [:new, :create, :edit, :update]
   map.logout '/logout', :controller => "school_sessions", :action => "destroy"
