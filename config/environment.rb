@@ -51,4 +51,4 @@ Rails::Initializer.run do |config|
 
 end
 
-require 'smtp-tls' if RUBY_VERSION < '1.8.7'
+require 'smtp_tls' if RUBY_VERSION < '1.8.7'
