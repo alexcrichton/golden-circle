@@ -25,7 +25,7 @@ class Ability
         upload.name == 'information'
       end
       can [:read, :update], school
-      can :read, 'results' if Time.now > Settings.event_date
+      can :read, 'results' if Settings.event_date.blank? || Time.now > Settings.event_date
     end
   end
 end

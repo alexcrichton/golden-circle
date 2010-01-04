@@ -81,7 +81,7 @@ class SchoolsController < ApplicationController
 
   def load_school
     @school = School.find_by_slug(params[:id], :include => [:teams, :proctors]) if params[:id]
-    @school = current_school if @school.nil?
+    @school = current_school if params[:action] == 'show_current'
   end
 
 end

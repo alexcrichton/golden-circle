@@ -12,7 +12,7 @@ describe SchoolsController do
     end
 
     it 'should allow anyone' do
-      controller.stub!(:current_school).and_return(mock_school)
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
       get :new
       response.should be_success
     end
@@ -41,28 +41,28 @@ describe SchoolsController do
   describe "responding to GET /schools/1" do
 
     it 'should redirect anonymous to the login page' do
-      School.stub!(:find)
+      School.stub!(:find_by_slug)
       get :show, :id => 1
       response.should redirect_to(login_path)
     end
 
     it 'should allow the owner' do
-      controller.stub!(:current_school).and_return(mock_school)
-      School.stub!(:find).and_return(mock_school)
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
+      School.stub!(:find_by_slug).and_return(mock_school)
       get :show, :id => 1
       response.should be_success
     end
 
-    it 'should redirect non-owners to the login page' do
+    it 'should redirect non-owners to the home page' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
-      School.stub!(:find).and_return(mock_school)
+      School.stub!(:find_by_slug).and_return(mock_school)
       get :show, :id => 1
-      response.should redirect_to(login_path)
+      response.should redirect_to(root_path)
     end
 
     it 'should allow an admin school' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true)); @mock_school = nil
-      School.stub!(:find).and_return(mock_school)
+      School.stub!(:find_by_slug).and_return(mock_school)
       get :show, :id => 1
       response.should be_success
     end
@@ -77,17 +77,17 @@ describe SchoolsController do
     end
 
     it 'should allow the owner' do
-      controller.stub!(:current_school).and_return(mock_school)
+      controller.stub!(:current_school).and_return(mock_school(:admin => false))
       School.stub!(:find).and_return(mock_school)
       get :edit, :id => 1
       response.should be_success
     end
 
-    it 'should redirect non-owners to the login page' do
+    it 'should redirect non-owners to the root page' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false)); @mock_school = nil
       School.stub!(:find).and_return(mock_school)
       get :edit, :id => 1
-      response.should redirect_to(login_path)
+      response.should redirect_to(root_path)
     end
 
     it 'should allow an admin school' do

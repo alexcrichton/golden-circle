@@ -11,7 +11,8 @@ module MockSchoolHelper
             :contact_phone => "555 555 5555",
             :enrollment => "500",
             :school_score => '3',
-            :openid_identifier => ''
+            :openid_identifier => '',
+            :admin => false
     }
   end
 

@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
     clear_stored_location
   end
 
-  alias :current_user :current_school
-
+  def current_user # for CanCan
+    current_school
+  end
 end
