@@ -4,8 +4,6 @@ describe GradingController do
 
   include MockSchoolHelper
   include MockTeamHelper
-  include MockScopeHelper
-
 
   describe "responding to GET /schools/1/print" do
 
@@ -60,9 +58,11 @@ describe GradingController do
       get :students, :team_id => 1
       response.should redirect_to(login_path)
     end
+
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name)))
+      Team.stub!(:find).and_return(@team = 'asdf')
+      @team.stub_chain(:students, :by_name => [])
       get :students, :team_id => 1
       response.should be_success
     end
@@ -151,11 +151,13 @@ describe GradingController do
       put :update_students, :team_id => 1
       response.should redirect_to(login_path)
     end
+
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      Team.stub!(:find).and_return(mock_team(:students => mock_scope([], :by_name), :student_scores_checked= => true, :changed? => false, :id => 1))
+      Team.stub!(:find).and_return(mock_team(:student_scores_checked= => true, :changed? => false, :id => 1))
+      mock_team.stub_chain(:students, :by_name => [])
       put :update_students, :team_id => 1, :team => {}, :students => {}
-      response.should redirect_to(grading_students_path(:team_id => 1))
+      response.should redirect_to(grading_students_path(1))
     end
   end
 

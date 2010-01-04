@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe SchoolsController do
+
   include MockSchoolHelper
-  include MockScopeHelper
 
   describe "responding to GET /schools/new" do
 
