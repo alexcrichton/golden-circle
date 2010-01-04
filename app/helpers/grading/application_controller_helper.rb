@@ -1,0 +1,2 @@
+module Grading::ApplicationControllerHelper
+end

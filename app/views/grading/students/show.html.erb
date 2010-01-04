@@ -3,9 +3,8 @@
 Find:<br />
 <input name="search" type="text" />
 <hr />
-<% form_tag(grading_students_path(:team_id => @team.id), :method => :put, :class => 'grading') do %>
-  <%= error_messages_for @students %>
-  <%= error_messages_for @team %>
+<% form_tag(grading_team_students_path(@team), :class => 'grading', :method => :put) do %>
+  <%= error_messages_for 'team' %>
   <% fields_for @team do |tf| %>
     <p>
       <%= tf.check_box :student_scores_checked %>
@@ -24,9 +23,12 @@ Find:<br />
     </tr>
     <% @students.each do |student| %>
       <% fields_for("students[#{student.id}]", student) do |sf| %>
-        <tr class="<%= cycle('even', 'odd') %> filter:<%= h(student.first_name + " " + student.last_name).gsub(/ /, "_") %>">
-          <td><%= sf.label :test_score, h(student.first_name + " " + student.last_name) %></td>
-          <td class="cell"><%= sf.text_field :test_score, :size => 4 %></td>
+        <tr class="<%= cycle('even', 'odd') %> filter:<%= h(student.name).gsub(/ /, "_") %>">
+          <td><%= sf.label :test_score, h(student.name) %></td>
+          <td class="cell">
+            <%= sf.text_field :test_score, :size => 4 %>
+            <%= error_message_on student, :test_score %>
+          </td>
           <td><%= h @team.school.name %></td>
           <td><%= h @team.level %></td>
         </tr>
@@ -35,6 +37,6 @@ Find:<br />
   </table>
   <p>
     <%= submit_tag "Submit Changes", :onclick => "setConfirmUnload(false)" %> or
-    <%= link_to 'Back to teams', grading_teams_path(:level => @team.level) %>
+    <%= link_to 'Back to teams', grading_team_path(@team.level) %>
   </p>
 <% end %>

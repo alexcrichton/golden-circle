@@ -9,7 +9,7 @@
     <h3>Teams</h3>
     <ul>
       <% @blank_teams.each do |team| %>
-        <li><%= link_to team_name(team), grading_teams_path(:level => team.level) %> (<%= team.level %>)</li>
+        <li><%= link_to team_name(team), grading_team_path(team.level) %> (<%= team.level %>)</li>
       <% end %>
     </ul>
     <hr />
@@ -18,7 +18,7 @@
     <h3>Students</h3>
     <ul>
       <% @blank_students.each do |student| %>
-        <li><%= link_to(h(student.name), grading_students_path(:team_id => student.team.id)) %></li>
+        <li><%= link_to(h(student.name), grading_team_students_path(student.team)) %></li>
       <% end %>
     </ul>
   <% end %>
@@ -34,7 +34,7 @@
     <h3>Teams</h3>
     <ul>
       <% @unchecked_team_scores.each do |team| %>
-        <li><%= link_to team_name(team), grading_teams_path(:level => team.level) %> (<%= team.level %>)</li>
+        <li><%= link_to team_name(team), grading_team_path(team.level) %> (<%= team.level %>)</li>
       <% end %>
     </ul>
     <hr />
@@ -43,7 +43,7 @@
     <h3>Students</h3>
     <ul>
       <% @unchecked_student_scores.each do |team| %>
-        <li><%= link_to team_name(team), grading_students_path(:team_id => team.id) %> (<%= team.level %>)</li>
+        <li><%= link_to team_name(team), grading_team_students_path(team) %> (<%= team.level %>)</li>
       <% end %>
     </ul>
   <% end %>

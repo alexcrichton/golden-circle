@@ -4,7 +4,7 @@ Find:<br />
 <input name="search" type="text" />
 <hr />
 
-<% form_tag(grading_teams_path(:level => params[:level]), :method => :put, :class => 'grading') do %>
+<% form_tag(grading_team_path(params[:id]), :method => :put, :class => 'grading') do %>
   <%= error_messages_for :object => @teams %>
   <table id="teams">
     <tr>
@@ -14,6 +14,7 @@ Find:<br />
       <th>School Name</th>
       <th>Level</th>
       <th>Score</th>
+      <th>Checked?</th>
       <th>School Size</th>
       <th>&nbsp;</th>
     </tr>
@@ -21,10 +22,11 @@ Find:<br />
       <% fields_for("teams[#{team.id}]", team) do |tf| %>
         <tr class="<%= cycle('even', 'odd') %> filter:<%= h(team_name(team) + "_" + team.level).gsub(/ /, "_") %>">
           <td><%= tf.label :test_score, team_name(team) %></td>
-          <td><%= h team.level %></td>
-          <td><%= tf.text_field :test_score, :size => 5 %> <%= tf.check_box :team_score_checked %></td>
+          <td><%= team.level %></td>
+          <td><%= tf.text_field :test_score, :size => 5 %></td>
+          <td><%= tf.check_box :team_score_checked %></td>
           <td><%= team.school.school_class %></td>
-          <td><%= link_to 'Individual Scores', grading_students_path(:team_id => team.id) %></td>
+          <td><%= link_to 'Individual Scores', grading_team_students_path(team) %></td>
         </tr>
       <% end %>
     <% end %>
