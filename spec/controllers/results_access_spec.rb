@@ -8,21 +8,21 @@ describe ResultsController do
     Settings.event_date = Time.now + 1.year
   end
 
-  describe "GET /results/stats" do
+  describe "GET /results/statistics" do
     it 'should redirect anonymous users to the login path' do
-      get :statistics
+      get :statistics, :klass => 'large'
       response.should redirect_to(login_path)
     end
 
     it 'should redirect non-admin users to the login path' do
       controller.stub!(:current_school).and_return(mock_school(:admin => false))
-      get :statistics
+      get :statistics, :klass => 'large'
       response.should redirect_to(login_path)
     end
 
     it 'should allow admin users' do
       controller.stub!(:current_school).and_return(mock_school(:admin => true))
-      get :statistics
+      get :statistics, :klass => 'large'
       response.should be_success
     end
   end

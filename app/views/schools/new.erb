@@ -1,5 +1,5 @@
 <h2>Create a school</h2>
-<% form_for @school, :url => schools_path, :html => {:method => :post, :class => 'new_school'} do |f| %>
+<% form_for @school do |f| %>
   <%= render 'schools/form', :f => f %>
   <p>
     <%= f.submit "Register School" %>

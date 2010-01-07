@@ -2,13 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/schools/new.erb" do
   include MockSchoolHelper
-  include MockUploadHelper
 
   before(:each) do
+    template.stub!(:current_school).and_return mock_school
     assigns[:school] = mock_school(:new_record? => true)
+    template.stub!(:can?).and_return(true)
     Settings.stub!(:event_date).and_return(Time.now)
     Settings.stub!(:deadline).and_return(Time.now)
-    Upload.stub!(:find_by_name).and_return(mock_upload)
     render "/schools/new.erb"
   end
 

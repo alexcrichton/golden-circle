@@ -1,18 +1,9 @@
-<% if flash[:notice] %>
-  <div class="notice flash">
-    <p><%= flash[:notice] %></p>
+<% flash.each do |name, msg| %>
+  <% content_tag :div, :class => "flash #{name}" do %>
+    <%= msg %>
     <%= link_to_function '[hide]', "$(this).parents('.flash').fadeOut('fast')" %>
-    &nbsp; <%# needed for some reason... %>
-  </div>
+  <% end %>
 <% end %>
-<% if flash[:error] %>
-  <div class="error flash">
-    <p><%= flash[:error] %></p>
-    <%= link_to_function '[hide]', "$(this).parents('.flash').fadeOut('fast')" %>
-    &nbsp; <%# needed for some reason... %>
-  </div>
-<% end %>
-
 <noscript>
   <p>
     Unfortunately your browser does not have JavaScript capabilities which are required to exploit full functionality of

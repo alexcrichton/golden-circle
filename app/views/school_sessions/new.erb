@@ -28,7 +28,7 @@
 <div class="login outer">
   <div class="inner">
     <h2>Register a School</h2>
-    <% form_for School.new, :html => {:method => :post, :class => 'new_school'} do |f| %>
+    <% form_for School.new do |f| %>
       <%= render 'schools/form', :f => f %>
       <p class="tcenter">
         <%= f.submit "Register School" %>

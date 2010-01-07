@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe ResultsController do
 
   include MockSchoolHelper
-  include MockScopeHelper
   include MockTeamHelper
   include MockStudentHelper
 
@@ -31,9 +30,9 @@ describe ResultsController do
     end
 
     it 'should assign the current school to the @school variable' do
-      controller.stub!(:current_school).and_return(mock_school)
+      controller.stub!(:current_school).and_return('current')
       get :school
-      assigns[:school].should == mock_school
+      assigns[:school].should == 'current'
     end
   end
 
@@ -55,20 +54,20 @@ describe ResultsController do
     end
 
     it 'should assign the winning schools to the @schools variable' do
-      School.stub!(:winners).and_return([mock_school])
+      School.stub!(:winners).and_return('winners')
       get :sweepstakes
-      assigns[:schools].should == [mock_school]
+      assigns[:schools].should == 'winners'
     end
 
     it 'should find the winning teams' do
-      Team.should_receive(:winners).and_return(mock_scope([], :participating, :non_exhibition))
+      Team.stub_chain(:winners, :participating, :non_exhibition => [])
       get :sweepstakes
     end
 
     it 'should assign the winning teams to the @teams variable' do
-      Team.should_receive(:winners).and_return(mock_scope([mock_team], :participating, :non_exhibition))
+      Team.stub_chain(:winners, :participating, :non_exhibition => 'Team')
       get :sweepstakes
-      assigns[:teams].should == [mock_team]
+      assigns[:teams].should == 'Team'
     end
   end
 
@@ -85,62 +84,47 @@ describe ResultsController do
     end
 
     it 'should find the winning students' do
-      Student.should_receive(:winners).and_return(mock_scope([], :upper_scores))
+      Student.stub_chain(:winners, :scoped)
       get :individual
     end
 
     it 'should assign the winning students to the @students variable' do
-      Student.stub!(:winners).and_return(mock_scope([mock_student], :upper_scores))
+      Student.stub_chain(:winners, :scoped => 'Student')
       get :individual
-      assigns[:students].should == [mock_student]
+      assigns[:students].should == 'Student'
     end
   end
 
 
 
-  describe "responding to GET /results/stats" do
+  describe "responding to GET :statistics" do
 
     it "should succeed" do
-      get :statistics
+      get :statistics, :klass => 'large'
       response.should be_success
     end
 
     it 'should render the correct template' do
-      get :statistics
+      get :statistics, :klass => 'large'
       response.should render_template('statistics')
     end
 
-    it 'should find the correct class of schools' do
-      School.should_receive(:winners).and_return(mock_scope([], 'large'))
-      get :statistics, :level => 'wizard', :class => 'large'
-    end
-
-    it 'should find the correct class and level of teams' do
-      Team.should_receive(:winners).and_return(mock_scope([], 'large', 'wizard'))
-      get :statistics, :level => 'wizard', :class => 'large'
-    end
-
-    it 'should find the correct class and level of students' do
-      Student.should_receive(:winners).and_return(mock_scope([], 'large', 'wizard'))
-      get :statistics, :level => 'wizard', :class => 'large'
-    end
-
     it 'should assign the found schools to @schools' do
-      School.should_receive(:winners).and_return(mock_scope([mock_school], 'large'))
-      get :statistics, :level => 'wizard', :class => 'large'
-      assigns[:schools].should == [mock_school]
+      School.stub_chain(:winners, :large => 'school')
+      get :statistics, :klass => 'large'
+      assigns[:schools].should == 'school'
     end
 
     it 'should assign the found teams to @teams' do
-      Team.should_receive(:winners).and_return(mock_scope([mock_team], 'large', 'apprentice'))
-      get :statistics, :level => 'apprentice', :class => 'large'
-      assigns[:teams].should == [mock_team]
+      Team.stub_chain(:winners, :large => 'team')
+      get :statistics, :klass => 'large'
+      assigns[:teams].should == 'team'
     end
 
     it 'should assign the found students to @students' do
-      Student.should_receive(:winners).and_return(mock_scope([mock_student], 'small', 'wizard'))
-      get :statistics, :level => 'wizard', :class => 'small'
-      assigns[:students].should == [mock_student]
+      Student.stub_chain(:winners, :small => 'student')
+      get :statistics, :klass => 'small'
+      assigns[:students].should == 'student'
     end
   end
 

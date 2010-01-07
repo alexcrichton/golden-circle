@@ -1,9 +1,7 @@
 class SchoolsController < ApplicationController
 
-  before_filter :load_school, :except => [:valid_name, :valid_email]
-  before_filter :require_school, :only => [:show_current]
-  before_filter :require_owner, :only => [:update, :edit, :destroy, :show]
-  before_filter :require_admin, :only => [:index, :email]
+  before_filter :load_school
+  authorize_resource
 
   def index
     @schools = School.all.by_name
@@ -38,16 +36,14 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(params[:school])
 
-    @school.save do |result|
-      if result
-        flash[:notice] = 'School was successfully created.'
-        redirect_to(@school)
-      elsif current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
-        @school.save(false)
-        redirect_to(@school)
-      else
-        render :action => "new"
-      end
+    if @school.save
+      flash[:notice] = 'School was successfully created.'
+      redirect_to(@school)
+    elsif current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
+      @school.save(false)
+      redirect_to(@school)
+    else
+      render :action => "new"
     end
   end
 
@@ -85,15 +81,7 @@ class SchoolsController < ApplicationController
 
   def load_school
     @school = School.find_by_slug(params[:id], :include => [:teams, :proctors]) if params[:id]
-  end
-
-  def require_owner
-    unless current_school && @school && (@school.id == current_school.id || current_school.admin)
-      store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to login_path
-      return false
-    end
+    @school = current_school if params[:action] == 'show_current'
   end
 
 end
