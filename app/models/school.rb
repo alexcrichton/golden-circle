@@ -28,7 +28,6 @@ class School < ActiveRecord::Base
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
   validates_associated :phone, :message => 'number is invalid', :on => :update, :unless => :password_changed?
-  validate :submitted_before_deadline?
 
   attr_protected :admin, :school_score
 
@@ -70,12 +69,6 @@ class School < ActiveRecord::Base
   end
 
   private
-  def submitted_before_deadline?
-    if new_record? && Time.zone.now > Settings.deadline
-      errors.add_to_base("The registration deadline has passed. If you would still like to participate this year, please email golden.circle.contest@gmail.com")
-    end
-  end
-
   def strip_name
     self[:name] = self[:name].strip if self[name]
   end

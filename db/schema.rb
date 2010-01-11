@@ -9,22 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091111023436) do
-
-  create_table "open_id_authentication_associations", :force => true do |t|
-    t.integer "issued"
-    t.integer "lifetime"
-    t.string  "handle"
-    t.string  "assoc_type"
-    t.binary  "server_url"
-    t.binary  "secret"
-  end
-
-  create_table "open_id_authentication_nonces", :force => true do |t|
-    t.integer "timestamp",  :null => false
-    t.string  "server_url"
-    t.string  "salt",       :null => false
-  end
+ActiveRecord::Schema.define(:version => 20100104014542) do
 
   create_table "proctors", :force => true do |t|
     t.string   "name"
@@ -54,11 +39,9 @@ ActiveRecord::Schema.define(:version => 20091111023436) do
     t.datetime "updated_at"
     t.string   "perishable_token",  :default => "",    :null => false
     t.integer  "school_score"
-    t.string   "openid_identifier"
     t.string   "slug"
   end
 
-  add_index "schools", ["openid_identifier"], :name => "index_schools_on_openid_identifier"
   add_index "schools", ["perishable_token"], :name => "index_schools_on_perishable_token"
   add_index "schools", ["slug"], :name => "index_schools_on_slug"
 

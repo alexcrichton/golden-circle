@@ -1,8 +1,8 @@
 <div id="login_links">
   <% if current_school %>
     Logged in as: <%= link_to h(current_school.name), current_school %> | <%= link_to 'Log out', logout_path %> |
-    <%= link_to 'Register new school', new_school_path if current_school.admin %>
+    <%= link_to 'Register new school', new_school_path if can? :create, School %>
   <% else %>
-    <%= link_to 'Log in', login_path %> | <%= link_to 'Register', new_school_path %>
+    <%= link_to 'Log in', login_path %> | <%= link_to 'Register', new_school_path if can? :create, School%>
   <% end %>
 </div>

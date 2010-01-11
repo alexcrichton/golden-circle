@@ -39,9 +39,6 @@ class SchoolsController < ApplicationController
     if @school.save
       flash[:notice] = 'School was successfully created.'
       redirect_to(@school)
-    elsif current_school && current_school.admin && @school.errors.size == 1 && @school.errors.on_base != nil
-      @school.save(false)
-      redirect_to(@school)
     else
       render :action => "new"
     end
@@ -51,8 +48,6 @@ class SchoolsController < ApplicationController
   end
 
   def update
-    params[:school].delete(:password)
-    params[:school].delete(:password_confirmation)
     if @school.update_attributes(params[:school])
       flash[:notice] = 'School successfully updated. Please review the form below to ensure accuracy.'
       redirect_to(@school)

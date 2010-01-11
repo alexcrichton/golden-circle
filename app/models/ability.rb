@@ -11,7 +11,9 @@ class Ability
     alias_action :show_current, :to => :read
     alias_action :valid, :to => :validate
     
-    can :create, School
+    can :create, School do 
+      Settings.deadline.blank? || Time.now < Settings.deadline
+    end
     can :validate, School
     if school.nil?
       can :login, School
@@ -25,7 +27,9 @@ class Ability
         upload.name == 'information'
       end
       can [:read, :update], school
-      can :read, 'results' if Settings.event_date.blank? || Time.now > Settings.event_date
+      can :read, 'results' do
+        Settings.event_date.blank? || Time.now > Settings.event_date
+      end
     end
   end
 end
