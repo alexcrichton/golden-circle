@@ -23,9 +23,6 @@ class Ability
       cannot :reset, 'password' # need to be logged out (don't want to mess with other users)
     else
       can :logout, School
-      can :transfer, Upload do |upload|
-        upload.name == 'information'
-      end
       can [:read, :update], school
       can :read, 'results' do
         Settings.event_date.blank? || Time.now > Settings.event_date

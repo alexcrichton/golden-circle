@@ -25,8 +25,8 @@ namespace :db do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/files #{latest_release}/public/files"
   end
-
 end
+
 namespace :deploy do
   task :restart, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
