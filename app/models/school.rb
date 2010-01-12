@@ -18,16 +18,15 @@ class School < ActiveRecord::Base
               :converter => Phone.converter
 
   validates_presence_of :name
-  validates_presence_of :contact_name, :enrollment, :phone, :on => :update, :unless => :password_changed?
+  validates_presence_of :contact_name, :enrollment, :phone, :on => :update
   validates_numericality_of :enrollment,
                             :greater_than_or_equal_to => 0,
                             :only_integer => true,
-                            :on => :update,
-                            :unless => :password_changed?
+                            :on => :update
   validates_uniqueness_of :name, :case_sensitive => false, :if => :name_changed?
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
-  validates_associated :phone, :message => 'number is invalid', :on => :update, :unless => :password_changed?
+  validates_associated :phone, :message => 'number is invalid', :on => :update
 
   attr_protected :admin, :school_score
 
@@ -70,7 +69,7 @@ class School < ActiveRecord::Base
 
   private
   def strip_name
-    self[:name] = self[:name].strip if self[name]
+    self[:name] = self[:name].strip if self[:name]
   end
 
   def add_teams
