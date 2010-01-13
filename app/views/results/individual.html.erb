@@ -33,7 +33,7 @@
             </tr>
           <% end %>
         </table>
-        <% dataset = (0..25).map{ |i| cache.select{ |s| s.test_score == i}.count } %>
+        <% dataset = (0..25).map{ |i| cache.select{ |s| s.test_score == i}.size } %>
         <% puts dataset.inspect %>
         <%= google_chart :cht => 'bvg',
                          :chco => '006666',
