@@ -5,8 +5,8 @@
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
-  :key         => '_gcircle_session',
-  :secret      => 'b5c82d10c7c1888b460991049023b06c735da95506f8062747c7b39f4c4b9bd9aa84b2135ca43b7f19f862028d4a34886290c660ab0dab21b0542a147866235d'
+  :key    => '_golden-circle_session',
+  :secret => '8b068c8720921fd9c69a2d02a7070657293c47b039ca87330b3f99d022d1e9caae93877c53490ab6e1544f10b7ab1366cae41fe946363098fa75d781bb21b176'
 }
 
 # Use the database for sessions instead of the cookie-based default,

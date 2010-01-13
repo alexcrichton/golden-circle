@@ -1,30 +1,44 @@
-ActionController::Routing::Routes.draw do |map|
+GoldenCircle::Application.routes.draw do |map|
 
 #     Taken out for Heroku
-#  map.resources :uploads, :collection => {:backup => :put, :restore => :get},
+#  resources :uploads, :collection => {:backup => :put, :restore => :get},
 #                :member => {:transfer => :get},
 #                :only => [:index, :update, :edit]
 
-  map.resources :schools, :collection => {:show_current => :get,
-                                          :email => :put,
-                                          :valid => :post}
-  map.namespace :grading do |grading|
-    grading.resources :teams, :only => [:update, :show] do |team|
-      team.resource   :students, :only => [:update, :show]
+  resources :schools do
+    collection do
+      get :show_current
+      put :email
+      post :valid
     end
-    grading.resource  :settings, :only => [:update, :show]
-    grading.resource  :status, :only => [:show], :controller => 'status'
   end
-  map.resources :teams, :only => [], :member => {:print => :get}
+  namespace :grading do
+    resources :teams, :only => [:update, :show] do
+      resource  :students, :only => [:update, :show]
+    end
+    resource :settings, :only => [:update, :show]
+    controller(:status) { get '/status', :to => :show }
+  end
+  resources :teams, :only => [] do
+    get :print, :on => :member
+  end
 
-  map.resource :results, :only => [], :member => {:school => :get, :sweepstakes => :get, :individual => :get}
-  map.statistics '/results/statistics/:klass', :controller => 'results', :action => 'statistics', :conditions => {:method => :get}
+  scope(:path => '/results', :controller => 'results') do
+    get '/school', :to => :school
+    get '/sweepstakes', :to => :sweepstakes
+    get '/individual', :to => :individual
+    get '/statistics/:klass', :to => :statistics
+  end
+  # match '/results/statistics/:klass' => 'results#statistics'
+  # statistics '/results/statistics/:klass', :controller => 'results', :action => 'statistics', :conditions => {:method => :get}
 
-  map.resources :password_resets, :only => [:new, :create, :edit, :update]
-  map.logout '/logout', :controller => "school_sessions", :action => "destroy"
-  map.login '/login', :controller => "school_sessions", :action => "new"
-  map.resource :school_session, :only => [:create]
+  resources :password_resets, :only => [:new, :create, :edit, :update]
+  #logout '/logout', :controller => "school_sessions", :action => "destroy"
+  #login '/login', :controller => "school_sessions", :action => "new"
+  match '/logout' => 'school_sessions#destroy'
+  match '/login' => 'school_sessions#new'
+  resource :school_session, :only => [:create]
 
-  map.root :controller => "schools", :action => "show_current"
+  root :to => "schools#show_current"
 
 end
