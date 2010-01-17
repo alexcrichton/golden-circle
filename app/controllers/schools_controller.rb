@@ -73,7 +73,7 @@ class SchoolsController < ApplicationController
   end
   
   def admin
-    @school.admin = params[:admin]
+    @school.admin = params[:school][:admin]
     if @school.save
       render :text => 'success'
     else 

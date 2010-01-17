@@ -18,11 +18,12 @@ class School < ActiveRecord::Base
               :converter => Phone.converter
 
   validates_presence_of :name
-  validates_presence_of :contact_name, :enrollment, :phone, :on => :update
+  validates_presence_of :contact_name, :enrollment, :phone, :on => :update, :unless => :admin_changed?
   validates_numericality_of :enrollment,
                             :greater_than_or_equal_to => 0,
                             :only_integer => true,
-                            :on => :update
+                            :on => :update,
+                            :unless => :admin_changed?
   validates_uniqueness_of :name, :case_sensitive => false, :if => :name_changed?
   validates_associated :teams, :message => "are invalid"
   validates_associated :proctors, :message => 'are invalid'
