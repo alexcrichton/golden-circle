@@ -3,6 +3,7 @@
     <td class="separator" colspan="7"><%= title %></td>
   </tr>
   <tr>
+    <th>Admin?</th>
     <th>School name</th>
     <th>Contact email</th>
     <th>Enrollment</th>
@@ -13,6 +14,14 @@
   </tr>
   <% schools.each do |school| %>
     <tr class="<%= cycle('even', 'odd') %>">
+      <td>
+        <% form_for school, :url => admin_school_path(school), :html => {:id => 'admin_school'} do |f| %>
+          <div>
+            <%= f.check_box :admin %>
+            <div class="response"></div>
+          </div>
+        <% end %>
+      </td>
       <td><%= link_to(h(school.name), school) %></td>
       <td><%= mail_to(school.email) %></td>
       <td class="num"><%= h school.enrollment %></td>

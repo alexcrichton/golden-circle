@@ -7,7 +7,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :schools, :collection => {:show_current => :get,
                                           :email => :put,
-                                          :valid => :post}
+                                          :valid => :post},
+                          :member => {:admin => :put}
   map.namespace :grading do |grading|
     grading.resources :teams, :only => [:update, :show] do |team|
       team.resource   :students, :only => [:update, :show]

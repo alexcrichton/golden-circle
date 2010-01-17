@@ -1,3 +1,6 @@
+var smallAjax = '<img src="/images/ajax-small.gif" alt="Loading..." class="loading"/>';
+var bigAjax = '<img src="/images/ajax-big.gif" alt="Loading..." class="loading"/>';
+
 function changeCount(count, dif) {
   if (typeof($[count]) == "undefined")
     $[count] = 0;
@@ -40,6 +43,22 @@ $(function() {
   if ($.browser.mozilla)
     $('#secureconnection').show();
   $('#tabs').tabs();
+});
+
+$(function() {
+  if($('form#admin_school').length == 0) return;
+  $(':checkbox').change(function(){
+    var img = $(smallAjax);
+    $(this).parents('div:first').append(img);
+    $(this).parents('form').find('.response').html('');
+    $(this).parents('form').ajaxSubmit({
+      error: error,
+      success: function(data) {
+        img.parents('div:first').find('.response').html(data);
+        img.remove();
+      }
+    });
+  });
 });
 
 $(function() {
@@ -226,3 +245,9 @@ function matches(words, searches, index) {
   }
   return false;
 }
+
+function error() {
+  $('img.loading').remove();
+  alert('Server Error... Please try later');
+}
+
