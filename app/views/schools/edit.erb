@@ -83,9 +83,7 @@
 
   <div>
     <h3 style="font-weight:bold;text-align:center">Teams</h3>
-    <% @school.teams.sorted.each do |team| %>
-
-      <% next if team.is_exhibition %>
+    <% @school.teams.non_exhibition.sorted.each do |team| %>
       <div class="span-8 <%= cycle 'colborder', 'last', :team_non_ex_class %>">
         <% f.fields_for :teams, team do |tf| %>
           <%= render 'team', :f => tf %>
@@ -103,10 +101,10 @@
       All Exhibition teams will still participate, although their scores will not count towards the school's total
       score. Once a team is created, it will be assigned an ID number to identify it.
     </p>
-    <% @school.teams.each do |team| %>
+    <% @school.teams.exhibition.each do |team| %>
       <% f.fields_for :teams, team do |etf| %>
         <%= render 'team', :f => etf %>
-      <% end if team.is_exhibition %>
+      <% end %>
     <% end %>
   </div>
 
