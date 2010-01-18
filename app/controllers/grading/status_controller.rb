@@ -9,5 +9,8 @@ class Grading::StatusController < ApplicationController
 
     @unchecked_team_scores = Team.unchecked_team_score.participating.sorted
     @unchecked_student_scores = Team.unchecked_student_scores.participating.sorted
+
+    @checked_team_scores = Team.checked_team_score.participating.sorted
+    @checked_student_scores = Team.checked_student_scores.participating.sorted
   end
 end

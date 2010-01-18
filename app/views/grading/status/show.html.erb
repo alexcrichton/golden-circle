@@ -1,50 +1,91 @@
-<div class="span-8 colborder">
-  <h1>Blank</h1>
+<div id="tabs">
+  <ul>
+    <li><a href="#blank">Blank</a></li>
+    <li><a href="#unchecked">Unchecked</a></li>
+    <li><a href="#checked">Checked</a></li>
+  </ul>
+  <div id="blank">
+    <h1>Blank</h1>
 
-  <p>
-    Those teams and students which haven't had scores entered yet. These might need to be entered in to have the correct
-    results...
-  </p>
-  <% if @blank_teams.size > 0 %>
-    <h3>Teams</h3>
-    <ul>
-      <% @blank_teams.each do |team| %>
-        <li><%= link_to team_name(team), grading_team_path(team.level) %> (<%= team.level %>)</li>
+    <p>
+      Those teams and students which haven't had scores entered yet. These might need to be entered in to have the correct
+      results...
+    </p>
+    <div class='span-8 colborder'>
+    <% if @blank_teams.size > 0 %>
+      <h3>Teams</h3>
+      <ul>
+        <% @blank_teams.each do |team| %>
+          <li><%= link_to team_name(team), grading_team_path(team.level) %> (<%= team.level %>)</li>
+        <% end %>
+      </ul>
+      <hr />
+    <% end %>
+    </div>
+    <div class='span-7 last'>
+    <% if @blank_students.size > 0 %>
+      <h3>Students</h3>
+      <ul>
+        <% @blank_students.each do |student| %>
+          <li><%= link_to(h(student.name), grading_team_students_path(student.team)) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  </div>
+  <div id="unchecked">
+    <h1>Unchecked</h1>
+    <p>
+      The teams and students which haven't had their scores checked yet. This is slightly important...
+    </p>
+    <div class='span-8 colborder'>
+      <% if @unchecked_team_scores.size > 0 %>
+        <h3>Teams</h3>
+        <ul>
+          <% @unchecked_team_scores.each do |team| %>
+            <li><%= link_to team_name(team), grading_team_path(team.level) %> (<%= team.level %>)</li>
+          <% end %>
+        </ul>
+        <hr />
       <% end %>
-    </ul>
-    <hr />
-  <% end %>
-  <% if @blank_students.size > 0 %>
-    <h3>Students</h3>
-    <ul>
-      <% @blank_students.each do |student| %>
-        <li><%= link_to(h(student.name), grading_team_students_path(student.team)) %></li>
+    </div>
+    <div class='span-7 last'>
+      <% if @unchecked_student_scores.size > 0 %>
+        <h3>Students</h3>
+        <ul>
+          <% @unchecked_student_scores.each do |team| %>
+            <li><%= link_to team_name(team), grading_team_students_path(team) %> (<%= team.level %>)</li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
-  <% end %>
-</div>
-<div class="span-7 last">
-  <h1>Unchecked</h1>
-
-  <p>
-    The teams and students which haven't had their scores checked yet. This is slightly important...
-  </p>
-
-  <% if @unchecked_team_scores.size > 0 %>
-    <h3>Teams</h3>
-    <ul>
-      <% @unchecked_team_scores.each do |team| %>
-        <li><%= link_to team_name(team), grading_team_path(team.level) %> (<%= team.level %>)</li>
+    </div>
+  </div>
+  
+  <div id="checked">
+    <h1>Checked</h1>
+    <p>
+      The teams and students who have had their scores checked. Congratulations!
+    </p>
+    <div class='span-8 colborder'>
+      <% if @checked_team_scores.size > 0 %>
+        <h3>Teams</h3>
+        <ul>
+          <% @checked_team_scores.each do |team| %>
+            <li><%= link_to team_name(team), grading_team_path(team.level) %> (<%= team.level %>)</li>
+          <% end %>
+        </ul>
+        <hr />
       <% end %>
-    </ul>
-    <hr />
-  <% end %>
-  <% if @unchecked_student_scores.size > 0 %>
-    <h3>Students</h3>
-    <ul>
-      <% @unchecked_student_scores.each do |team| %>
-        <li><%= link_to team_name(team), grading_team_students_path(team) %> (<%= team.level %>)</li>
+    </div>
+    <div class='span-7 last'>
+      <% if @checked_student_scores.size > 0 %>
+        <h3>Students</h3>
+        <ul>
+          <% @checked_student_scores.each do |team| %>
+            <li><%= link_to team_name(team), grading_team_students_path(team) %> (<%= team.level %>)</li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
-  <% end %>
+    </div>
+  </div>
 </div>
