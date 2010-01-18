@@ -23,6 +23,6 @@ class Grading::SettingsController < ApplicationController
 
   def convert_date(hash, key)
     args = (1..5).map { |n| val = hash["#{key}(#{n}i)"]; return nil if val.nil?; val}
-    Time.zone.local(*args)
+    Time.local(*args)
   end
 end
