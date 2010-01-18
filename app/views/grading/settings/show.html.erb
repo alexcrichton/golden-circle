@@ -18,11 +18,11 @@
     <%= f.text_field :cost_per_student, :size => 4 %>
   </p>
   <% f.fields_for :cutoff_score, Settings.cutoff_score do |builder| %>
-    <% [:small, :large].each do |klass| %>
+    <% ['small', 'large'].each do |klass| %>
       <fieldset>
         <legend><%= klass.to_s.capitalize %> School cuttoffs</legend>
         <% builder.fields_for klass, Settings.cutoff_score[klass] do |builder2| %>
-          <% [:apprentice, :wizard].each do |level| %>
+          <% ['apprentice', 'wizard'].each do |level| %>
             <p>
               <%= builder2.label level %><br />
               <%= builder2.text_field level, :value => Settings.cutoff_score[klass][level] %>  
