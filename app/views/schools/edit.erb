@@ -83,7 +83,7 @@
 
   <div>
     <h3 style="font-weight:bold;text-align:center">Teams</h3>
-    <% @school.teams.each do |team| %>
+    <% @school.teams.sorted.each do |team| %>
 
       <% next if team.is_exhibition %>
       <div class="span-8 <%= cycle 'colborder', 'last', :team_non_ex_class %>">
