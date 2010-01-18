@@ -25,7 +25,7 @@ class Team < ActiveRecord::Base
 
   attr_protected :test_score, :test_score_checked, :student_scores_checked, :team_score, :is_exhibition
 
-  named_scope :sorted, :order => 'teams.level ASC'
+  named_scope :sorted_by_level, :order => 'teams.level ASC'
   named_scope :unchecked_student_scores, :conditions => {:student_scores_checked => false}
   named_scope :unchecked_team_score, :conditions => {:team_score_checked => false}
   named_scope :checked_student_scores, :conditions => {:student_scores_checked => true}
