@@ -17,6 +17,11 @@
     <%= f.label :cost_per_student, 'Cost per student (in dollars)' %>:<br />
     <%= f.text_field :cost_per_student, :size => 4 %>
   </p>
+  
+  <p>
+    <%= f.label :cutoff_score, 'Cutoff score for being displayed in individual results' %>:<br />
+    <%= f.text_field :cutoff_score, :size => 4 %>
+  </p>
 
   <p><%= f.submit "Submit" %></p>
 <% end %>

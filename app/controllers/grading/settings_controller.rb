@@ -13,6 +13,7 @@ class Grading::SettingsController < ApplicationController
     deadline = convert_date(params[:settings], :deadline)
     Settings.deadline = deadline if deadline
     Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
+    Settings.cutoff_score = params[:settings][:cutoff_score].to_i if params[:settings][:cutoff_score]
 
     flash[:notice] = "Settings successfully updated!"
 
