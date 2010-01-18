@@ -26,7 +26,7 @@ class Grading::StudentsController < ApplicationController
       @team.recalculate_team_score #successful saves, score changed
     else
       flash[:error] = 'Student scores not saved!'
-      return render(:action => 'students') # unsuccessful saves...
+      return render(:action => 'show') # unsuccessful saves...
     end
     flash[:notice] = 'Students successfully updated!'
     redirect_to grading_team_students_path(@team)
