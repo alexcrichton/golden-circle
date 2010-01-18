@@ -15,11 +15,13 @@
   <% schools.each do |school| %>
     <tr class="<%= cycle('even', 'odd') %>">
       <td>
-        <% form_for school, :url => admin_school_path(school), :html => {:id => 'admin_school'} do |f| %>
-          <div>
-            <%= f.check_box :admin %>
-            <div class="response"></div>
-          </div>
+        <% if school != current_school%>
+          <% form_for school, :url => admin_school_path(school), :html => {:id => 'admin_school'} do |f| %>
+            <div>
+              <%= f.check_box :admin %>
+              <div class="response"></div>
+            </div>
+          <% end %>
         <% end %>
       </td>
       <td><%= link_to(h(school.name), school) %></td>
