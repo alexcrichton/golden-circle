@@ -40,6 +40,7 @@ class Team < ActiveRecord::Base
   named_scope :participating, :conditions => ['students_count > ?', 0]
   named_scope :sorted, :order => 'schools.name ASC', :include => [:school]
   named_scope :winners, :order => 'team_score DESC', :conditions => ['team_score IS NOT ?', nil]
+  named_scope :search, lambda{ |query| {:conditions => ['schools.name LIKE ?', "%#{query}%"], :include => [:school] }}
 
   def self.max_team_score
     # 5 student scores of 25 + max team test score * 5

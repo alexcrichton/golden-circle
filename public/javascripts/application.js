@@ -61,6 +61,21 @@ $(function() {
   });
 });
 
+$(function() { 
+  if ($('#tabs #search').length == 0) return;
+  
+  $('#tabs #search form').ajaxForm({
+    beforeSubmit: function() {
+      $('#tabs #search form div').append(smallAjax);
+    },
+    error: error,
+    success: function(data) {
+      $('img.loading').remove();
+      $('#response').html(data);
+    }
+  });
+});
+
 $(function() {
   $('.inner').corner('8px').parent().css('padding', '2px').corner('10px');
 
@@ -224,7 +239,7 @@ $(function() {
       }
     }
     last_filter = $(this).attr('value');
-  });
+  }).keyup();
 });
 
 function matches(words, searches, index) {

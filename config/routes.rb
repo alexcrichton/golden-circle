@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
       team.resource   :students, :only => [:update, :show]
     end
     grading.resource  :settings, :only => [:update, :show]
-    grading.resource  :status, :only => [:show], :controller => 'status'
+    grading.resource  :status, :only => [:show], :controller => 'status', :collection => {:search => :post}
   end
   map.resources :teams, :only => [], :member => {:print => :get}
 

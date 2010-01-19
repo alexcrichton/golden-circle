@@ -24,7 +24,13 @@ class Student < ActiveRecord::Base
   named_scope :wizard, :conditions => ['teams.level = ?', Team::WIZARD], :include => :team
   named_scope :apprentice, :conditions => ['teams.level = ?', Team::APPRENTICE], :include => :team
   named_scope :by_name, :order => 'last_name ASC, first_name ASC'
-
+  named_scope :search, lambda{ |first, last| 
+    if last.nil?
+      {:conditions => ['first_name LIKE ?', "#{first}%"]}
+    else
+      {:conditions => ['first_name LIKE ? AND last_name LIKE ?', "#{first}%", "#{last}%"]}
+    end
+  }
   def name
     first_name + " " + last_name
   end

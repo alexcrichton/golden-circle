@@ -3,6 +3,7 @@
     <li><a href="#blank">Blank</a></li>
     <li><a href="#unchecked">Unchecked</a></li>
     <li><a href="#checked">Checked</a></li>
+    <li><a href="#search">Search</a></li>
   </ul>
   <div id="blank">
     <h1>Blank</h1>
@@ -88,4 +89,18 @@
       <% end %>
     </div>
   </div>
+  <div id="search">
+    <% form_tag search_grading_status_path do %>
+      <p>
+        <%= text_field_tag :q %>
+        <%= submit_tag 'Search' %><br/>
+        <%= check_box_tag :apprentice, '1', true %> Apprentice
+        <%= check_box_tag :wizard, '1', true %> Wizard
+      </p>
+    <% end %>
+    <div id="response">
+    </div>
+  </div>
 </div>
+
+

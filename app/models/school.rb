@@ -40,7 +40,7 @@ class School < ActiveRecord::Base
   named_scope :unknown, :conditions => {:enrollment => nil}
   named_scope :by_name, :order => 'name ASC'
   named_scope :winners, :order => 'school_score DESC, name ASC', :conditions => ['school_score IS NOT ?', nil]
-
+  
   def self.max_school_score
     2 * Team.max_team_score
   end
