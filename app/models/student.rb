@@ -26,9 +26,9 @@ class Student < ActiveRecord::Base
   named_scope :by_name, :order => 'last_name ASC, first_name ASC'
   named_scope :search, lambda{ |first, last| 
     if last.nil?
-      {:conditions => ['first_name LIKE ?', "#{first}%"]}
+      {:conditions => ['UPPER(first_name) LIKE UPPER(?)', "#{first}%"]}
     else
-      {:conditions => ['first_name LIKE ? AND last_name LIKE ?', "#{first}%", "#{last}%"]}
+      {:conditions => ['UPPER(first_name) LIKE UPPER(?) AND UPPER(last_name) LIKE UPPER(?)', "#{first}%", "#{last}%"]}
     end
   }
   def name
