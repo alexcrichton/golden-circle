@@ -34,6 +34,7 @@ class School < ActiveRecord::Base
   after_create :add_teams
   before_save :strip_name
 
+  named_scope :participating, :conditions => ['enrollment > ?', 0]
   named_scope :all, :include => [:proctors, :teams, :students]
   named_scope :large, :conditions => ['enrollment >= ?', CUTOFF]
   named_scope :small, :conditions => ['enrollment < ?', CUTOFF]
