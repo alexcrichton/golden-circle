@@ -20,10 +20,10 @@ class Student < ActiveRecord::Base
   scope :blank_scores, where(:test_score => nil)
   scope :upper_scores, where('students.test_score >= ?', 20)
   scope :team_contributors, order('students.test_score DESC').limit(5)
-  scope :large, where('schools.enrollment >= ?', School::CUTOFF).include(:team => :school)
-  scope :small, where('schools.enrollment < ?', School::CUTOFF).include(:team => :school)
-  scope :wizard, where('teams.level = ?', Team::WIZARD).include(:team)
-  scope :apprentice, where('teams.level = ?', Team::APPRENTICE).include(:team)
+  scope :large, where('schools.enrollment >= ?', School::CUTOFF).includes(:team => :school)
+  scope :small, where('schools.enrollment < ?', School::CUTOFF).includes(:team => :school)
+  scope :wizard, where('teams.level = ?', Team::WIZARD).includes(:team)
+  scope :apprentice, where('teams.level = ?', Team::APPRENTICE).includes(:team)
   scope :by_name, order('last_name ASC, first_name ASC')
 
   def name

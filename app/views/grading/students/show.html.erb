@@ -3,7 +3,7 @@
 Find:<br />
 <input name="search" type="text" />
 <hr />
-<% form_tag(grading_team_students_path(@team), :class => 'grading', :method => :put) do %>
+<% form_tag(grading_team_student_path(@team), :class => 'grading', :method => :put) do %>
   <%= error_messages_for 'team' %>
   <% fields_for @team do |tf| %>
     <p>

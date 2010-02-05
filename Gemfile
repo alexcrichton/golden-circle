@@ -5,6 +5,7 @@ gem "rails", "3.0.0.beta"
 gem "authlogic" 
 gem "cancan"
 gem "paperclip"
+gem 'sqlite3-ruby', :require => 'sqlite3'
 
 ## Bundle edge rails:
 # gem "rails", :git => "git://github.com/rails/rails.git"

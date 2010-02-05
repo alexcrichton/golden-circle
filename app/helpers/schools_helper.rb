@@ -39,7 +39,8 @@ module SchoolsHelper
     opts[:after] ||= ""
     opts[:before] ||= ""
     js = "remove($(this).parents('#{container}'));"
-    link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
+    opts[:remote] = true
+    link_to name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 
   # Creates a link which when pressed will add a new section to the form.
@@ -67,7 +68,8 @@ module SchoolsHelper
     opts[:before] ||= ""
     opts[:after] ||= ""
     js = "add_new(#{opts.delete(:var)}, $('#{container_selector}'), #{opts[:parent] ? "$(this).parents('#{opts.delete(:parent)}')" : 'null' })"
-    link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
+    opts[:remote] = true
+    link_to name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 
   # Extracts the ID of a team from it's form name

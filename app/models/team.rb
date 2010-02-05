@@ -32,10 +32,10 @@ class Team < ActiveRecord::Base
   scope :exhibition, where(:is_exhibition => true)
   scope :wizard, where(:level => Team::WIZARD)
   scope :apprentice, where(:level => Team::APPRENTICE)
-  scope :large, where('schools.enrollment >= ?', School::CUTOFF).include(:school)
-  scope :small, where('schools.enrollment < ?', School::CUTOFF).include(:school)
+  scope :large, where('schools.enrollment >= ?', School::CUTOFF).includes(:school)
+  scope :small, where('schools.enrollment < ?', School::CUTOFF).includes(:school)
   scope :participating, where('students_count > ?', 0)
-  scope :sorted, order('schools.name ASC').include(:school)
+  scope :sorted, order('schools.name ASC').includes(:school)
   scope :winners, order('team_score DESC').where('team_score IS NOT ?', nil)
 
   def self.max_team_score

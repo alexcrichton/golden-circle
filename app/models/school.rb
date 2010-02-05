@@ -1,3 +1,5 @@
+require 'acts_as_slug'
+
 class School < ActiveRecord::Base
 
   CUTOFF = 200
@@ -33,12 +35,12 @@ class School < ActiveRecord::Base
   after_create :add_teams
   before_save :strip_name
 
-  scope :all, include(:proctors, :teams, :students)
+  scope :everything, includes(:proctors, :teams, :students)
   scope :large, where('enrollment >= ?', CUTOFF)
   scope :small, where('enrollment < ?', CUTOFF)
   scope :unknown, where(:enrollment => nil)
   scope :by_name, order('name ASC')
-  scope :winners, order'school_score DESC, name ASC').where('school_score IS NOT ?', nil)
+  scope :winners, order('school_score DESC, name ASC').where('school_score IS NOT ?', nil)
 
   def self.max_school_score
     2 * Team.max_team_score

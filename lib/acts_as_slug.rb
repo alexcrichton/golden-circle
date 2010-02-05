@@ -4,8 +4,6 @@ module Acts
     def self.append_features(base)
       super
       base.extend(ClassMethods)
-#      base.send(:include, InstanceMethods)
-#      puts base
     end
 
     module ClassMethods
@@ -61,3 +59,13 @@ module Acts
   end
 end
 
+ActiveRecord::Base.class_eval do
+  include Acts::Slug
+
+  # def to_xml(options = {})
+  #   # protect attributes registered with attr_protected
+  #   default_except = self.class.protected_attributes.to_a
+  #   options[:except] = (options[:except] ? options[:except] | default_except : default_except)
+  #   super
+  # end
+end

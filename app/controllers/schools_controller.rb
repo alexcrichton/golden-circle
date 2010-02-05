@@ -4,7 +4,7 @@ class SchoolsController < ApplicationController
   authorize_resource
 
   def index
-    @schools = School.all.by_name
+    @schools = School.everything.by_name
     @large_schools = @schools.large
     @small_schools = @schools.small
     @unknown = @schools.unknown

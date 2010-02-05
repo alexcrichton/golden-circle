@@ -26,7 +26,7 @@ Find:<br />
           <td><%= tf.text_field :test_score, :size => 5 %></td>
           <td><%= tf.check_box :team_score_checked %></td>
           <td><%= team.school.school_class %></td>
-          <td><%= link_to 'Individual Scores', grading_team_students_path(team) %></td>
+          <td><%= link_to 'Individual Scores', grading_team_student_path(team) %></td>
         </tr>
       <% end %>
     <% end %>
