@@ -14,7 +14,7 @@ class SchoolsController < ApplicationController
   end
 
   def email
-    School.find(:all).each { |school| Notification.deliver_confirmation(school) }
+    School.all.each { |school| Notification.confirmation(school).deliver }
     flash[:notice] = 'Emails have been sent!'
     redirect_to schools_path
   end

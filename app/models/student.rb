@@ -16,15 +16,15 @@ class Student < ActiveRecord::Base
 
   before_save :strip_names
 
-  named_scope :winners, :order => 'students.test_score DESC, last_name ASC, first_name ASC', :conditions => ['students.test_score IS NOT ?', nil]
-  named_scope :blank_scores, :conditions => {:test_score => nil}
-  named_scope :upper_scores, :conditions => ['students.test_score >= ?', 20]
-  named_scope :team_contributors, :order => 'students.test_score DESC', :limit => 5
-  named_scope :large, :conditions => ['schools.enrollment >= ?', School::CUTOFF], :include => {:team => :school}
-  named_scope :small, :conditions => ['schools.enrollment < ?', School::CUTOFF], :include => {:team => :school}
-  named_scope :wizard, :conditions => ['teams.level = ?', Team::WIZARD], :include => :team
-  named_scope :apprentice, :conditions => ['teams.level = ?', Team::APPRENTICE], :include => :team
-  named_scope :by_name, :order => 'last_name ASC, first_name ASC'
+  scope :winners, order('students.test_score DESC, last_name ASC, first_name ASC').where('students.test_score IS NOT ?', nil)
+  scope :blank_scores, where(:test_score => nil)
+  scope :upper_scores, where('students.test_score >= ?', 20)
+  scope :team_contributors, order('students.test_score DESC').limit(5)
+  scope :large, where('schools.enrollment >= ?', School::CUTOFF).include(:team => :school)
+  scope :small, where('schools.enrollment < ?', School::CUTOFF).include(:team => :school)
+  scope :wizard, where('teams.level = ?', Team::WIZARD).include(:team)
+  scope :apprentice, where('teams.level = ?', Team::APPRENTICE).include(:team)
+  scope :by_name, order('last_name ASC, first_name ASC')
 
   def name
     first_name + " " + last_name

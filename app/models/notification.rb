@@ -1,19 +1,15 @@
 class Notification < ActionMailer::Base
+  
+  default :from => smtp_settings[:user_name]
 
   def password_reset_instructions(school)
-    from          smtp_settings[:user_name]
-    sent_on       Time.now
-    subject       "Password Reset Instructions"
-    recipients    school.email
-    body          :edit_password_reset_url => edit_password_reset_url(school.perishable_token)
+    @edit_password_reset_url = edit_password_reset_url(school.perishable_token)
+    mail :to => school.email, :subject => "Password Reset Instructions"
   end
 
   def confirmation(school)
-    from           smtp_settings[:user_name]
-    sent_on        Time.now
-    subject        "Golden Circle Contest Confirmation of Registration"
-    recipients     school.email
-    body           :school => school
+    @school = school
+    mail :to => school.email, :subject => "Golden Circle Contest Confirmation of Registration"
   end
 
 end

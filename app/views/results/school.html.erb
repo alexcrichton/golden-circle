@@ -34,6 +34,6 @@
                    :chtt => 'Breakdown of Score' %>
 </div>
 <h2>Team Results</h2>
-<% @school.teams.find(:all, :order => 'is_exhibition').each do |team| %>
+<% @school.teams.order('is_exhibition').each do |team| %>
   <%= render 'team', :team => team %>
 <% end %>

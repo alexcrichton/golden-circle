@@ -33,12 +33,12 @@ class School < ActiveRecord::Base
   after_create :add_teams
   before_save :strip_name
 
-  named_scope :all, :include => [:proctors, :teams, :students]
-  named_scope :large, :conditions => ['enrollment >= ?', CUTOFF]
-  named_scope :small, :conditions => ['enrollment < ?', CUTOFF]
-  named_scope :unknown, :conditions => {:enrollment => nil}
-  named_scope :by_name, :order => 'name ASC'
-  named_scope :winners, :order => 'school_score DESC, name ASC', :conditions => ['school_score IS NOT ?', nil]
+  scope :all, include(:proctors, :teams, :students)
+  scope :large, where('enrollment >= ?', CUTOFF)
+  scope :small, where('enrollment < ?', CUTOFF)
+  scope :unknown, where(:enrollment => nil)
+  scope :by_name, order('name ASC')
+  scope :winners, order'school_score DESC, name ASC').where('school_score IS NOT ?', nil)
 
   def self.max_school_score
     2 * Team.max_team_score
@@ -46,7 +46,7 @@ class School < ActiveRecord::Base
 
   def deliver_password_reset_instructions!
     reset_perishable_token!
-    Notification.deliver_password_reset_instructions(self)
+    Notification.password_reset_instructions(self).deliver
   end
 
   def cost

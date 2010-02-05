@@ -25,18 +25,18 @@ class Team < ActiveRecord::Base
 
   attr_protected :test_score, :test_score_checked, :student_scores_checked, :team_score, :is_exhibition
 
-  named_scope :unchecked_student_scores, :conditions => {:student_scores_checked => false}
-  named_scope :unchecked_team_score, :conditions => {:team_score_checked => false}
-  named_scope :blank_scores, :conditions => {:test_score => nil}
-  named_scope :non_exhibition, :conditions => {:is_exhibition => false}
-  named_scope :exhibition, :conditions => {:is_exhibition => true}
-  named_scope :wizard, :conditions => {:level => Team::WIZARD}
-  named_scope :apprentice, :conditions => {:level => Team::APPRENTICE}
-  named_scope :large, :conditions => ['schools.enrollment >= ?', School::CUTOFF], :include => [:school]
-  named_scope :small, :conditions => ['schools.enrollment < ?', School::CUTOFF], :include => [:school]
-  named_scope :participating, :conditions => ['students_count > ?', 0]
-  named_scope :sorted, :order => 'schools.name ASC', :include => [:school]
-  named_scope :winners, :order => 'team_score DESC', :conditions => ['team_score IS NOT ?', nil]
+  scope :unchecked_student_scores, where(:student_scores_checked => false)
+  scope :unchecked_team_score, where(:team_score_checked => false)
+  scope :blank_scores, where(:test_score => nil)
+  scope :non_exhibition, where(:is_exhibition => false)
+  scope :exhibition, where(:is_exhibition => true)
+  scope :wizard, where(:level => Team::WIZARD)
+  scope :apprentice, where(:level => Team::APPRENTICE)
+  scope :large, where('schools.enrollment >= ?', School::CUTOFF).include(:school)
+  scope :small, where('schools.enrollment < ?', School::CUTOFF).include(:school)
+  scope :participating, where('students_count > ?', 0)
+  scope :sorted, order('schools.name ASC').include(:school)
+  scope :winners, order('team_score DESC').where('team_score IS NOT ?', nil)
 
   def self.max_team_score
     # 5 student scores of 25 + max team test score * 5

@@ -36,7 +36,7 @@ class Settings < ActiveRecord::Base
 
   #retrieve all settings as a hash
   def self.all
-    vars = find(:all, :select => 'var, value')
+    vars = select('var, value')
 
     result = {}
     vars.each do |record|
@@ -67,7 +67,7 @@ class Settings < ActiveRecord::Base
 
   #retrieve the actual Setting record
   def self.object(var_name)
-    Settings.find_by_var(var_name.to_s)
+    Settings.where(:var => var_name.to_s).first
   end
 
   #get the value field, YAML decoded

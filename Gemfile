@@ -1,6 +1,6 @@
 # Edit this Gemfile to bundle your application's dependencies.
 
-gem "rails", "3.0.pre"
+gem "rails", "3.0.0.beta"
 
 gem "authlogic"
 gem "cancan"

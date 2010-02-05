@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  filter_parameter_logging :password, :password_confirmation 
-
   helper :all # include all helpers, all the time
-
-  protect_from_forgery
 
   helper_method :current_school, :current_school_session
 
