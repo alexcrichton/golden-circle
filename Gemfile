@@ -2,7 +2,7 @@
 
 gem "rails", "3.0.0.beta"
 
-gem "authlogic"
+gem "authlogic" 
 gem "cancan"
 gem "paperclip"
 
