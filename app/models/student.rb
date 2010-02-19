@@ -25,6 +25,13 @@ class Student < ActiveRecord::Base
   scope :wizard, where('teams.level = ?', Team::WIZARD).includes(:team)
   scope :apprentice, where('teams.level = ?', Team::APPRENTICE).includes(:team)
   scope :by_name, order('last_name ASC, first_name ASC')
+  scope :search, lambda{ |first, last| 
+    if last.nil?
+      where('UPPER(first_name) LIKE UPPER(?)', "#{first}%")
+    else
+      where('UPPER(first_name) LIKE UPPER(?) AND UPPER(last_name) LIKE UPPER(?)', "#{first}%", "#{last}%")
+    end
+  }
 
   def name
     first_name + " " + last_name

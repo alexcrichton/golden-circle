@@ -15,6 +15,7 @@ class Ability
       Settings.deadline.blank? || Time.now < Settings.deadline
     end
     can :validate, School
+    
     if school.nil?
       can :login, School
       can :reset, 'password'

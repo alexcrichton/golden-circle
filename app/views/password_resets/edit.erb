@@ -3,7 +3,7 @@
 <% end %>
 <h1>Change My Password</h1>
 
-<% form_for @school, :url => password_reset_path(:id => params[:id]), :method => :put do |f| %>
+<% form_for @school, :url => password_reset_path(:id => params[:id]), :html => {:method => :put} do |f| %>
   <%= f.error_messages %>
   <div id="password">
     <p>

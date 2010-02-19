@@ -25,8 +25,11 @@ class Team < ActiveRecord::Base
 
   attr_protected :test_score, :test_score_checked, :student_scores_checked, :team_score, :is_exhibition
 
+  scope :sorted_by_level, order('teams.level ASC')
   scope :unchecked_student_scores, where(:student_scores_checked => false)
   scope :unchecked_team_score, where(:team_score_checked => false)
+  scope :checked_student_scores, where(:student_scores_checked => true)
+  scope :checked_team_score, where(:team_score_checked => true)
   scope :blank_scores, where(:test_score => nil)
   scope :non_exhibition, where(:is_exhibition => false)
   scope :exhibition, where(:is_exhibition => true)
@@ -37,6 +40,7 @@ class Team < ActiveRecord::Base
   scope :participating, where('students_count > ?', 0)
   scope :sorted, order('schools.name ASC').includes(:school)
   scope :winners, order('team_score DESC').where('team_score IS NOT ?', nil)
+  scope :search, lambda{ |query| where('UPPER(schools.name) LIKE UPPER(?)', "%#{query}%").includes(:school) }
 
   def self.max_team_score
     # 5 student scores of 25 + max team test score * 5

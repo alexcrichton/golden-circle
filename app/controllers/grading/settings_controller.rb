@@ -13,6 +13,7 @@ class Grading::SettingsController < ApplicationController
     deadline = convert_date(params[:settings], :deadline)
     Settings.deadline = deadline if deadline
     Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
+    Settings.cutoff_score = params[:settings][:cutoff_score] if params[:settings][:cutoff_score]
 
     flash[:notice] = "Settings successfully updated!"
 
@@ -23,6 +24,6 @@ class Grading::SettingsController < ApplicationController
 
   def convert_date(hash, key)
     args = (1..5).map { |n| val = hash["#{key}(#{n}i)"]; return nil if val.nil?; val}
-    Time.zone.local(*args)
+    Time.local(*args)
   end
 end

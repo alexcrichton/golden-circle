@@ -19,7 +19,7 @@ class Grading::TeamsController < ApplicationController
       flash[:notice] = "Teams successfully updated!"
       redirect_to grading_team_path(params[:id])
     else
-      render :action => 'teams'
+      render :action => 'show'
     end
   end
 

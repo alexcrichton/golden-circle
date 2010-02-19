@@ -1,7 +1,7 @@
 <% flash.each do |name, msg| %>
   <% content_tag :div, :class => "flash #{name}" do %>
     <%= msg %>
-    <%= link_to_function '[hide]', "$(this).parents('.flash').fadeOut('fast')" %>
+    <%= link_to '[hide]', "$(this).parents('.flash').fadeOut('fast')" %>
   <% end %>
 <% end %>
 <noscript>

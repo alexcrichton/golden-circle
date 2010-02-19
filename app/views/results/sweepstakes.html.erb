@@ -37,8 +37,8 @@
     <% max = (@schools[0].school_score * 1.1).to_i %>
     <% [:large, :small].each do |klass| %>
       <% arr = @schools.send(klass)[0..4] %>
-      <% data1 = arr.map { |s| s.teams.apprentice.first.team_score } %>
-      <% data2 = arr.map { |s| s.teams.wizard.first.team_score } %>
+      <% data1 = arr.map { |s| s.teams.apprentice.first.team_score || 0 } %>
+      <% data2 = arr.map { |s| s.teams.wizard.first.team_score || 0 } %>
       <% i = -1 %>
       <%= google_chart :cht => 'bhs',
                        :chco => '4D89F9,C6D9FD',

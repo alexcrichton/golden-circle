@@ -71,6 +71,15 @@ class SchoolsController < ApplicationController
       render :text => (@school.errors.on(@field).blank? ? 'true' : 'false')
     end
   end
+  
+  def admin
+    @school.admin = params[:school][:admin]
+    if @school.save
+      render :text => 'success'
+    else 
+      render :text => 'failure'
+    end
+  end
 
   protected
 
