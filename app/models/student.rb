@@ -22,8 +22,8 @@ class Student < ActiveRecord::Base
   scope :team_contributors, order('students.test_score DESC').limit(5)
   scope :large, where('schools.enrollment >= ?', School::CUTOFF).includes(:team => :school)
   scope :small, where('schools.enrollment < ?', School::CUTOFF).includes(:team => :school)
-  scope :wizard, where('teams.level = ?', Team::WIZARD).includes(:team)
-  scope :apprentice, where('teams.level = ?', Team::APPRENTICE).includes(:team)
+  scope :wizard, where('teams.level = ?', Team::WIZARD).includes(:team => :school)
+  scope :apprentice, where('teams.level = ?', Team::APPRENTICE).includes(:team => :school)
   scope :by_name, order('last_name ASC, first_name ASC')
   scope :search, lambda{ |first, last| 
     if last.nil?

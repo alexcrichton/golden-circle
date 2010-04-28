@@ -1,7 +1,7 @@
 class SchoolSessionsController < ApplicationController
 
-  before_filter(:except => :destroy) { |c| c.unauthorized! if c.cannot? :login, School }
-  before_filter(:only => :destroy) { |c| c.unauthorized! if c.cannot? :logout, School }
+  before_filter(:except => :destroy) { |c| c.authorize! :login, School }
+  before_filter(:only => :destroy) { |c| c.authorize! :logout, School }
   layout 'wide'
 
   def new

@@ -16,7 +16,9 @@
             <col width="40"/>
           </colgroup>
           <tr>
-            <td colspan="3" class="separator"><%= klass.to_s.capitalize %> Schools</td>
+            <td colspan="3" class="separator">
+							<%= klass.to_s.capitalize %> Schools
+						</td>
           </tr>
           <tr>
             <th>Rank</th>
@@ -54,9 +56,11 @@
     <% end %>
 
   </div>
+
   <div id="wizard">
     <%= render 'level_results', :level => 'wizard' %>
   </div>
+
   <div id="apprentice">
     <%= render 'level_results', :level => 'apprentice' %>
   </div>

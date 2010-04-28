@@ -1,12 +1,12 @@
 <div class="upload ui-widget-content ui-corner-all span-11">
   <h3 class="ui-widget-header ui-corner-all">Database</h3>
 
-  <% form_tag backup_uploads_path, :method => :put do %>
+  <%= form_tag backup_uploads_path, :method => :put do %>
     <p><%= submit_tag 'Backup Database' %> or</p>
   <% end %>
 
 
-  <% form_for @backup, :html => {:multipart => true} do |f| %>
+  <%= form_for @backup, :html => {:multipart => true} do |f| %>
     <p>
       <%= f.label :upload, 'Restore the database from a previous backup' %><br/>
       <%= f.file_field :upload %>
@@ -24,7 +24,7 @@
 <div class="upload ui-widget-content ui-corner-all span-11">
   <h3 class="ui-widget-header ui-corner-all">Information</h3>
 
-  <% form_for @information, :html => {:multipart => true} do |f| %>
+  <%= form_for @information, :html => {:multipart => true} do |f| %>
     <p>
       <%= f.label :upload, 'Upload the informational PDF file' %>
       (<%= link_to 'Current one', transfer_upload_path(@information) %>) <br/>

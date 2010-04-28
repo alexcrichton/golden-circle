@@ -2,7 +2,7 @@
 <div class="ui-widget-content ui-corner-all span-11">
   <h3 class="ui-widget-header ui-corner-all">Configuration Panel</h3>
 
-<% form_for Settings, :url => grading_settings_path do |f| %>
+<%= form_for Settings, :url => grading_settings_path do |f| %>
   <p>
     <%= f.label :deadline, 'Deadline for registration' %>:<br />
     <%= f.datetime_select :deadline %>
@@ -17,11 +17,14 @@
     <%= f.label :cost_per_student, 'Cost per student (in dollars)' %>:<br />
     <%= f.text_field :cost_per_student, :size => 4 %>
   </p>
-  <% f.fields_for :cutoff_score, Settings.cutoff_score do |builder| %>
+
+  <%= f.fields_for :cutoff_score, Settings.cutoff_score do |builder| %>
+
     <% ['small', 'large'].each do |klass| %>
+
       <fieldset>
         <legend><%= klass.to_s.capitalize %> School cuttoffs</legend>
-        <% builder.fields_for klass, Settings.cutoff_score[klass] do |builder2| %>
+        <%= builder.fields_for klass, Settings.cutoff_score[klass] do |builder2| %>
           <% ['apprentice', 'wizard'].each do |level| %>
             <p>
               <%= builder2.label level %><br />
@@ -30,7 +33,9 @@
           <% end %>
         <% end %>
       </fieldset>
+
     <% end %>
+
   <% end %>
 
   <p><%= f.submit "Submit" %></p>

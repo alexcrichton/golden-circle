@@ -1,6 +1,6 @@
 class Grading::StatusController < ApplicationController
   
-  before_filter { |c| c.unauthorized! if c.cannot? :grade, School }
+  before_filter { |c| c.authorize! :grade, School }
   layout 'wide'
 
   def show
@@ -18,9 +18,9 @@ class Grading::StatusController < ApplicationController
     
     arr = params[:q].split ' '
     if arr.length == 1
-      @students = Student.search(arr.first, nil).scoped(:include => :team)
+      @students = Student.search(arr.first, nil).includes(:team)
     else
-      @students = Student.search(arr.first, arr.last).scoped(:include => :team)
+      @students = Student.search(arr.first, arr.last).includes(:team)
     end
     @teams = Team.search(arr.first)
     

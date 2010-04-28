@@ -1,17 +1,19 @@
-<% form_for(@school, :html => {:class => 'edit_school'}) do |f| %>
+<%= form_for(@school, :html => {:class => 'edit_school'}) do |f| %>
   <%= f.error_messages %>
 
   <% content_for :jstemplates do %>
     var proctor='<%= generate_template(f, :proctors) %>';
     var team='<%= generate_template(f, :teams) %>';
   <% end %>
-  <% f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
+
+  <%= f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
     <% content_for :jstemplates do %>
       var student='<%= generate_template(tf, :students) %>';
     <% end %>
   <% end %>
 
   <div class="clearfix" id="school-info">
+	
     <div class="span-8">
       <fieldset>
         <legend>School</legend>
@@ -26,6 +28,7 @@
         </p>
       </fieldset>
     </div>
+
     <div class="span-7 payment outer tcenter">
       <div class="inner">
         The amount due for this team is
@@ -35,7 +38,9 @@
         <% end %>
       </div>
     </div>
+
     <hr />
+
     <div class="span-8 colborder">
       <fieldset>
         <legend>School Contact</legend>
@@ -59,7 +64,7 @@
 
         <p>
           <label>Phone</label><br />
-          <% f.fields_for :phone, @school.phone do |pf| %>
+          <%= f.fields_for :phone, @school.phone do |pf| %>
             <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
             <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
             <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
@@ -79,13 +84,15 @@
         <% end %>
       </fieldset>
     </div>
+
   </div>
 
   <div>
     <h3 style="font-weight:bold;text-align:center">Teams</h3>
+
     <% @school.teams.non_exhibition.sorted_by_level.each do |team| %>
       <div class="span-8 <%= cycle 'colborder', 'last', :team_non_ex_class %>">
-        <% f.fields_for :teams, team do |tf| %>
+        <%= f.fields_for :teams, team do |tf| %>
           <%= render 'team', :f => tf %>
         <% end %>
       </div>
@@ -101,8 +108,9 @@
       All Exhibition teams will still participate, although their scores will not count towards the school's total
       score. Once a team is created, it will be assigned an ID number to identify it.
     </p>
+
     <% @school.teams.exhibition.each do |team| %>
-      <% f.fields_for :teams, team do |etf| %>
+      <%= f.fields_for :teams, team do |etf| %>
         <%= render 'team', :f => etf %>
       <% end %>
     <% end %>

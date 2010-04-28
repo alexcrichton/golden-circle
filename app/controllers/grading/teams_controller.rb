@@ -1,6 +1,6 @@
 class Grading::TeamsController < ApplicationController
   
-  before_filter { |c| c.unauthorized! if c.cannot? :grade, School }
+  before_filter { |c| c.authorize! :grade, School }
   before_filter :load_teams
   layout 'wide'
 
@@ -26,9 +26,10 @@ class Grading::TeamsController < ApplicationController
   protected
 
   def load_teams
+    params[:id] = 'wizard' unless params[:id] =~ /\Aapprentice\z/i
     @team_hash = {}
     @teams = Team.send(params[:id].downcase).participating.sorted
-    @teams.each { |t| @team_hash[t.id] = t}
+    @teams.each { |t| @team_hash[t.id] = t }
   end
 
 end

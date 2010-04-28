@@ -1,6 +1,7 @@
 <div class="upload ui-widget-content ui-corner-all span-10">
+	
   <h3 class="ui-widget-header ui-corner-all">Notify Schools</h3>
-  <% form_tag email_schools_path, :method => :put do %>
+  <%= form_tag email_schools_path, :method => :put do %>
     <p>
       The following button will send a confirmation email to all schools so they might validate the information they
       have submitted.
@@ -10,21 +11,26 @@
       <%= submit_tag 'Send Email Notification', :confirm => "Are you sure?\nThis will email all schools!" %>
     </p>
   <% end %>
+
 </div>
+
 <table style="width:50%">
   <caption>Statistics</caption>
+
   <tr>
     <td>&nbsp;</td>
     <th>Large Schools</th>
     <th>Small Schools</th>
     <th>Total</th>
   </tr>
+
   <tr class="odd">
     <th>School Count:</th>
     <td class="num"><%= @large_schools.size %></td>
     <td class="num"><%= @small_schools.size %></td>
     <td class="num"><strong><%= @schools.size %></strong></td>
   </tr>
+
   <% [Team::APPRENTICE, Team::WIZARD, :all].each do |level| %>
     <tr>
       <th><%= level == :all ? 'Total Student' : level %> Count:</th>
@@ -34,7 +40,9 @@
     </tr>
   <% end %>
 </table>
+
 <hr />
+
 <%= render 'schools', :title => 'Large Schools', :schools => @large_schools %>
 <%= render 'schools', :title => 'Small Schools', :schools => @small_schools %>
 <%= render 'schools', :title => 'Unlisted Enrollments', :schools => @unknown %>
@@ -47,8 +55,8 @@
   </tr>
   <% @proctors.each do |proctor| %>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= h proctor.name %></td>
-      <td><%= h proctor.school.name %></td>
+      <td><%= proctor.name %></td>
+      <td><%= proctor.school.name %></td>
     </tr>
   <% end %>
 </table>

@@ -5,7 +5,7 @@ module SchoolsHelper
   end
 
   def student_count(schools, level)
-    schools = [schools] unless schools.is_a?(Array)
+    schools = [schools] unless schools.respond_to? :collect
     schools.collect{ |s| s.teams }.flatten.collect{ |t| t.level == level || level == :all ? t.students_count : 0 }.sum
   end
 
@@ -40,7 +40,7 @@ module SchoolsHelper
     opts[:before] ||= ""
     js = "remove($(this).parents('#{container}'));"
     opts[:remote] = true
-    link_to name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
+    link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 
   # Creates a link which when pressed will add a new section to the form.
@@ -69,7 +69,7 @@ module SchoolsHelper
     opts[:after] ||= ""
     js = "add_new(#{opts.delete(:var)}, $('#{container_selector}'), #{opts[:parent] ? "$(this).parents('#{opts.delete(:parent)}')" : 'null' })"
     opts[:remote] = true
-    link_to name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
+    link_to_function name, opts.delete(:before) + ";" + js + ";" + opts.delete(:after), opts
   end
 
   # Extracts the ID of a team from it's form name

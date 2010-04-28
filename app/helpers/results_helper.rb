@@ -25,7 +25,7 @@ module ResultsHelper
   # 'Exhibition :id' if they are exhibition teams. 
   def team_name(team)
     suffix = team.is_exhibition ? " Exhibition #{team.id}" : ""
-    h(team.school.name + suffix)
+    team.school.name + suffix
   end
 
   # Calculates the ranks of scores on the fly. This must be called sequentially with the scores already
@@ -65,7 +65,7 @@ $(function(){
 });
       EOF
     end
-    "<div id=\"graph#{@loaders}\" class=\"loading loader graph\" " +
-            "style=\"width:#{opts[:chs].split('x')[0]}px;height:#{opts[:chs].split('x')[1]}px\"></div>"
+    raw("<div id=\"graph#{@loaders}\" class=\"loading loader graph\" " +
+            "style=\"width:#{opts[:chs].split('x')[0]}px;height:#{opts[:chs].split('x')[1]}px\"></div>")
   end
 end

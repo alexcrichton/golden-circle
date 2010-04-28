@@ -1,14 +1,15 @@
 class ResultsController < ApplicationController
   
-  before_filter { |c| c.unauthorized! if c.cannot? :read, 'results' }
-  before_filter(:only => :statistics) { |c| c.unauthorized! if c.cannot? :read, 'statistics' }
+  before_filter { |c| c.authorize! :read, 'results' }
+  before_filter(:only => :statistics) { |c| c.authorize! :read, 'statistics' }
   layout 'wide'
 
   def statistics
-    params[:klass] ||= 'large'
+    params[:klass] = 'large' if params[:klass] != 'small'
     @schools = School.winners.send(params[:klass])
     @teams = Team.winners.send(params[:klass])
     @students = Student.winners.send(params[:klass])
+    
   end
 
   def school
@@ -21,7 +22,7 @@ class ResultsController < ApplicationController
   end
 
   def individual
-    @students = Student.winners.scoped(:include => :team)
+    @students = Student.winners
   end
 
 end

@@ -1,6 +1,6 @@
 class Grading::SettingsController < ApplicationController
   
-  authorize_resource :class => Settings
+  authorize_resource :resource => Settings
   
   layout 'wide'
 

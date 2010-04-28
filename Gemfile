@@ -1,10 +1,11 @@
 # Edit this Gemfile to bundle your application's dependencies.
 
-gem "rails", "3.0.0.beta"
+gem "rails", "3.0.0.beta3"
 
-gem "authlogic" 
-gem "cancan"
-gem "paperclip"
+gem 'cancan'
+gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => 'rails3'
+gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git', :branch => 'rails3'
+
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 ## Bundle edge rails:

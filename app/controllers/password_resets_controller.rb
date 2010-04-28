@@ -1,7 +1,7 @@
 class PasswordResetsController < ApplicationController
 
   before_filter :load_school_using_perishable_token, :only => [:edit, :update]
-  before_filter { |c| c.unauthorized! if c.cannot? :reset, 'password' }
+  before_filter { |c| c.authorize! :reset, 'password' }
 
   layout 'wide'
 

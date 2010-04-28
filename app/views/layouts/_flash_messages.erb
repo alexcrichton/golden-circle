@@ -1,9 +1,10 @@
 <% flash.each do |name, msg| %>
-  <% content_tag :div, :class => "flash #{name}" do %>
+  <%= content_tag :div, :class => "flash #{name}" do %>
     <%= msg %>
     <%= link_to '[hide]', "$(this).parents('.flash').fadeOut('fast')" %>
   <% end %>
 <% end %>
+
 <noscript>
   <p>
     Unfortunately your browser does not have JavaScript capabilities which are required to exploit full functionality of

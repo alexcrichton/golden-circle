@@ -1,9 +1,8 @@
 class Grading::StudentsController < ApplicationController
   
-  before_filter { |c| c.unauthorized! if c.cannot? :grade, School }
+  before_filter { |c| c.authorize! :grade, School }
   before_filter :load_students
   layout 'wide'
-
 
   def show
   end
@@ -29,14 +28,14 @@ class Grading::StudentsController < ApplicationController
       return render(:action => 'show') # unsuccessful saves...
     end
     flash[:notice] = 'Students successfully updated!'
-    redirect_to grading_team_student_path(@team)
+    redirect_to grading_team_students_path(@team)
   end
 
   protected 
 
   def load_students
     @student_hash = {}
-    @team = Team.find(params[:team_id], :include => [:school])
+    @team = Team.includes(:school).find(params[:team_id])
     @students = @team.students.by_name
     @students.each { |s| @student_hash[s.id] = s }
   end

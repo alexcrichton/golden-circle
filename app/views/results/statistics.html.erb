@@ -1,4 +1,5 @@
 <h1><%= params[:klass].to_s.capitalize %> Schools Statistics</h1>
+
 <div id="tabs">
   <ul>
     <li><%= link_to 'Sweepstakes', '#sweepstakes' %></li>
@@ -7,6 +8,7 @@
     <li><%= link_to 'Apprentice Teams', '#apprentice-team' %></li>
     <li><%= link_to 'Apprentice Individual', '#apprentice-individual' %></li>
   </ul>
+
   <div id="sweepstakes">
     <table>
       <colgroup>
@@ -25,65 +27,26 @@
       <% @schools.each do |school| %>
         <tr class="<%= cycle('even', 'odd') %>">
           <td class="num"><%= rank(school.school_score, :school) %></td>
-          <td><%= h(school.name) %></td>
-          <td class="num"><%= school.teams.apprentice.first.team_score %> <%= check_image(school.teams.apprentice.first) %></td>
-          <td class="num"><%= school.teams.wizard.first.team_score %> <%= check_image(school.teams.wizard.first) %></td>
-          <td class="num"><%= school.school_score %> <%= check_image(school) %></td>
+          <td><%= school.name %></td>
+
+          <td class="num">
+						<%= school.teams.apprentice.first.team_score %> 
+						<%= check_image(school.teams.apprentice.first) %>
+					</td>
+          <td class="num">
+						<%= school.teams.wizard.first.team_score %> 
+						<%= check_image(school.teams.wizard.first) %>
+					</td>
+          <td class="num">
+						<%= school.school_score %> 
+						<%= check_image(school) %>
+					</td>
         </tr>
       <% end %>
     </table>
   </div>
-  <% ['wizard', 'apprentice'].each do |level| %>
-    <div id="<%= level %>-team">
-      <table>
-        <colgroup>
-          <col width="40"/>
-        </colgroup>
-        <tr>
-          <td colspan="5" class="separator"><%= params[:klass].capitalize %> School <%= level.capitalize %> Team Results</td>
-        </tr>
-        <tr>
-          <th>Rank</th>
-          <th>School Name</th>
-          <th>Student Score Sum</th>
-          <th>Test Score</th>
-          <th>Total Score</th>
-        </tr>
-        <% @teams.send(level).each do |team| %>
-          <tr class="<%= cycle('even', 'odd') %>">
-            <td class="num"><%= rank(team.team_score, "team_#{level}") %></td>
-            <td><%= team_name(team) %></td>
-            <td class="num"><%= team.student_score_sum %> <%= check_image(team, :student_scores_checked) %></td>
-            <td class="num"><%= team.team_test_score %> <%= check_image(team, :team_score_checked) %></td>
-            <td class="num"><%= team.team_score %> <%= check_image(team) %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
 
-    <div id="<%= level %>-individual">
-      <table>
-        <colgroup>
-          <col width="40"/>
-        </colgroup>
-        <tr>
-          <td colspan="4" class="separator"><%= params[:klass].capitalize %> School Individual <%= level.capitalize %> Results</td>
-        </tr>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>School</th>
-          <th>Score</th>
-        </tr>
-        <% @students.send(level).each do |student| %>
-          <tr class="<%= cycle('even', 'odd') %>">
-            <td class="num"><%= rank(student.test_score, "student_#{level}") %></td>
-            <td><%= h student.name %></td>
-            <td><%= team_name(student.team) %></td>
-            <td class="num"><%= student.test_score %> <%= check_image(student) %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  <% end %>
+	<%= render 'level_statistics', :level => 'wizard', :teams => @teams.wizard, :students => @students.wizard %>
+	
+	<%= render 'level_statistics', :level => 'apprentice', :teams => @teams.apprentice, :students => @students.apprentice %>
 </div>

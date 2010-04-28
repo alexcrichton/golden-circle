@@ -1,13 +1,16 @@
 <h1><%= team_name(@team) %></h1>
+
 <h2><%= @school.school_class %> - <%= @team.level.classify.pluralize %></h2>
+
 <dl id="info" class="clearfix" style="width:80%">
   <dt>Contact name:</dt>
-  <dd><%= h @school.contact_name.blank? ? 'No Contact' : @school.contact_name %></dd>
+  <dd><%= @school.contact_name.blank? ? 'No Contact' : @school.contact_name %></dd>
   <dt>Contact email:</dt>
   <dd><%= mail_to @school.email %></dd>
   <dt>Contact phone:</dt>
-  <dd><%= h @school.contact_phone.blank? ? 'No Phone' : @school.contact_phone %></dd>
+  <dd><%= @school.contact_phone.blank? ? 'No Phone' : @school.contact_phone %></dd>
 </dl>
+
 <table border="1" class="print">
   <tr>
     <td class="separator">&nbsp;</td>
@@ -15,6 +18,7 @@
     <td class="separator">Last Name</td>
     <td class="separator">Score</td>
   </tr>
+
   <% @team.students.by_name.each do |student| %>
     <tr class="<%= cycle('even', 'odd', :name => 'rowclass') %>">
       <td class="num"><%= cycle(*1..15) %></td>
@@ -24,6 +28,7 @@
     </tr>
   <% end %>
 </table>
+
 <div class="span-12 colborder" style="margin:10px;">
   <p><%= (["________"] * 5).join " + " %> = _________</p>
   <em>Top 5 individual scores and sum.</em>
@@ -32,6 +37,7 @@
   <p>_______ x 5 = ________</p>
   <em>Number right on team test, then times 5</em>
 </div>
+
 <div class="span-5 total">
   <p>School Score:</p>
   <em>Add sum and product</em>

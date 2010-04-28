@@ -3,14 +3,18 @@
 Find:<br />
 <%= text_field_tag :search, params[:q] %>
 <hr />
-<% form_tag(grading_team_student_path(@team), :class => 'grading', :method => :put) do %>
+
+<%= form_tag(grading_team_students_path(@team), :class => 'grading', :method => :put) do %>
+
   <%= error_messages_for 'team' %>
-  <% fields_for @team do |tf| %>
+
+  <%= fields_for @team do |tf| %>
     <p>
       <%= tf.check_box :student_scores_checked %>
       <%= tf.label :student_scores_checked, 'These scores have been checked at least once and they are all correctly entered.' %>
     </p>
   <% end %>
+
   <table id="students">
     <tr>
       <td class="separator" colspan="4">All <%= @team.level %> Students of <%= @team.school.name %></td>
@@ -22,7 +26,7 @@ Find:<br />
       <th>Level</th>
     </tr>
     <% @students.each do |student| %>
-      <% fields_for("students[#{student.id}]", student) do |sf| %>
+      <%= fields_for("students[#{student.id}]", student) do |sf| %>
         <tr class="<%= cycle('even', 'odd') %> filter:<%= h(student.name).gsub(/ /, "_") %>">
           <td><%= sf.label :test_score, h(student.name) %></td>
           <td class="cell">
@@ -35,6 +39,7 @@ Find:<br />
       <% end %>
     <% end %>
   </table>
+
   <p>
     <%= submit_tag "Submit Changes", :onclick => "setConfirmUnload(false)" %> or
     <%= link_to 'Back to teams', grading_team_path(@team.level) %>

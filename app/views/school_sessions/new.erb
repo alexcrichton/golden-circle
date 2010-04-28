@@ -2,10 +2,11 @@
 <div class='notice'>
 	Unfortunately, Golden Circle has been canceled for 2010. We apologize for any inconvenience. Please check back in Spring 2011!
 </div>
+
 <div class="login outer">
   <div class="inner">
     <h2>Login School</h2>
-    <% form_for @school_session, :url => school_session_path do |f| %>
+    <%= form_for @school_session, :url => school_session_path do |f| %>
       <div id="pass-login">
         <p>
           <%= f.label :email %><br/>
@@ -27,12 +28,13 @@
     <% end %>
   </div>
 </div>
+
 <br />
 <% if can? :create, School %>
   <div class="login outer">
     <div class="inner">
       <h2>Register a School</h2>
-      <% form_for School.new do |f| %>
+      <%= form_for School.new do |f| %>
         <%= render 'schools/form', :f => f %>
         <p class="tcenter">
           <%= f.submit "Register School" %>

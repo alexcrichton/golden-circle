@@ -7,45 +7,13 @@
     <li><%= link_to 'Apprentice - Large', '#apprentice-large' %></li>
     <li><%= link_to 'Apprentice - Small', '#apprentice-small' %></li>
   </ul>
-  <% [:wizard, :apprentice].each do |level| %>
-    <% [:large, :small].each do |klass| %>
-      <div id="<%= "#{level}-#{klass}" %>">
-        <table>
-          <colgroup>
-            <col width="40"/>
-          </colgroup>
-          <tr>
-            <td colspan="4" class="separator"><%= klass.to_s.capitalize %> Schools</td>
-          </tr>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>School</th>
-            <th>Score</th>
-          </tr>
-          <% (cache = @students.send(klass).send(level)).each do |student| %>
-            <% next if student.test_score < Settings.cutoff_score[klass.to_s][level.to_s].to_i %>
-            <tr class="<%= cycle('even', 'odd') %>">
-              <td class="num"><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
-              <td><%= h student.name %></td>
-              <td><%= team_name(student.team) %></td>
-              <td class="num"><%= student.test_score %></td>
-            </tr>
-          <% end %>
-        </table>
-        <% dataset = (0..25).map{ |i| cache.select{ |s| s.test_score == i}.size } %>
-        <%= google_chart :cht => 'bvg',
-                         :chco => '006666',
-                         :chds => "0,#{dataset.max}",
-                         :chd => "t:#{dataset.join ','}",
-                         :chxt => 'x,y',
-                         :chxr => "1,0,#{dataset.max},1",
-                         :chxl => "0:|#{(0..25).to_a.join('|')}|",
-                         :chs => '900x300',
-                         :chbh => 'a,5,5',
-                         :chtt => "Score distribution" %>
-      </div>
-    <% end %>
-  <% end %>
+
+	<%= render 'individual_results', :klass => 'large', :level => 'wizard', :students => @students.wizard.large %>
+	
+	<%= render 'individual_results', :klass => 'large', :level => 'apprentice', :students => @students.apprentice.large %>
+	
+	<%= render 'individual_results', :klass => 'small', :level => 'wizard', :students => @students.wizard.small %>
+	
+	<%= render 'individual_results', :klass => 'small', :level => 'apprentice', :students => @students.apprentice.small %>
 </div>
 
