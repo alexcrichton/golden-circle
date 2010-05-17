@@ -13,5 +13,8 @@ group 'development' do
   gem 'mysql'
 end
 
-gem 'pg',    :group => 'production'
+group 'production' do
+  gem 'pg'
+  gem 'memcached'
+end
 
