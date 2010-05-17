@@ -6,8 +6,7 @@ Bundler.require :default, Rails.env
 
 module GoldenCircle
   class Application < Rails::Application
-    config.filter_parameters << :password
-    config.filter_parameters << :password_confirmation
+    config.filter_parameters += [:password, :password_confirmation]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

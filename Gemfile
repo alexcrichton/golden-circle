@@ -8,12 +8,12 @@ gem 'paperclip', :git => 'git://github.com/dwalters/paperclip.git', :branch => '
 
 gem 'haml'
 
-group 'development' do
+group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'mysql'
 end
 
-group 'production' do
+group :production do
   gem 'pg'
   gem 'memcached'
 end
