@@ -7,6 +7,9 @@ gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => '
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git', :branch => 'rails3'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'haml'
+
+gem 'mysql'
 
 ## Bundle edge rails:
 # gem "rails", :git => "git://github.com/rails/rails.git"

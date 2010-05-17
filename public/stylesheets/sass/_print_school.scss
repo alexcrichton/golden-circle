@@ -1,0 +1,26 @@
+table.print td {
+  height: 40px;
+  font-size: 12pt;
+}
+
+div.total {
+  margin: 10px;
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+div.total p {
+  font-weight: bold;
+  font-size: 15pt;
+  margin: 0;
+  padding: 0;
+}
+
+div.sum {
+  background: #ccc;
+  border: 3px solid #555;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100px;
+  float: right;
+}

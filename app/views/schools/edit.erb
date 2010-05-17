@@ -29,14 +29,12 @@
       </fieldset>
     </div>
 
-    <div class="span-7 payment outer tcenter">
-      <div class="inner">
-        The amount due for this team is
-        <span style="color:#008000;font-weight:bold;"><%= number_to_currency @school.cost %></span>.
-        <% if @school.cost > 0 %>
-          Please bring a check payable to <em>GT Education</em> to the registration table.
-        <% end %>
-      </div>
+    <div class="span-7 payment">
+      The amount due for this team is
+      <span style="color:#008000;font-weight:bold;"><%= number_to_currency @school.cost %></span>.
+      <% if @school.cost > 0 %>
+        Please bring a check payable to <em>GT Education</em> to the registration table.
+      <% end %>
     </div>
 
     <hr />

@@ -1,0 +1,190 @@
+@import "fieldset";
+@import "errors";
+@import "login";
+@import "school";
+@import "print_school";
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f1f1f1;
+}
+
+.header {
+  height: 60px;
+  border-bottom: solid #505050 4px;
+  width: auto;
+  background: #fff;
+  position: relative;
+  padding: 0 10px;
+}
+
+
+img#logo {
+  position: absolute;
+  top: 11px;
+  left: 10px;
+}
+
+#container {
+  border: solid #d1d1d1;
+  border-width: 0 1px;
+  background: white;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+div#footer {
+  background: #e5e5e5;
+  margin: 0 auto;
+  padding: 10px;
+  border: solid #d1d1d1 4px;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  float: none;
+  color: #555;
+
+  p {
+    margin: 0;
+  }
+}
+
+#topnav {
+  list-style: none;
+  margin: 0;
+  padding: 0; /*Push-10*/
+  margin-left: 400px;
+  font-size: 1.25em;
+  width: 550px;
+}
+
+#login_links {
+  position: absolute;
+  right: 10px;
+  text-align: right;
+  background: white;
+}
+
+#info {
+  font-size: 100%;
+  
+  dd {
+    float: left;
+    margin-left: 0;
+    width: 390px;
+    margin-bottom: 5px;
+    padding: 3px 0;
+  }
+
+  dt {
+    float: left;
+    margin-right: 10px;
+    width: 250px;
+    padding: 3px 0;
+  }
+}
+
+.controls {
+  float: right;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.separator {
+  background: #066;
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;
+  color: white;
+  border-width: 0;
+  border-top: 15px solid #fff;
+}
+
+.num {
+  text-align: right;
+}
+
+div#school-info {
+  margin-bottom: 10px;
+}
+
+tr.odd:hover td {
+  background: #fafab6;
+}
+
+tr.even:hover td {
+  background: #ceddf6;
+}
+
+.tcenter {
+  text-align: center;
+}
+
+.flash a {
+  float: right;
+}
+
+.flash p {
+  float: left;
+}
+
+#tabs, .container {
+  overflow:auto;
+}
+
+div.loader {
+  border: 1px solid #ccc;
+  width: 500px;
+  height: 500px;
+}
+
+.graph {
+  float: left;
+  margin: 5px;
+}
+
+div.loader.loading {
+  background: url(/images/ajax-big.gif) no-repeat center center;
+}
+
+h3.ui-widget-header {
+  text-align: center;
+  margin: 0;
+  padding: 0.4em;
+}
+
+div.ui-widget-content {
+  padding: 0.4em;
+}
+
+@media print {
+  body {
+    background: inherit;
+  }
+
+  #container {
+    border-right: 0;
+  }
+
+  .header {
+    display: none;
+  }
+
+  #footer {
+    display: none;
+  }
+
+  #right {
+    display: none;
+    visibility: collapse;
+  }
+
+  div.main {
+    border-right: 0;
+    width: 100%;
+  }
+
+}

@@ -46,9 +46,9 @@ GoldenCircle::Application.routes.draw do |map|
   resources :password_resets, :only => [:new, :create, :edit, :update]
   #logout '/logout', :controller => "school_sessions", :action => "destroy"
   #login '/login', :controller => "school_sessions", :action => "new"
-  match 'logout', :to => 'school_sessions#destroy', :as => 'logout'
-  match 'login', :to => 'school_sessions#new', :as => 'login'
-  resource :school_session, :only => [:create]
+  get 'logout' => 'school_sessions#destroy'
+  get 'login' => 'school_sessions#new'
+  post 'login' => 'school_sessions#create'
 
   root :to => "schools#show_current"
 

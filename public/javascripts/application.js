@@ -77,7 +77,7 @@ $(function() {
 });
 
 $(function() {
-  $('.inner').corner('8px').parent().css('padding', '2px').corner('10px');
+  // $('.inner').corner('8px').parent().css('padding', '2px').corner('10px');
 
   $('.menu li').hover(
           function() {
@@ -88,7 +88,7 @@ $(function() {
             $(this).removeClass('ui-state-hover');
             $(this).find('ul:first').hide();
           }).addClass('ui-state-default');
-  $('.menu > li > a, .menu > li > span').corner("top 9px").parent().css('padding', '1px 1px 0 1px').corner("round top 10px");
+  // $('.menu > li > a, .menu > li > span').corner("top 9px").parent().css('padding', '1px 1px 0 1px').corner("round top 10px");
 
 });
 
