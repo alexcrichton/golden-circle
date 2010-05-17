@@ -11,3 +11,4 @@ gem 'haml'
 
 gem 'mysql', :group => :development
 gem 'pg',    :group => :production
+
