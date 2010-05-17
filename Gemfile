@@ -9,7 +9,8 @@ gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git', :branch =>
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'haml'
 
-gem 'mysql'
+gem 'mysql', :group => :development
+gem 'pg', :group => :production
 
 ## Bundle edge rails:
 # gem "rails", :git => "git://github.com/rails/rails.git"
