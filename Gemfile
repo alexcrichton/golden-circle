@@ -16,5 +16,6 @@ end
 group :production do
   gem 'pg'
   gem 'memcached'
+  gem 'memcache'
 end
 
