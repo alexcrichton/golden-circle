@@ -1,9 +1,10 @@
 GoldenCircle::Application.routes.draw do |map|
-
-#     Taken out for Heroku
-#  resources :uploads, :collection => {:backup => :put, :restore => :get},
-#                :member => {:transfer => :get},
-#                :only => [:index, :update, :edit]
+  
+  if Rails.env.production?
+    match '*path', :to => redirect { |params| 
+      "https://goldencircle.heroku.com/" + params[:path]
+    }, :constraints => {:protocol => /http/ }
+  end
 
   resources :schools do
     collection do
@@ -12,24 +13,18 @@ GoldenCircle::Application.routes.draw do |map|
       post :valid
     end
     put :admin, :on => :member
-#   map.namespace :grading do |grading|
-#     grading.resources :teams, :only => [:update, :show] do |team|
-#       team.resource   :students, :only => [:update, :show]
-#     end
-#     grading.resource  :settings, :only => [:update, :show]
-#     grading.resource  :status, :only => [:show], :controller => 'status', :collection => {:search => :post}
-# >>>>>>> master
   end
+  
   namespace :grading do
     resources :teams, :only => [:update, :show] do
       resource  :students, :only => [:update, :show]
     end
     resource :settings, :only => [:update, :show]
-    # controller(:status) { get 'status', :to => :show, :as => 'status' }
     resource :status do
       post :search
     end
   end
+  
   resources :teams, :only => [] do
     get :print, :on => :member
   end
@@ -40,12 +35,8 @@ GoldenCircle::Application.routes.draw do |map|
     get 'individual', :to => :individual, :as => 'individual_results'
     get 'statistics/:klass', :to => :statistics, :as => 'statistics'
   end
-  # match '/results/statistics/:klass' => 'results#statistics'
-  # statistics '/results/statistics/:klass', :controller => 'results', :action => 'statistics', :conditions => {:method => :get}
 
   resources :password_resets, :only => [:new, :create, :edit, :update]
-  #logout '/logout', :controller => "school_sessions", :action => "destroy"
-  #login '/login', :controller => "school_sessions", :action => "new"
   get 'logout' => 'school_sessions#destroy'
   get 'login' => 'school_sessions#new'
   post 'login' => 'school_sessions#create'

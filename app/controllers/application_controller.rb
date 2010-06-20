@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
   
-  include SslRequirement
-
   helper :all # include all helpers, all the time
 
   helper_method :current_school, :current_school_session
@@ -13,10 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  
-  def ssl_required?
-    Rails.env.production?
-  end
   
   def current_school_session 
     return @current_school_session if defined?(@current_school_session)
