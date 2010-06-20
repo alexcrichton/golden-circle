@@ -1,9 +1,15 @@
 GoldenCircle::Application.routes.draw do |map|
   
   if Rails.env.production?
-    match '*path', :to => redirect { |params| 
-      "https://goldencircle.heroku.com/" + params[:path]
-    }, :constraints => {:protocol => /http/ }
+    # This regex is weird... /http$/ doesn't work though :(
+    constraints :protocol => /http[^s]|http$/ do
+      
+      # TODO: make this configurable
+      match '*p', :to => redirect('https://goldencircle.heroku.com/%{p}')
+      
+      # Apparently the above wildcard doesn't match the root url?
+      root :to => redirect('https://goldencircle.heroku.com/')
+    end
   end
 
   resources :schools do
