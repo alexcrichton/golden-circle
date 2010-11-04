@@ -1,31 +1,38 @@
-class Team < ActiveRecord::Base
+class Team
+  include Mongoid::Document
+  
+  field :level
+  field :test_score, :type => Integer
+  field :team_score_checked, :type => Boolean, :default => false
+  field :student_scores_checked, :type => Boolean, :default => false
+  field :is_exhibition, :type => Boolean, :default => true
+  field :team_score, :type => Integer
+  field :students_count, :type => Integer
 
-  WIZARD = 'Wizard'
-  APPRENTICE = 'Apprentice'
+  embeds_many :students
+  embedded_in :school, :inverse_of => :teams
+
+  WIZARD      = 'Wizard'
+  APPRENTICE  = 'Apprentice'
   MAXSTUDENTS = 15
 
-  has_many :students, :dependent => :destroy, :validate => false
-  accepts_nested_attributes_for :students,
-                                :reject_if => lambda{ |s| s['first_name'].blank? && s['last_name'].blank? },
-                                :allow_destroy => true
-
-  belongs_to :school
+  accepts_nested_attributes_for :students, :allow_destroy => true,
+    :reject_if => lambda{ |s| s['first_name'].blank? && s['last_name'].blank? }
 
   validates_inclusion_of :level, :in => [Team::WIZARD, Team::APPRENTICE]
-  validates_associated :students, :message => 'are invalid', :unless => :student_validation_not_needed?
+  validates_associated :students, :message => 'are invalid',
+    :unless => :student_validation_not_needed?
   validates_size_of :students,
-                    :maximum => MAXSTUDENTS,
-                    :message => "have a maximum of #{MAXSTUDENTS} allowed",
-                    :unless => :student_validation_not_needed?
-  validates_numericality_of :test_score,
-                            :only_integer => true,
-                            :less_than_or_equal_to => 30,
-                            :greater_than_or_equal_to => 0,
-                            :allow_nil => true
+    :maximum => MAXSTUDENTS, :unless => :student_validation_not_needed?,
+    :message => "have a maximum of #{MAXSTUDENTS} allowed"
 
-  attr_protected :test_score, :test_score_checked, :student_scores_checked, :team_score, :is_exhibition
+  validates_numericality_of :test_score, :only_integer => true, 
+    :less_than_or_equal_to => 30, :greater_than_or_equal_to => 0,
+    :allow_nil => true
 
-  scope :sorted_by_level, order('teams.level ASC')
+  attr_accessible :level
+
+  scope :sorted_by_level, order_by(:level.asc)
   scope :unchecked_student_scores, where(:student_scores_checked => false)
   scope :unchecked_team_score, where(:team_score_checked => false)
   scope :checked_student_scores, where(:student_scores_checked => true)
@@ -35,12 +42,8 @@ class Team < ActiveRecord::Base
   scope :exhibition, where(:is_exhibition => true)
   scope :wizard, where(:level => Team::WIZARD)
   scope :apprentice, where(:level => Team::APPRENTICE)
-  scope :large, where('schools.enrollment >= ?', School::CUTOFF).includes(:school)
-  scope :small, where('schools.enrollment < ?', School::CUTOFF).includes(:school)
-  scope :participating, where('students_count > ?', 0)
-  scope :sorted, order('schools.name ASC').includes(:school)
-  scope :winners, order('team_score DESC').where('team_score IS NOT ?', nil)
-  scope :search, lambda{ |query| where('UPPER(schools.name) LIKE UPPER(?)', "%#{query}%").includes(:school) }
+  scope :participating, where(:students_count.gte => 0)
+  scope :winners, order_by(:team_score.desc).where(:team_score.ne => nil)
 
   def self.max_team_score
     # 5 student scores of 25 + max team test score * 5
@@ -48,17 +51,18 @@ class Team < ActiveRecord::Base
   end
 
   def team_test_score
-    return 0 if test_score.nil?
-    test_score * 5
+    test_score.nil? ? 0 : test_score * 5
   end
 
   def student_score_sum
-    students.team_contributors.map(&:test_score).reject(&:nil?).sum
+    students.team_contributors.map(&:test_score).compact.sum
   end
 
   def recalculate_team_score(student_scores_changed = true)
     # only recalculate if the student's or this team's scores have changed
-    self.team_score = team_test_score + student_score_sum if student_scores_changed || test_score_changed?
+    if student_scores_changed || test_score_changed?
+      self.team_score = team_test_score + student_score_sum 
+    end
     calc_school = team_score_changed? # cache because will be different after save
     @recalculating = true
     return_val = save

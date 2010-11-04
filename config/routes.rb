@@ -3,10 +3,10 @@ GoldenCircle::Application.routes.draw do |map|
   if Rails.env.production?
     # This regex is weird... /http$/ doesn't work though :(
     constraints :protocol => /http[^s]|http$/ do
-      
+
       # TODO: make this configurable
       match '*p', :to => redirect('https://goldencircle.heroku.com/%{p}')
-      
+
       # Apparently the above wildcard doesn't match the root url?
       root :to => redirect('https://goldencircle.heroku.com/')
     end
@@ -31,9 +31,7 @@ GoldenCircle::Application.routes.draw do |map|
     end
   end
   
-  resources :teams, :only => [] do
-    get :print, :on => :member
-  end
+  get 'teams/:id/print' => 'teams#print'
 
   scope(:path => 'results', :controller => 'results') do
     get 'school', :to => :school, :as => 'school_results'
@@ -42,10 +40,7 @@ GoldenCircle::Application.routes.draw do |map|
     get 'statistics/:klass', :to => :statistics, :as => 'statistics'
   end
 
-  resources :password_resets, :only => [:new, :create, :edit, :update]
-  get 'logout' => 'school_sessions#destroy'
-  get 'login' => 'school_sessions#new'
-  post 'login' => 'school_sessions#create'
+  devise_for :schools
 
   root :to => "schools#show_current"
 

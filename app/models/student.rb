@@ -1,40 +1,40 @@
-class Student < ActiveRecord::Base
+class Student
+  include Mongoid::Document
+
+  field :last_name
+  field :first_name
+  field :test_score, :type => Integer
+
+  embedded_in :team, :inverse_of => :students
 
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :first_name,
-                          :scope => [:last_name],
-                          :case_sensitive => false,
-                          :if => Proc.new{ |s| s.first_name_changed? || s.last_name_changed? }
-  validates_numericality_of :test_score,
-                            :only_integer => true,
-                            :less_than_or_equal_to => 25,
-                            :greater_than_or_equal_to => 0,
-                            :allow_nil => true
-  attr_protected :test_score
+    :scope => [:last_name], :case_sensitive => false,
+    :if => Proc.new{ |s| s.first_name_changed? || s.last_name_changed? }
+  validates_numericality_of :test_score, :only_integer => true,
+    :less_than_or_equal_to => 25, :greater_than_or_equal_to => 0,
+    :allow_nil => true
 
-  belongs_to :team, :counter_cache => true
+  attr_accessible :last_name, :first_name
 
   before_save :strip_names
+  after_create :increment_student_count
+  before_destroy :decrement_student_count
 
-  scope :winners, order('students.test_score DESC, last_name ASC, first_name ASC').where('students.test_score IS NOT ?', nil)
+  scope :winners, order_by(:test_score.desc, :last_name.asc, :first_name.asc).
+    where(:test_score.ne => nil)
   scope :blank_scores, where(:test_score => nil)
-  scope :upper_scores, where('students.test_score >= ?', 20)
-  scope :team_contributors, order('students.test_score DESC').limit(5)
-  scope :large, where('schools.enrollment >= ?', School::CUTOFF).includes(:team => :school)
-  scope :small, where('schools.enrollment < ?', School::CUTOFF).includes(:team => :school)
-  scope :wizard, where('teams.level = ?', Team::WIZARD).includes(:team => :school)
-  scope :apprentice, where('teams.level = ?', Team::APPRENTICE).includes(:team => :school)
-  scope :by_name, order('last_name ASC, first_name ASC')
-  scope :search, lambda{ |first, last| 
-    if last.nil?
-      where('UPPER(first_name) LIKE UPPER(?)', "#{first}%")
-    else
-      where('UPPER(first_name) LIKE UPPER(?) AND UPPER(last_name) LIKE UPPER(?)', "#{first}%", "#{last}%")
-    end
-  }
+  scope :upper_scores, where(:test_score.gte => 20)
+  scope :team_contributors, order_by(:test_score.desc).limit(5)
+  scope :by_name, order_by(:last_name.asc, :first_name.asc)
+  scope :search, lambda{ |first, last|
+    scope = where(:first_name => /^#{first}/i)
+    scope = where(:last_name => /^#{last}/i) if last.present?
+    scope
+  }  
 
   def name
-    first_name + " " + last_name
+    first_name + ' ' + last_name
   end
 
   def blank?
@@ -44,9 +44,18 @@ class Student < ActiveRecord::Base
   protected
 
   def strip_names
-    # without self, doesn't work for some reason...
-    self.first_name = self.first_name.strip if self.first_name
-    self.last_name = self.last_name.strip if self.last_name
+    self.first_name = self.first_name.try :strip
+    self.last_name  = self.last_name.try :strip
+  end
+
+  def increment_student_count
+    team.student_count += 1
+    team.save!
+  end
+  
+  def decrement_student_count
+    team.student_count -= 1
+    team.save!
   end
 
 end

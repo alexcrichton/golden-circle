@@ -1,4 +1,9 @@
-class Settings < ActiveRecord::Base
+class Settings
+  include Mongoid::Document
+
+  field :var
+  field :value
+
   class SettingNotFound < RuntimeError; end
 
   cattr_accessor :defaults

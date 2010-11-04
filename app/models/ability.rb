@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
   
-  def initialize(school)
+  def initialize school
     clear_aliased_actions
 
     alias_action :edit, :to => :update

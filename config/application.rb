@@ -35,19 +35,8 @@ module GoldenCircle
     #   g.template_engine :erb
     #   g.test_framework  :test_unit, :fixture => true
     # end
-    # require 'acts_as_slug'
-    # # require 'smtp_tls' if RUBY_VERSION < '1.8.7'
-    # ActiveRecord::Base.class_eval do
-    #   include Acts::Slug
-    # 
-    #   def to_xml(options = {})
-    #     # protect attributes registered with attr_protected
-    #     default_except = self.class.protected_attributes.to_a
-    #     options[:except] = (options[:except] ? options[:except] | default_except : default_except)
-    #     super
-    #   end
-    # end
-    # ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(:default => '%l:%M%p %m/%d/%Y')
+
+    config.encoding = "utf-8"
 
   end
 end

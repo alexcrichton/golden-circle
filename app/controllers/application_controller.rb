@@ -1,8 +1,4 @@
 class ApplicationController < ActionController::Base
-  
-  helper :all # include all helpers, all the time
-
-  helper_method :current_school, :current_school_session
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = 'Access denied.'
