@@ -1,6 +1,7 @@
 @import "blueprint/typography";
 @import "compass";
 @import "errors";
+@import "tables";
 
 body {
   @include blueprint-typography-body(12px);

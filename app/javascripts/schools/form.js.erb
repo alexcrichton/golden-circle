@@ -1,0 +1,139 @@
+//= require <jquery/validate>
+
+$(function() {
+  $('form.edit_school').validate({
+    rules: {
+      'school[email]': {
+        required: true,
+        email: true,
+        remote: {
+          url: '/schools/valid',
+          type: 'post',
+          data: {
+            field: 'email',
+            'default': $('input#school_email').val()
+          }
+        }
+      },
+      'school[name]': {
+        required: true,
+        remote: {
+          url: '/schools/valid',
+          type: 'post',
+          data: {
+            field: 'name',
+            'default': $('input#school_name').val()
+          }
+        }
+      },
+      'school[enrollment]': {
+        required: true
+      },
+      'school[contact_name]': {
+        required: true
+      },
+      'school[phone][area_code]': {
+        required: true
+      },
+      'school[phone][prefix]': {
+        required: true
+      },
+      'school[phone][suffix]': {
+        required: true
+      }
+
+    },
+    messages: {
+      'school[name]': {
+        remote: 'Name has already been taken'
+      },
+      'school[email]': {
+        remote: 'Email has already been taken'
+      }
+    },
+    onkeyup: function(element) {
+      if ($(element).attr('name') != 'school[name]' &&
+          $(element).attr('name') != 'school[email]') {
+        $.validator.defaults.onkeyup.apply(this, arguments);
+      }
+    }
+
+  });
+
+  var addElem = function(id, klass) {
+    return function(e) {
+      var html = $(id).html().replace(/CHANGEME/g,
+        new Date().getTime().toString()), elem;
+
+      if (klass != null) {
+        elem = $('<div>').addClass(klass).html(html);
+      } else {
+        elem = $(html);
+      }
+
+      elem.addClass('new').find('input:disabled').removeAttr('disabled');
+      elem.hide();
+      elem.insertBefore($(id));
+      elem.slideDown();
+      e.preventDefault();
+    };
+  };
+
+  $('form').submit(function() {
+    $('#new_proctor, #new_team, .new_student').remove();
+  });
+
+  $('#proctors legend a').click(addElem('#new_proctor', 'proctor'));
+  $('#exhibition h3 a').click(addElem('#new_team', null));
+  $('.team .add_student').live('click', function(e) {
+    var parent = $(this).parents('.team');
+    var tbl = parent.find('table:first');
+    if (parseInt(tbl.find('span.count').text(), 10) < <%= Team::MAXSTUDENTS %>) {
+      var html = parent.find('.new_student tbody').html();
+      html = html.replace(/FIXME/g, new Date().getTime().toString());
+      var el = $(html).addClass('new');
+      tbl.find('tbody').append(el);
+      tbl.find('span.count').text(tbl.find('tbody tr:visible').length);
+    }
+    
+    e.preventDefault();
+  });
+
+  $('.proctor a').live('click', function(e) {
+    $(this).parents('.proctor').slideUp(function() {
+      $(this).remove();
+    });
+    e.preventDefault();
+  });
+
+  function removeParent(selector) {
+    return function(e) {
+      // This might be a bug in mongoid for now. When a new team is created and
+      // then removed, it's still created in the document.
+      var par = $(this).parents(selector);
+      if (par.is('.new')) {
+        par.remove();
+      } else {
+        $(this).prev('input:hidden').val('1');
+        par.hide();
+        if (par.is('tr')) {
+          par.appendTo(par.parents('tbody').siblings('tfoot'));
+        }
+      }
+
+      e.preventDefault();
+    };
+  }
+
+  $('#exhibition .team a.remove').live('click', removeParent('.team'));
+  $('#exhibition .student a').live('click', function() {
+    var ct = $(this).parents('tbody').find('tr:visible').length - 1;
+    $(this).parents('table').find('span.count').text(ct);
+  });
+  $('#exhibition .student a').live('click', removeParent('tr'));
+  
+  // Rails emits the id of the nested attributes after the rendered partial,
+  // causing the inputs to be in a bad place. This causes rendering issues, so
+  // just manually move them around
+  $('tbody input:hidden[id$=_id]').appendTo($('tfoot:first'));
+});

@@ -49,12 +49,12 @@ class Student
   end
 
   def increment_student_count
-    team.student_count += 1
+    team.students_count += 1
     team.save!
   end
   
   def decrement_student_count
-    team.student_count -= 1
+    team.students_count -= 1
     team.save!
   end
 

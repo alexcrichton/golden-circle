@@ -20,7 +20,7 @@ class SchoolsController < ApplicationController
 
   def show_current
     @school = current_school
-    render :action => 'edit'
+    render :template => 'devise/registrations/edit'
   end
   
   def valid

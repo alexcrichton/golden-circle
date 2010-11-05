@@ -1,0 +1,53 @@
+<div class="team">
+  <% team = f.object %>
+
+  <p>
+    <%= f.hidden_field :id %>
+    <%= f.label :level, 'Team level:' %>
+    <% if team.is_exhibition %>
+      <%= f.select :level, [Team::APPRENTICE, Team::WIZARD] %>
+      <%= f.hidden_field :_destroy %>
+      <%= link_to '[Remove this team]', '#', :class => 'remove' %>
+    <% else %>
+      <%= team.level %>
+      <%= f.hidden_field :level %>
+    <% end %>
+  </p>
+
+  <% if team.is_exhibition && !team.new_record? %>
+    <p><label>Team ID Number:</label> <%= team.id %></p>
+  <% end %>
+
+  <table class="noborder sortable" style="border:1px solid #066">
+    <caption>
+      Students 
+      (<span class="count"><%= team.students.count %></span>/<%= Team::MAXSTUDENTS %>)
+    </caption>
+
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+
+    <tfoot></tfoot>
+
+    <tbody>
+      <%= f.fields_for :students do |sf| %>
+        <%= render 'schools/student', :f => sf %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class='new_student'>
+    <tbody>
+      <%= f.fields_for :students, Student.new, :child_index => 'FIXME' do |sf| %>
+        <%= render 'schools/student', :f => sf %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to 'add', '#', :class => 'add_student' %>
+</div>

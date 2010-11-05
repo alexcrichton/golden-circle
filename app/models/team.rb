@@ -7,7 +7,7 @@ class Team
   field :student_scores_checked, :type => Boolean, :default => false
   field :is_exhibition, :type => Boolean, :default => true
   field :team_score, :type => Integer
-  field :students_count, :type => Integer
+  field :students_count, :type => Integer, :default => 0
 
   embeds_many :students
   embedded_in :school, :inverse_of => :teams
@@ -17,7 +17,7 @@ class Team
   MAXSTUDENTS = 15
 
   accepts_nested_attributes_for :students, :allow_destroy => true,
-    :reject_if => lambda{ |s| s['first_name'].blank? && s['last_name'].blank? }
+    :reject_if => lambda{ |s| p s; s['first_name'].blank? && s['last_name'].blank? }
 
   validates_inclusion_of :level, :in => [Team::WIZARD, Team::APPRENTICE]
   validates_associated :students, :message => 'are invalid',
@@ -30,7 +30,7 @@ class Team
     :less_than_or_equal_to => 30, :greater_than_or_equal_to => 0,
     :allow_nil => true
 
-  attr_accessible :level
+  attr_accessible :level, :students_attributes
 
   scope :sorted_by_level, order_by(:level.asc)
   scope :unchecked_student_scores, where(:student_scores_checked => false)

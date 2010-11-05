@@ -1,15 +1,136 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% javascript 'rails', 'schools/form' %>
+<% stylesheet 'schools/form' %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+<%= form_for @school, :url => registration_path(@school) do |f| %>
+  <%= render 'shared/error_messages', :target => @school %>
+  <%#= f.error_messages %>
 
-  <%= render 'form', :f => f %>
+  <%# content_for :jstemplates do %>
+    <!-- var proctor='<%#= generate_template(f, :proctors) %>'; -->
+    <!-- var team='<%#= generate_template(f, :teams) %>'; -->
+  <%# end %>
 
-  <p><%= f.submit "Update" %></p>
+  <%#= f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
+    <%# content_for :jstemplates do %>
+      <!-- var student='<%#= generate_template(tf, :students) %>'; -->
+    <%# end %>
+  <%# end %>
+
+  <div id="school-info">	
+    <fieldset>
+      <legend>School</legend>
+      <p>
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+      </p>
+
+      <p>
+        <%= f.label :enrollment, '9th grade school enrollment' %><br />
+        <%= f.text_field :enrollment, :size => 4 %>
+      </p>
+    </fieldset>
+
+    <div class="payment">
+      The amount due for this team is
+      <span><%= number_to_currency @school.cost %></span>.
+
+      <% if @school.cost > 0 %>
+        Please bring a check payable to <em>GT Education</em> to the
+        registration table.
+      <% end %>
+    </div>
+
+    <div>
+      <fieldset>
+        <legend>School Contact</legend>
+        <p>
+          <%= f.label :contact_name, 'Name' %><br />
+          <%= f.text_field :contact_name %>
+        </p>
+
+        <p>
+          <%= f.label :email %><br />
+          <%= f.text_field :email %>
+        </p>
+        <p>
+          <%= f.label :password %>
+          <em>(leave blank if you don't want to change it)</em>
+          <br />
+          <%= f.password_field :password %>
+        </p>
+
+        <p><%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation %></p>
+
+        <p>
+          <label>Phone</label><br />
+          <%= f.text_field :contact_phone %>
+        </p>
+      </fieldset>
+    </div>
+
+    <div class="span-8 last">
+      <fieldset id="proctors">
+        <legend>Proctors <%= link_to '[add]', '#proctors' %></legend>
+        <p>We need proctors. Let us know if you can proctor.</p>
+        <%= f.fields_for :proctors do |pf| %>
+          <%# Guarantee an update always happens %>
+          <%= pf.hidden_field '', :value => '' %>
+
+          <% @school.proctors.each do |proctor| %>
+            <div class='proctor persisted'>
+              <%= link_to 'X', '#', :class => 'x' %>
+              <%= proctor %>
+              <%= pf.hidden_field '', :value => proctor %>
+            </div>
+          <% end %>
+
+          <div id='new_proctor'>
+            <%= f.label :name %>
+            (<%= link_to 'remove', '#' %>) <br />
+            <%= pf.text_field '', :value => '', :disabled => true %>
+          </div>
+        <% end %>
+      </fieldset>
+    </div>
+  </div>
+
+  <div>
+    <h3>Teams</h3>
+
+    <% @school.teams.non_exhibition.sorted_by_level.each do |team| %>
+      <div>
+        <%= f.fields_for :teams, team do |tf| %>
+          <%= render 'schools/team', :f => tf %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="exhibition">
+    <h3>Exhibition Teams <%= link_to '[add]', '#exhibition' %></h3>
+
+    <p>
+      All Exhibition teams will still participate, although their scores will not count towards the school's total
+      score. Once a team is created, it will be assigned an ID number to identify it.
+    </p>
+
+    <% @school.teams.exhibition.each do |team| %>
+      <%= f.fields_for :teams, team do |etf| %>
+        <%= render 'schools/team', :f => etf %>
+      <% end %>
+    <% end %>
+    
+    <div id='new_team'>
+      <%= f.fields_for :teams, Team.new, :child_index => 'CHANGEME' do |tf| %>
+        <%= render 'schools/team', :f => tf %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="save">
+    Press this button to save the form!<br />
+    <%= f.submit 'Save Changes' %>
+  </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
