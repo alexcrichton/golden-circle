@@ -3,30 +3,20 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = 'Access denied.'
     store_location unless current_school
-    redirect_to current_school ? root_url : login_url
+    redirect_to current_school ? root_path : new_school_session_path
   end
 
   protected
-  
-  def current_school_session 
-    return @current_school_session if defined?(@current_school_session)
-    @current_school_session = SchoolSession.find
-  end
-
-  def current_school 
-    return @current_school if defined?(@current_school)
-    @current_school = current_school_session && current_school_session.school
-  end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.fullpath
   end
 
   def clear_stored_location
     session[:return_to] = nil
   end
 
-  def redirect_back_or_default(default)
+  def redirect_back_or_default default
     redirect_to(session[:return_to] || default)
     clear_stored_location
   end

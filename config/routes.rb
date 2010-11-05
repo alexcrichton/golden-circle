@@ -1,4 +1,6 @@
 GoldenCircle::Application.routes.draw do |map|
+
+  devise_for :schools
   
   if Rails.env.production?
     # This regex is weird... /http$/ doesn't work though :(
@@ -39,8 +41,6 @@ GoldenCircle::Application.routes.draw do |map|
     get 'individual', :to => :individual, :as => 'individual_results'
     get 'statistics/:klass', :to => :statistics, :as => 'statistics'
   end
-
-  devise_for :schools
 
   root :to => "schools#show_current"
 

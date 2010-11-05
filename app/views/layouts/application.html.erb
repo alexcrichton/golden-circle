@@ -1,31 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Golden Circle</title>
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="description" content="The Golden Circle web site registration and grading system" />
+  <meta name="keywords" content="golden circle, math tournament, des moines, central academy" />
 
-<%= render 'layouts/header' %>
+  <%= stylesheet_tags 'application' %>
+  <%= javascript_tags %>
+</head>
 <body>
-<%= render 'layouts/body_header' %>
-<div id="container">
-  <div class="span-24 last" id="page">
-    <div class="span-17 main">
+  <header>
+    <%= link_to image_tag('logo.png', :id => 'logo', :alt => 'Golden Circle'), current_school ? root_path : new_school_session_path %>
 
+    <div id="login_links">
+      <% if current_school %>
+        Logged in as: <%= link_to current_school.name, current_school %> |
+        <%= link_to 'Log out', destroy_school_session_path %> |
+      <% else %>
+        <%= link_to 'Log in', new_school_session_path %> |
+      <% end %>
+
+      <% if can? :create, School %>
+        | <%= link_to 'Register new school', new_school_path  %>
+      <% end %>
+    </div>
+
+    <nav><%= render 'layouts/topnav' %></nav>
+  </header>
+
+  <div id="container">
+    <div id='main'<%= %( class='sidebar').html_safe if content_for?(:sidebar) %>>
       <%= render 'layouts/flash_messages' %>
 
       <%= yield %>
-
     </div>
 
-    <div class="span-6 last" style="padding-left:5px" id="right">
-			<% if content_for? :sidebar %>
-      	<%= yield(:sidebar) %>
-			<% else %>
-				<%= render 'sidebar' %>
-			<% end %>
-    </div>
-
+		<% if content_for? :sidebar %>
+      <div id="sidebar"><%= yield :sidebar %></div>
+		<% end %>
   </div>
-</div>
 
-<%= render 'layouts/footer' %>
+  <footer>&reg; 2009, Golden Circle</footer>
 </body>
 </html>

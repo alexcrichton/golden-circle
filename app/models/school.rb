@@ -2,7 +2,7 @@ class School
   include Mongoid::Document
 
   devise :database_authenticatable, :recoverable, :rememberable,
-    :trackable, :validatable
+    :trackable, :validatable, :registerable
 
   field :email
   field :name

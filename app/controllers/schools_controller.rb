@@ -1,7 +1,6 @@
 class SchoolsController < ApplicationController
 
-  before_filter :load_school
-  authorize_resource
+  load_and_authorize_resource :find_by => :slug
 
   def index
     @schools = School.everything.by_name
@@ -19,47 +18,47 @@ class SchoolsController < ApplicationController
     redirect_to schools_path
   end
 
-  def show
-    render :action => 'edit'
-  end
+  # def show
+  #   render :action => 'edit'
+  # end
 
   def show_current
     @school = current_school
     render :action => 'edit'
   end
 
-  def new
-    @school = School.new
-    render :layout => 'wide' if current_school.nil?
-  end
+  # def new
+  #   @school = School.new
+  #   render :layout => 'wide' if current_school.nil?
+  # end
+  # 
+  # def create
+  #   @school = School.new(params[:school])
+  # 
+  #   if @school.save
+  #     flash[:notice] = 'School was successfully created.'
+  #     redirect_to(@school)
+  #   else
+  #     render :action => "new"
+  #   end
+  # end
+  # 
+  # def edit
+  # end
 
-  def create
-    @school = School.new(params[:school])
+  # def update
+  #   if @school.update_attributes(params[:school])
+  #     flash[:notice] = 'School successfully updated. Please review the form below to ensure accuracy.'
+  #     redirect_to(@school)
+  #   else
+  #     render :action => "edit"
+  #   end
+  # end
 
-    if @school.save
-      flash[:notice] = 'School was successfully created.'
-      redirect_to(@school)
-    else
-      render :action => "new"
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @school.update_attributes(params[:school])
-      flash[:notice] = 'School successfully updated. Please review the form below to ensure accuracy.'
-      redirect_to(@school)
-    else
-      render :action => "edit"
-    end
-  end
-
-  def destroy
-    @school.destroy
-    redirect_to(schools_path)
-  end
+  # def destroy
+  #   @school.destroy
+  #   redirect_to(schools_path)
+  # end
   
   def valid
     @field = params[:field].to_sym

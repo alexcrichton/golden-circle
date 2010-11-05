@@ -59,6 +59,6 @@ GoldenCircle::Application.configure do
       :root => Rails.root.join('tmp').to_s
 
   config.action_mailer.default_url_options = {
-    :host => 'recipes.alexcrichton.com'
+    :host => 'goldencircle.heroku.com'
   }
 end

@@ -1,5 +1,7 @@
 <ul id="topnav" class="menu">
-  <li><%= link_to 'Home', current_school ? root_path : login_path %></li>
+  <li>
+    <%= link_to 'Home', current_school ? root_path : new_school_session_path %>
+  </li>
   <% if can? :grade, School %>
     <li>
       <span>Grading</span>
