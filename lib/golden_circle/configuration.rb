@@ -2,6 +2,14 @@ module GoldenCircle
   class Configuration # Must be a class for ActiveSupport::Configurable to work
     include ActiveSupport::Configurable
 
+    config.event_date = Time.now
+    config.cost_per_student = 4
+    config.deadline = Time.now
+    config.cutoff_score = {
+      'large' => {'wizard' => 20, 'apprentice' => 20},
+      'small' => {'wizard' => 20, 'apprentice' => 20}
+    }
+
     def self.load!
       settings = Setting.all
       settings.each do |setting|
