@@ -1,7 +1,7 @@
 <% javascript 'rails', 'schools/form' %>
 <% stylesheet 'schools/form' %>
 
-<%= form_for @school, :url => registration_path(@school) do |f| %>
+<%= form_for @school do |f| %>
   <%= render 'shared/error_messages', :target => @school %>
   <%#= f.error_messages %>
 

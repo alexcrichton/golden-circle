@@ -27,16 +27,7 @@
   <% end %>
 </div>
 
-<br />
 <% if can? :create, School %>
-  <div class="login">
-    <h2>Register a School</h2>
-    <%= form_for School.new, :url => registration_path(School.new) do |f| %>
-      <%= render 'devise/registrations/form', :f => f %>
-      <p class="tcenter">
-        <%= f.submit "Register School" %>
-      </p>
-    <% end %>
-  </div>
+  <%= render 'schools/form' %>
 <% end %>
 

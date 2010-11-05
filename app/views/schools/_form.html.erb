@@ -1,0 +1,31 @@
+<% stylesheet 'login' %>
+<% javascript 'schools/new' %>
+
+<div class='login'>
+  <h2>Register a School</h2>
+
+  <%= form_for @school || School.new, :html => {:class => 'new_school'} do |f| %>
+    <%= render 'shared/error_messages', :target => f.object %>
+
+    <p>
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label :name, 'School Name' %><br />
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      <%= f.label :password %><br />
+      <%= f.password_field :password %>
+    </p>
+
+    <p><%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %></p>
+
+    <p><%= f.submit 'Register' %></p>
+  <% end %>
+
+</div>
+

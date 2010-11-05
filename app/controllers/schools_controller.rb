@@ -1,5 +1,6 @@
 class SchoolsController < ApplicationController
 
+  respond_to :html
   load_and_authorize_resource :find_by => :slug
 
   def index
@@ -12,6 +13,36 @@ class SchoolsController < ApplicationController
     render :layout => 'wide'
   end
 
+  def new
+    respond_with @school
+  end
+
+  def edit
+    respond_with @school
+  end
+
+  def show
+    respond_with @school
+  end
+
+  def create
+    @school.save
+
+    respond_with @school
+  end
+
+  def update
+    @school.update_attributes params[:school]
+
+    respond_with @school
+  end
+
+  def destroy
+    @school.destroy
+
+    respond_with @school
+  end
+
   def email
     School.all.each { |school| Notification.confirmation(school).deliver }
     flash[:notice] = 'Emails have been sent!'
@@ -20,7 +51,10 @@ class SchoolsController < ApplicationController
 
   def show_current
     @school = current_school
-    render :template => 'devise/registrations/edit'
+    
+    respond_with @school do |format|
+      format.html{ render :action => 'edit' }
+    end
   end
   
   def valid

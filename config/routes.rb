@@ -14,7 +14,7 @@ GoldenCircle::Application.routes.draw do |map|
     end
   end
 
-  resources :schools, :only => [:show, :index] do
+  resources :schools do
     collection do
       get :show_current
       put :email
