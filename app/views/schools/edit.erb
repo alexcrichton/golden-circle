@@ -1,49 +1,48 @@
+<% javascript 'rails' %>
+
 <%= form_for @school, :html => {:class => 'edit_school'} do |f| %>
-  <%= f.error_messages %>
+  <%#= f.error_messages %>
 
-  <% content_for :jstemplates do %>
-    var proctor='<%= generate_template(f, :proctors) %>';
-    var team='<%= generate_template(f, :teams) %>';
-  <% end %>
+  <%# content_for :jstemplates do %>
+    <!-- var proctor='<%#= generate_template(f, :proctors) %>'; -->
+    <!-- var team='<%#= generate_template(f, :teams) %>'; -->
+  <%# end %>
 
-  <%= f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
-    <% content_for :jstemplates do %>
-      var student='<%= generate_template(tf, :students) %>';
-    <% end %>
-  <% end %>
+  <%#= f.fields_for :teams, Team.new, :child_index => 'PARENT_ID' do |tf| %>
+    <%# content_for :jstemplates do %>
+      <!-- var student='<%#= generate_template(tf, :students) %>'; -->
+    <%# end %>
+  <%# end %>
 
-  <div class="clearfix" id="school-info">
-	
-    <div class="span-8">
-      <fieldset>
-        <legend>School</legend>
-        <p>
-          <%= f.label :name %><br />
-          <%= f.text_field :name %>
-        </p>
+  <div id="school-info">	
+    <fieldset>
+      <legend>School</legend>
+      <p>
+        <%= f.label :name %><br />
+        <%= f.text_field :name %>
+      </p>
 
-        <p>
-          <%= f.label :enrollment, '9th grade school enrollment' %><br />
-          <%= f.text_field :enrollment, :size => 4 %>
-        </p>
-      </fieldset>
-    </div>
+      <p>
+        <%= f.label :enrollment, '9th grade school enrollment' %><br />
+        <%= f.text_field :enrollment, :size => 4 %>
+      </p>
+    </fieldset>
 
-    <div class="span-7 payment">
+    <div class="payment">
       The amount due for this team is
-      <span style="color:#008000;font-weight:bold;"><%= number_to_currency @school.cost %></span>.
+      <span><%= number_to_currency @school.cost %></span>.
+
       <% if @school.cost > 0 %>
-        Please bring a check payable to <em>GT Education</em> to the registration table.
+        Please bring a check payable to <em>GT Education</em> to the
+        registration table.
       <% end %>
     </div>
 
-    <hr />
-
-    <div class="span-8 colborder">
+    <div>
       <fieldset>
         <legend>School Contact</legend>
         <p>
-          <%= f.label :contact_name, "Name" %><br />
+          <%= f.label :contact_name, 'Name' %><br />
           <%= f.text_field :contact_name %>
         </p>
 
@@ -62,18 +61,12 @@
 
         <p>
           <label>Phone</label><br />
-          <%= f.fields_for :phone, @school.phone do |pf| %>
-            <%= pf.text_field :area_code, :size => 3, :maxlength => 3 %> &ndash;
-            <%= pf.text_field :prefix, :size => 3, :maxlength => 3 %> &ndash;
-            <%= pf.text_field :suffix, :size => 4, :maxlength => 4 %>
-          <% end %>
+          <%= f.text_field :contact_phone %>
         </p>
       </fieldset>
     </div>
 
     <div class="span-8 last">
-      <% @school.proctors.build %>
-      <%= small_errors(@school.proctors) %>
       <fieldset id="proctors">
         <legend>Proctors <%= add_link '[add]', '#proctors' %></legend>
         <p>We need proctors. Let us know if you can proctor.</p>
@@ -82,7 +75,6 @@
         <% end %>
       </fieldset>
     </div>
-
   </div>
 
   <div>
@@ -96,8 +88,6 @@
       </div>
     <% end %>
   </div>
-
-  <hr />
 
   <div id="exhibition">
     <h3>Exhibition Teams <%= add_link '[add]', '#exhibition', :var => 'team' %></h3>
@@ -114,9 +104,9 @@
     <% end %>
   </div>
 
-  <div class="tcenter save">
-      Press this button to save the form!<br />
-      <%= f.submit "Save Changes", :onclick => "setConfirmUnload(false)" %>
+  <div class="save">
+    Press this button to save the form!<br />
+    <%= f.submit 'Save Changes' %>
   </div>
 <% end %>
 

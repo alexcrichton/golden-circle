@@ -22,20 +22,19 @@ class School
 
   validates_presence_of :name
   validates_presence_of :contact_name, :enrollment, :phone, :on => :update,
-    :unless => Proc.new{ |s|
-      s.send(:admin_changed?) || s.send(:password_changed?) }
+    :unless => Proc.new{ |s| s.admin_changed? || s.password_changed? }
   validates_numericality_of :enrollment,
     :greater_than_or_equal_to => 0, :only_integer => true, :on => :update,
-    :unless => Proc.new{ |s|
-      s.send(:admin_changed?) || s.send(:password_changed?) }
-  validates_uniqueness_of :name, :case_sensitive => false, :if => :name_changed?
+    :unless => Proc.new{ |s| s.admin_changed? || s.password_changed? }
+  validates_uniqueness_of :name, :if => Proc.new{ |s|
+      s.name_changed? || s.new_record? }
   validates_associated :teams, :message => 'are invalid'
 
   attr_accessible :email, :name, :proctors, :contact_phone, :contact_name,
-    :enrollment, :teams_attributes
+    :enrollment, :teams_attributes, :password, :password_confirmation
 
   after_create :add_teams
-  before_save :strip_name
+  before_save :strip_name, :set_slug
 
   scope :participating, where(:enrollment.gt => 0)
   scope :large, where(:enrollment.gte => CUTOFF)
@@ -53,6 +52,10 @@ class School
     Settings.cost_per_student * students.size
   end
 
+  def students
+    teams.map(&:students).flatten.size
+  end
+
   def school_class
     if enrollment.nil?
       'unknown'
@@ -68,10 +71,18 @@ class School
     save(:validate => false) # saves time
   end
 
+  def to_param
+    self[:slug]
+  end
+
   private
 
   def strip_name
     self[:name] = self[:name].try :strip
+  end
+
+  def set_slug
+    self[:slug] = self[:name].try :parameterize
   end
 
   def add_teams

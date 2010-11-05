@@ -8,31 +8,35 @@
   <meta name="keywords" content="golden circle, math tournament, des moines, central academy" />
 
   <%= stylesheet_tags 'application' %>
-  <%= javascript_tags %>
 </head>
 <body>
-  <header>
-    <%= link_to image_tag('logo.png', :id => 'logo', :alt => 'Golden Circle'), current_school ? root_path : new_school_session_path %>
-
-    <div id="login_links">
-      <% if current_school %>
-        Logged in as: <%= link_to current_school.name, current_school %> |
-        <%= link_to 'Log out', destroy_school_session_path %> |
-      <% else %>
-        <%= link_to 'Log in', new_school_session_path %> |
-      <% end %>
-
-      <% if can? :create, School %>
-        | <%= link_to 'Register new school', new_school_path  %>
-      <% end %>
-    </div>
-
-    <nav><%= render 'layouts/topnav' %></nav>
-  </header>
-
   <div id="container">
+    <header>
+      <%= link_to image_tag('logo.png', :alt => 'Golden Circle'), current_school ? root_path : new_school_session_path, :id => 'logo' %>
+
+      <div id="login_links">
+        <% if current_school %>
+          Logged in as: <%= link_to current_school.name, current_school %> |
+          <%= link_to 'Log out', destroy_school_session_path %>
+        <% else %>
+          <%= link_to 'Log in', new_school_session_path %>
+        <% end %>
+
+        <% if can? :create, School %>
+          | <%= link_to 'Register new school', new_school_registration_path  %>
+        <% end %>
+      </div>
+
+      <nav><%= render 'layouts/topnav' %></nav>
+    </header>
+
     <div id='main'<%= %( class='sidebar').html_safe if content_for?(:sidebar) %>>
-      <%= render 'layouts/flash_messages' %>
+      <% flash.each do |name, msg| %>
+        <% javascript 'flash' %>
+        <%= content_tag :div, :class => "flash #{name}" do %>
+          <%= msg %> <%= link_to '[hide]', '#' %>
+        <% end %>
+      <% end %>
 
       <%= yield %>
     </div>
@@ -40,8 +44,10 @@
 		<% if content_for? :sidebar %>
       <div id="sidebar"><%= yield :sidebar %></div>
 		<% end %>
+
+    <footer>&reg; 2009, Golden Circle</footer>
   </div>
 
-  <footer>&reg; 2009, Golden Circle</footer>
+  <%= javascript_tags 'jquery' %>
 </body>
 </html>

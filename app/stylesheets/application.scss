@@ -1,3 +1,70 @@
-a {
-  display: block;
+@import "blueprint/typography";
+@import "compass";
+@import "errors";
+
+body {
+  @include blueprint-typography-body(12px);
+}
+
+#container {
+  width: 900px;
+  margin: 0 auto;
+  overflow: auto;
+  border: 2px solid black;
+
+  @include border-radius(10px);
+}
+
+header {
+  padding: 5px;
+  overflow: auto;
+  position: relative;
+  border-bottom: 2px solid #777;
+
+  #logo {
+    float: left;
+  }
+
+  #login_links {
+    float: right;
+  }
+  
+  nav {
+    position: absolute;
+    bottom: 0;
+    left: 400px;
+    float: left;
+    ul {
+      @include horizontal-list;
+    }
+  }
+}
+
+footer {
+  padding: 10px;
+  text-align: center;
+  @include border-bottom-radius(8px);
+  @include linear-gradient(color-stops(white, #888));
+}
+
+.flash {
+  a {
+    color: inherit;
+    float: right;
+  }
+  &.notice, &.error, &.alert {
+    margin: 10px;
+    padding: 10px;
+  }    
+
+  &.notice {
+    background: #FFC;
+    border: solid #FF0 1px;
+  }
+
+  &.error, &.alert {
+    background: #C00;
+    border: solid #F00 1px;
+    color: white;
+  }
 }

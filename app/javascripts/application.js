@@ -159,6 +159,7 @@ $(function() {
 $(function() {
   if ($('form.new_school').length == 0)
     return;
+
   $('form.new_school').validate({
     rules: {
       'school[email]': {

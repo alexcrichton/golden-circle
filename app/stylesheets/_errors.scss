@@ -1,0 +1,47 @@
+.field_with_errors {
+  padding: 2px;
+  margin: 2px;
+
+  input, textarea {
+    background: #ffdfdf;
+  }
+}
+
+input.error, textarea.error {
+  background: #ffdfdf;
+}
+
+label.error {
+  color: darken(red, 20%);
+}
+
+#error_explanation {
+  border: 2px solid #a00;
+  padding: 7px;
+  padding-bottom: 3px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  overflow: auto;
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  p {
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 5px;
+  }
+
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}

@@ -1,0 +1,25 @@
+<p>
+  <%= f.label :email %><br />
+  <%= f.text_field :email %>
+</p>
+<p>
+  <%= f.label :name, 'School Name' %><br />
+  <%= f.text_field :name %>
+</p>
+
+<p>
+  <%= f.label :password %>
+  <% if f.object.persisted? %>
+    <em>(leave blank if you don't want to change it)</em>
+  <% end %>
+  <br />
+  <%= f.password_field :password %>
+</p>
+
+<p><%= f.label :password_confirmation %><br />
+<%= f.password_field :password_confirmation %></p>
+
+<% if f.object.persisted? %>
+  <p><%= f.label :current_password %> <em>(we need your current password to confirm your changes)</em><br />
+<%= f.password_field :current_password %></p>
+<% end %>

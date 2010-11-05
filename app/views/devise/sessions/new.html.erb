@@ -1,27 +1,28 @@
-<div class='notice'>
+<% javascript 'schools/new' %>
+<% stylesheet 'login' %>
+
+<div class='flash notice'>
 	Unfortunately, Golden Circle has been canceled for 2010. We apologize for any inconvenience. Please check back in Spring 2011!
 </div>
 
 <div class="login">
   <h2>Login School</h2>
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div id="pass-login">
-      <p>
-        <%= f.label :email %><br/>
-        <%= f.text_field :email %>
-      </p>
+    <p>
+      <%= f.label :email %><br/>
+      <%= f.text_field :email %>
+    </p>
 
-      <p>
-        <%= f.label :password %> (<%= link_to "Forgot password?", new_password_path(resource_name) %>)<br />
-        <%= f.password_field :password %>
-      </p>
-    </div>
+    <p>
+      <%= f.label :password %> (<%= link_to 'Forgot password?', new_password_path(resource_name) %>)<br />
+      <%= f.password_field :password %>
+    </p>
     <div>
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
-      <div class="tcenter">
-        <%= f.submit 'Login' %>
-      </div>
+    </div>
+    <div>
+      <%= f.submit 'Login' %>
     </div>
   <% end %>
 </div>
@@ -30,8 +31,8 @@
 <% if can? :create, School %>
   <div class="login">
     <h2>Register a School</h2>
-    <%= form_for School.new do |f| %>
-      <%= render 'schools/form', :f => f %>
+    <%= form_for School.new, :url => registration_path(School.new) do |f| %>
+      <%= render 'devise/registrations/form', :f => f %>
       <p class="tcenter">
         <%= f.submit "Register School" %>
       </p>

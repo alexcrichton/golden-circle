@@ -2,31 +2,24 @@ class Ability
   include CanCan::Ability
   
   def initialize school
-    clear_aliased_actions
-
-    alias_action :edit, :to => :update
-    alias_action :new, :to => :create
-    alias_action :show, :to => :read
-
-    alias_action :show_current, :to => :read
+    # We want the index action limited on looking at schools
+    aliased_actions.delete :read
+    alias_action :show, :show_current, :to => :read
     alias_action :valid, :to => :validate
-    
-    can :create, School do 
-      Settings.deadline.blank? || Time.now < Settings.deadline
+
+    if Settings.deadline.blank? || Time.now < Settings.deadline
+      can :create, School 
     end
     can :validate, School
     
     if school.nil?
-      can :login, School
-      can :reset, 'password'
+      # No more permissions
     elsif school.admin
       can :manage, :all
-      cannot :reset, 'password' # need to be logged out (don't want to mess with other users)
     else
-      can :logout, School
-      can [:read, :update], school
-      can :read, 'results' do
-        Settings.event_date.blank? || Time.now > Settings.event_date
+      can [:read, :update], School, :id => school.id
+      if Settings.event_date.blank? || Time.now > Settings.event_date
+        can :read, 'results'
       end
     end
   end

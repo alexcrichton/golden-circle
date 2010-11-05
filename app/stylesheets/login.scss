@@ -1,0 +1,22 @@
+@import "compass/css3";
+
+.login {
+  width: 320px;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  padding: 20px;
+  @include border-radius(20px);
+
+  h2 {
+    margin: 0;
+  }
+
+  input {
+    font-size: 20px;
+  }
+
+  input[type=submit] {
+    display: block;
+    margin: 0 auto;
+  }
+}
