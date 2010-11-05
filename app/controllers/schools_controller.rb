@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :except => :valid
   load_and_authorize_resource :find_by => :slug
 
   def index
@@ -62,14 +62,19 @@ class SchoolsController < ApplicationController
   def valid
     @field = params[:field].to_sym
     @school = School.new(params[:school])
+
     if params[:default] == @school[@field]
-      render :text => 'true'
+      valid = true
     else
       @school.valid? # get errors if they exist
-      render :text => (@school.errors[@field].blank? ? 'true' : 'false')
+      valid = @school.errors[@field].blank?
+    end
+
+    respond_with valid do |format|
+      format.json { render :json => valid }
     end
   end
-  
+
   def admin
     @school.admin = params[:school][:admin]
     if @school.save
