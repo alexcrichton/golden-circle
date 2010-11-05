@@ -1,4 +1,5 @@
 //= require <jquery/validate>
+//= require <notifychange>
 
 $(function() {
   $('form.edit_school').validate({
@@ -136,4 +137,5 @@ $(function() {
   // causing the inputs to be in a bad place. This causes rendering issues, so
   // just manually move them around
   $('tbody input:hidden[id$=_id]').appendTo($('tfoot:first'));
+
 });

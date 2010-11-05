@@ -1,27 +1,25 @@
-var confirmUnload = false;
+//= require <jquery>
 
-function setConfirmUnload(on) {
-  confirmUnload = on;
-}
+$(function() {
+  var confirmUnload = false;
 
-$(document).ready(function() {
-  if ($('#exhibition').length == 0)
-    return;
-  $('form :input').bind("change", function() {
+  $('form :input').live('change', function() {
     confirmUnload = true;
   });
-  window.onbeforeunload = winClose;
 
+  $('form').bind('submit', function() {
+    confirmUnload = false;
+  });
+
+  window.onbeforeunload = function(evt) {
+    if (confirmUnload) {
+      var message = "There are some unsaved changes. If you leave this page they will be lost!";
+      if (typeof evt == undefined)
+        evt = window.event;
+      if (evt)
+        evt.returnValue = message;
+      return message;
+    }
+    confirmUnload = false;
+  };
 });
-
-function winClose(evt) {
-  if (confirmUnload) {
-    var message = "There are some unsaved changes. If you leave this page they will be lost!";
-    if (typeof evt == undefined)
-      evt = window.event;
-    if (evt)
-      evt.returnValue = message;
-    return message;
-  }
-  confirmUnload = false;
-}
