@@ -45,6 +45,11 @@ class School
   scope :winners, order_by(:school_score.desc, :name.asc).
     where(:school_score.ne => nil)
 
+  def self.find_by_slug! slug
+    where(:slug => slug).first or raise Mongoid::Errors::DocumentNotFound.new(
+      self, slug)
+  end
+
   def self.max_school_score
     2 * Team.max_team_score
   end

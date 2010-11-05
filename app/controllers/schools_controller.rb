@@ -22,7 +22,9 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    respond_with @school
+    respond_with @school do |format|
+      format.html{ render :action => 'edit' }
+    end
   end
 
   def create
@@ -51,7 +53,7 @@ class SchoolsController < ApplicationController
 
   def show_current
     @school = current_school
-    
+
     respond_with @school do |format|
       format.html{ render :action => 'edit' }
     end
