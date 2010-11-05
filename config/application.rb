@@ -45,6 +45,6 @@ module GoldenCircle
     config.to_prepare do
       GoldenCircle::Configuration.load!
     end
-    
+
   end
 end

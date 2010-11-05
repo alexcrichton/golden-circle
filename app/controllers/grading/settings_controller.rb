@@ -15,7 +15,7 @@ class Grading::SettingsController < ApplicationController
     config.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
     config.cutoff_score = params[:settings][:cutoff_score] if params[:settings][:cutoff_score]
 
-    GoldenCirle::Configuration.save!
+    GoldenCircle::Configuration.save!
 
     flash[:notice] = 'Settings successfully updated!'
 

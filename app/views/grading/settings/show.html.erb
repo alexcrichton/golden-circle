@@ -2,7 +2,8 @@
 <div>
   <h3>Configuration Panel</h3>
 
-<%= form_for GoldenCircle, :url => grading_settings_path do |f| %>
+<%= form_for GoldenCircle, :url => grading_settings_path, :as => :settings,
+      :html => {:method => :put} do |f| %>
   <p>
     <%= f.label :deadline, 'Deadline for registration' %>:<br />
     <%= f.datetime_select :deadline %>
