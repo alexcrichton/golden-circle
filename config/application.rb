@@ -38,7 +38,13 @@ module GoldenCircle
     #   g.test_framework  :test_unit, :fixture => true
     # end
 
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
+    require 'golden_circle/configuration'
+
+    config.to_prepare do
+      GoldenCircle::Configuration.load!
+    end
+    
   end
 end

@@ -20,7 +20,11 @@ GoldenCircle::Application.routes.draw do |map|
       put :email
       post :valid
     end
-    put :admin, :on => :member
+
+    member do
+      put :admin
+      get 'teams/:team_id/print' => 'teams#print', :as => 'print_team'
+    end
   end
   
   namespace :grading do
@@ -33,7 +37,6 @@ GoldenCircle::Application.routes.draw do |map|
     end
   end
   
-  get 'teams/:id/print' => 'teams#print'
 
   scope(:path => 'results', :controller => 'results') do
     get 'school', :to => :school, :as => 'school_results'

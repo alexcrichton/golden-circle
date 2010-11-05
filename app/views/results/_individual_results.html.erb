@@ -13,7 +13,7 @@
       <th>Score</th>
     </tr>
     <% students.each do |student| %>
-      <% next if student.test_score < Settings.cutoff_score[klass.to_s][level.to_s].to_i %>
+      <% next if student.test_score < GoldenCircle.cutoff_score[klass.to_s][level.to_s].to_i %>
       <tr class="<%= cycle('even', 'odd') %>">
         <td class="num"><%= rank(student.test_score, "student_#{level}_#{klass}") %></td>
         <td><%= h student.name %></td>

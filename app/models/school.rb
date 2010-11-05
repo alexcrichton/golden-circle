@@ -55,7 +55,7 @@ class School
   end
 
   def cost
-    Settings.cost_per_student * students.size
+    GoldenCircle.cost_per_student * students.size
   end
 
   def students
@@ -63,13 +63,25 @@ class School
   end
 
   def school_class
-    if enrollment.nil?
+    if unknown?
       'unknown'
-    elsif enrollment >= CUTOFF
+    elsif large?
       'Large School'
     else
       'Small School'
     end
+  end
+
+  def large?
+    !unknown? && enrollment >= CUTOFF
+  end
+  
+  def small?
+    !unknown? && !large?
+  end
+
+  def unknown?
+    enrollment.nil?
   end
 
   def recalculate_school_score

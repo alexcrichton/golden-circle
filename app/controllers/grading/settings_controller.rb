@@ -1,21 +1,23 @@
 class Grading::SettingsController < ApplicationController
-  
-  authorize_resource :resource => Settings
-  
-  layout 'wide'
+
+  authorize_resource
 
   def show
   end
 
   def update
-    event_date = convert_date(params[:settings], :event_date)
-    Settings.event_date = event_date if event_date
-    deadline = convert_date(params[:settings], :deadline)
-    Settings.deadline = deadline if deadline
-    Settings.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
-    Settings.cutoff_score = params[:settings][:cutoff_score] if params[:settings][:cutoff_score]
+    config = GoldenCircle::Configuration.config
 
-    flash[:notice] = "Settings successfully updated!"
+    event_date = convert_date(params[:settings], :event_date)
+    config.event_date = event_date if event_date
+    deadline = convert_date(params[:settings], :deadline)
+    config.deadline = deadline if deadline
+    config.cost_per_student = params[:settings][:cost_per_student].to_i if params[:settings][:cost_per_student]
+    config.cutoff_score = params[:settings][:cutoff_score] if params[:settings][:cutoff_score]
+
+    GoldenCirle::Configuration.save!
+
+    flash[:notice] = 'Settings successfully updated!'
 
     redirect_to grading_settings_path
   end

@@ -4,13 +4,13 @@ class SchoolsController < ApplicationController
   load_and_authorize_resource :find_by => :slug
 
   def index
-    @schools = School.everything.by_name
-    @large_schools = @schools.large
-    @small_schools = @schools.small
-    @unknown = @schools.unknown
-    @proctors = @schools.collect{ |s| s.proctors }.flatten
+    @schools       = School.by_name
+    @proctors      = @schools.collect{ |s| s.proctors }.flatten
+    @large_schools = @schools.select &:large?
+    @small_schools = @schools.select &:small?
+    @unknown       = @schools.select &:unknown?
 
-    render :layout => 'wide'
+    respond_with @schools
   end
 
   def new
@@ -46,7 +46,7 @@ class SchoolsController < ApplicationController
   end
 
   def email
-    School.all.each { |school| Notification.confirmation(school).deliver }
+    School.all.each { |school| Notifier.confirmation(school).deliver }
     flash[:notice] = 'Emails have been sent!'
     redirect_to schools_path
   end

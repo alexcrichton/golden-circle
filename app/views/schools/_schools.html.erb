@@ -35,7 +35,7 @@
 
       <td>
         <% school.teams.each do |team| %>
-          <%= link_to (team.is_exhibition ? "Ex #{team.id}" : team.level[0,3]), print_team_path(team) %> |
+          <%= link_to (team.is_exhibition ? "Ex #{team.id}" : team.level[0,3]), print_team_school_path(school, team) %> |
         <% end %>
 
         <%= link_to 'Destroy', school, :confirm => 'Are you sure?', :method => :delete %>
